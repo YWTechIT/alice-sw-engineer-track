@@ -628,9 +628,194 @@ $ git checkout alice
 2. `Git` 원격 저장소 받아오기: `Git clone url`(기존 repository를 복사), `clone` 버튼을 누르고 `CLI`창에 `$ git clone url`을 입력한다.
 3. 원격 저장소와 로컬저장소 연결하기: `$ git remote add origin https://gitlab.com/group/project` (웹 호스트 서비스: gitlab.com, 그룹 명 group, 프로젝트 명 project) 이후 git remote 로 연결된 저장소가 무엇인지 볼 수 있음 `git remote show origin` 을 통해 어떤 원격 저장소가 있는지도 확인 가능 
 4. 원격 저장소 동기화
+
+
 ```shell
 1. `$ git pull`: 원격 저장소에서 데이터 가져오기 + 나의 로컬 레포지터리와 병합(Merge)한다. (따로 `merge`하지 않아도 적용됨.)
 2. `$ git Fetch`: 원격 저장소에서 데이터 가져오기 (별개로 `merge` 단계를 거쳐야 한다.)
 ```
 
 5. `origin/master`: 내 컴퓨터에 저장되어 있는 저장소와 원격저장소를 연결하기 위해서 다음의 명령어를 사용한다. `git remote add origin https://~` 여기서 `origin`은 원격저장소의 단축이름을 origin 으로 지정한다는 의미다. origin이 아닌 다른 이름으로도 원격 저장소의 이름을 지정해 줄 수도 있다. (`git remote add foo https://~`) 원격저장소의 이름의 `default` 값은 `origin` 이다. 따라서 `clone` 으로 복사해온 저장소의 이름은 `origin` 으로 통일하게 된다. `git remote -v` 명령어를 사용하면 지정한 저장소의 이름과 주소를 함께 볼 수 있다. 
+
+---
+## 📍 11.2.화(실시간 강의)
+앨리스 교육을 받은 기간도 어느덧 2주째가 되었다. 저번주에는 `HTML/CSS` 파트를 배워서 못 따라갈 정도로 어렵다고 느끼진 않았다. 이번주부터는 본격적으로 `JS` 과정을 배우는데, 저번주와는 다르게 이론강의 4시간, 실습강의 3시간으로 나눠서 배웠다. 이후 `JS`를 배우는 커리큘럼은 괜찮지만 나중에 `this`, `closure` 과정을 배울 때는 못 따라가진 않을까 약간의 걱정이 된다. 하지만 처음엔 뒤쳐져도 꾸준히 공부하다보면 언젠간 다 따라잡을 수 있을 것이다.
+
+### ❏ 저번시간 복습
+1. git `HEAD` 혹은 `branch` 바꾸기: `git checkout <hash>`, `git checkout <branchName>`
+2. 과거 상태의 `HEAD`로 `reset` 했을 때 지금까지의 모든 커밋 보기: `git log --oneline --all` 
+3. 개발자 도구(f12)의 `CSS` 창은 상단부터 우선순위가 높은 속성값을 보여준다. (즉, 제일 위에 있는 속성값 먼저 적용된다는 얘기)
+4. `git log` 중 `HEAD`나 `master`로 찾지 못하는 `commit`이 있다면 `git reflog` 사용하기
+5. `git reset --hard hashId`: `HEAD`가 가리키는 브랜치를 움직인다.
+
+### ❏ JS 이론 수업
+1. `HTML` 코드에서 `JS`를 호출하려면 `<script src=""></script>`태그를 사용하자. (css 파일 불러오는 태그인 `<link rel="stylesheet" href="style.css(경로입력)">`)와 목적이 비슷하게 `JS` 파일을 따로 불러올 수 있다.
+2. `document.write("attribute")`: 자바스크립트 출력문으로 어떤 정보를 `HTML` 화면에 출력하는 기능(실무에서는 거의 쓰이지 않는다.)
+3. `<input type="button" value="buttonName">`: `button`을 만드는 태그
+4. `event`: 사용자와 상호작용하는 모든 사건
+5. `document.querySelector("body")`: `body` 태그를 가져오는 속성
+6. `document.querySelector("#container")`: css `id` 선택자가 `container`인 값 가져오기
+7. `document.querySelector("body").style.backgroundColor="red";`: body태그의 `style` `background-color` 바꾸기
+8. 주간 / 야간 다크모드 구현
+
+```html
+<!-- 구현1: 주간 / 야간 두개의 버튼을 만들고 `onClick`시 바뀌는 기능을 추가한다. -->
+
+<!-- 주간 모드 -->
+<input type="button" value="day" onclick="
+      document.querySelector('body').style.backgroundColor='white';
+      document.querySelector('body').style.color='black';
+">
+
+<!-- 야간 모드 -->
+<input type="button" value="night" onclick="
+      document.querySelector('body').style.backgroundColor='black';
+      document.querySelector('body').style.color='white';
+" />
+
+<!-- 리팩토링 1: 토글기능(한 개의 버튼으로 모드 변경 가능) -->
+<input id="dn" type="button" value="night" onclick="
+      var target = document.querySelector('#dn');
+      if (target.value === 'night'){
+        body.style.backgroundColor='black';
+        body.style.color='white';
+        target.value = 'day'
+      }else{
+        body.style.backgroundColor='white';
+        body.style.color='black';
+        target.value = 'night'
+      }
+  " />
+
+<!-- 리팩토링 2: this 사용(id값을 설정 할 필요 없이 `this`를 통해 동일한 버튼이 여러개여도 각각의 기능을 보장한다. -->
+  <input type="button" value="night" onclick="
+      var target = this;
+      if (target.value === 'night'){
+        body.style.backgroundColor='black';
+        body.style.color='white';
+        target.value = 'day'
+      }else{
+        body.style.backgroundColor='white';
+        body.style.color='black';
+        target.value = 'night'
+      }
+  " />
+```
+
+9. 변수(parameter): 익명의 데이터에 이름을 붙이는 행위, 가독성이 증가하는 장점이 있다.
+10. 비교연산자: `1===1`, `1>0`
+11. 조건문: `if(true)`
+
+### ❏ JS 실습 수업
+1. 줄 바꿈하는 태그: `<br>`
+2. 큰 따옴표와 작은 따옴표가 섞인 문장 출력하기: 큰 따옴표와 작은 따옴표 앞에 `\`를 붙여 출력
+
+```javascript
+// "It's all right."
+document.write("It's all right.");
+document.write('\"It\'s all right."');
+```
+
+3. `var`, `let`, `const`의 차이: 이전에 작성한 <a href='https://ywtechit.tistory.com/227?category=951122'>글</a> 참고
+4. `==`, `===`의 차이: `==`은 좌항과 우항의 피연산자를 비교할 때 `암묵적 타입변환(implicit coercion)`으로 타입을 동일하게 일치시키고 같은 값인지 비교한다. 따라서 `==`는 좌항과 우항의 피연산자가 타입은 다르더라도 암묵적 타입 변환 후에 같은 값일 수 있다면 `true`를 반환한다. 반면, `===`는 좌항과 우항의 피연산자가 타입도 같고 값도 같은 경우에 한하여 `true`를 반환한다. 즉, 암묵적 타입 변환을 하지 않고 값을 비교한다. 따라서 일치 비교 연산자는 예측하기 쉽다.
+
+```javascript
+// (==), true
+5 == 5;
+5 == "5";
+0 == '';
+false = '0';
+0 == -0;
+
+// (==), false
+"0" == '';
+false == 'false';
+false == null;
+false == undefined;
+
+// (===), true
+5 === 5;
+0 === -0;
+
+// (===), false
+5 === '5';
+NaN === NaN;
+```
+
+5. `암묵적 타입변환(implicit coercion)`: `JS` 엔진은 표현식을 평가할 때 개발자의 의도와는 상관없이 코드의 문맥을 고려해 암묵적으로 데이터 타입을 강제 변환(암묵적 타입 변환)할 때가 있다.
+
+6. 문자열 타입으로의 변환
+
+```javascript
+// 피연산자가 모두 문자열 타입이어야 하는 문맥
+"10" + 2 // 102
+
+// 피연산자가 모두 숫자 타입이어야 하는 문맥
+5 * "10" // 50
+
+// 피연산자 또는 표현식이 불리언 타입이어야 하는 문맥
+!0 // true
+if (1) {} // {}
+
+// 숫자 타입
+0 + '' // "0"
+-0 + '' // "0"
+1 + '' // "1"
+-1 + '' // "-1"
+NaN + '' // "NaN"
+Infinity + '' // "Infinity"
+-Infinity + '' // "-Infinity"
+
+// 불리언 타입
+true + '' // "true"
+false + '' // "false"
+
+// null
+null + '' // "null"
+
+// undefined
+undefined + '' // "undefined"
+```
+
+7. 숫자 타입으로 변환: `빈 문자열('')`, `null`, `false`는 `0으`로 `true`는 `1로` 반환된다. 객체와 빈 배열이 아닌 배열, `undefined`는 변환되지 않아 `NaN`이 된다는 것에 주의하자.
+
+```javascript
+1 - "1" // 0
+1 * "10" // 10
+1 / 'one' // NaN
+
+// 문자열 타입
++'' // 0
++'0' // 0
++'1' // 1
++'string' // NaN
+
+// 불리언 타입
++true // 1
++false // 0
+
+// null 타입
++null // 0
+
+// undefined 타입
++undefined // NaN
+```
+
+8. 불리언 타입으로의 변환: 아래의 값들은 `falsy`로 평가되는 `Falsy`값이다. 이 값들 외에 값은 `truthy(참으로 평가되는 값)`라고 보면 된다.
+
+```javascript
+// 아래의 조건문은 모두 코드 블록을 실행한다.
+if (!'') {console.log("execute")}; 
+if (!false) {console.log("execute")}; 
+if (!undefined) {console.log("execute")}; 
+if (!null) {console.log("execute")}; 
+if (!0) {console.log("execute")}; 
+if (!NaN) {console.log("execute")}; 
+```
+
+reference
+1. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
+
+
+
+
