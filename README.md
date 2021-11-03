@@ -816,6 +816,149 @@ if (!NaN) {console.log("execute")};
 reference
 1. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
 
+---
+## 📍 11.3.수(실시간 강의)
+오늘은 어제 배운 내용에 이어서 `JS` 기본 문법(object, function 등 )들을 배웠다. 강의 난이도는 2/5이다.
+
+### ❏ 복습
+1. `JS`를 실행하는 코드: `개발자 도구(F12)`, `<script>`, `onclick`
+2. 이고잉님 추천 도서는 <a href='https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=236186172'>리팩터링 2판 - 마틴 파울러</a> 였는데, 내용의 40%는 변수 이름 설정의 중요성에 대해 설파했다고 한다. 
+3. 변수(parameter): 익명의 데이터에 이름을 붙인 값
+
+### ❏ 이론강의(4시간) + 실습강의(3시간)
+1. 배열(array): 여러 개의 값을 순차적으로 나열한 자료구조다. 배열은 사용 빈도가 매우 높은 가장 기본적인 자료구조다. 자바스크립트는 배열을 다루기 위한 유용한 메서드를 다수 제공한다. 배열은 사용 빈도가 높으므로 배열 메소드를 능숙하게 다룰 수 있다면 코딩에 매우 도움이 된다. 배열이 가지고 있는 값을 `요소`, `element`, `색인`, `index`라고 부른다. 대부분의 프로그래밍 언어에서 인덱스의 시작은 보통 `0`부터 시작한다. `JS`도 예외는 아니다. 특이한 점은 자바스크립트에서 배열이라는 타입은 존재하지 않는다. 배열은 객체 타입이다. 배열은 객체이지만, 일반 객체와는 구별되는 독특한 특징이 있다. 일반 객체와 배열을 구분하는 가장 명확한 차이는 `값의 순서`와 `length 프로퍼티`다. 인덱스로 표현되는 값의 순서와 `length` 프로퍼티를 갖는 배열은 반복문을 통해 순차적으로 값에 접근하기 적합한 자료구조다.
+또, 자바스크립트 배열은 인덱스로 배열 요소에 접근 할 때 일반적인 배열보다 느릴 수밖에 없는 구조적인 단점을 보완하기 위해 대부분의 모던 자바스크립트 엔진은 배열을 일반 객체와 구별하여 좀 더 배열처럼 동작하도록 최적화하여 구현했다. 다음과 같이 배열과 일반 객체의 성능을 테스트해보면 배열이 일반 객체보다 약 2배정도 빠르다는 것을 알 수 있다.
+
+```javascript
+// 배열 선언
+const arr = ["apple", "banana", "orange"];
+
+// 배열 순회
+for(let i=0; i<arr.length; i++){
+	console.log(arr[i]);
+}
+
+// 배열 타입: object
+typeof([1, 2, 3]) // object
+
+// 배열과 객체 순회 속도 비교
+const array = [];
+console.time("Array Performance Test");
+
+for (let i=0; i<10000000; i++){
+	array[i]=i;
+}
+
+console.timeEnd("Array Performance Test"); // 약 340ms
+
+const obj = {};
+console.time("Object Performance Test");
+
+for (let i=0; i<10000000; i++){
+	obj[i]=i;
+}
+
+console.timeEnd("Object Performance Test"); // 약 600ms
+```
+
+2. `html`에서 `a`태그 모두 선택하기: `document.querySelectAll("a")`
+   
+```javascript
+// 배열 길이 만큼 li태그에 값 넣기
+for (let i=0; i<names.length; i++){
+   document.write(`<li><a href="${i}.html" target="_blank">${names[i]}</a></li>`)
+}
+
+// `a` 태그의 모든 값 색상 바꾸기
+for (let i=0; i<aTags.length; i++){
+    console.log(aTags[i].style.color = "red");
+}
+```
+
+3. `debugger`: 코드 작성시 브라우저는 퍼즈(pause) 상태 이후 한 단계씩 진행한다.
+4. `function 함수명(){}`: 함수명은 이름만 봐도 어떤 로직으로 구성되어 있을지 추론가능해야한다.
+
+```javascript
+// 2개의 인자를 받는 함수
+function getAdditionalTax(price, tax){
+	return price * tax;
+}
+
+console.log(getAdditionalTax(1000, 0.1));
+👉🏽 100
+
+// 인자에 값이 넘어오지 않으면 기본 값을 설정 할 수 있다.
+function getAdditionalTax1(price, tax=0.1){
+	return price * tax;
+}
+
+console.log(getAdditionalTax1(1000));
+👉🏽 100
+```
+
+5. 다크모드 리팩토링2: 어제 작성했던 다크모드 리팩토링2 코드를 살펴보면 `input`태그 안에서 `onclick` 함수를 일일이 작성하여 가독성이 떨어진다는 단점이 있다. 이를 보완하기 위해 `onclick`을 담당하는 함수를 따로 빼내어 작성했다. 이 기능을 해결 할 때 `this`가 살짝 헷갈렸는데 결론적으로 `input` 태그 안에서 사용된 `this`는 `input`을 가리키고 있지만 `toggleDarkMode`의 인자 없이 `this`를 사용하게 되면 `전역객체(global)`를 바라보기 때문에 정상적으로 `input value`가 변경되지 않는다. 따라서 `input`에서 사용하는 `this`를 `toggleDarkMode(this)`처럼 인자로 넘겨주어 `input`의 `this`를 그대로 유지하게 만들자. (`this`는 누가 호출하느냐에 따라 달라지는데 `this`를 호출 할 때 `this` 앞에 객체가 명시되어 있는 경우 메서드로 호출한 것이고, 그렇지 않은 모든 경우는 함수로 호출한 것이다. 어떤 함수를 함수로서 호출할 경우에는 `this`가 지정되지 않는데, `this`가 지정되지 않는 경우 전역 객체를 바라보게 된다.)
+
+```html
+<!-- 리팩토링 전: onclick 기능을 일일이 나열하여 가독성이 떨어지는 단점이 있다. -->
+  <input type="button" value="night" onclick="
+      var target = this;
+      if (target.value === 'night'){
+        body.style.backgroundColor='black';
+        body.style.color='white';
+        target.value = 'day'
+      }else{
+        body.style.backgroundColor='white';
+        body.style.color='black';
+        target.value = 'night'
+      }
+  " />
+
+<!-- 리팩토링 후: onclick 기능 코드만 따로 함수로 빼내어 가독성을 높였다. -->
+<input type="button" value="night" onclick="toggleDarkMode(this);">
+<script>
+    const body = document.querySelector("body");
+    
+    function toggleDarkMode(target){
+      if (target.value === "night"){
+        body.style.backgroundColor = "black";
+        body.style.color = "white";
+        target.value = "day";
+
+        let a = document.querySelectorAll("a");
+        for (let i=0; i<a.length; i++){
+          a[i].style.color = "white";
+        }
+        
+      }else{
+        body.style.backgroundColor = "white";
+        body.style.color = "black";
+        target.value = "night";
+
+        let a = document.querySelectorAll("a");
+        for (let i=0; i<a.length; i++){
+          a[i].style.color = "black";
+        }
+      }
+    }
+  </script>
+
+	<input type="button" value="night" onclick="toggleDarkMode(this)">
+```
+
+6. 객체: 서로 연관된 데이터와 처리방법을 그룹화해서 이름을 붙인 것
+
+```javascript
+let taxData = {
+	price : 10000,
+	tax = 0.1,
+	calcTax = function(){
+		return this.price * this.tax;
+	}
+}
+```
+
+
+
 
 
 
