@@ -1157,3 +1157,53 @@ parseFloat("20.6")  // 실수 형태의 20.6 변환
 ```
 
 6. 자바스크립트 출력시 역 슬래시(`\`)의 출력과 `\n` 같은 이스케이프 시퀀스를 구분하기 위해서는 앞에 `\` 를 붙여준다.
+
+### ❏ 자바스크립트로 입력 받기
+
+```javascript
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+// 한번 입력 받고 출력
+rl.on("line", (line) => { 
+    // 한 줄씩 입력받은 후 실행할 코드
+    // 입력된 값은 line에 저장된다.
+		console.log(line)
+    rl.close(); // close가 없으면 입력을 무한히 받는다.
+});
+rl.on('close', () => {
+    // 입력이 끝난 후 실행할 코드
+})
+
+// 입력이 한 줄 공백으로 주어질 때 
+let input = [];
+rl.on("line", function (line) {
+  input = line.split(" ");
+	r1.close();
+}).on("close", function () {
+  console.log(input);
+});
+```
+
+### ❏ 자바스크립트 match 정규식
+1. 다음 문자열 중 `e` 의 개수는 몇 개인가?
+
+```js
+let lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias iste tempore voluptatem architecto pariatur obcaecati provident sint neque. Ratione debitis officia quo? Vero tempora sequi laborum maxime fugiat fuga sapiente?" 
+
+// 정규식 
+console.log(lorem.match(/e/g));
+👉🏽 23
+
+// 반복문
+let cnt=0;
+for (let x of lorem){
+	if(x === "e") cnt++ 
+}
+console.log(cnt);
+👉🏽 23
+```
+
