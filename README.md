@@ -817,7 +817,7 @@ reference
 1. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
 
 ---
-## 📍 11.3.수(실시간 강의)
+## 📍 7일차 11.3.수.(실시간 강의)
 오늘은 어제 배운 내용에 이어서 `JS` 기본 문법(object, function 등 )들을 배웠다. 강의 난이도는 2/5이다.
 
 ### ❏ 복습
@@ -957,8 +957,203 @@ let taxData = {
 }
 ```
 
+reference
+1. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
 
+---
+## 📍 8일차 11.4.목.(온라인 강의)
+오늘은 온라인 강의로 `JS` 기초문법을 배웠다. 어제 배운 내용에서 크게 벗어나지 않는 내용이었고 추가로 배운것은 `JS`로 입력받는 방법과 `match` 정규식에 대해서 배웠다.
 
+### ❏ 자바스크립트 소개
+1. 자바스크립트란 이미지 슬라이드 효과, 팝업 효과 등의 기능을 포함한 동적인 웹사이트 제작 시 사용되는 프로그래밍 언어 (HTML 은 웹사이트의 구조를 짜고, CSS 웹사이트를 꾸며주고, JS 는 사용자와 상호작용할 수 있게 만들어준다.)
+2. 자바스크립트 사용분야 : IoT(예: 전동커튼), 하이브리드 앱(예: 네이버 앱), 서버 개발(node.js)
 
+### ❏ 자바스크립트 변수
+1. 변수란? 데이터를 담는 공간
 
+```javascript
+var fruit;  // 변수 선언: 데이터를 담을 공간을 생성하는 것
+fruit = "apple";  // 변수 초기화: 생성된 변수에 공간을 생성하는 것
 
+var fruit = "apple";  // 변수 선언 및 초기화
+```
+
+2. 데이터 변경: 변수 `fruit` 의 데이터를 `apple` 에서 `banana`로 변경했지만 변수는 이미 앞서 선언되었으므로 `var`로 다시 선언 할 필요가 없다.
+
+```javascript
+var fruit = "apple";
+fruit = "banana";
+```
+
+3. 변수 데이터 확인: `console.log()`
+
+```javascript
+var fruit = "apple";
+console.log(fruit);
+```
+
+4. 변수 생성 시 주의 사항
+```javascript
+// 변수명은 숫자로 시작 할 수 없음
+var 1str;
+
+// 변수명은 최대한 자세하게 작성
+var randomNumber;
+
+// 의미가 불명확한 단어들의 조합은 피해야 함
+var tmax;
+```
+
+5. 자바스크립트 사용 방법: `<script>` 태그 안에 `src` 속성 값으로 `js` 파일을 입력 후 `html`파일과 연동
+
+```javascript
+<body>
+	<script src="index.js"></script>
+</body>
+```
+
+6. 변수 데이터 확인 방법: 우 클릭 후 크롬 개발자 검사 or F12
+7. `document.write()` : 변수의 데이터를 웹 화면에 출력하는 코드
+8. `document.writeln()` : 출력값 사이에 공백을 넣는 코드
+
+### ❏ 자바스크립트 데이터 타입
+1. 데이터 타입: 초콜릿도 다양한 종류가 존재하듯, 변수에 전달되는 데이터 타입에도 여러가지 타입이 존재한다.
+2. 데이터 타입의 종류: `string`, `number`, `boolean`, `function`, `object`, `undefined`, `null`, `array`
+3. 문자열(`string`)
+
+```javascript
+var str1 = "Hello";
+var str2 = 'i am';
+var str3 = "27";  // 숫자가 아닌 문자열
+
+var str4 = "Elice'; // 혼용 불가
+var str5 = "He's a boy";
+var str6 = 'He\'s a boy';  // 감싸주는 따옴표와 동일한 따옴표를 붙이려면 따옴표 앞에 `\`를 붙여주자.
+```
+
+4. 숫자(`number`)
+
+```js
+var num1 = 10;
+var num2 = -10;
+var num3 = 3.14;
+var num4 = Number.MAX_SAFE_INTEGER  // 9007199254740991
+var num5 = Number.MIN_SAFE_INTEGER  // 9007199254740991
+```
+
+5. 함수(`function`)
+
+```js
+// 함수 표현식
+var func1 = function(){
+	console.log("func1");
+}  // 함수 생성
+
+func1();  // 함수 호출
+
+// 함수 선언식
+function func2(){
+	console.log("func2");
+}
+
+// 매개변수: width, height
+var area = function(width, height){
+	return width * height;
+}
+
+// 함수 호출 및 인자 전달
+area(10, 20);
+
+// 함수 데이터 호출방법
+var result = area(10, 20);
+console.log(result);
+
+console.log(area(10, 20));
+```
+
+6. 배열(`array`): 비슷한 성격을 갖고 있는 데이터를 하나의 변수 안에서 관리
+
+```js
+var fruit = ["사과", "배", "수박"];
+console.log(fruit);
+
+// 데이터 좌표값(index) 작성, 첫번째 좌표값은 0
+console.log(fruit[0]);
+
+// 배열 데이터 변경하기
+fruit[0] = "포도";
+```
+
+7. 객체(`object`): 프로퍼티, 메서드, 데이터로 구성, 여러 종류의 데이터 타입 삽입 가능
+
+```js
+var student = [
+	name : "AYW",
+	age : 27,
+	stack : ["JS", "TS"],
+	sum : function (num1, num2) { return num1 + num 2};
+]
+
+// 객체 데이터 출력하기
+console.log(student.name);
+console.log(student["name"]);
+
+// 객체 데이터 변경하기
+student.name = "AYJ"
+console.log(student.name);
+```
+
+8. `undefined`: 변수 안에 데이터를 입력하지 않은 상태(데이터가 없는 것)
+9. `null`: 개발자가 임의로 변수 안에 빈 데이터를 삽입한 상태(빈 데이터를 지정한 것)
+
+```js
+var unde;
+var empty = null;
+```
+
+10. `boolean`: `true`, `false`
+
+```js
+var t = true;
+var f = false;
+```
+
+### ❏ 자바스크립트의 프로퍼티와 메서드
+1. 프로퍼티, 메서드: `js`에서 사용자를 위해 사전에 작성된 편의 기능
+2. 문자열 메서드
+
+```js
+var str1 = "Hello World";
+str1.length;  // 문자열 길이 11
+str1.charAt(0);  // 문자열 추출
+str1.split(' ');  // 공백 기준으로 문자를 나누고 배열에 담는 메서드
+```
+
+3. 배열 메서드
+
+```js
+var fruit = ["사과", "배", "포도"];
+fruit.length;
+fruit.push("딸기");  // 배열 뒤에 데이터 삽입
+fruit.unshift("레몬");  // 배열 앞에 데이터 삽입
+fruit.pop();  // 배열 뒤의 데이터 제거
+fruit.shift();  // 배열 앞의 데이터 제거
+```
+
+4. `math` 의 수학 연산 메서드
+
+```js
+Math.abs(-3) // 절대값
+Math.ceil(0.3) // 올림
+Math.floor(10.9)  // 내림
+Math.random()  // 임의의 숫자 출력
+```
+
+5. 문자를 숫자로 변환하는 메서드
+
+```jsx
+parseInt("20.6")  // 정수 형태의 20 변환
+parseFloat("20.6")  // 실수 형태의 20.6 변환
+```
+
+6. 자바스크립트 출력시 역 슬래시(`\`)의 출력과 `\n` 같은 이스케이프 시퀀스를 구분하기 위해서는 앞에 `\` 를 붙여준다.
