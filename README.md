@@ -1406,7 +1406,7 @@ timesTable(3); // 3단만 출력
 오늘은 강의 대신 `HTML`, `CSS`, `JS`를 이용해서 자기소개 페이지를 만드는 과제가 있었다. 주제는 어렵지 않은데 이것저것 추가하다 보니까 다른기능을 추가하고 싶다는 생각이 많이 들어서 섣불리 끝나지는 않았다. `GitLab`에 파일을 배포하는 형식으로 진행했다. 디자인에 잼병인 내가 어떻게 홈페이지를 꾸며볼까 하다가 <a href='https://dribbble.com/'>dribble</a>이라는 사이트에서 괜찮은 템플릿을 하나 골라 비슷하게 만들었다. `header`에는 `navbar` 대신 `img`를 `blur` 처리해서 넣었고, 가운데에 선명한 사진을 또 넣었다. `body`에는 과제에 포함해야하는 질문들을 포함해서 넣었고 글만 넣기에는 뭔가 심심해서 `toggle` 버튼을 넣었다. 그리고 나의 스택을 쉽게 알려주는 사이트인 <a href='https://shields.io/'>shields.io</a>에서 `img`를 따왔다. 마지막으로 `footer`에는 내가 지금까지 만든 포트폴리오의 링크를 첨부했다. 결과물은 이 <a href='http://ywtechit.kdt-gitlab.elice.io/produce-myself/'>사이트</a>에서 볼 수 있다.
 
 ---
-## 📍 11일차 11.9.월.(실시간 강의)
+## 📍 11일차 11.9.화.(실시간 강의)
 오늘은 오랜만에 비가 내려서 새벽런닝을 하지 못했고 날씨도 급격하게 추워졌다. 벌써 11월이라니.. 2021년 올해도 벌써 1달 조금 넘게밖에 남지 않았다. 내년 2월까지 최선을 다하자..! 저번시간에 `JS I`을 통해 자기소개 <a href='http://ywtechit.kdt-gitlab.elice.io/produce-myself/'>홈페이지</a>를 만들었고, 이번주는 진도를 더 나가서 `JS II`를 배우게된다. `DOM`, `Event`, `this`, `closure` 등에 대해서 배우는데 이번주차는 어려운 파트기 때문에 복습을 더 열심히 해야겠다는 생각을 했다.
 
 ### ❏ 저번주 복습
@@ -1450,3 +1450,249 @@ timesTable(3); // 3단만 출력
 
 reference
 1. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
+
+---
+## 📍 12일차 11.10.수.(온라인 강의)
+오늘은 `DOM`과 `event`를 온라인강의로 배우는 날이다. 이전 챕터와는 다르게 `DOM`은 자주 다뤄보지 않은 개념이어어서 관련 문제를 푸는데 오래걸렸다. 익숙해질때까지 반복해야겠다. `DOM`에 관한 기본적인 개념은 어제 다뤘기 때문에 오늘은 `event`를 집중적으로 다뤄볼까 한다.
+
+### ❏ `DOM`과 이벤트 소개
+1. `DOM(Document Object Model)`: 문서 객체모델, 객체 지향 모델로써 구조화된 문서를 표현하는 방식(문자열로 된 코드를 트리구조 형태로 바꿔주는 것)
+2. `DOM` 은 `XML` 이나 `HTML` 문서의 구조화된 표현을 제공하여 프로그래밍 언어가 문서 구조, 스타일, 내용 등을 변경할 수 있도록 한다. 
+3. `DOM` 의 종류: `Core DOM`(모든 문서타입을 위한 모델), `HTML DOM`(HTML 문서를 위한 모델), `XML DOM` (문서를 위한 모델)
+4. `Document`: 웹 페이지 자체를 의미하며, 웹 페이지에 존재하는 `HTML` 요소에 접근할 때는 `Document` 객체부터 시작해야 한다.
+5. `Document Method`: HTML 요소 선택, 요소 생성, 이벤트 핸들러 추가, 객체의 선택
+
+### ❏ 자바스크립트와 DOM
+1. dom 요소의 선택: `Document.prototype.getElementById("id")`, `Document.prototype.getElementsByTagName("Tag")`, `Document.prototype.getElementsByClassName("class")`, `Document.prototype.querySelector`, `Document.prototype.querySelectorAll`
+2. `dom` 스타일 변경: `document.getElementById("id").style.color = "red`
+3. `dom` 내용 변경: `document.getElementById("id").innerHTML = "Hi"`
+
+### ❏ Node 객체
+1. 노드: `HTML DOM` 에서 정보를 저장하는 계층적 단위, 노드 트리는 노드들의 집합으로, 노드 간의 관계를 나타낸다. `JS`에서는 `HTML DOM` 을 이용하여 노드 트리에 포함된 모든 노드에 접근할 수 있다.
+2. 노드 트리의 모든 노드는 서로 계층적 관계를 맺고 있다.
+3. 노드의 종류: `문서 노드(document node)`(HTML 문서 전체를 나타내는 노드), `요소 노드(element node)`(모든 HTML 요소는 요소 노드로 속성을 가질 수 있는 유일한 노드), `주석 노드(comment node)`(HTML 문서의 모든 주석은 주석노드), `속성노드(attribute node)` (해당 요소 노드의 자식 노드에는 포함되지 않는다.), `텍스트 노드(text node)`(HTML 문서의 모든 텍스트는 텍스트 노드)
+
+### 💡 nodeType 프로퍼티 값: `nodeType` 값은 텍스트가 아닌 숫자로 표현됩니다.
+
+```jsx
+요소 노드(Element Node): 1
+속성 노드(Attribute Node): 2
+텍스트 노드(Text Node): 3
+주석 노드(Comment Node): 8
+문서 노드(Doucment Node): 9
+```
+
+4. 노드 타입 접근 예제
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>자바스크립트 기초</title>
+</head>
+<body>
+    <div name="red"  class="fruit" id="apple">apple</div>
+		<div name="yellow" class="fruit" id="banana">banana</div>
+    <div name="red"  class="vegetable" id="carrot">carrot</div>
+		<div name="white"  class="vegetable" id="onion">onion</div>
+<script src="index.js"></script>
+</body>
+</html>
+```
+
+```javascript
+let $apple = document.getElementById("apple").childNodes[0];  // "apple"
+let $appleNodeValue = $apple.nodeValue;  // "apple"
+let $appleNodeType = $apple.nodeType;  // 3(텍스트 노드)
+```
+
+### ❏ 이벤트(Event)
+1. 이벤트(Event): 웹 브라우저가 알려주는 HTML 요소에 대한 사건의 발생, JS는 발생한 이벤트에 반응하여 특정 동작을 수행할 수 있다. (mouse, scroll, keyboard, window 객체 등)
+
+```javascript
+// 마우스 클릭 이벤트 예시
+<p onclick = "changeText(this)"> 여기를 클릭해주세요</p>
+
+function changeText(element){
+	element.innerHTML = "내용이 바뀌었읍니다."
+}
+```
+
+2. 이벤트 핸들러: 이벤트가 발생했을 때 그 처리를 담당하는 함수. 지정된 이벤트가 발생하면 웹 브라우저에게 등록된 이벤트 핸들러 함수호출을 위임하게 된다.
+
+```js
+// HTML 문서가 로드될 때 실행됨
+window.onload = function(){
+	let text = document.getElementById("text");
+	text.innerHTML = "HTML 문서가 로드되었읍니다."
+}
+```
+
+3. 이벤트 타입: 이벤트의 종류를 나타내는 문자열이다. 약 200여가지의 타입이 있는데, <a href='https://developer.mozilla.org/ko/docs/Web/Events'>`MDN`</a>을 참고하자.
+
+### 💡 이벤트 핸들러 등록
+1. 이벤트가 발생했을 때 브라우저에게 이벤트 핸들러의 호출을 위임하는 것
+2. 어트리뷰트 방식: 함수 호출문 등의 문을 할당하면 이벤트 핸들로가 등록된다. `HTML`과 자바스크립트는 관심사가 다르므로 혼재하는 것보다 분리하는 것이 더 좋다. 하지만 `Vue`를 담당하는 `Angular/React/Svelte/Vue.js` 같은 프레임워크 / 라이브러리에서는 이벤트 핸들러 어트리뷰트 방식으로 이벤트를 처리한다. 뷰를 구성하기 위한 구성 요소로 보기 때문에 관심사가 다르다고 생각하지 않는다.
+
+```html
+<html>
+	<body>
+		<button onclick="sayHi('Lee')">Click me!</button>
+		<script>
+			function sayHi(name){
+				console.log(`Hi! ${name}`);
+			}
+		</script>
+	</body>
+</html>
+```
+
+3. 이벤트 핸들러 프로퍼티 방식: `DOM` 노드 객체는 이벤트에 대응하는 이벤트 핸들러 프로퍼티를 가지고 있다. 이벤트 핸들러 프로퍼티에 함수를 바인딩하면 이벤트 핸들러가 등록된다. `2`번에서 살펴본 어트리뷰트의 단점을 보완한 케이스이다. 하지만 이벤트 핸들러 프로퍼티에 하나의 이벤트 핸들러만 바인딩 할 수 있다는 단점이 있다.
+
+```html
+<html>
+	<body>
+		<button id="btn">Click me!</button>
+		<script>
+			const $button = document.getElementById("btn");
+
+			$button.onclick = function () {
+				console.log("button click!");
+			}
+		</script>
+	</body>
+</html>
+```
+
+4. `addEventListener` 이벤트 방식: 이벤트 핸들러 프로퍼티 방식과는 달리 `on` 접두사를 붙이지 않는다. 두 번째 매개변수에는 이벤트 핸들러를 전달한다. 마지막 매개변수에는 이벤트를 캐치할 이벤트 전파 단계(캡처링 또는 버블링)를 지정한다. 생략하거나 `false`로 지정하면 버블링 단계에서 이벤트를 캐치하고, `true`를 지정하면 캡처링 단계에서 이벤트를 캐치한다. `3`번 과정과는 다르게 하나 이상의 이벤트 핸들러를 등록할 수 있다. 이때, 이벤트 핸들러는 등록된 순서대로 호출한다.
+
+```html
+<html>
+	<body>
+		<button id="btn">Click me!</button>
+		<script>
+			const $button = document.getElementById("btn");
+
+			$button.addEventListener("click", function(){
+					console.log("button click!");
+			});
+		</script>
+	</body>
+</html>
+```
+
+### ❏ DOM 요소의 기본 동작 조작
+1. `DOM` 요소는 저마다 기본 동작이 있다. 예를 들어 `a` 요소를 클릭하면 `href` 어트리뷰트에 지정된 링크로 이동하고, `checkbox` 혹은 `radio`를 클릭하면 체크 또는 해제된다. 이벤트 객체의 `preventDefault()` 메서드는 이러한 `DOM` 요소의 기본 동작을 중단시킨다.
+
+```html
+<html>
+	<body>
+		<a href="#">Click me!</a>
+		<input type="checkbox">
+		<script>
+			const $a = document.getElementsByTagName("a")[0];
+			$a.addEventListener("click", function(e){
+				e.preventDefault();
+			});
+
+			const $input = document.querySelector("input[type=checkbox]");
+			$input.addEventListener("click", function(e){
+				e.preventDefault();
+			})
+		</script>
+	</body>
+</html>
+```
+
+### ❏ 이벤트 핸들러 내부의 this
+1. 다음 예제의 `handleClick` 함수 내부의 `this`는 전역 객체 `window`를 가리킨다.
+
+```html
+<html>
+	<body>
+		<button onclick="handleClick(this)">Click Me</button>
+		<script>
+			function handleClick(button){
+				console.log(button);  // button 요소
+				console.log(this);  // window
+			}
+		</script>
+	</body>
+</html>
+```
+
+![](https://images.velog.io/images/abcd8637/post/78888e26-14e5-479d-81d4-b43dca931fea/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-11-10%2020.01.38.png)
+
+2. 이벤트 핸들러 프로퍼티 방식: `addEventListener` 메서드와 동일하게 모두 이벤트 핸들러 내부의 `this` 는 이벤트를 바인딩한 `DOM` 요소를 가리킨다. 즉, 이벤트 핸들러 내부의 `this` 는 이벤트 객체의 `currentTarget` 프로퍼티와 같다.
+    
+```html
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <button id="btn">Click me!</button>
+  <script>
+    const $button = document.querySelector("#btn");
+    
+    $button.onclick = function(e){
+      console.log(this)
+      console.log(e.currentTarget)
+      console.log(this === e.currentTarget)
+    }
+  </script>  
+</body>
+</html>
+```
+    
+![](https://images.velog.io/images/abcd8637/post/c9e9e6cd-683d-4e3b-ac4b-47f3584ce8de/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-11-10%2020.03.38.png)
+
+3. `addEventListener`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <button id="btn">Click me!</button>
+  <script>
+    const $button = document.querySelector("#btn");
+    
+    $button.addEventListener("click", function(e){
+      console.log(this);
+      console.log(e.currentTarget);
+      console.log(this === e.currentTarget)
+    })
+  </script>  
+</body>
+</html>
+```
+
+![](https://images.velog.io/images/abcd8637/post/7a2dc9ec-9be0-49c5-b791-a1449087836b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-11-10%2020.05.03.png)
+
+4. 화살표 함수로 정의한 핸들러 내부: 이벤트 핸들러 내부의 `this` 는 상위 스코프의 `this` 를 가리킨다. 화살표 함수는 함수 자체의 `this` 바인딩을 갖지 않는다.
+    
+```html
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <button id="btn">Click me!</button>
+  <script>
+     const $button = document.querySelector("#btn");
+    
+    $button.onclick = e => { 
+      console.log(this)
+      console.log(e.currentTarget)
+      console.log(this === e.currentTarget)
+    }
+
+    const $button = document.querySelector("#btn");
+    
+    $button.addEventListener("click", (e) => {
+      console.log(this);
+      console.log(e.currentTarget);
+      console.log(this === e.currentTarget)
+    })
+  </script>  
+</body>
+</html>
+```
+
+![](https://images.velog.io/images/abcd8637/post/d8b4152a-0bd8-4aed-bf82-a03f2ffbe16f/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-11-10%2020.07.35.png)
