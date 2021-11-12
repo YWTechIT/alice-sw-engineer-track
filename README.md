@@ -1786,3 +1786,294 @@ const pow = n => n*n;
 
 reference
 1. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
+
+---
+## 📍 14일차 11.12.금.(온라인 강의)
+오늘은 `closure`, `arrow-function`, `spread operator`, `this` 등 자바스크립트 동작 원리에 대해서 배웠는데, `closure` 부분에서 막힌 부분이 조금 많았다. 아무래도 내가 지금까지 잘 사용하지 않았던 문법이어서 그런가보다. 자주자주 보고 익숙해져야겠다.
+
+### ❏ 자바스크립트 함수가 실행되는 과정
+1. JS의 코드가 없는 경우
+
+```javascript
+// 동작 순서
+1. 실행환경(실행 컨텍스트)을 초기화한다.
+2. scope는 코드가 현재 실행되는 환경, 맥락(context)을 의미한다.
+3. this 포인터, 스코프에 저장된 변수들, 스코프 체인 등이 환경에 포함된다.
+4. this 포인터의 경우, 글로벌 스코프에서는 window를 가리킨다.
+
+// GEC에서 실행되는 context
+5. this
+6. 변수들(Variable Object)
+7. Scope
+```
+
+2. JS의 코드가 있는 경우
+
+```javascript
+// 1. 함수가 실행되면, 함수 스코프에 따라 환경이 만들어진다.
+// 2. this, 함수 스코프의 변수들, 그리고 스코프 체인이 형성된다.
+// 3. 스코프 체인을 따라 글로벌 환경에 도달한다.
+
+function myFunc(){
+  let a = 10;
+  let b = 20;
+  function add(first, second){
+    return first + second
+  }
+  return add(a, b);
+}
+
+myFunc()
+
+// 4. 객체의 메서드의 경우, 메서드 환경의 this는 해당 객체를 가리키게 된다.
+// 5. 하지만 this가 가리키는 것은 환경에 따라 변할 수 있다.
+```
+
+### ❏ 실행 컨텍스트
+
+1. `JS` 동작원리를 파악하기위해 중요한 개념이다.
+2. 자바스크립트 코드가 실행되는 환경
+3. 코드에서 참조하는 변수, 객체(함수 포함), this 등에 대한 레퍼런스가 있다.
+4. 실행 컨텍스트는 전역에서 시작해, 함수가 호출될 때 스택에 쌓이게 된다.
+5. `JS` 가 실행될 때 전역실행컨텍스트(GEC)가 만들어진다.
+6. 함수가 실행될 때 함수실행컨텍스트(FEC)가 만들어진다.
+
+```javascript
+let a = 10;
+function f1(){
+	let b = 20;
+	function print(v){console.log(v)};
+	function f2(){
+		let c = 30;
+		print(a+b+c);
+	}
+	f2();
+}
+f1();  // 60
+```
+
+```javascript
+const o = {
+name: "Kim",
+  changeMyName: function (name) { this.name = name },
+};
+
+const o2 = {
+  name: "Song",
+};
+
+function callFuncWithArg(f, arg) {
+  f(arg);
+}
+
+o.changeMyName.bind(o2)("Sam");
+console.log("1번 - ", o2.name);  // "Sam"
+
+callFuncWithArg(o.changeMyName, "Daniel");  // "Kim"
+console.log("2번 - ", o.name);
+
+o.changeMyName("Sam"); 
+console.log("3번 - ", o.name);  // "Sam"
+```
+
+### ❏ 함수가 호출되는 상황 4가지(`dynamic binding`)
+1. 직접 호출: 함수를 직접 호출한다 (myfunc())
+2. 메서드 호출: 객체의 메서드를 호출한다.(o.method())
+3. 생성자 호출: 생성자 함수를 호출한다. (`const p = new Person()`)
+4. 간접 호출: `call`, `apply` 등으로 함수를 간접 호출한다.(`f.call(null, obj)`)
+5. 콜백함수(특정 동작 이후에 불려지는 함수), 다른 함수의 인자로 보내지는 함수 등
+
+```javascript
+// 직접 호출
+function myFunc(){
+  console.log("my func called");
+}
+
+// 메소드 호출
+const o = {
+  name: "AYW",
+  printName: function(){
+    console.log(this.name);
+  }
+}
+
+o.printName()
+
+// 생성자 호출
+function Person(name){
+  this.name = name;
+  this.consoleName = function(){
+    console.log(this.name);
+  }
+}
+
+const p = new Person("AYW")
+console.log(p)
+p.consoleName()
+
+setTimeout(p.consoleName.bind(p), 1000);  // AYW
+```
+
+### ❏ this가 가리키는 것
+1. 함수는 다양한 상황에서 호출될 수 있다.
+2. 함수의 호출 환경에 따라 `this` 는 동적으로 세팅된다.
+3. `this` 가 환경에 따라 바뀌는 것을 `dynamic binding`이라고 한다.
+4. `bind`, `apply`,`call` 등으로 `this` 를 가리키는 것을 조작할 수 있다.
+5. 일반 함수와 화살표 함수의 `this` 차이
+5-1. 화살표 함수로 `this` 호출 시 `global` 을 가리킨다.
+5-2. 일반 함수로 `this` 호출 시 누가 호출 했는지에 따라 값이 동적으로 바뀐다.
+
+```javascript
+const o = {
+  name: "TED",
+  arrowFunc: () => { console.log(this) },
+  generalFunc: function(){console.log(this)}
+}
+
+o.arrowFunc();  // global
+o.generalFunc();  // { name: 'TED', arrowFunc: [Function: arrowFunc], generalFunc: [Function: generalFunc] }
+
+setTimeout(o.arrowFunc, 1000);  // global
+setTimeout(o.generalFunc, 1000);  // global
+```
+
+7. `setTimeout` 의 `this` 는 `global` 을 가리킨다.
+8. `bind`, `apply`, `call` 등의 함수로 `this` 를 조작한다.
+9. `setTimeout` 은 함수 호출과는 다른 콜백 호출이다.
+10. `printName` 메서드는 `bind` 함수를 이용해 `this` 변수가 `o` 를 가리키도록 컨텍스트를 동적 바인딩한다.
+
+```javascript
+const o = {
+  name: "TED",
+  printName: function(){console.log("내 이름은" + this.name)},
+}
+
+o.printName();  // 내 이름은 TED
+setTimeout(o.printName, 1000);  // 내 이름은 undefined
+setTimeout(o.printName.bind(o), 1000);  // 내 이름은 TED
+```
+
+### ❏ 화살표 함수와 일반 함수의 this
+
+1. 화살표 함수의 `this` 는 호출된 함수를 둘러싼 실행 컨텍스트를 가리킨다. (선언 당시의 `this` 값을 유지한다. `this` 값을 `bind` , `apply`, `call` 로 바꿀 수 없다.) `this` 가 정해지면 바꿀 수 없다. `setTimeout` 등 `this` 가 바뀌는 상황에서 유용하다.
+2. 일반 함수의 `this` 는 새롭게 생성된 실행 컨텍스트를 가리킨다. (`this` 값을 `bind` , `apply`, `call` 로 바꿀 수 있다.), `this` 가 바뀌어야하는 경우는 일반함수를 사용한다.
+
+```javascript
+const o = {
+  method(){
+    console.log(this)
+    let f1 = function(){console.log(`f1`, this)};  
+    let f2 = () => console.log(`f2`, this)  
+    f1();  // global
+    f2();  // o
+  }
+};
+
+o.method()  // o
+```
+
+```javascript
+window.name = "TED";
+
+const o = {name: "AYW"};
+const arrow  = (prefix) => console.log(prefix + this.name);
+
+arrow("Dr. ");  // Dr. TED
+arrow.bind(o)(("Dr. "));  // Dr. TED
+arrow.call(o, "Dr. ");  // Dr. TED
+arrow.apply(o, ["Dr. "]);  // Dr. TED
+```
+
+### ❏ closure
+1. 일급객체란? 다른 변수처럼 대상을 다룰 수 있는것. JS에서 함수는 일급 객체이다. JS에서 함수는 변수처럼 다룰 수 있다.
+2. 클로저는 함수의 일급 객체 성질을 이용한다.
+3. 함수가 생성될 때, 함수 내부에서 사용되는 변수들이 외부에 존재하는 경우 그 변수들은 함수의 스코프에 저장한다.
+4. 함수와 함수가 사용하는 변수들을 저장한 공간을 클로저라 한다.
+
+```javascript
+function add(a, b){
+	return a+b;
+}
+
+[1, 2, 3].reduce(add, 0);
+
+(() => {
+	console.log("익명 함수를 생성한다.")
+})()
+
+function outer(a){
+	function inner(b){
+		return a + b
+	}
+	return inner(10)
+}
+
+// 함수를 변수로 생성한다.
+const Person = (name) => {
+  const printName = () => console.log(name);
+  return { printName }  // 함수를 리턴하며 closure를 생성한다.
+}
+
+const person = Person("ted");
+person.printName()
+
+function printName(name){
+  console.log(name)
+}
+
+// 함수끼리 비교한다.
+// ===의 경우, 변수가 같은 객체(함수)를 가리키는지 체크한다.
+console.log(printName === person.printName)
+```
+
+```javascript
+// 클로저 함수 예시
+// card1과 card2와 별도의 메모리 공간에 저장된다.
+
+function createCard(){
+  let title = "";
+  let content = "";
+
+  function changeTitle(text) {title = text};
+  function changeContent(text) {content = text};
+  function print(){console.log(title), console.log(content)};
+
+  return { changeTitle, changeContent, print };
+}
+
+const card1 = createCard();
+card1.changeTitle("생일 카드")
+card1.changeContent("생일 축하해");
+card1.print()
+
+const card2 = createCard();
+card2.changeTitle("감사 카드")
+card2.changeContent("감사합니다.");
+card2.print()
+```
+
+### ❏ Rest, spread operator
+1. 함수의 인자, 배열, 객체 중 나머지 값을 묶어 사용하도록 한다.
+2. 함수의 인자 중 나머지를 가리킨다.
+3. 배열의 나머지 인자를 가리킨다.
+4. 객체의 나머지 필드를 가리킨다.
+5. 함수인자 `...arr` 은, 인자들을 배열로 묶는다.
+
+```javascript
+// 인자로 들어왔을 때
+function findMin(...arr){
+	return rest.reduce((a, b) => a < b ? a : b)}
+}
+
+findMin(7, 3, 5, 2, 4, 1)  // 1
+
+// 객체로 사용할 때
+const o = {
+  name: "TED",
+  age: 23,
+  job: "zzz"
+}
+
+const { name, ...rest } = o;
+console.log(rest)  // { age: 23, job: 'zzz' }
+```
