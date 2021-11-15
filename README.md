@@ -2077,3 +2077,278 @@ const o = {
 const { name, ...rest } = o;
 console.log(rest)  // { age: 23, job: 'zzz' }
 ```
+
+---
+## 📍 15일차 11.13.토.(온라인 강의)
+오늘은 `JS`엔진, `JS` 코드 실행, `렉시컬 환경`, `Hoisting`, `globalThis` 등에 대해서 배웠다.
+
+### ❏ JS 엔진
+1. `JS` 엔진은 `JS` 코드를 읽어 실행하는 프로그램이다.
+2. `JS` 코드는 `JS` 엔진을 통해 파싱되고 실행된다.
+3. `Chrome` 브라우저의 경우 `V8` 엔진을 사용한다.
+4. `node.js` 는 브라우저 외의 환경에서 `JS` 코드를 실행하도록 하는 프로그램이다.
+5. `node.js` 는 여러 프로그램으로 구성되며, `JS` 코드를 읽는 프로그램으로 `V8`을 사용한다.
+6. 브라우저 환경과 `node.js` 환경은 같은 `JS` 코드를 작성해도 다르게 동작할 수 있다.
+
+### ❏ JS  코드 실행
+1. JS 엔진은 코드 실행 전 실행 컨텍스트를 실행한다.
+2. 실행 컨텍스트는 두 단계를 통해 생성된다.
+3. 생성단계에서 변수를 초기화시킨다.
+4. 실행단계에서 변수 값을 할당한다.
+
+### ❏ 렉시컬 환경
+1. 함수의 렉시컬 환경은, 함수가 사용하는 변수들을 둘러싼 환경을 의미한다.
+2. 특정 변수의 값은 함수의 렉시컬 환경 내에서 찾을 수 있다.
+3. 렉시컬 환경은 실행 컨텍스트 안에 정의된 `Variable Object` 로 이해할 수 있다.
+4. 실행 컨텍스트 안에 해당 변수가 없다면, 엔진은 함수스코프 외부에서 해당 변수를 찾으려고 한다. 이것을 `scope chain` 이라 부른다. 
+
+### ❏ 스코프 체인(scope chain)
+`scope`는 식별자에 대한 유효범위다. 어떤 경계 `A`의 외부에서 선언한 변수는 `A`의 외부뿐 아니라 `A`의 내부에서도 접근이 가능하지만, `A`의 내부에서 선언한 변수는 오직 `A`의 내부에서만 접근할 수 있다. 이러한 `식별자의 유효범의`를 안에서부터 바깥으로 차례로 검색해나가는 것을 스코프체인이라고 부른다. 이때 `outerEnvironmentReference`는 현재 호출된 함수가 선언될 당시의 `L.E`를 참조하게되는데, 중요한 점은 과거 당시 `선언된 시점`이다. 다음 코드의 `foo()`와 `bar()`의 값은 1로 동일한데, 그 이유는 `function bar`가 선언된 시점의 `x`는 전역 변수인 `x`를 바라보게 된다. 즉, `this`처럼 함수를 어디서 호출했는지가 아니라 함수를 어디에서 정의했는지에 따라 상위 스코프를 결정한다. 함수가 호출된 위치는 상위 스코프 결정에 어떠한 영향도 주지 않는다. 즉, 함수의 상위 스코프는 언제나 자신이 정의된 스코프다. 함수 선언문으로 정의된 `bar` 함수는 전역에서 정의된 함수다. 그러므로 전역 코드가 실행되기 전에 먼저 평가되어 함수 객체를 생성한다. 이때 생성된 `bar` 함수 객체는 전역 스코프를 기억한다. 그리고 `bar` 함수가 호출되면 호출된 곳이 어디인지 관계없이 언제나 자신이 기억하고 있는 전역 스코프를 상위 스코프로 사용한다.
+
+```javascript
+var x = 1;
+
+function foo(){
+  var x = 10;
+  bar();
+}
+
+function bar(){
+  console.log(x);
+}
+
+foo();  // 1
+bar();  // 1
+```
+
+### ❏ Hoisting
+1. `JS`가 코드를 읽으면, 생성 단계에서 실행 컨텍스트를 생성한다.
+2. `var` 변수는 저장 시 `undefined` 로 초기화 된다. `let` 과 `const` 는 초기화되지 않는다. (해당 코드를 읽고 나서부터 사용 가능하다.)
+3. `var`, `let` 은 변수에 재할당이 가능하지만 `const` 는 재할당이 불가능하다.
+4. `var` 는 함수 스코프, `let`, `const` 는 블록 스코프 변수이다.
+
+```javascript
+// Hoisting은 변수가 선언된 시점보다 앞에서 사용되는 현상이다.
+// 이는 var 변수가 생성 단계에서 undefined로 초기화되는것이 원인이다.
+// 함수는 생성단계에서 함수 전체가 저장되므로 뒤에서 선언되어도 호출이 가능하다.
+
+console.log(callMe())  // undefined
+
+var x = 10;
+
+console.log(callMe())  // 10
+
+function callMe(){
+	return x;
+}
+```
+
+```javascript
+// let, const 변수는 생성 단계에서 초기화되지 않는다.
+// 선언문 이전에 접근 시 Reference Error가 발생한다.
+// 이 경계를 TDZ라고 한다.
+// 따라서, let, const는 hoisting이 발생하지 않는다.
+// 함수는 생성단계에서 값까지 할당하지만 let, const는 생성단계에서 해당 값 이전에 접근하려고 했기 때문에 TDZ에 의해 참조에러가 난다.
+
+console.log(callMe())  // undefined
+
+var x = 10;
+
+console.log(callMe())  // 10
+
+function callMe(){
+	return x;
+}
+```
+
+```javascript
+// varFor에서 i는 varFor 함수 범위에 존재하는 변수이다.
+// 따라서, setTimeout이 호출될 때, i는 for 블럭이 끝난 시점에 소멸하지 않는다.
+// letFor에서 i는 for 블럭안에 존재하는 변수이다.
+// 각 for block이 실행되고 i는 소멸한다. 다만, 이 경우 각 화살표 함수의 closure에 저장된다.
+
+function varFor(){
+  for(var i=0; i<3; i++){
+    setTimeout(() => console.log(i))
+  }
+}
+
+function letFor(){
+  for(let i=0; i<3; i++){
+    setTimeout(() => console.log(i))
+  }
+}
+
+varFor()  // 3 3 3
+letFor()  // 0 1 2
+```
+
+### ❏ GlobalThis
+1. `globalThis`: 전역 객체를 지칭하는 변수이다.
+2. 전역 객체는 환경에 다라 다르다.
+3. 브라우저 환경은 `window`, `node` 환경은 `global` 객체를 지칭한다.
+4. `globalThis` 는 환경별 차이를 통일하여 하나의 변수로 서로 다른 전역 객체를 가리키게 한다.
+
+```javascript
+// DOM document를 포함하는 창을 나타내는 객체
+// 전역 스코프에 선언된 변수는 모두 window의 property가 된다.
+// 현재 창의 정보를 얻거나, 창을 조작한다.
+// globalThis는 브라우저 환경에서 window 객체와 같다.
+
+const targetURL = "https://www.naver.com";
+const windowSize = `height=${window.innerHeight}, width=${window.innerWidth}`;
+window.open(targetURL, "target", windowSize)
+
+// globalThis
+const windowSize = `height=${globalThis.innerHeight}, width=${globalThis.innerWidth}`;
+globalThis.open(targetURL, "target", windowSize)
+```
+
+### ❏ Document
+1. 브라우저에 로드된 웹 페이지
+2. 문서의 `title`, `URL` 등의 정보를 얻는다.
+3. `element` 생성, 검색 등의 기능 제공
+
+```js
+function printDocumentInfo(){
+	console.log(document.URL);
+	console.log(document.title);
+	console.log(document.querySelectorAll("*"));
+}
+```
+
+4. `createElement`, `createTextNode` 는 동적으로 원소를 생성한다.
+
+```js
+function createTodoList(todos){
+	return todos
+			.map((todo) => {
+				const li =
+	document.createElement("li")
+	li.appendChild(document.createTextNode(todo))
+})
+		return li
+	})
+		.reduce((ul, li) => {
+			ul.appendChild(li)
+			return ul
+}, document.createElement("ul"))
+}
+```
+
+### ❏ Number, NaN
+1. `number` 원시타입을 감싸는 객체
+2. 유의미한 상수값, 숫자를 변환하는 메서드 등을 제공한다.
+3. `NaN`: Not a Number를 나타내는 객체
+4. `isNaN()`: 전역 함수로, 입력값을 숫자로 변환했을 때 `NaN` 이 되는지를 검사
+
+```js
+// toFixed
+function changeToUsd(krw){
+	const rate = 1046;
+	return (krw/rate).toFixed(2);
+}
+
+const krw = 100_000;
+console.log(changeToUsd(krw));
+
+// isNaN
+function formatNumber(n){
+	if (isNaN(n) return "0");
+	return Number(n).toFixed(2);
+}
+
+formatNumber("12.345");  // 12.35
+```
+
+1. `math`: `BigInt` 타입과 호환되지 않고, `Number` 타입만을 인자로 다룬다.
+
+```js
+// bigInt
+let bigN = 1000000000000n
+
+// Math.max, Math.min
+function getMaxDiff(nums){
+	return Math.max(...nums) - Math.min(...nums);
+}
+
+getMaxDiff([-1, -4, -7, 11]);
+
+// Math.random
+function getRandomNumberInRange(min, max){
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+Array.from({ length: 10 }).map(() => getRandomNumberInRange(50, 100))
+```
+
+### ❏ Date
+1. 특정 시점의 날짜를 표시하기 위한 객체
+2. 날짜와 관련된 작업을 하기 위한 여러 메서드를 포함한다.
+
+```js
+// Date.getDay()는 요일을 0(일요일)부터 6(토요일)로 구한다.
+// 이 외에 년도, 월, 일, 시, 분, 초, 밀리초 등을 구할 수 있다.
+// getMonth(), getDate(), getHour()...
+
+function isWeekend(today){
+	let day = today.getDay();
+	return day === 0 || day === 6;
+}
+
+console.log(isWeekend(new Date("2021/11/13")))
+
+// setDate()등의 메서드로 시간을 설정한다.
+// 설정 시 월 변경 등의 시간 변환은 Date 객체가 처리한다.
+// toDateString() 메서드는 특정 포맷의 문자열을 반환한다.
+
+function addDays(date, days){
+	date.setDate(date.getDate() + days)
+	return date.toDateString()
+}
+
+addDays(new Date("2021/9/22"), 100)  // Fri Dec 31 2021
+
+// getTime() 메서드는 시간을 밀리초 단위로 반환한다.
+// 이때 밀리초는 1970.1.1 시점부터 흐른 시간이다.
+// fromNow는 주어진 시간이 현재로부터 며칠이나 흘렀는지를 계산한다
+function timeDiff(date1, date2){
+	return date2.getTime() - date1.getTime()
+}
+
+let dayTime = 60 * 24 * 60 * 1000
+function fromNow(date){
+	let diff = timeDiff(date, newDate())
+	return `${Math.floor(diff / dayTime)} days ago...`
+}
+
+fromNow(new Date("2021/11/13"))
+```
+
+### ❏ String, JSON
+1. 문자열 원시 타입의 래퍼객체
+2. 문자열을 조작하기 위한 여러 메서드를 포함한다.
+3. JSON - JSON 객체와 관련된 메서드를 담은 객체
+
+```js
+// toUserList는 이름의 배열을 받아 리스트 태그 목록의 문자열을 계산한다.
+function toUserList(users) {
+	return users
+			.fileter((user) =>
+	!user.includes("Admin"))
+			.map((user) => 
+	user.trim().toUpperCase())
+			.map((user) => `<li>${user}</li>`)
+			.join("")	
+}
+
+console.log(toUserList(["TED", "AYW", "AYJ"]))
+```
+
+```js
+// JSON.stringify는 주어진 객체를 JSON 문자열로 만든다.
+JSON.stringify({name: "TED", age: 27})  // {"name":"TED","age":27}
+
+// JSON.parse()는 주어진 JSON 문자열을 JS 객체로 만든다.
+JSON.parse('{"name":"TED","age":27}')  // { name: 'TED', age: 27 }
+```
