@@ -2352,3 +2352,7 @@ JSON.stringify({name: "TED", age: 27})  // {"name":"TED","age":27}
 // JSON.parse()는 주어진 JSON 문자열을 JS 객체로 만든다.
 JSON.parse('{"name":"TED","age":27}')  // { name: 'TED', age: 27 }
 ```
+
+reference 
+1. <a href='https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=206513031'>코어 자바스크립트</a>
+2. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
