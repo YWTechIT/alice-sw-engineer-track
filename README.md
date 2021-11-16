@@ -2356,3 +2356,109 @@ JSON.parse('{"name":"TED","age":27}')  // { name: 'TED', age: 27 }
 reference 
 1. <a href='https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=206513031'>코어 자바스크립트</a>
 2. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
+
+---
+## 📍 16일차 11.16.화.(실시간 강의)
+어느덧 엘리스를 시작한지 4주차가 되는 날이다. 4개월의 전체 과정 중 1/4인 약 25%를 달려온 셈인데, 생각보다 시간이 빨리가서 놀랐다. 남은 3개월도 꾸준하게 배운 내용을 기록하여 미래의 기본이 탄탄한 프론트엔드가 될 나의 밑바탕이 되어보자. 오늘은 `동기 / 비동기`, `콜백 함수`, `promise`에 대해서 배웠다. 항상 콜백함수를 배울 때는 `JS` 엔진의 동작방식이랑 같이 배우게 되는데, 잘 알아둬야하는 이유는 기술 면접에서 물어보기 때문이다. 실제로 면접을 볼 때마다 `call back`과 `promise` 함수의 차이점에 대한 질문을 받았다. 그때는 뭉뚱그려 대답했는데, 이번 기회를 통해 차이점을 확실하게 알아야겠다.
+
+### ❏ 동기 / 비동기
+1. 동기(synchronous): 동기적이다라는 표현은 일정한 순서에 의해 진행된다는 말인데, 보통 `python`과 같은 언어가 동기적으로 작동한다고 할 수 있다. `JS`도 마찬가지로 동기언어인데, 자바스크립트 엔진은 한 번에 하나의 태스트만 실행할 수 있는 싱글 스레드 방식이기 때문이다. 때문에, 시간이 걸리는 기능은 해당 기능이 끝날 때까지 기다려야하는 블로킹 현상이 발생하는데, 이는 동기처리 방식의 대표적인 예시이다. 장점으로는 실행 순서가 보장되어있다.
+2. 비동기(Asynchronous): 동기처리 방식과는 반대로, 다음 태스크를 블로킹하지 않고 곧바로 실행하는 것을 비동기라고 하는데, 비동기 처리 방식은 현재 실행 중인 태스크가 종료되지 않은 상태라 해도, 다음 태스크를 곧바로 실행하므로 블로킹이 발생하지 않는다는 장점이 있지만, 태스크의 실행순서가 보장받지 않는 단점이 있다. `JS`에서 `setTimeout`, `setInterval`, `HTTP 요청`, `event handler`는 비동기 처리방식으로 동작한다. 
+
+```javascript
+// 동기 코드: 앞선 task가 종료할 때까지 나머지 task는 대기한다.
+let initTime = Date.now();
+let count = 0;
+
+while (true) {
+    let currentTime = Date.now();
+    if (currentTime - initTime > 3000) {
+        count++;
+        break;
+    }
+}
+
+function foo(){
+  console.log('foo')
+}
+
+function bar(){
+  console.log('bar')
+}
+
+foo();
+bar();
+
+// 비동기 코드: 동시에 실행되는 특징을 갖고 있다.
+setTimeout(() => {
+        count++;
+}, 3000);
+
+function foo(){
+  console.log('foo')
+}
+
+function bar(){
+  console.log('bar')
+}
+
+foo();
+bar();
+```
+
+### ❏ 콜백함수(call back)
+1. 콜백함수란 다른 함수의 인자로써 사용되는 함수를 말한다.
+2. 우리가 JS에서 비동기 처리를 수행할 때는 콜백함수를 사용하는데, 콜백함수의 단점은 여러개의 콜백 패턴을 사용할 때 가독성이 떨어지고, 비동기 처리 중 발생한 예외 처리가 곤란하며, 여러개의 비동기 처리를 한 번에 처리할 때 한계가 있다. 
+
+```javascript
+// 1초가 지나고 undefined가 출력된다.
+function findUser(id){
+	let user;
+
+	setTimeout(function (){
+		console.log("1초 기다림")
+		user = {
+			id: id
+		}
+})
+
+	return user
+}
+
+let user = findUser(1);
+
+// 콜백으로 넘겨주기: 1초가 지나고 user에 값이 할당된다.
+// 단점: 비동기를 또 넘겨주고 싶을 떄는 콜백지옥에 빠진다.
+function findUser(id, callbackFunc){
+	let user;
+	setTimeout(function(){
+		console.log("1초 기다림")
+		user = {
+			id: id
+		};
+
+		callbackFunc();
+	}, 5000);
+	return user;
+}
+
+findUser(1, function(user){
+	console.log("user:", user)
+})
+
+// 이벤트 핸들링
+addEventListener("click", function(){console.log("HI")})
+```
+
+### ❏ promise
+1. ES6에서 비동기 처리를 위한 또 다른 패턴으로 프로미스를 도입했는데, 프로미스는 전통적인 콜백 패턴이 가진 단점(비동기처리를 연속적으로 진행할 경우 가독성이 떨어지는 문제, 비동기처리 중 예외 발생시 예외 처리의 어려움, 여러개의 비동기를 한번에 처리하기 어려움)을 보완하며 비동기 처리 시점을 명확하게 표현할 수 있다는 장점이 있다.
+2. 프로미스는 비동기 방식의 코드를 동기 방식으로 동작하게 끔 만들어주는 장점이 있다. `promise` 객체는 3가지의 상태정보를 갖는데, `pending(비동기 처리가 수행되지 않은 상태) -> 프로미스가 생성된 직후 기본 상태`, `fulfilled(비동기 처리가 수행된 상태(성공)) -> resolve 함수 호출`, `rejected(비동기 처리가 수행된 상태(실패)) -> reject 함수 호출` 여기서 `fulfilled` 혹은 `rejected` 상태를 `settled` 상태라고 한다. `settled` 상태는 `fulfilled` 또는 `rejected` 상태와 상관없이 `pending`이 아닌 상태로 비동기 처리가 수행된 상태를 말한다. 프로미스는 `pending` 상태에서 `settled` 상태로 변화할 수 있지만, `settled` 상태에서 `pending` 상태로 변화할 수 없다.
+3. `promise.prototype.then`: `then` 메서드는 두 개의 콜백 함수를 인수로 전달받는다. 즉, 첫 번째 콜백 함수는 비동기 처리가 성공했을 때 호출되는 성공 처리 콜백함수이며, 두 번째 콜백함수는 비동기 처리가 실패했을 때 호출되는 실패 처리 콜백 함수다. `reject`를 사용하지 않더라도 `then`으로 `promise`의 성공과 실패의 결과 값을 모두 받을 수 있는데 이는 `then`메소드에 두번 째 콜백 함수를 전달하는 것보다 `catch` 메소드를 사용하는 것이 가독성이 좋고 명확하기 때문에 별로 추천하지 않는다.
+4. `promise.prototype.catch`: `catch` 메서드는 한 개의 콜백 함수를 인수로 전달받는다. `catch` 메서드의 콜백 함수는 프로미스가 `rejected` 상태인 경우만 호출된다. `then` 메소드와 마찬가지로 언제나 프로미스를 반환한다.
+5. `promise.prototype.finally`: `finally` 메소드는 한 개의 콜백 함수를 인수로 전달받는다. `finally` 메서드의 콜백 함수는 프로미스의 성공(`fulfilled`) 또는 실패(`rejected`)와 상관없이 무조건 한 번 호출된다. `finally` 메서드는 프로미스의 상태와 상관없이 공통적으로 수행해야 할 처리 내용이 있을 때 유용하다. `finally` 메서드도 `then/catch` 메서드와 마찬가지로 언제나 프로미스를 반환한다.
+
+지금까지 `동기 / 비동기`, `callBack`, `promise`를 짧게 알아봤는데, 결론적으로 `callBack`과 `promise`의 차이점은 `callback`으로 비동기 처리를 하려면 `callback` 함수 안에서만 처리해야하는데, `promise`는 비동기의 값이 `promise` 객체에 저장되기 때문에 함수 밖에서 처리할 수 있고, `promise`의 장점은 `callback`의 단점인 콜백 지옥, 예외 처리, 한번에 여러번 비동기 처리를 해결 할 수 있다는 장점이 있다.
+
+reference 
+1. <a href='https://blog.toycrane.xyz/promise-%EC%A0%95%EB%A7%90-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-a74b6e3c6722'>toy crane</a>
+2. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
