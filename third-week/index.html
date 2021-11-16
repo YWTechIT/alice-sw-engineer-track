@@ -1,18 +1,54 @@
 <html>
+
 <head></head>
+
 <body>
   <header>
     <h1><a href='index.html'></a>Web2</h1>
   </header>
   <nav>
-    <ol>
+    <ul>
       <li><a href="1.html">html</a></li>
       <li><a href="2.html">css</a></li>
-    </ol>
+    </ul>
   </nav>
   <article>
     <h2>Welcome</h2>
     Hello, Web
   </article>
+  <script>
+    let data = [
+      { id: 1, title: 'html', body: "html is..." },
+      { id: 2, title: 'css', body: "css is..." },
+      { id: 3, title: 'js', body: "js is..." }
+    ]
+
+    function handleInner(selector, content) {
+      document.querySelector(selector).innerHTML = content;
+    }
+
+    function handleArticle(id) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].id === id) {
+          handleInner("article", `<h2>${data[i].title}</h2>${data[i].body}`);
+          break;
+        }
+      }
+    }
+
+    let refreshNav = () => handleInner('nav>ul', data
+      .map(item =>
+        `<li>
+            <a href="${item.id}.html" onclick="
+                event.preventDefault();
+                handleArticle(${item.id});
+            ">${item.title}</a>
+        </li>`)
+      .join(''));
+
+    refreshNav();
+
+  </script>
 </body>
+
 </html>
