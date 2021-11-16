@@ -5,14 +5,29 @@
     <h1><a href='index.html'></a>Web2</h1>
   </header>
   <nav>
-    <ol>
+    <ul>
       <li><a href="1.html">html</a></li>
       <li><a href="2.html">css</a></li>
-    </ol>
+    </ul>
   </nav>
   <article>
     <h2>Welcome</h2>
     Hello, Web
   </article>
+  <script>
+    let data = [
+      {id:1, title: 'html', body: "html is..."},
+      {id:2, title: 'css', body: "css is..."},
+      {id:3, title: 'js', body: "js is..."}
+    ]
+
+    let navTag = "";
+    // for 반복문으로 태그 추가하기
+    for (let i=0; i<data.length; i++){
+      navTag += `<li>${data[i].title}</li>`;
+    }
+
+    document.querySelector("nav>ul").innerHTML = navTag;
+  </script>
 </body>
 </html>
