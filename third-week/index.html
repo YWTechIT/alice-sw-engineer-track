@@ -1,5 +1,7 @@
 <html>
+
 <head></head>
+
 <body>
   <header>
     <h1><a href='index.html'></a>Web2</h1>
@@ -16,16 +18,37 @@
   </article>
   <script>
     let data = [
-      {id:1, title: 'html', body: "html is..."},
-      {id:2, title: 'css', body: "css is..."},
-      {id:3, title: 'js', body: "js is..."}
+      { id: 1, title: 'html', body: "html is..." },
+      { id: 2, title: 'css', body: "css is..." },
+      { id: 3, title: 'js', body: "js is..." }
     ]
 
-    // map 반복문으로 태그 추가하기
-    let navTag = "";
-    let newElements = data.map(e => `<li><a href='${e.id}.html'>${e.title}</a></li>`);
-    let navTag = newElements.join("");
-    document.querySelector("nav>ul").innerHTML = navTag;
+    function handleInner(selector, content) {
+      document.querySelector(selector).innerHTML = content;
+    }
+
+    function handleArticle(id) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].id === id) {
+          handleInner("article", `<h2>${data[i].title}</h2>${data[i].body}`);
+          break;
+        }
+      }
+    }
+
+    let refreshNav = () => handleInner('nav>ul', data
+      .map(item =>
+        `<li>
+            <a href="${item.id}.html" onclick="
+                event.preventDefault();
+                handleArticle(${item.id});
+            ">${item.title}</a>
+        </li>`)
+      .join(''));
+
+    refreshNav();
+
   </script>
 </body>
+
 </html>
