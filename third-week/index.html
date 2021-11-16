@@ -23,12 +23,7 @@
 
     // map 반복문으로 태그 추가하기
     let navTag = "";
-
-    function new_element_gen(e){
-      return `<li><a href='${e.id}.html'>${e.title}</a></li>`;
-    }
-
-    let newElements = data.map(new_element_gen);
+    let newElements = data.map(e => `<li><a href='${e.id}.html'>${e.title}</a></li>`);
     let navTag = newElements.join("");
     document.querySelector("nav>ul").innerHTML = navTag;
   </script>
