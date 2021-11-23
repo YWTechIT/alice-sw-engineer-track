@@ -2601,3 +2601,1007 @@ promise
 	.then((item) => getUserNameById(item.id))
   .catch(e => e.message);
 ```
+
+---
+## 📍 18일차 11.18.목.(실시간 강의)
+오늘은 실시간 강의로 `Ajax`, `promise`, `async / await`, `SPA` 에 대해 배웠다. 
+
+### ❏ SPA 만들기
+1. SPA로 구현하려면 경로로 접속할 때 같은 파일을 내려줘야 한다.
+2. `html` 파일은 웹 서버에서 보관하고 `html` 해석은 웹 브라우저에서 한다. `html` 파일을 가공해서 고객들에게 보여주는 행위를 `client side tech, 혹은 front end` 라고 한다.
+3. `header`: 서버에서 클라이언트에게 전달하는 정보
+4. `fetch`를 사용하면 `JSON` 형태의 내용이 온다.
+5. JS에서 객체를 표현하는 방법을 참고해서 만든 data spec
+6. `JSON.parse`: JSON으로 넘어온 데이터를 JS 객체 형태로 바꾼다.
+7. `Ajax`: `JS`를 사용하여 브라우저가 서버에게 비동기 방식으로 데이터를 요청하고, 서버가 응답한 데이터를 수신하여 웹페이지를 동적으로 갱신하는 프로그래밍 방식
+8. `XMLHttpRequest` 는 크로스브라우징을 고려해야한다. 지금보니까 `fetch`도 꽤나 안되는 브라우저들이 있었다.(`Edge 12-13`, `IE`, `Opera Mini`)
+9. `fetch`:  `fetch(url).then(type => type.json())` : `promise`를 `json`타입으로 바꿔준다.
+10. `XMLHttpRequest`을 `fetch` 버전으로 바꿔보기
+
+```javascript
+// XMLHttpRequest로 JSON 객체 가져오기
+function name() {
+    var request = new XMLHttpRequest();
+    request.open("GET", "https://gorest.co.in/public/v1/users", false); // `false` makes the request synchronous
+    request.send(null);
+
+    if (request.status === 200) {
+        let text = request.responseText;
+        let obj = JSON.parse(text);
+        console.log("obj", obj.data[0].name);
+        document.querySelector("#name").value = obj.data[0].name;
+    } else if (request.status === 200) {
+    }
+}
+```
+
+```javascript
+// 타입을 json으로 결정한다
+1. let json = fetch("https://gorest.co.in/public/v1/users").then(type => type.json())
+
+👉🏽 Promise {<fulfilled>: {…}}
+[[Prototype]]: Promise
+[[PromiseState]]: "fulfilled"
+[[PromiseResult]]: Object
+
+// 타입을 처리한다
+json.then(res => console.log(res))
+👉🏽 {meta: {…}, data: Array(20)}
+```
+
+### ❏ JSON
+1. 데이터를 주고받을 때 사용하기 위해 고안된 데이터 형태
+2. `get` 방식은 `data` 를 가져오기
+3. 서버로 값을 보낼 때는 `JSON` 형태로 보내고, POST 할 때는 `headers` 설정과  `JSONstringify` 를 사용하기
+4. 짝 프로그래밍
+
+```javascript
+fetch('/topics', {
+    method:'POST', 
+    body:JSON.stringify({title:'js', body:'js is ..'}), 
+    headers: {
+        'Content-Type': 'application/json'
+    }})
+```
+
+### ❏ async / await
+1. `promise` 코드에 `async - await` 문법을 사용하면 비동기적인 코드를 동기적으로 관리할 수 있다.
+2. promise로 반환한 객체 앞에 `await` 를 붙이면 비동기적인 동작을 끝낼때까지 기다린다.
+3. `await` 는 전역적으로 사용하는 것이 아니라 `async`함수 내에서만 사용할 수 있다.
+4. 상황에따라 `promise`, `async` 를 맞춰서 사용하면 된다.
+5. `async` 문법은 `promise` 를 리턴한다.
+6. `async:`함수 내에서 비동기적으로 실행되면 비동기가 끝나면 다음 비동기가 실행된다
+
+```javascript
+// async - await
+async function asyncFunc() {
+    return "elice";
+}
+
+// promise
+function promiseFunc() {
+    return new Promise((resolve) => resolve("elice"));
+}
+
+console.log(asyncFunc());
+👉🏽 Promise { 'elice' }
+
+// 인자와 return 값이 인자 한개면 생략할 수 있다.
+console.log(asyncFunc().then(console.log));
+
+
+console.log(promiseFunc());
+👉🏽 Promise { 'elice' }
+```
+
+```javascript
+//async, await으로 변환하는 방법
+
+// 1. Promise 대신 async로 비동기 처리해 'elice'를 반환하도록 fetchUser 함수를 수정하세요.
+async function fetchUser() {
+    return 'elice';
+}
+
+const user = fetchUser();
+user.then((res)=>console.log(res));
+
+// 2. delay 함수를 이용해 getCoffee와 getTea 함수를 작성하세요.
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function getCoffee() {
+    await delay(1000);
+    return 'coffee';
+}
+
+async function getTea() {
+    await delay(1000);
+    return 'tea';
+}
+
+// 3. 위 두 개의 함수를 사용해서 coffee와 tea를 한번에 반환합니다.
+async function getDrinks() 
+{
+    const coffee = await getCoffee();
+    const tea = await getTea();
+    return ${coffee} and ${tea};
+}
+
+getDrinks().then((res)=>{console.log(res)});
+```
+
+### ❏ REST API
+1. 이고잉님의 `REST API`에 관한 짧은 <a href='https://www.youtube.com/watch?v=PmY3dWcCxXI'>영상</a> 강의 보기
+2. REST: HTTP를 기반으로 클라이언트에서 서버로 연결할 때 정해진 아키텍쳐에 따라 접근하는 방식
+3. RESTAPI: REST를 기반으로 서비스 API를 구현한 것
+
+---
+## 📍 19일차 11.19.금.(온라인 강의)
+오늘은 `async - await`, `error처리`, `HTTP`, `REST API`에 대해서 배웠다.
+
+### ❏ async / await 문법
+1. `Promise` 를 활용한 비동기 코드를 간결하게 작성하는 문법
+2. `async / await` 문법으로 비동기 코드를 동기 코드처럼 간결하게 작성할 수 있다.
+3. `async` 함수와 `await` 키워드를 이용한다.
+4. `await` 키워드는 반드시 `async` 함수 안에서만 사용해야 한다.
+5. `async` 로 선언된 함수는 반드시 `Promise` 를 리턴한다.
+6. `async` 함수는 `function` 키워드 앞에 `async` 를 붙여 만든다
+7. `async` 함수 내부에서 `await` 키워드를 사용한다.
+8. `fetchData`, `fetchUser`는 `Promise` 를 리턴하는 함수이다.
+9. `then method chain` 시 `then` 을 2번 이상 사용하면 순차적으로 실행된다. 첫번째 `then`을 기다렸다가 완료되면 다음 `then` 으로 이어진다. `async` 도 마찬가지로 `await`가 여러개 있을 때 순차적으로 실행된다.
+10. `await` 키워드는, `then` 메서드 체인을 연결한것처럼 순서대로 동작한다.
+11. 비동기 코드에 쉽게 순서를 부여한다.
+
+```js
+// async 함수
+async function asyncFunc1(){
+    let data = await fetchData()
+    let user = await fetchUser(data)
+    return user
+}
+
+// await 키워드 실행 순서
+async function asyncFunc2(){
+	let data1 = await fetchData1()
+	let data2 = await fetchData2(data1)
+	let data3 = await fetchData(data2)
+	return data3;
+}
+
+function promiseFunc(){
+	return fetchData1()
+			.then(fetchData2)
+			.then(fetchData3)
+}
+```
+
+12. `Promise` 를 리턴하는 함수의 경우, 에러가 발생하면 `catch` 메서드를 이용하여 에러를 처리한다.
+13. `catch` 메서드를 사용하지 않는다면 `async` 함수에서 `try-catch` 구문을 이용하여 에러를 처리한다.
+14. `try` 구절안에 `await` 가 2개 이상 있을 때 `catch` 문에 해당 `error` 가 들어간다. `error` 처리를 세분화 하고 싶으면 한 `try` 구절에 `await` 를 1개씩만 담자.
+
+```js
+// promise error handling
+function fetchData1(){
+	return request()
+			.then(response => response.requestData)
+			.catch(error => // error)
+}
+
+// async - await error handling
+async function asyncFunc(){
+	try{
+		let data1 = await fetchData1()
+		return fetchData2(data1)
+	} catch (e){
+		console.log("error: ", e)
+	}
+}
+```
+
+15. async 함수는 동기적으로 보이지만 비동기적으로 실행됩니다. 단, 내부에서 `await` 키워드가 쓰이지 않았을 경우엔 `Promise.resolve()` 로 처리됩니다.
+16. await 키워드는 프로미스를 리턴하지 않는 함수라도 사용할 수 있습니다. 단 이 경우 리턴한 데이터는 `Promise.resolve()`로 감싸집니다.
+
+### ❏ HTTP(HyperText Transfer Protocol)
+1. `Web` 에서 서버와 클라이언트 간의 통신하는 방법을 정한 것.
+2. 클라이언트는 웹 브라우저 등 서버로 요청을 보내는 대상
+3. 서버는 클라이언트가 요청을 보내기 전까지 대응하지 않음
+4. 서버와 클라이언트 사이에는 무수히 많은 요소가 존재
+5. `HTTP` 는 이런 존재들 사이의 통신 방법을 규정
+6. 규약을 통해 통신하지 않으면 복잡해지고 혼란스럽게 된다.
+7. `HTTP Message`: 서버 주소, 요청 메서드(POST), 상태 코드(200, 404), `target path`, 헤더 정보, 바디 정보 등이 포함된다. 요청 메시지와 응답 메시지의 모양이 다르다. `HTTP/1.1` 메시지는 사람이 읽을 수 있다.
+8. `HTTP header`: 콘텐츠 관련 정보(`content-type: json...`), 인증 관련 정보(`Authorization`), 쿠키 정보(헤더에 들어간다. 가벼운 정보 등), 캐시(페이지 조회정보를 클라이언트에 내릴 때 일정시간 내에는 동일한 페이지를 그대로 사용하는 방법 등...) 관련정보 등 서버과 클라이언트 통신 시 필요한 정보를 담는다. 클라이언트 요청 시, 서버 응답 시 모두 헤더에 정보를 담을 수 있다.
+9. `HTTP status` : `HTTP`요청 시, 클라이언트는 요청의 결과에 대한 상태 정보를 얻는다. `200`, `400`, `500` 등 숫자 코드와, `OK NOT FOUND` 등의 텍스트로 이루어진다. 코드를 이용해 각 결과에 해당하는 행위를 할 수 있다.
+10. `요청 메서드`: 클라이언트에서 서버로 요청에 의미를 부여할 때 사용하는 명령어(`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)
+
+### ❏ REST API(Representational State Transfer API)
+1. HTTP를 이용하여 클라이언트가 서버의 리소스에 접근하는 방식을 규정한 아키텍쳐고 `REST API` 는 `REST` 를 기반으로 서비스 `API` 를 규정한 것
+2. API는 사용자가 특정 기능을 사용할 수 있도록 제공하는 함수
+3. `REST API` 의 요청 메소드에 응하는 서버API와 클라이언트 간 통신의 구조가 지켜야 할 좋은 방법을 명시한 것이다.
+4. 요청 메서드의 의미, URI설계, 클라이언트의 상태에 대한 동작 등을 정의한다.
+5. REST API 요청 메서드: GET - 리소스 정보를 얻음, POST  - 리소스를 생성, PUT - 리소르르 생성하거나 업데이트 DELETE - 리소스를 제거
+
+### ❏ Fetch API
+1. `HTTP` 를 활용할 수있는 `API` 
+2. 기존 `XMLHTTPRequest` 를 대체하는 `HTTP` 요청 `API` (두 함수의 큰 차이점은 `Promise` 리턴 여부)
+3. `ES6` 에 추가된 `Promise` 를 리턴하도록 정의 됨
+4. 네트워크 요청 성공 시, `Promise` 는 `resolve` 
+5. 네트워크 요청 실패 시, `Promise` 는 `reject`
+6. `response.` 객체는 결과에 대한 다양한 정보를 담는다.
+7. `response.ok` : `200 <= HTTP status code <= 299` : true, 그 외 `false`
+8. `response.status`: `HTTP status code` 를 담는다.
+9. `response.url` : 요청한 `URL` 정보를 담는다
+10.  response.json(): `body` 정보를 `json` 으로 만드는 `Promise` 를 반환한다.
+11. `body` 값은 `json()` 값을 `resolve` 해서 나온 값을 `then` 처리를 해줘야 사용가능하다. `json()` 을 한번만 사용하면 `promise` 를 사용하는 꼴이된다.
+12. `POST`: `fetch(url, options)` 로 `fetch` 메서드 옵션을 넣는다. `method` 필드로 여러 요청 메서드를 활용한다. `headers`, `body` 필드를 활용해 서버에 추가 정보를 보낸다.
+
+```js
+// response 객체 살펴보기
+.fetch(URL)
+	.then(response => {
+		response.ok
+		response.status
+		response.statusText
+		response.url
+		response.bodyUsed
+	})
+
+// response header
+.fetch("https://randomuser.me/api/").then(response => {
+    for(let [k,v] of response.header){
+        console.log(k,v)
+    }}
+);
+
+// response body
+.fetch(URL)
+	.then(response => response.json()
+	.then(console.log)
+
+// POST 요청
+fetch(serverURL, {
+	method: "post",  // method 넣기
+	headers: {
+			'Content-Type': 'application/json; charset=utf-8',
+	Authentication: 'mysecret'
+	},
+	body: JSON.stringify(formData)
+})
+	.then(res => res.json())
+	.then(console.log)
+```
+
+---
+## 📍 20일차 11.20.토.(온라인 강의)
+오늘은 `JS`기본 내장 라이브러리인 `fetch`와 `HTTP` 비동기 외부 라이브러리인 `Axios`와의 차이점, `API` 그리고 `HTTP methods`에 대해서 배웠다. 본론으로 들어가기 전 `Window`는 `DOM document`를 포함하는 창을 나타내는 창을 말하고, `document`는 브라우저에 로드된 웹 페이지를 나타내는 객체이다. 쉽게말해 `window`는 브라우저 전체를, `document`는 브라우저 내부의 화면을 말한다.
+
+### ❏ Axios
+1. `Ajax`는 비동기 `JS`란 의미로 `Asynchronous JavaScript and XML`의 약자입니다. `Ajax`는 브라우저가 가지고 있는 `XMLHttpRequest` 객체를 이용하여 화면 전체를 새로고침하지 않고 변경된 일부 데이터만 로드하는 비동기 처리가 가능합니다. `Axios`는 `Ajax`와 유사하며, `API`를 이용한 통신을 할 때 주로 사용합니다.
+2. `Axios`는 웹 브라우저와 `Node.js`를 위한 `HTTP` 비동기 통신 라이브러리입니다. 쉽게 말해 백엔드와 프론트엔드 간 통신을 쉽게 하기 위해 사용되는 것으로, `Ajax`처럼 사용되는 것입니다. 비동기 통신 라이브러리를 사용하지 않으면 모든 코드가 순차적으로 처리되어야 하므로 코드의 순서를 신경 써서 작성해야 합니다. 코드 작성이 매우 복잡해지며, 따라서 비동기 통신을 쉽게 해주는 `Axios`나 `Ajax`같은 것이 자주 사용되는 것입니다.
+
+### ❏ Axios vs Fetch
+1. 둘 다 `HTTP` 요청을 처리하기 위한 `JS` 라이브러리지만 몇 가지 차이점이 존재합니다.
+2. `Fetch`의 경우 `JS`에 내장되어있기 때문에 별도의 `import`나 설치가 필요하지 않습니다. 하지만, `Axios`의 경우 설치 과정이 필요합니다.
+3. `Fetch`는 `IE`에서 사용이 불가하고 `Edge` 14버전 이상부터 사용이 가능합니다.(<a href='https://caniuse.com/?search=fetch'>caniuse</a>) 반면, `Axios`는 `Fetch`보다 많은 브라우저에서 지원하고 있어 크로스 브라우징이 더 뛰어납니다.
+4. `Fetch`에서 지원하지 않는 `JSON`자동 변환, 응답 시간 초과 설정 기능 등을 `Axios`에서 지원해줍니다.
+5. 무조건 `Axios`를 사용하기보다는 자신의 개발 상황에 맞는 라이브러리를 선택해야 합니다.
+
+### ❏ API
+1. 운영 체제나 프로그래밍 언어가 제공하는 기능을 제어할 수 있게 만든 <a href='https://ko.wikipedia.org/wiki/%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4_(%EC%BB%B4%ED%93%A8%ED%8C%85'>인터페이스</a>를 말합니다.
+2. 만약 여러분이 밥을 먹기 위해 식당을 갔다고 해봅시다. 손님인 여러분은 요리사에게 음식 주문을 해야 밥을 먹을 수 있습니다. 하지만 직접 요리사에게 말하지는 않죠. 일반적인 경우 점원을 통해 주문을 할 텐데요. 이때 점원 역할이 바로 API라고 생각하시면 됩니다. 즉, 프로그램과 프로그램을 연결해 주는 다리 역할을 하는 것이 API입니다.
+3. 나 자신이 URL을 통해 누군가에게 해당 정보를 **요청하면,** 요청한 정보를 누군가가 나에게 다시 **전달해줍니다.**이러한 규칙을 HTTP라고 부릅니다.
+4. 요청 받은 데이터를 가져오는 것은 웹 서버의 역할이며 HTTP는 바로 그 클라이언트와 서버 간의 규칙입니다. 이때, 클라이언트의 요청을 `HTTP Request`, 서버의 응답을 `HTTP Response`라고 합니다.
+  
+![](https://images.velog.io/images/abcd8637/post/392e05c2-4c10-438a-82db-301022524773/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-11-20%2007.15.58.png)
+
+5. `200 <= HTTP status code <= 299` : `true`, 그 외 `false`
+6. `CRUD`는 `Create`, `Read`, `Update`, `Delete`의 제일 앞 문자를 하나씩 따와 만든 줄임말로 각각은 아래처럼 매칭이 됩니다. C : Create(생성) - POST, R : Read(조회) - GET, U : Update(수정) - PUT, D : Delete(삭제) - DELETE
+7. `PUT` : 데이터의 전체를 바꿀 때 사용
+8. `PATCH`: 데이터의 일부만 바꿀 때 사용
+9. 예를 들어, `PUT` 으로 넘겨준 객체가 `name` 만 가지고 있다면, `email` 은 `null` 로 바뀌지만, `PATCH` 로 넘겨주면 `name` 이 변경되고, `email` 은 기존의 데이터를 유지합니다. 보통 `openAPI` 에서는 `PUT` 을 지원하지 않습니다. 주로 `API` 를 직접 만들 때 주로 `PUT` 이 사용됩니다.
+10. `openAPI` 에 `DELETE` 요청을 보내도 실제 서버에 있는 데이터가 삭제되지는 않습니다. 
+11. `HTTP 204`: 요청이 성공했으나, 클라이언트가 현재 페이지에서 벗어나지 않아도 된다는 것을 나타냅니다.
+
+### ❏ Axios 사용법
+```javascript
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+// POST: 새로운 자원 생성
+axios.post(url, data 객체)
+
+// GET: 자원을 요청
+axios.get(url)
+
+// PUT: 자원을 갱신
+axios.put(url, data 객체)
+
+// DELETE: 자원을 삭제
+axios.delete(url)
+```
+
+```javascript
+// POST
+function axiosPost() {
+  const token = document.getElementById("token");
+  const data =  { "email": "eve.holt@reqres.in", "password": "cityslicka" };
+  const URL = "https://reqres.in/api/login";
+  
+  axios.post(URL, data)
+    .then(res => {
+        token.innerHTML = res.data.token
+    })
+}
+export default axiosPost;
+
+// GET
+function axiosGet() {
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+ 
+  const URL = "https://reqres.in/api/users/2";
+  axios.get(URL)
+    .then(res => {
+        const {data} = res.data;
+        const emailData = data.email;
+        const nameData = `${data.first_name} ${data.last_name}`
+        name.innerHTML = nameData;
+        email.innerHTML = emailData;
+    })
+}
+export default axiosGet;
+
+// PUT
+function axiosPut() {
+  const name = document.getElementById("name");
+  const emailEl = document.getElementById("email");
+  const updateDate = document.getElementById("update_date");
+  
+  const data = { "first_name": "White", "last_name": "Rabbit" , "email": "alice@elice.io" };
+  const URL = "https://reqres.in/api/users/2";
+  
+  axios.put(URL, data)
+    .then(res => {
+        const {email, first_name, last_name, updatedAt} = res.data;
+        emailEl.innerHTML = email;
+        name.innerHTML = `${first_name} ${last_name}`
+        updateDate.innerHTML = updatedAt
+    })
+}
+export default axiosPut;
+
+// DELETE
+function axiosDelete() {
+  const statusEl = document.getElementById("status");
+  const URL = "https://reqres.in/api/users/2";
+  
+  axios.delete(URL)
+    .then(res => {
+        const {status} = res;
+        statusEl.innerHTML = status;
+    })
+}
+export default axiosDelete;
+```
+
+---
+## 📍 21일차 11.23.화.(실시간 강의) (클린코드와 타입스크립트)
+이번주는 `클린코드`와 `typescript`의 `타입`, `클래스`, `인터페이스`, `Generic`, `Decorator`에 대해서 배웠다. 엘리스 엔지니어 SW트랙을 신청할 당시 제일 기대가 되었던 커리큘럼이 이번주차에 배우는 내용이었는데, 벌써 그 내용을 듣게 된다니.. 이전보다 더욱 열심히 들어야겠다. 여느때와 마찬가지로 이론수업과 실습수업으로 나뉘었는데, 실습수업은 김병철 코치님이 가르쳐주셨다. 처음에는 누군지 잘 몰랐는데 알고리즘계에서 꽤 유명한 분이셨다. 개발자 오픈채팅방에 코딩테스트 대비 순서에 대해 물어보면 항상 <a href='https://github.com/tony9402/baekjoon'>tony9402 - 코딩테스트 대비 문제집</a>부터 풀라는 얘기가 많았는데 그 레포지터리 컨트리뷰터의 2번째(<a href='https://github.com/VSFe'>VSfe</a>)분이셨다. 😲😲 저번 이고잉님이 가르쳐주실때도 신기했는데 이번에도 엄청 신기했다.. 공부 의지가 한껏 솟아오르는 계기가 되었다.
+
+### ❏ 클린코드란
+1. 비즈니스 전문가 → 분석가(제품관리자 / 서비스 기획자 / 프로그래머) → 프로그래머 → 컴퓨터
+2. 좌측 방향은 목적 / 추상적, 우측 방향은 수단 / 구체적
+3. 시간이 갈수록 코드를 쓰는것보다 읽는 비중이 늘어난다.(코드 가독성의 중요성이 늘어남)
+4. 코드 재사용(반복되는 문제의 풀이는 재사용 가능, SW 개발 비용 절감)
+
+### 💡 테스트 기법
+1. 수동 테스트
+ - 품질 담당자가 UI를 사용해 기능 검증
+ - 사람의 손으로 일일이 테스트한다.(인건비 증가)
+ - 소프트웨어 회귀(시간에 따라 기능이 많아지면, 추가한 기능과 기존의 기능과의 충돌로 인해 기존의 있던 코드조차 실행이 안되는 현상이 발생한다.)
+
+2. 인수 테스트
+ - 배치된 시스템을 대상으로 검증
+ - 전체 시스템 이상 여부 신뢰도가 높음
+ - 높은 비용(작성 / 관리 / 실행 비용)
+ - 피드백 품질이 낮음(현상을 드러나지만 원인은 숨겨짐)
+ - 테스터가 품질 외부를 살펴본다.
+
+3. 자동 테스트
+ - 기능을 검증하는 코드를 작성
+ - 테스트 코드 작성 비용이 소비되지만 실행 비용이 낮고 결과의 신뢰도가 높음
+ - 테스트 코드 작성과 관리가 프로그래머 역량에 크게 영향을 받는다.
+
+4. 단위 테스트
+ - 시스템 일부(하위 시스템)를 대상으로 검증
+ - 낮은 비용
+ - 높은 피드백 품질
+ - 전체 시스템 이상 여부 신뢰도가 낮음
+ - 단위끼리 오류가 나는 경우가 있다.
+ - 테스터가 프로그램의 기능을 살펴본다.
+
+### ❏ 타입스크립트의 역사
+1. ES2015부터 모듈 스펙을 제공하기 시작: 프로젝트의 규모 증가, 개발환경이 복잡해짐, `npm` 의 등장, 번들러 등장(Webpack 등등) 주석제거 / 파일압축 / 어글리파이, 트랜스파일러 등장 (Babel, Typescript 등등)
+2. `TS` 는 `JS` 의 모든 기능을 기본으로 제공한다. (슈퍼셋), 명시적인 데이터에 대한 유형 설명
+3. 자바스크립트보다 타입에 대한 추가적인 정보를 얻을 수 있다.
+4. 안정성 있는 코드를 작성하기 위하여 별도의 타입체크가 필요함
+5. 예상치 못한 오류가 발생할 수 있음
+6. 타입 체크를 위해 코드가 길어지는 문제 발생
+7. 실제 코드를 실행을 해보기 전까지 오류 체크 불가
+8. 실제 서비스 단계가 아닌 컴파일러 과정에서 오류를 확인할 수 있다.(디버깅, 새로고침 과정까지 가지 않아도 확인 가능함) 보다 안전한 프로그래밍 환경을 제공받을 수 있다.
+
+```
+JS
+ - 인터프리터 언어(한줄 한줄 실행)
+ - 스크립팅 언어
+ - 컴파일러 필요 없음
+ - 객체 지향적이지 않음, 프로토타입 기반
+
+TS
+ - 컴파일 언어
+ - 객체 지향 프로그래밍 언어
+ - 컴파일러 필요
+ - 클래스 기반, 상속, 인터페이스, 수정자 사용 가능
+```
+
+### ❏ typescript의 type알아보기
+1. 인터페이스의 경우, 컴파일하는 과정에서 인터페이스끼리 전부 합쳐지고 해당 인터페이스에 대응하는 객체를 생성해주는 과정을 거칩니다. (JS의 호이스팅을 떠올릴 수 있지만, 실제 동작과정은 약간 다릅니다. 일반적으로 인터페이스, 클래스 등의 정의는 최상단에 고정하고 하단에 추가하거나 수정하는 것은 지양하는 편 입니다.)
+
+```typescript
+// 타입 유틸리티
+// 1. Tuple: 튜플, 보다 엄격하게 타입을 정의하고 싶을 때 사용
+let x : [number, string];
+x = [27, "AYW"];
+
+// enum
+enum Color {
+	Red, Green, Blue
+}
+
+console.log(Color)
+👉🏽 { 0: 'Red', 1: 'Green', 2: 'Blue', Red: 0, Green: 1, Blue: 2 }
+
+ - 값을 할당해주지 않으면 0, 1, 2가 들어간다.
+
+enum Color {
+	Red = 2, Green, Blue
+  }
+  
+console.log(Color[2])
+👉🏽 Red
+
+// any
+let num: any = "123";
+
+// void: 함수가 리턴하는 값이 없을 때 사용하는 타입
+function warnUser(): void{
+  console.log("This is my warning message")
+}
+
+function temp(age: number): number{
+  return age;
+}
+
+// null
+let none: null = null;
+
+// undefined
+let done: undefined = undefined;
+
+// never
+function error(message: string): never{
+  throw new Error(message);
+}
+
+function infiniteLoop(): never {
+  while(true){
+    /* 기능 */  
+  }
+}
+
+// 타입 별칭
+let x: number = 10;
+let xPositina: number = 10;
+
+type YesOrNo = string;
+type YesOrNoDetail = "Y" | "N";
+
+let sayMe: YesOrNo = "HI";
+let sayYou: YesOrNoDetail = "Y"
+
+// 인자가 없고 리턴 값이 string 타입인 type 지정
+type FooFunction = () => string;
+let temp: FooFunction = () => {
+  return "temp"
+}
+
+// interface
+
+type Name = "AYW";
+
+interface IUser{
+  id: number;
+  name: Name;
+  email: string;
+  age: number;
+}
+
+const myInfo: IUser = {
+    id: 1,
+    name: "AYW",
+    email: "any",
+    age: 27
+}
+
+// interface는 속성 값끼리 합칠 수 있다. 
+interface IUser{
+  id: number;
+  name: Name;
+  email: string;
+  age: number;
+}
+
+interface IUser {address: string}
+
+// type 별칭은 불가능하다.
+type IUser{
+  id: number;
+  name: Name;
+  email: string;
+  age: number;
+}
+
+type IUser {address: string}
+👉🏽 Error. Duplicate identifier 'IUser'.
+
+// keyof: 타입에 있는 속성값들을 하나의 타입으로 묶는다.
+interface User {
+    id: number;
+    name: string;
+    age: number;
+    gender: "male" | "female";
+}
+
+type UserKey = keyof User;
+// 'id' | 'name' | 'age' | 'gender'
+
+const uk: UserKey = "name"
+console.log(uk)
+```
+
+### ❏ type utility 알아보기
+1. `typescript`는 일반적인 타입 변환을 쉽게 하기 위해서 몇 가지 유틸리티 타입을 제공합니다. 이러한 유틸리티는 전역으로 사용 가능합니다.
+
+```typescript
+
+// Partial<T>: type 집합의 모든 프로퍼티를 선택적으로 타입을 생성한다.
+// Partial 대신 ?를 써도 된다.
+interface User {
+    id: number;
+    name: string;
+    age: number;
+    gender: 'male' | 'female'
+}
+
+let admin: Partial<User> = {
+    id: 1,
+    name: "AYW",
+}
+
+console.log(admin);
+
+// Readonly<T>: 처음 설정한 값외에 속성을 수정 할 수 없다. 재할당 금지
+interface User {
+    id: number;
+    name: string;
+    age: number;
+    gender: 'male' | 'female'
+}
+
+let admin: Readonly<User> = {
+    id: 1,
+    name: "AYW",
+    age: 27,
+    gender: "male"
+}
+
+admin.id = 3;
+console.log(admin)
+
+👉🏽 Cannot assign to 'id' because it is a read-only property.
+
+// Readonly
+interface User {
+    id: number;
+    name: string;
+    age: number;
+    readonly gender: 'male' | 'female'
+}
+
+let admin: User = {
+    id: 1,
+    name: "AYW",
+    age: 27,
+    gender: "male"
+}
+
+admin.id = 3;
+admin.gender = "female";  // error
+console.log(admin)
+👉🏽 Cannot assign to 'gender' because it is a read-only property.
+
+// Record<K, T>: 개체의 속성과 타입을 정의할 때 사용하는 메소드
+type Grade = "1" | "2" | "3" | "4";
+type Score = "A" | "B" | "C" | "D";
+
+const score: Record<Grade, Score> = {
+    1: "A",
+    2: "B",
+    3: "C",
+    4: "D",
+}
+
+console.log(score)
+
+// Record<K, T>: 타입의 프로퍼티 키의 집합으로 타입을 생성한다. 개체의 속성과 타입을 정의할 때 사용하는 메소드
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+
+function isValid(user: User){
+    const result: Record<keyof User, boolean> = {
+        id: user.id > 0,
+        name: user.name !== '',
+        age: user.age > 0,
+    }
+    return result;
+}
+
+// Pick<T, K>: Type에서의 Key값을 선택하여 새로 type으로 정하는 기능
+interface User {
+    id: number;
+    name: string;
+    age: number;
+    gender: "male" | "female";
+}
+
+const admin: Pick<User, "id"|"name"> = {
+    id : 0,
+    name: "TED"
+}
+
+console.log(admin)
+
+// Omit<T, K>: Type에서의 Key값을 선택하여 사용하지 못하게 한다.
+interface User {
+    id: number;
+    name: string;
+    age: number;
+    gender: "male" | "female";
+}
+
+const admin: Omit<User, "id"|"name"> = {
+    age: 27,
+    gender: "male"
+}
+
+console.log(admin)
+
+// Exclude<T1, U>: 속성 대신 Type의 key 값을 제외한다.
+type T1 = string | number | boolean;
+type T2 = Exclude<T1, number | string>;
+
+let isNum: T2 = 3;
+👉🏽 Type 'number' is not assignable to type 'T2'.
+
+let isNum: T2 = true;
+
+// NonNullable<T>: undefined와 null 타입을 제거한다.
+type T1 = string | null | undefined | void;
+type T2 = NonNullable<T1>;
+
+let empty: T2 = null;
+👉🏽 Type 'null' is not assignable to type 'T2'.
+let empty: T2 = "Hi";
+
+// Parameters<T>: 함수 타입을 인자로 받아서 튜플타입으로 리턴해주는 문법
+type T0 = Parameters<() => string>;  // []
+type T1 = Parameters<(s: string) => void>;  // [string]
+type T2 = Parameters<(s: string, i: number) => number>
+
+let T1Arr: T1 = ["123"];
+
+// ReturnType<T>: return type값을 정의하는 문법
+type T0 = ReturnType<() => string>;
+
+function returnString(): T0{
+    return "123"
+}
+
+type T7 = ReturnType<any> // any
+type T8 = ReturnType<never> // any
+
+// Required<T>: partial과 반대되는 기능으로 type집합의 모든 프로퍼티를 필수로 설정한다.
+interface User {
+    id: number;
+    name?: string
+}
+
+let admin: Required<User> = {
+    id: 1,
+}
+
+👉🏽 Property 'name' is missing in type '{ id: number; }' but required in type 'Required<User>'.
+
+let admin: Required<User> = {
+    id: 1,
+		name: "AYW"
+}
+```
+
+### ❏ 타입스크립트의 함수
+1. 일급객체(first-class object): 함수를 변수로 선언하고, 함수에 인자를 함수로 넘길 수 있고, 함수의 리턴값을 함수로 설정할 수 있는 것을 일급객체라 부릅니다. `JS` 와 `TS` 는 모두 일급객체입니다.
+2. 일급객체의 특징 때문에 고차함수, 콜백함수를 만들 수 있다.
+
+```ts
+// 함수 자체를 값으로 저장한다.
+let sum = function(a, b){
+  return a + b;
+}
+
+function ul(child){
+  return `<ul>${child}</ul>`
+}
+
+// 함수를 리턴할 수 있다.
+function makeLi(container, contents){
+  const liList = [];
+
+  for (const content of contents){
+    liList.push(`<li>${content}</li>`)
+  }
+
+  return container(liList.join(""))
+}
+
+// 함수를 함수의 인자로 넣어줄 수 있다.
+const htmlUl = makeLi(ul, ['월', '화', '수', '목', '금', '토', '일'])
+```
+
+3. 함수의 선언문, 선언식
+```ts
+// 함수 선언문
+function sum(a, b){
+	return a+b;
+}
+
+// 함수 표현식
+const myFunc = function(a, b){
+		return a+b;
+}
+```
+
+4. 함수의 가변인자
+```ts
+function sum(a, b){
+	return a+b;
+}
+
+const abcSum = sum(10, 20, 30);
+
+// 가변 인자식
+function sum(){
+  let s = 0;
+	for (let i=0; i< arguments.length; i++){
+		s+=arguments[i];
+	}
+	return s;
+}
+
+// arguments
+function sum(...args){
+  let s = 0;
+	for (let i=0; i< args.length; i++){
+		s+=args[i];
+	}
+	return s;
+}
+```
+
+4. 함수 호출
+```ts
+// call과 apply는 인자를 하나씩 넘겨주냐 배열로 넘겨주냐의 차이
+sum(10, 20, 30, 40);
+// 컨텍스트 null
+sum.call(null, 10, 20, 30, 40);
+
+arr = [10, 20, 30, 40];
+sum.apply(null, arr);
+```
+
+5. 함수의 종류
+```ts
+// 즉시 실행 함수
+(function(){
+  console.log(123);
+})
+
+// 일반함수와 화살표함수의 차이:  컨텍스트의 차이점
+const sumV2 = (a, b, ...args) => {
+
+}
+
+const ten = () => 100;
+const hundred = x => 100 + x;
+
+// 생성기 함수(generate function): 함수를 한번에 실행시키는 것이 아니라 텀을 두고 실행할 때
+function* gen(){
+    yield 10;
+    yield 20;
+    return 30;
+}
+
+const g = gen();
+
+console.log(g.next());  // 10
+console.log(g.next());  // 20
+console.log(g.next());  // 30
+```
+
+6. 함수 작성시 반환 타입 명시 권장(필수는 아님, `TS` 컴파일러는 방정식의 한쪽에만 타입이 있더라도 타입을 추론할 수 있다.)
+7. 매개변수와 인수의 타입이 호환 가능하게 작성, 인수 타입의 전달이 잘못된 경우 오류 발생
+
+```ts
+// 함수를 안전하게 만들 수 있다.
+interface MathFn {
+    (a: number, b: number): number;
+    operator: string;
+};
+
+const sum: MathFn = (a, b) => a + b;
+sum.operator = "+";
+
+1. void: 반환값이 없는 함수입니다. (그냥 출력하거나, 상태를 바꿀 때 자주 씁니다.)
+2. never: 함수가 종료되지 않습니다. (무한루프를 돌거나, Error를 띄울 때 사용합니다.)
+```
+
+8. 함수의 매개변수: 함수에 주어진 인자의 개수는 함수가 기대하는 매개변수의 수와 일치해야 함
+
+```ts
+function sum(a: number, b:number, type?: string): number{
+    return a+b;
+}
+
+let sumAge = sum(2, 3, "ted");
+
+function buildName(firstName: string, lastName="Smith") {
+    return firstName + ' ' + lastName;
+}
+
+let result1 = buildName("Bob");
+let result2 = buildName("Bob", undefined);
+let result3 = buildName("Bob", 'Ted');
+console.log(result1)
+👉🏽 "Bob Smith" 
+
+
+[LOG]: "Bob Smith" 
+[LOG]: "Bob Ted"
+
+console.log(result2)
+console.log(result3)
+
+undefined가 넘어가면 lastName이 없다고 판단되지만, null이 들어가면 lastName이 있다고 판단을 합니다. 
+(undefined는 값 자체가 없다고 판단하나, null은 값은 있는데 의미없는 특별한 값이 들어있다고 보시면 좋을 것 같아요.)
++ undefined는 미리 선언된 global variable이나, null은 키워드입니다.
+```
+
+### ❏ 객체 지향 프로그래밍(OOP)
+1. `OOP` 는 컴퓨터 프로그램을 객체의 모임으로 파악하려는 프로그래밍 패러다임
+2. 프로그램을 유연하고, 변경이 용이하고, 개발과 보수를 간편하게 만든다, 직관적인 코드 분석이 가능해진다.
+3. 클래스 요소: 필드(field), 생성자(constructor, 객체가 처음 생성될 때 호출, 멤버 변수 초기화), 메소드(method)
+4. 인스턴스: `new` 연산자에 의해서 생성된 객체
+
+```ts
+class Person {
+    name: string;
+    constructor(name: string){
+        this.name = name
+    }
+    say(){
+        return `Hello, ${this.name}!`
+    }
+}
+
+let person = new Person("AYW");
+console.log(person.say())
+```
+
+### ❏ 클래스 만들기
+1. 생성자의 매개변수에 `public` 과 같은 접근 제한자를 붙이면 해당 매개변수의 이름을 가진 속성이 클래스에 선언된 것처럼 동작합니다.
+
+```ts
+// public 접근 제한자
+class Information {
+  constructor(public name: string, public age: number){}
+}
+
+const myInfo = new Information("AYW", 27);
+console.log(myInfo)
+👉🏽 { name: 'AYW', age: 27 }
+
+// this
+class Information {
+    name: string;
+    age: number
+  constructor(name: string, age: number){
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const myInfo = new Information("AYW", 27);
+console.log(myInfo)
+👉🏽 { name: 'AYW', age: 27 }
+```
+
+### ❏ 클래스 상속받기
+1. 부모 클래스를 상속받는 키워드: `extends`
+
+```ts
+class AYW extends Information{
+  constructor(public name: string, public age: number, gender: "male" | "female"){
+    super(name, age)
+  }
+
+  sayHello(): void {
+    console.log(`제 이름은 ${this.name}입니다.`)
+  }
+}
+
+const myInfo: AYW = new AYW("AYW", 27, "male")
+console.log(myInfo);
+👉🏽 AYW { name: 'AYW', age: 27 }
+
+myInfo.sayHello();
+👉🏽 제 이름은 AYW입니다.
+```
+
+### ❏ 추상 클래스
+1. 추상 클래스는 자신의 속성이나 메서드 앞에 `abstract`를 붙여 나를 상속하는 다른 클래스에서 이 속성이나 메서드를 구현하게 합니다.
+
+```ts
+abstract class Information {
+    name: string;
+    age: number;
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+
+    abstract sayHello(): void;
+}
+
+class AYW extends Information {
+    constructor(
+        public name: string,
+        public age: number,
+        gender: "male" | "female"
+    ) {
+        super(name, age);
+    }
+
+    sayHello(): void {
+        console.log(`제 이름은 ${this.name}입니다.`);
+    }
+}
+
+const myInfo: AYW = new AYW("AYW", 27, "male");
+console.log(myInfo);
+👉🏽 AYW { name: 'AYW', age: 27 }
+
+myInfo.sayHello();
+👉🏽 제 이름은 AYW입니다.
+```
