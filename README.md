@@ -3605,3 +3605,1033 @@ console.log(myInfo);
 myInfo.sayHello();
 👉🏽 제 이름은 AYW입니다.
 ```
+
+---
+## 📍 22일차 11.24.수.(온라인 강의)
+오늘은 어제 배웠던 내용을 강의를 통해 다시 한번 배우는 시간을 가졌다. 클린코드, 타입스크립트 정의, `type`, `utility` 등등에 대해서 다시 배워보자.
+
+### ❏ 클린코드란
+1. 클린 코드란 말 그대로 깨끗하게 작성된 코드를 의미합니다. 깨끗하게 작성된 코드란 직접적이고 단순하여 읽기가 쉽고, 코드 작성자가 아닌 누가 보더라도 의도가 명확히 드러나는 코드입니다. 이러한 코드는 가독성이 좋고, 의존성을 최대한 줄여 유지보수가 쉬운 특징이 있습니다.
+2. 프로그래머는 작성 기한을 맞추기 위해서 나쁜 코드를 양산할 수밖에 없다고 생각합니다. 하지만 나쁜 코드를 양산하면 결국 기한을 맞추지 못합니다. 오히려 엉망진창인 코드 때문에 개발 속도가 느려지고 결국 기한을 놓칩니다. 기한을 맞추는 유일한 방법은 언제나 코드를 최대한 깨끗하게 유지하는 것입니다.
+
+### ❏ 클린코드와 타입스크립트
+1. 자바스크립트는 타입이 없기 때문에 실행 후에 타입 에러를 확인할 수 있습니다. 반면 타입스크립트는 같은 코드에 대해 아래와 같이 실행을 하기 전에, 미리 에러를 확인할 수 있습니다. 자바스크립트의 런타임 단계에서 발생하는 타입 에러를 타입스크립트에서는 컴파일 단계에서 미리 확인하고 고칠 수 있다. 만약, 런타임 단계에서 발생하는 에러로 인해 프로그램이 멈추면, 운영되는 서비스에 큰 차질이 생길 수 있다. 타입스크립트를 사용하면 에러를 미리 방지할 수 있다.
+2. 타입을 정의함으로써 개발자의 실수를 줄일 수 있고, 명시된 타입을 보고 해당 변수의 자료형이 무엇인지 쉽게 이해할 수 있다. 결과적으로 어던 용도로 코드가 작성되었고, 무엇을 의미하는지 파악하기 훨씬 용이하기 때문에 유지보수에 유리하고 자연스럽게 개발 속도도 빨라지게 된다.
+
+### ❏ 타입스크립트란?
+1. `microsoft` 에서 개발한 오픈 소스 언어
+2. 자바스크립트의 상위 집합, JS의 한계를 해결
+3. 타입스크립트를 실행하려면 자바스크립트로 변환하는 컴파일과정이 필요하다.
+4. 동적타입을 정적으로 사용가능
+5. 타입 유추로 타입 제어 가능
+6. 컴파일 시점에 오류 포착 가능
+7. JS에서 찾을 수 없는 추가코드 기능 제공
+
+```typescript
+// JS
+let a;
+a = 1;
+a = 'b';
+
+const sum = (a, b) => {
+	return a+b;
+}
+
+sum(1, "2")  // 12
+
+// TS
+let a :number;
+a = 1;
+b = 'b';  // Error(컴파일 시점)
+
+const sum = (a: number, b:number) => {
+	return a + b
+}
+ 
+sum(1, 2)  // 12
+```
+
+### ❏ 타입스크립트의 기본 Type
+1. JS코드에 변수 함수 등의 type 정의 가능
+2. 타입 표기(type annotation)을 사용한다.
+3. 기본자료형(primitive type): `string`, `boolean`, `number`, `null`, `undefined`, `symbol(ES6)`
+
+```typescript
+// string
+let str: string = "hi";
+
+// boolean
+let isSucceeded: boolean = true;
+
+// number: 2진수, 8진수, 10진수, 16진수 사용 가능
+let decimal: number = 6;
+let hex: number = 0xf00d;
+let binary: number = 0b1010;
+let octal: number = 0o744;
+
+console.log(decimal, hex, binary, octal)  // 6 61453 10 484
+
+// null
+let n:null = null;
+
+// undefined
+let u: undefined = undefined;
+```
+
+4. 참조자료형(reference type): object, array, function
+```typescript
+// 객체, 배열, 함수 등과 같은 Object 형식의 타입, 메모리에 값을 주소로 저장하고, 출력시 메모리 주소와 일치하는 값을 출력
+// object
+function create(o: object): void{};
+
+create({prop: 0})  // object
+create([1, 2, 3])  // array
+create("string")  // error
+create(false)  // error
+create(42)  // error
+
+// array
+let arr1: number[] = [1, 2, 3];
+let arr2: Array<number> = [1, 2, 33]
+```
+
+5. 추가 제공 자료형: tuple, enum, any, void, never 
+```typescript
+// tuple: 길이와 각 요소의 타입이 정해진 배열을 저장하는 타입
+let arr: [string, number] = ["Hi", 122];
+arr[1].concat("1")  // Error: 'number' does not have 'concat'
+arr[3] = "hello"  // Error: Property '3' does not exist on type [string, number]
+
+// enum: 특정 값들의 집합을 저장하는 타입
+enum Car {BUS, TAXI, SUV};
+let bus: Car = Car.BUS;
+let taxi: string = Car[2];
+
+console.log(bus, taxi)
+👉🏽 0 "SUV"
+
+enum Car {BUS = 2, TAXI, SUV};
+let bus: Car = Car.BUS;
+let taxi: string = Car[3];
+
+console.log(bus, taxi)
+👉🏽 2 "TAXI"
+
+// any: 모든 타입 저장 가능, 컴파일 중 타입 검사를 하지 않음
+let str: any = "hi";
+let num: any = 1;
+let arr: any = [1, 2, 3];
+
+// void: 보통 함수에서 반환 값이 없을 때 설정하는 타입
+let unknown: void = undefined;
+function sayHi(): void {
+  console.log("hi")
+}
+
+// never: 절대 발생할 수 없는 타입, 종료되지 않는 함수, 항상 오류를 발생시키는 함수
+function neverEnd():never {
+  while(true){}
+}
+
+function neverEnd():never {  // Error: A function returning 'never' cannot have a reachable end point.
+  while(true){break} 
+}
+
+function error(message: string):never{
+  throw new Error(message)
+}
+```
+
+### ❏ 타입스크립트의 Utility
+1. Typescript는 공통 타입 변환을 용이하게 하기 위해 유틸리티 타입을 제공한다.
+2. 유틸리티 타입은 전역으로 사용 가능하다
+3. `Partial<T>`, `Readonly<T>`, `Record<T>`, `Pick<T, K>`, `Omit<T, K>`,  `Exclude<T, U>`. `Extract<T, U>`, `NonNullable<T>`, `Parameters<T>` , `ConstructorParameters<T>`, `ReturnType<T>`, `Required<T>`
+4. 제네릭이란 어떤 함수나 클래스가 사용할 타입을 생성 단계가 아닌 사용 단계에서 정의하는 프로그래밍 기법입니다.
+
+```typescript
+// Partial<T>: 프로퍼티를 선택적으로 만드는 타입을 구성한다.
+interface Todo {
+  title: string;
+  description: string;
+}
+
+function updateTodo(todo: Todo, fieldsToUpdate: Partial<Todo>){
+  return {...todo, ...fieldsToUpdate}
+}
+
+const todo1: Todo = {
+  title: 'organize desk',
+  description: 'clear clutter'
+}
+
+const todo2 = updateTodo(todo1, {description: 'throw out trash'})
+
+console.log(todo1, todo2)
+👉🏽 { title: 'organize desk', description: 'clear clutter' } { title: 'organize desk', description: 'throw out trash' }
+
+// Readonly<T>: 프로퍼티를 읽기 전용으로 설정한다.
+interface Todo {
+  title: string;
+}
+
+const todo1: Readonly<Todo> = {
+  title: 'organize desk',
+}
+
+todo1.title = "Hello" // Error: Cannot assign to 'title' because it is a read-only property.
+
+// Record<T>: 프로퍼티의 집합 K로 타입을 구성한다. 타입의 프로퍼티들을 다른 타입에 매핑시키는데 사용한다.
+interface PageInfo {
+  title: string;
+}
+
+type Page = "home" | "about" | "contact";
+
+const x: Record<Page, PageInfo> = {
+  about: {title: 'about'},
+  contact: {title: 'contact'},
+  home: {subTitle: 'home'}  // Error: Type '{ subTitle: string; }' is not assignable to type 'PageInfo'.  Object literal may only specify known properties, and 'subTitle' does not exist in type 'PageInfo'
+}
+
+// Pick<T, K>: 프로퍼티 K의 집합을 선택해 타입을 구성한다.
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean
+}
+
+type TodoPreview = Pick<Todo, "title" | "completed">;
+
+const todo: TodoPreview = {
+  title: 'clean room',
+  completed: true,
+  description: 'desc'  // Error: Type '{ title: string; completed: true; description: string; }' is not assignable to type 'TodoPreview'. Object literal may only specify known properties, and 'description' does not exist in type 'TodoPreview'
+}
+
+// Omit<T, K>: 모든 프로퍼티를 선택한 다음 K를 제거한 타입을 구성한다.
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean
+}
+
+type TodoPreview = Omit<Todo, "description">;
+
+const todo: TodoPreview = {
+  title: 'clean room',
+  completed: true,
+  description: 'desc'  // Error: Type '{ title: string; completed: true; description: string; }' is not assignable to type 'TodoPreview'.
+}
+
+// Exclude<T, U> : 타입 T에서 U와 겹치는 타입을 제외한 타입을 구성합니다.
+// Extract<T, U> : 타입 T에서 U와 겹치는 타입만 포함하여 타입을 구성합니다.
+// NonNllable<T> : T 타입에서 null과 undefined를 제외한 타입을 구성합니다.
+// Parameter<T> : 함수 타입 T의 매개변수의 타입들의 튜플로 타입을 구성합니다.
+// ConstructorParameters<T> : 클래스의 생성자를 비롯한 생성자 타입의 모든 매개변수 타입을 추출합니다.
+// ReturnType<T> : 함수 T가 반환한 타입으로 타입을 구성합니다.
+// Required<T> : 타입 T의 모든 프로퍼티가 필수로 설정된 타입을 구성합니다.
+```
+
+### ❏ 함수 사용하기
+1. 함수를 정의 할 때 사용되는 변수는 매개변수이고 호출 할 때 사용되는 값은 인수라고 한다.
+
+```typescript
+function add(x, y){  // 매개변수
+	return x+y;
+}
+
+add(2, 5)  // 인수
+```
+
+2. 일급객체(first-class object): 다른 객체들에 일반적으로 적용 가능한 연산을 모두 지원하는 객체
+
+```typescript
+1. 다른 함수에 매개변수로 제공할 수 있다.
+2. 함수에서 반환이 가능하다
+3. 변수에 함수를 할당할 수 있다.
+```
+
+3. 함수 선언식, 함수 표현식
+
+```typescript
+// 함수 선언식
+function world(name){}
+
+// 함수 표현식
+const hi = function(name){}
+
+// 함수 생성자는 되도록 사용을 권하지 않는다
+let world5 = new Function()
+```
+
+4. `TS` 에서 함수 작성시 반환 타입을 추론하도록 하는걸 권장한다.
+5. `TS` 컴파일러는 방정식의 한쪽에만 타입이 있어도 타입추론이 가능한데, 이를 `contextual typing` 이라고 부른다. 이를 통해 프로그램에서 타입을 유지하기 위한 노력을 줄일 수 있다.
+
+### ❏ 함수의 매개변수
+1. 기본 매개변수: 함수에 주어진 인자의 수는 함수가 기대하는 매개변수의 수와 일치해야 한다.
+
+```typescript
+function buildName(firstName: string, lastName: string){
+  return firstName + lastName
+}
+
+let result1 = buildName("a", "b")
+let result2 = buildName("a", "b", "c") // Error: Expected 2 arguments, but got 3.
+```
+
+2. 선택적 매개변수: `JS` 에서는 인수가 없으면 `undefined` 로 선언이된다. `TS` 에서는 변수명 뒤에 `?` 를 사용하면 변수를 선택적으로 사용할 수 있다.
+3. 기본-초기화 매개변수: `TS` 에서 값을 제공하지 않거나, `undefined` 로 했을 때 매개변수의 값 할당 가능
+
+```typescript
+function buildName(firstName: string, lastName: string = "TED"){
+  return firstName + lastName
+}
+
+let result1 = buildName("a");  // aTED
+let result1 = buildName("a", undefined);  // aTED
+let result1 = buildName("a", "morning");  // amorning
+```
+
+4. 나머지 매개변수: `...` 을 넣어주어 매개변수의 수를 무한으로 취급할 수 있다. 아무것도 넘겨주지 않으면 `[]` 이 할당된다.
+
+```typescript
+function buildName(firstName: string, ...lastName: string[]){
+  return firstName + lastName
+}
+
+let result1 = buildName("a", "SON", "Ted");  // aSON,Ted
+```
+
+### ❏ OOP
+1. 객체 지향 프로그래밍: 컴퓨터 프로그램을 객체의 모임으로 파악하려는 프로그래밍 패러다임이다. 객체들은 서로 메세지를 주고 받으며 데이터를 처리할 수 있다.
+2. 장점: 프로그램을 유연하고, 변경이 용이하게 만들어지며, 개발과 보수를 간편하게 만든다, 직관적인 코드 분석을 가능하게 한다.
+3. 중요한 특성: 강한 응집력과 약한 결합력을 지향한다.
+
+### ❏ Class
+1. 클래스의 요소: 멤버, 필드, 생성자, 메소드
+2. 인스턴스: `new` 연산자에 의해 생성된 객체
+
+```typescript
+class Person {
+  name: string;
+  constructor(name: string){
+    this.name = name;
+  }
+
+  say(){
+    return "Hello, My name is " + this.name
+  }
+}
+
+let person = new Person("TED");
+console.log(person)  // Person { name: 'TED' }
+```
+
+### ❏ Class 접근 제어자
+1. 속성, 메소드로의 접근을 제한하기 위해 사용한다.
+2. `public`, `protected`, `private` 
+3. `Java` 와 다르게 `package` 개념이 없어 `default` 접근 제어자는 없다.
+4. `public`: 프로그램 내 선언된 멤버들이 자유롭게 접근할 수 있다. 기본적으로 `public` 으로 선언된다. 명시적으로 `public` 선언도 가능하다.
+
+```typescript
+class Person {
+  public name: string;
+  constructor(name: string){
+    this.name = name;
+  }
+}
+
+let a = new Person("TED").name;
+console.log(a)  // TED
+```
+
+5. `private` :멤버가 포함된 클래스 외부에서 접근을 막는다.
+
+```typescript
+class Person {
+  private name: string;
+  constructor(name: string){
+    this.name = name;
+  }
+}
+
+new Person("TED").name;  // Error: Property 'name' is private and only accessible within class 'Person'.
+```
+
+6. `protected`: 멤버가 포함될 클래스와 그 하위 클래스 외부에서의 접근을 막는다. (내부에서는 접근이 가능하지만, 외부에서의 접근은 불가하다)
+
+```typescript
+class Person {
+  protected name: string;
+  constructor(name: string){
+    this.name = name;
+  }
+}
+
+class Employee extends Person {
+  private department: string
+
+  constructor(name: string, department: string){
+    super(name);
+    this.department = department;
+  }
+
+  public getElevatorPitch(){
+    return `good.`
+  }
+}
+
+let howard = new Employee("Howard", "sales");
+console.log(howard.name)  // Error: Property 'name' is protected and only accessible within class 'Person' and its subclasses.
+```
+
+### ❏ Class 상속
+1. 상속을 이용하여 존재하는 클래스를 확장해 새로운 클래스를 생성할 수 있다. `extends`
+2. 파생된 클래스는 하위클래스(subclass), 기초 클래스는 상위 클래스(super class)라고 부른다.
+
+```typescript
+class Animal {
+  move(distanceInMeters: number){
+    console.log(`Animal moved ${distanceInMeters}m.`)
+  }
+}
+
+class Dog extends Animal{
+  makeSound(){
+    console.log(`멍멍`)
+  }
+}
+
+const dog = new Dog();
+dog.move(10);
+```
+
+### ❏ Getters & Setters
+1. 비공개로 설정하려는 속성은 `private` 로 설정하고, 속성값을 읽고 수정하는 `getter/setter` 함수를 사용한다.
+2. `class` 에 직접 적용하는것을 막고, 함수를 사용해 값을 받아오거나 수정한다. 속성에 직접 접근해 수정하면 데이터 무결성이 깨질 수 있다. (캡슐화 권장)
+3. 각 객체의 멤버에 접근하는 방법을 세밀하게 제어할 수 있다.
+
+```typescript
+class Person {
+  private _name: string
+  
+  get name(){
+    return this._name;
+  }
+
+  set name(name: string){
+    if (name.length > 10){
+      throw new Error ("name too long")
+    }
+    this._name=name;
+  }
+}
+
+let person = new Person();
+console.log(person.name);  // undefined
+
+person.name="TED"
+console.log(person.name);  // TED
+
+person.name="TEDTEDTEDTEDTED"  // throw Error
+```
+
+### ❏ Readonly
+1. 읽기만 가능한 속성을 선언하기 위해 사용한다. (변경 할 수 없다.)
+2. 선언될 때나 생성자에서 값을 설정하면 이후 수정할 수 없다.
+
+```typescript
+class Person{
+  readonly age: number = 20;
+  constructor(age: number){
+    this.age = age;
+  }
+}
+
+let person = new Person(10);
+person.age = 30;  // Error: Cannot assign to 'age' because it is a read-only property
+```
+
+### ❏ static
+1. 전역 멤버를 선언할 때 사용한다. (전역멤버: 객체마다 할당되지 않고, 클래스의 모든 객체가 공유하는 멤버) 
+2. 인스턴스가 아닌 클래스 자체에서 보이는 전역 멤버를 생성한다.
+3. 범용적으로 사용되는 값에 설정한다.
+4. `클래스명.` 을 앞에 붙여 `static` 멤버에 접근할 수 있다.
+5. `ES6` 에서 메소드 전용 속성에는 선언이 안되었으나, `TS` 에서는 사용가능하다.
+
+```typescript
+class Grid {
+  static origin = {x: 0, y: 0}
+  calculateDistanceFromOrigin(point: {x: number, y: number}){
+    let xDist = point.x - Grid.origin.x;
+    let yDist = point.y - Grid.origin.y;
+    return Math.sqrt(xDist*xDist+yDist*yDist) / this.scale;
+  }
+  constructor(public scale: number){}
+}
+
+let grid1 = new Grid(1.0);  // 1x scale
+let grid2 = new Grid(5.0);  // 5x scale
+
+console.log(grid1.calculateDistanceFromOrigin({x: 10, y:10}))  // 14.142135623730951
+console.log(grid2.calculateDistanceFromOrigin({x: 10, y:10}))  // 2.8284271247461903
+```
+
+### ❏ 추상클래스
+1. 다른 클래스들이 파생될 수 있는 기초클래스
+2. 직접 인스턴스화 될 수 없다.
+3. `abstract` 키워드는 추상 클래스나 추상 메소드를 정의하는데 사용된다.
+4. 추상 메소드는 클래스에는 구현되어 있지 않고, 파생된 자식 클래스에서 구현해야 한다.
+
+```typescript
+abstract class Animal {
+  protected name: string;
+
+  constructor(name: string){
+    this.name = name;
+  }
+
+  abstract makeSound() : void
+  move(): void {
+    console.log("move !!")
+  }
+}
+
+class Dog extends Animal{
+  constructor(name: string){
+    super(name)  // 파생된 클래스의 생성자는 반드시 super()를 호출
+  }
+
+  makeSound(): void {
+    console.log(this.name + "멍멍")
+  }
+}
+
+const animal = new Animal("animal");  // Error: Cannot create an instance of an abstract class.
+const dog = new Dog("진돗개")  // Dog { name: '진돗개' }
+```
+
+### 💡 추상 클래스를 활용한 디자인 패턴
+1. 프로그램의 일부분을 서브 클래스로 캡슐화해 전체 구조를 바꾸지 않고 특정 단계의 기능을 바꾸는 것
+2. 전체적인 알고리즘은 상위 클래스에서 구현하고, 다른 부분은 하위 클래스에서 구현한다.
+3. 전체 구조는 유사하지만, 부분적으로 다른 구문에서 작성된 메소드의 코드 중복을 최소화 할 수 있다.
+
+```typescript
+abstract class Parent {
+  public do(){
+    console.log("Parent에서 실행 - 상") ;
+    this.hook();
+    console.log("Parent에서 실행 - 하");
+  }
+
+  abstract hook(): void;
+}
+
+class Child extends Parent {
+  hook(): void {
+    console.log("child")
+  }
+}
+
+const child = new Child();
+child.do();
+
+👉🏽
+Parent에서 실행 - 상
+child
+Parent에서 실행 - 하
+```
+
+---
+## 📍 23일차 11.25.목(실시간 강의)
+오늘은 `interface`, `generic` 문법에 대해서 배웠다.
+
+### ❏ Interface 
+1. 타입 체크를 위해 사용되며 변수, 함수, 클래스에 사용 가능
+2. 직접 인스턴스를 생성할 수 없음. 모든 메소드는 추상 메소드다. (이때 `abstract` 키워드를 사용하지 않는다)
+3. 선언만 존재한다. (JS로 변환되면 인터페이서는 사라진다.)
+4. `interface` 간에 `extends` 를 사용하여 다중 상속 가능(class와 비슷)
+5. 추상 클래스와 다른점: 추상 `class`는 전체적인 구조, `interface`는 프로그래머 간의 협업 개발을 할 때 사용
+6. 함수의 매개변수(파라미터로)로 사용
+7. `API` 응답에서 데이터의 구조를 결정할 때 사용
+
+```typescript
+// 키 값을 다음처럼 정해주면 키 값은 제한이 없다.
+interface User {
+  [grade: number]: "A" | "B" | "C" | "D"
+}
+
+let user: User = {
+  1: "A",
+  2: "B",
+  5: "D",
+}
+```
+
+8. 선택적 프로퍼티(?): `?`가 붙는 경우는 반드시 구현되지 않고 선택가능
+
+```typescript
+// 키 값을 다음처럼 정해주면 키 값은 제한이 없다.
+interface User {
+  1: string;
+  2?: string;
+  5: string
+}
+
+let user: User = {
+  1: "A",
+  5: "D",
+}
+```
+
+9. 클래스 선언문의 `implements` 를 붙여서 사용 가능(인터페이스를 구현하는 클래스의 일관성을 유지할 수 있는 장점을 가짐)
+
+```typescript
+// 모든 메소드는 추상 메소드여야 한다.
+// 인터페이스에서 정의한 타입은 클래스 안에서도 모두 적용해야한다.
+interface ITodo {
+    id: number;
+    content: string;
+    completed: boolean;
+		sayHello(): void;
+}
+
+class Todo implements ITodo {
+    constructor(
+        public id: number,
+        public content: string,
+        public completed: boolean
+    ){} 
+
+		sayHello(){
+      console.log(`안녕하세요!!`)
+    }
+}
+
+const today = new Todo(1, "TED", true);  // 인스턴스
+console.log(today)  // Todo { id: 1, content: 'TED', completed: true }
+today.sayHello();  // 안녕하세요!!
+```
+
+9. 함수와 변수에서도 덕타입이 적용된다.(덕 타이핑: 타입 체크에서 중요한 것은 값을 실제 가지고 있느냐에 관한 것, 인터페이스에서 정의한 프로퍼티나 메소드를 가지고 있다면 그 인터페이스를 구현한 것으로 여김 덕 타이핑 또는 구조적타이핑이라 부름)
+
+```typescript
+type IPerson = {
+  name: string
+}
+
+function sayHello(person: IPerson): void{
+  console.log(`Hello ${person.name}`)
+}
+
+const me = {name : "TED", age: 27};
+sayHello(me);
+```
+
+### ❏ 디자인패턴
+1. 생성패턴: 객체를 생성하는데 관련한 패턴
+2. 구조패턴: 프로그램의 구조에 관련한 패턴
+3. 행위패턴: 반복적으로 사용되는 객체들의 상호작용 패턴
+
+```typescript
+// 전략 패턴
+interface Weapon {
+  attack: () => void;
+}
+
+class Sword implements Weapon {
+  public attack() {
+      console.log("검 공격");
+  }
+}
+
+class Spear implements Weapon {
+  public attack() {
+      console.log("창 공격");
+  }
+}
+
+class Bow implements Weapon {
+  public attack() {
+      console.log("활 공격");
+  }
+}
+
+class GameUser {
+  private weapon: Weapon | null = null;
+
+  public setWeapon(weapon: Weapon) {
+      this.weapon = weapon;
+  }
+
+  public attack() {
+      if (this.weapon === null) {
+          console.log("맨손 공격");
+      } else {
+          this.weapon.attack();
+      }
+  }
+}
+
+const testUser = new GameUser();
+testUser.setWeapon(new Spear());
+testUser.attack();  // 창 
+
+testUser.setWeapon(new Bow()); 
+testUser.attack();  // 활 공격
+
+testUser.setWeapon(new Sword());
+testUser.attack();  // 검 공격
+
+testUser.setWeapon(null);
+testUser.attack();  // 맨손 공격
+```
+
+### ❏ 제네릭(Generic)
+1. 데이터타입을 일반화 함
+2. 자료형을 정하지 않고 여러 타입을 사용할 수 있게 한다.(범용적인 함수를 쓰고 싶을 때?, 여러가지 타입을 사용하고 싶을 때)
+3. 재사용성이 높은 함수를 만들어줄때 사용됨
+4. 한가지 타입보다 여러가지 타입에서 동작하는 함수를 생성한다.
+
+```typescript
+// class 문법에서의 제네릭
+class Stack<T> {
+  private data: T[] = []; 
+
+  constructor(){}
+
+  push(item: T): void {
+    this.data.push(item);
+  }
+
+  pop():T | undefined{
+    return this.data.pop()
+  }
+}
+
+// 인스턴스의 타입을 유연하게 설정할 수 있다.
+const numberStack = new Stack<number>();
+const stringStack = new Stack<string>();
+numberStack.push(1);
+stringStack.push('a')
+
+// 함수에서의 제네릭
+function getSize<T>(arr: T[]): number {
+  return arr.length;
+}
+
+const arr1 = [1, 2, 3];
+getSize<number>(arr1);
+
+const arr2 = ['a', 'b', 'c'];
+getSize<string>(arr2);
+```
+
+5. 제네릭한 변수를 추가하고 싶을 때 `<T, U>`
+
+```typescript
+// 1
+function toPair<T, U>(a: T, b: U): [T, U]{
+  return [a, b];
+}
+
+toPair<number, string>(1, "1");
+toPair<string, boolean>("Hello", true);
+
+// 2
+function logText<T>(text: T[]): number{
+  return text.length;
+}
+
+// 3
+interface Mobile<T>{
+  name: string;
+  price: number;
+  option: T;
+}
+
+let myInfo: Mobile<boolean> = {
+  name: "TED",
+  price: 6000,
+  option: true
+}
+
+let yourInfo: Mobile<object> = {
+  name: "TED",
+  price: 6000,
+  option: {
+    age: 28,
+    color: "orange",
+  }
+}
+
+// 함수에서의 제네릭
+// <T>는 text의 인자는 T로 받고 리턴값도 T 타입으로 해준다.
+interface GenericLogTextFn {
+  <T>(text: T): T;
+}
+
+interface GenericLogTextFn<T> {
+  (text: T): T
+}
+
+function logText<T>(text: T): T{
+  return text;
+}
+
+let myString: GenericLogTextFn<string> = logText;
+console.log(myString)
+
+interface Mobile<T> {
+  name: string;
+  price: number;
+  option: T;
+}
+
+interface OptionType {
+  color: string;
+  coupon: boolean;
+}
+
+const m1: Mobile<OptionType> = {
+  name: "s21",
+  price: 1000,
+  option: { color: "red", coupon: false },
+};
+
+// 제네릭 상속
+interface User {
+  name: string;
+  age: number;
+}
+
+interface Book {
+  price: number;
+}
+
+let user: User = { name: "a", age : 10 };
+let book: Book = { price: 3000 };
+
+function showName<T extends { name : string }>(data: T){
+  return data.name;
+}
+```
+
+### ❏ Non-null assertion operator
+1. `Null` 이 아닌 어선셜 연산자는 피연산자가 `null` 이 아니라고 컴파일러에게 전달하여 일시적으로 `Null` 제약조건을 완화합니다. 권장하지 않는 문법이고 대신 `&&` 을 사용한다.
+
+### ❏ Union type
+
+```typescript
+// example1
+function getAge(age: number | string){
+  return typeof age === "number" ? age.toFixed() : age;
+}
+
+const myAge = getAge(28);
+console.log(myAge)
+
+const yourAge = getAge("25");
+console.log(yourAge)
+
+// union 기호
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Developer {
+  name: string;
+  skill: string;
+}
+ 
+// 겹치는 속성만 사용 가능
+function introduce(someone: Person | Developer){
+  someone.name;
+  someone.age;  // Error
+  someone.skill;  // Error
+}
+
+// 모든 속성 사용 가능
+function introduce(someone: Person & Developer){
+  someone.name;
+  someone.age;  // 사용 가능
+  someone.skill;  // 사용 가능
+}
+```
+
+### ❏ 제약 조건(constraints / keyof)
+1. 제네릭 타입에 어느정도 힌트를 주고 제약을 걸기 위해 사용, 최소한 `length` 속성이 있어야 에러가 나지 않는다
+
+```typescript
+interface LengthWise {
+  length: number;
+}
+
+interface Rect {
+  length: number;
+  area: number;
+}
+
+function logText1<T extends LengthWise | Rect>(text: T){
+  console.log(text.length);
+  console.log(text.area);  // 공통되는 속성이 아니므로 Error가 난다.
+}
+
+function logText1<T extends LengthWise & Rect>(text: T){
+  console.log(text.length);
+  console.log(text.area);  // 모든 속성 사용 가능하므로 Error가 나지 않는다.
+```
+
+### ❏ keyof를 사용한 제약
+1. 객체의 속성을 제약하고 싶을 때 사용
+
+```typescript
+// 객체 안에서의 속성만 사용하는 문법
+function getProperty<T, O extends keyof T>(obj: T, key: O){
+  return obj[key]
+}
+
+let obj = { a: 1, b: 2, c: 3 }
+// 'a' | 'b' | 'c'
+console.log(getProperty(obj, 'c'));
+```
+
+### ❏ 기타 기능 및 개념
+1. Type Assertion: 타입 추론기능은 강력하지만 한계 존재, 타입단언(type assertion)은 타입스크립트가 추정하지 못하는 부분까지 개발자가 선언하는것
+2. as
+
+```typescript
+let a;
+a = 10;
+a = 'abc';
+let b = a;
+
+b = a as string;
+
+interface Person{
+  name: string;
+  age: number;
+}
+
+interface Developer{
+  name: string;
+  skill: string;
+}
+
+function introduce(someone: Person | Developer){
+  someone.name;
+  (someone as Person).age;
+  (someone as Developer).skill;
+}
+```
+
+3. typeGuard
+
+```typescript
+// 함수
+function doSomeThing(id: string | number){
+  if (typeof id === 'string'){
+      console.log(id.trim());
+  }else {
+    console.log(id);
+  }
+}
+
+// 클래스
+class Diner {}
+class Merchant {}
+
+function doSomething(user: Diner | Merchant){
+  if(user instanceof Diner){
+  }else{   
+  }
+}
+
+// 메소드
+interface Bird {
+  fly(): string;
+}
+
+interface Fish {
+  swim(): number;
+}
+
+function doSomething(animal: Fish | Bird){
+  if('swim' in animal){
+    console.log((animal as Fish).swim())
+  }else{
+    console.log((animal as Bird).fly())
+  }
+}
+
+doSomething({
+  swim: () => {
+    return 82
+  }
+})
+
+doSomething({
+  fly: () => {
+    return "Hello"
+  }
+})
+
+// 타입 확인
+function isFish(animal: Fish | Bird): animal is Fish {
+  return (animal as Fish).swim !== undefined;
+}
+
+function doSomething(animal: Fish | Bird){
+  if (isFish(animal)) {
+    animal.swim()
+  }else{
+    animal.fly()
+  }
+}
+```
+
+### ❏ 실습
+1. 클래스 vs 추상클래스: 어떤 메서드는 그냥 구현해도 되고, 어떤 메서드는 정의 되지 않은 메서드 일 수 있다.(사용하려면 상속이 필요하다)
+2. 인터페이스: 추상클래스와 달리 `abstract` 를 사용하지 않음. 구성되는 것의 타입만 명시해서(생성자나 메서드 구현을 작성할 필요가 없다.) (하나의 interface에 여러 데이터가 뭉치지 않도록 분산시킬 수 있기 때문에 다중상속이 가능하다.)
+3. `interface` vs `type` vs `abstract`  
+
+```typescript
+// 인터페이스: 상속이 가능하며, 다중 상속도 가능하다. 내부에서 메서드 구현을 할 수 없다.
+interface Test {
+	name: string;
+	id: number;
+	introduce(): void;
+}
+
+// 상속이 불가능하다. 내부에서 메서드 구현을 할 수 없다.
+type Test {
+	name: string;
+	id: number;
+	introduce(): void;
+}
+
+// 클래스이기 대문에 상속은 가능하지만, 다중 상속은 불가하다. 원하는 메서드는 구현을 할 수 있다.
+abstract class Test {
+	name: string;
+	id: number;
+  abstractintroduce(): void;
+}
+```
+
+4. `T extends number | string` : 2개 이상 상속이 가능함.
+5. `interface` 활용 예시: 데이터베이스 조작(로그인, 게시물, 등등)
+6. ORM: SQL문을 대신해서 내가 알고있는 프로그래밍 언어로 DB로 조작하는 방법(나중에 SQL문으로 변환된다)
+
+### ❏  Generic
+1. 선언한 시점에 타입을 사용하는것이 아니라  사용 할 때 모든 타입을 마음대로 넣을 수 있다.
+2. 타입에 제한을 걸기 위해 `<T extends string | number>` 처럼 사용할 수 있다.
+
+### ❏ 자바스크립트의 동적인 타입 예시
+1. `true == "true"`: `false` abstract equality composition (피연산자에 `number` 씌우고 비교한다)
+2. `010-03=5`, 0붙어서 8진수가 된다. (16진수는 ox, 2진수는 ob)
+3. `1+'1' = '11'`(`+` 는 문자열 우선순위), `11-'1' = 10`(`-` 는 `Number`만 지원한다.)
+4. `0/0=NaN` , 숫자로 취급하지 않는다.
+5. `1 / 0 > 10 * 1000 = true` : True, infinity는 표현 범위를 넘어서면 취급한다
+6. `true++=>Error` : 값에다가 붙이는게 아니라 변수에다 선언해야한다.
+7. `1+2+"3" = 33`
