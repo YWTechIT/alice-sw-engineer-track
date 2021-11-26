@@ -4635,3 +4635,242 @@ abstract class Test {
 5. `1 / 0 > 10 * 1000 = true` : True, infinity는 표현 범위를 넘어서면 취급한다
 6. `true++=>Error` : 값에다가 붙이는게 아니라 변수에다 선언해야한다.
 7. `1+2+"3" = 33`
+
+---
+## 📍 24일차 11.26.금(온라인 강의)
+오늘은 `interface`와 `generic`에 대한 개념을 강의로 배웠다.
+
+### ❏ Interface란?
+1. 일반적으로 변수, 함수, 클래스에 타입 체크를 위해 사용된다.
+2. 직접 인스턴스를 생성할 수 없고, 모든 메소드가 추상 메소드이다.
+3. 추상 클래스의 추상 메소드와 달리 `abstract` 키워드는 사용할 수 없다.
+4. `ES6` 는 인터페이스를 지원하지 않지만, `Typescript` 는 인터페이스를 지원한다.
+5. 정의한 프로퍼티 값을 누락하거나, 정의하지 않는 값을 인수로 전달하면 컴파일시 에러가 발생한다.
+
+### ❏ interface를 사용하는 이유
+1. 타입의 이름을 짓고 코드 안의 계약을 정의한다.
+2. 프로젝트 외부에서 사용하는 코드의 계약을 정의하는 강력한 방법이다.
+
+```typescript
+interface Person{
+	name: string
+}
+
+function sayName(obj: Person){
+	console.log(obj.name);
+}
+
+let person = { name: "june" };
+sayName(person);
+```
+
+### ❏ Properties
+1. 컴파일러는 프로퍼티의 두 가지 요소를 검사한다. (필수요소 프로퍼티의 유무, 프로퍼티 타입)
+2. 아래 예약어로 프로퍼티를 세밀하게 컨트롤 할 수 있다.(?, readonly)
+
+### ❏ Optional Properties
+1. 프로퍼티 선언 시 이름 끝에 `?` 를 붙여 표시한다.
+2. 인터페이스에 속하지 않는 프로퍼티의 사용을 방지하면서, 사용 가능한 프로퍼티를 기술할 때 사용한다.
+3. 객체 안의 몇 개의 프로퍼티만 채워 함수에 전달하는 `option bags` 같은 패턴에 유용하다.
+
+### ❏ Readonly Properties
+1. 객체가 처음 생성될 때만 값 설정이 가능하고, 이후 수정이 불가능하다.
+2. 프로퍼티 이름 앞에 `readonly` 를 붙여 사용한다.
+
+```typescript
+interface Point {
+    readonly x: number;
+    readonly y: number;
+}
+
+let point: Point = { x: 10, y: 20};
+point.x = 5  // Error: Cannot assign to 'x' because it is a read-only property.
+```
+
+3. readonly 와 const 의 공통점: 생성 후 배열을 변경하지 않음을 보장한다. 변수에는 const, 프로퍼티에는 readonly 를 사용한다.
+
+### ❏ interface Type
+1. TS에서 인터페이스는 함수, 클래스에서 사용할 수 있다.
+
+```typescript
+// function type: 함수의 인자 타입, 반환값 타입 정의
+interface CountStar {
+  (star: string[]): number
+}
+
+const myStars = ["*", "*", "*"];
+
+const getCountStar: CountStar = stars => {
+  return stars.length;
+}
+
+console.log(getCountStar(myStars))
+
+// class type: 클래스가 특정 계약을 충족하도록 명시적으로 강제한다.
+interface Animal{
+	makeSound(): void;
+}
+
+class Dog implements Animal{
+	makeSound(): void {
+		console.log("멍멍")
+	}
+}
+```
+
+2. 인터페이스와 클래스는 인터페이스간의 확장이 가능하다.
+
+```typescript
+interface Animal{
+	makeSound(): void;
+}
+
+interface Dog extends Animal{
+	speed: number
+}
+
+class Bulldog implements Dog{
+	makeSound(): void {
+		console.log("멍멍")
+	}
+}
+```
+
+3. hybrid type: JS 의 클로저를 TS 로 구현한 문법
+
+```typescript
+interface Counter {
+  (start: number): string;
+  interval: number;
+  reset(): void;
+}
+
+function getCounter(): Counter {
+  let counter = function (start: number) {} as Counter;
+  counter.interval = 123;
+  counter.reset = function(){}
+  return counter
+}
+
+let c = getCounter();
+c(10);
+c.reset();
+c.interval = 5.0;
+```
+
+### ❏ 디자인패턴
+1. 객체가 할 수 있는 행위들을 전략으로 만들어두고, 동적으로 행위의 수정이 필요한 경우 전략을 바꾸는 것만으로 수정이 가능하도록 만든 패턴이다. 
+2. 하단의 코드를 살펴보면 메소드를 직접 변경하는것이 아니라 새로운 `interface` 를 생성하고 해당 `interface` 를 적용하면 `Pay` 메소드를 구현할 수 있다.
+
+### ❏ 제네릭이란?
+1. 정적 `type` 언어는 클래스나 함수를 정의 할 때 `type` 을 선언해야 한다.
+2. `Generic` 은 코드를 작성할 때가 아니라 코드가 수행될 때 타입을 명시한다. 코드를 작성할 때 식별자를 써서 아직 정해지지 않은 타입을 표시한다. (일반적인 식별자는 `T`, `U`, `V` 를 사용한다.)
+
+### ❏ 제네릭을 사용하는 이유
+1. 재 사용성이 높은 함수와 클래스를 생성할 수 있다.(여러 타입에서 동작가능, 코드의 가독성 향상)
+2. 예상치 못한 오류를 쉽게 포착한다. (`any` : 타입을 체크하지 않아 관련 메소드의 힌트를 얻지 못한다. 컴파일 시 컴파일러가 오류를 찾지 못한다.)
+3. `Generic` 은 타입을 체크해 컴파일러가 오류를 찾을 수 있다.
+4. `any` 를 지양하고 다양한 타입을 사용하려면 `Generic` 혹은 `Union` 문법을 권장한다.
+
+### ❏ Generic으로 함수와 클래스 만들기
+```typescript
+// function
+function sort<T>(items: T[]){
+  return items.sort();
+}
+
+const numbers: number[] = [1, 3, 2];
+const strings: string[] = ["a", "b", "c"]
+
+sort<number>(numbers);
+sort<string>(strings)
+
+// class
+// stack
+class Stack<T>{
+  protected data: T[] = [];
+
+  push(item: T){
+    this.data.push(item);
+  }
+
+  pop(): T|undefined{
+    return this.data.pop()
+  }
+}
+
+const stack = new Stack();
+console.log(stack)
+stack.push(1)
+stack.pop()
+
+// queue
+class Queue<T> {
+  private data: Array<T> = []
+  // 제네릭을 활용하여 push()와 pop() 메소드를 구현해주세요.
+  push(item: T){
+    this.data.push(item);
+  }
+  
+  pop(): T | undefined{
+    return this.data.pop();
+  }
+}
+
+const numberQueue = new Queue<number>()  // nunberQueue안에 구성된 타입은 number 형이다.
+
+numberQueue.push(0)
+console.log(numberQueue.pop())
+```
+
+### ❏ Union
+1. `|` 을 사용하여 두 개 이상의 타입을 선언하는 방식
+2. `union` 과 `generic` 은 모두 여러 타입을 다룰 수 있다. (`union` 은 공통된 메소드만 사용가능하다, 리턴값은 선언된 `union` 타입으로 지정된다.)
+
+```typescript
+// Union
+const printMessage = (message: string | number) => {
+  return message;
+}
+
+const message1 = printMessage(1322);
+const message2 = printMessage("hellow");
+
+// Generic
+const printMessage = <T>(message: T) => {
+  return message;
+}
+
+const message1 = printMessage<number>(1322);
+const message2 = printMessage<string>("hellow");
+```
+
+### ❏ 제약조건(constraints / keyof)
+1. 원하지 않는 속성에 접근하는 것을 막기 위해 `Generic` 에 제약조건을 사용한다.
+2. `Constraints`: 특정 타입들로만 동작하는 `Generic` 함수를 만들 때 사용한다.
+3. `Keyof`: 두 객체를 비교할 때 사용한다.
+
+```typescript
+// constraints: Generic T에 제약 조건을 설정한다.(string | number)
+// 제약 조건을 벗어나는 타입을 선언하면 에러가 발생한다
+const printMessage = <T extends string | number>(message: T) => {
+  return message;
+}
+
+printMessage<number>(1322);
+printMessage<string>("hello");
+printMessage<boolean>(true);  // Error: Type 'boolean' does not satisfy the constraint 'string | number'
+
+// keyof: 두 객체를 비교할 때 사용한다.
+// U의 값인 `not in obj` 가 `T`의 키 값 중 존재하지 않기 때문에 오류가 발생한다.
+const printMessage = <T extends object, U extends keyof T>(obj:T, key:U) => {
+  return obj[key]
+}
+
+console.log(printMessage({a: 1, b: 2, c: 3}, "a"));
+console.log(printMessage({a: 1, b: 2, c: 3}, "not in obj"));  // Error: Argument of type '"not in obj"' is not assignable to parameter of type '"a" | "b" | "c"'.
+```
+
+### ❏ 디자인 패턴
+1. `Factory Pattern`: 객체를 생성하는 인터페이스만 미리 정의하고 인스턴스를 만들 클래스의 결정은 서브 클래스가 내리는 패턴
+2. 여러개의 서브 클래스를 가진 슈퍼 클래스가 있을 때, 입력에 따라 하나의 서브 클래스의 인스턴스를 반환한다.
