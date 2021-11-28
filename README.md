@@ -4874,3 +4874,1011 @@ console.log(printMessage({a: 1, b: 2, c: 3}, "not in obj"));  // Error: Argument
 ### ❏ 디자인 패턴
 1. `Factory Pattern`: 객체를 생성하는 인터페이스만 미리 정의하고 인스턴스를 만들 클래스의 결정은 서브 클래스가 내리는 패턴
 2. 여러개의 서브 클래스를 가진 슈퍼 클래스가 있을 때, 입력에 따라 하나의 서브 클래스의 인스턴스를 반환한다.
+
+---
+## 📍 25일차 11.27.토(온라인 강의)
+오늘은 `typescript` 심화 그리고 `decorator`에 대해서 배웠다. 지금까지의 프로젝트를 하면서 많이 접해보지 않아 내용이 어렵게 느껴졌다. 나중에 기억에 잘 남으려면 실전에서 많이 사용해야겠지??
+
+### ❏ Union Type, Intersection type
+1. 기존 타입, 인터페이스의 변경은 이미 그 타입을 사용하고 있는 코드에 똑같은 변경을 가해줘야 한다. 만약, 해당 타입을 쓰는 모든 코드에 변경을 가하지 않고 특정 코드만 자유롭게 타입을 확장하고 싶을 땐 어떻게 해야할까? 
+
+```typescript
+// Animal 인터페이스에 메소드를 추가하게 되면 해당 인터페이스를 implements하는 다른 class들에도 동일한 메소드를 추가해야 한다.
+ interface Animal {
+  eat: () => void;
+  sleep: () => void;
+  
+}
+
+class Dog implements Animal {
+    eat(){};
+    sleep(){};
+}
+
+class Cat implements Animal {
+    eat(){};
+    sleep(){};
+}
+```
+
+2. 그럴때는 `Intersection(And)`, : A타입이면서 B타입 `Union(Or)` A타입, B타입 둘 중 하나를 사용한다.
+
+### ❏ Union
+1. `|`  부호를 사용한다.
+
+```typescript
+// one의 타입은 string과 number 둘 중 하나
+let one: string | number;
+```
+
+2. 여러 타입 중 하나가 올 것이라고 가정할 때 사용한다. 단, 인터페이스에 유니온 타입을 사용하는 경우 인터페이스는 유니온 타입을 확장하지 못함. 이럴 때는 `type` 과 `&` 를 사용해야 한다.
+
+```typescript
+// 에러 케이스
+type A = string | number;
+
+interface StrOrNum extends A {  // Error: An interface can only extend an object type or intersection of object types with statically known members.
+  a: string;
+}
+
+// 정상 케이스(유니온 타입의 확장)
+type A = {a: string & (string | number)};   
+
+interface StrOrNum extends A {
+  a: string;
+}
+```
+
+3. Union Type 주의할 점: 동시에 여러 타입이 될 수 없다.
+
+```typescript
+// Human인지 Dog인지 확신할 수 없어서 컴파일 단계에서 에러
+type Human = {
+  think: () => void;
+}
+
+type Dog = {
+  bark: () => void;
+}
+
+declare function getEliceType(): Human | Dog;
+
+const elice = getEliceType();
+elice.think();  // Error: Property 'think' does not exist on type 'Human | Dog'. Property 'think' does not exist on type 'Dog'.
+elice.bark();  // Error: Property 'bark' does not exist on type 'Human | Dog'. Property 'bark' does not exist on type 'Human'.
+```
+
+### ❏ Intersection type
+1. `&` 사용
+2. `A` 타입이면서 `B` 타입이라는 의미
+
+```typescript
+type Human = {
+  think: () => void;
+}
+
+type Developer = {
+  work: () => void;
+}
+
+const elice: Human & Developer = {
+    think(){
+      console.log("I'm thinking")
+    },
+    work(){
+      console.log("I'm working")
+    }
+}
+```
+
+3. `Intersection type` 은 기존 타입을 대체하지 않으면서, 기존 타입에 새로운 필드를 추가하고 싶을 때 사용한다.
+
+```typescript
+// Student 메서드를 추가하고 싶을 때
+// 전
+type Human = {
+  think: () => void;
+}
+
+type Developer = {
+  work: () => void;
+}
+
+const elice: Human & Developer & Student= {
+    think(){
+      console.log("I'm thinking")
+    },
+    work(){
+      console.log("I'm working")
+    },
+}
+
+// 후
+type Student = {
+  study: () => void;
+}
+
+const elice: Human & Developer & Student= {
+    think(){
+      console.log("I'm thinking")
+    },
+    work(){
+      console.log("I'm working")
+    },
+    study(){
+      console.log("I'm studying")
+    },
+}
+```
+
+4. 각 타입에 겹치는 필드가 있다면 어떨까?
+
+```typescript
+// 타입이 같을 때
+type Developer = {
+  output: string;
+  develop: () => void;
+}
+
+type Designer = {
+  output: string;
+  design: () => void;
+}
+
+const 개자이너: Developer & Designer = {
+  output : "띠용",
+  develop(){
+    console.log("I'm working")
+  },
+  design(){
+    console.log("I'm working")
+  },
+}
+
+// 타입이 다를 때
+type Developer = {
+  output: number;
+  develop: () => void;
+}
+
+type Designer = {
+  output: string;
+  design: () => void;
+}
+
+const 띠용: Developer & Designer = {
+  output : "며용",  // Error: Type 'string' is not assignable to type 'never'.
+  develop(){
+    console.log("I'm working")
+  },
+  design(){
+    console.log("I'm working")
+  },
+}
+
+// 타입이 포함관계 일 때
+type Developer = {
+  output: number;
+  develop: () => void;
+}
+
+type Designer = {
+  output: number | string;
+  design: () => void;
+}
+
+const 띠용: Developer & Designer = {
+  // output : "며용",  Error: Type 'string' is not assignable to type 'number'.
+  output : 28,
+  develop(){
+    console.log("I'm working")
+  },
+  design(){
+    console.log("I'm working")
+  },
+
+}
+```
+
+### ❏ Type Guard
+1. 데이터의 타입을 알 수 없거나, 될 수 있는 타입이 여러 개라고 가정할 때 조건문을 통해 데이터의 타입을 좁혀나가는 것
+2. 데이터의 타입에 따라 대응하여 에러를 최소화 할 수 있음. 타입을 통해 가드하는 코드, 방어적인 코드를 짤 수 있음
+
+```typescript
+// Human인지 Dog인지 확신할 수 없어서 컴파일 단계에서 에러
+type Human = {
+  think: () => void;
+}
+
+type Dog = {
+  bark: () => void;
+}
+
+declare function getEliceType(): Human | Dog;
+
+const elice = getEliceType();
+elice.think();  // Error: Property 'think' does not exist on type 'Human | Dog'. Property 'think' does not exist on type 'Dog'.
+elice.bark();  // Error: Property 'bark' does not exist on type 'Human | Dog'. Property 'bark' does not exist on type 'Human'.
+
+// 타입스크립트가 타입을 추론할 수 있도록 단서를 줘보면 어떨까
+type Human = {
+  think: () => void;
+}
+
+type Dog = {
+	tail: string;
+  bark: () => void;
+}
+
+declare function getEliceType(): Human | Dog;
+
+const elice = getEliceType();
+
+if ('tail' in elice){
+	elice.bark();
+}else{
+	elice.think();
+}
+```
+
+3. 구별된 유니온으로 타입 가드하는 방법: 조건문을 통해 어떤 타입인지 추론한다.
+
+```typescript
+// 서버에서 오는 응답 또는 함수의 결과가 여러 갈래로 나뉠 때 사용 
+type SuccessResponse = {
+  status: true;
+  data: any;
+}
+
+type FailureResponse = {
+  status: false;
+  error: Error;
+}
+
+type CustomResponse = SuccessResponse | FailureResponse;
+
+declare function getData(): CustomResponse;
+
+const response: CustomResponse = getData();
+
+if (response.status){
+  console.log(response.data)
+}else if(response.status === false){
+  console.log(response.error)
+}
+```
+
+4. `instanceof`: `TS` 에서 클래스도 타입이다. 객체가 어떤 클래스의 객체인지 구별할 때 사용하는 연산자
+
+```typescript
+class Developer {
+  develop(){
+    console.log("I'm working")
+  }
+}
+
+class Designer {
+  design(){
+    console.log("I'm working")
+  }
+}
+
+const work = (worker: Developer | Designer) => {
+  if (worker instanceof Designer){
+    worker.design()
+  }else if (worker instanceof Developer){
+    worker.develop()
+  }
+}
+```
+
+5. `typeof` : 데이터의 타입을 반환하는 연산자 (`data==null` 동등연산자를 사용하면 `null`, `undefined` 둘다 체크한다. 그러나, `null` 과 `undefined` 는 따로 체크하는 습관을 기르자, )
+
+```typescript
+const add = (arg?: number) => {
+  if (typeof arg === 'undefined'){
+    return 0;
+  }
+  return arg+arg;
+}
+```
+
+6. `in` : 오브젝트의 `key`중에 문자열 `A` 가 존재하는지 확인할 때
+
+```typescript
+// 문자열 A는 key(field, property 이름)을 의미한다.
+type Human = {
+  think: () => void;
+}
+
+type Dog = {
+	tail: string;
+  bark: () => void;
+}
+
+declare function getEliceType(): Human | Dog;
+
+const elice = getEliceType();
+
+if ('tail' in elice){
+	elice.bark();
+}else{
+	elice.think();
+}
+```
+
+7. `switch-case`, `else-if`
+
+```typescript
+type Action = "click" | "hover" | "scroll";
+
+// switch
+const doPhotoAction = (action: Action) => {
+  switch(action) {
+    case "click":
+      showPhoto()
+      break;
+    case "hover":
+      zoomInPhoto()
+      break;
+    case "scroll":
+      loadPhotoMore()
+      break;
+  }
+}
+
+// if
+const doPhotoAction = (action: Action) => {
+  if(action === "click"){
+    showPhoto()
+  }else if(action === "hover"){
+    zoomInPhoto()
+  }else{
+    loadPhotoMore()
+  }
+}
+```
+
+8. `type-guard` 에 유용한 오픈소스
+
+```typescript
+// yarn add @sindersorhus/is
+import is from "@sindresorhus/is";
+
+const getString = (arg?: string) => {
+  if (is.nullOrUndefined(arg)){
+    return "";
+  }
+
+  if (is.emptyStringOrWhiteSpace(arg)){
+    return '';
+  }
+
+  return arg;
+}
+```
+
+### ❏ Optional Chaning
+1. 접근하는 객체의 프로퍼티가 `null` 또는 `undefined` 일 수 있는 `optional property` 인 경우 `if` 문을 사용하지 않고 넘어가게 하는 체이닝 방법
+2. `es2020` 에서 추가된 문법이며, 객체가 `null` 또는 `undefined` 이면 `undefined` 를 리턴, 그렇지 않은 경우 데이터 값을 리턴
+3. `&&` 와 `?.` 의 차이점: `&&` 는 `falsy` 한 값 체크, `?.` 는 `null` 과 `undefined` 만 체크
+
+```typescript
+// 값이 있을 때만 반환한다.
+type Cat = {
+	sitDown?: () => void;
+}
+
+function trainCat(cat: Cat){
+	cat.sitDown?.();
+}
+
+// 분기처리 optional Chaining
+type Tail = {
+	살랑살랑: () => void;
+}
+
+type Human = {
+	call: (dogName: string) => void;
+]
+
+type Dog = {
+	name: string;
+	tail?: Tail;
+	주인?: Human;
+}
+
+function petDog(dog: Dog){
+	dog.주인?.call(dog.name);
+	dog.tail?.살랑살랑();
+}
+
+// optional chaining refactory
+// 전
+function petDog(dog?: Dog) {
+  if (dog && dog.tail && dog.tail.살랑살랑) {
+    dog.tail.살랑살랑();
+  }
+}
+
+// 후
+function petDog(dog?: Dog) {
+	dog?.tail?.살랑살랑?.();
+}
+```
+
+### ❏ Nullish Coalescing Operator
+1. `es2020` 에서 추가된 문법이며, 좌항이 `null`, `undefined` 인 경우에만 `B` 를 리턴
+2. `A ?? B`:  `falsy` 값을 그대로 리턴하고 싶은 경우 사용
+
+```typescript
+// price가 0인 경우 -1 반환
+function getPrice1(product: {price?: number}){
+  return product.price || -1;
+}
+
+// price가 0인 경우 0 반환
+function getPrice2(product: {price?: number}){
+  return product.price ?? -1;
+}
+
+console.log(0 ?? -1)  // 0
+console.log(0 || -1)  // -1
+```
+
+3. falsy한 값(false로 평가되는 값) 0과 empty string(‘’)이 올 수 있는 변수에 **`||`** 를 쓰면 0, ‘’를 false로 인식하기 때문에 의도치 못한 결과를 초래할 수 있습니다. 실무에서 흔하게 저지르는 실수이기도 합니다. default 값을 지정해줄 때는 **`||`** 이 아니라 **`??`**을 쓰는 것을 권장합니다.
+
+### ❏ Function overloading
+1. 파라미터의 타입만 다르고 비슷한 코드가 반복되고 있는 상황, 코드의 중복을 줄이고 재사용성을 높일때 사용
+2. 파라미터의 형태가 다양한 여러 케이스에 대응하는 같은 이름을 가진 함수를 만드는 것, 함수의 다형성을 지원하는 것 
+3. 함수의 이름이 같아야한다. 매개변수의 순서는 같아야한다. 반환 타입이 같아야 한다. `function` 키워드로만 가능하다, 
+4. 함수 오버로딩의 타입 선언부는 런타임에서 제거되고 구현부만 남기때문에, 실제 구현, 정의하는 함수는 하나여야만 한다.
+
+```typescript
+// 매개변수가 같을 때
+class User {
+  constructor(private id: string){}
+
+  setId(id: string): void;
+  setId(id: number): void;
+  setId(id: string | number): void{
+    this.id = typeof id === "number" ? id.toString() : id;
+  }
+}
+
+// 매개변수의 개수가 다를 때(순서만 지켜주면 된다.)
+class User {
+  constructor(private id: string){}
+
+  setId(id: string): void;
+  setId(id: number, radix: number): void;
+  setId(id: string | number, radix?: number): void{
+    this.id = typeof id === "number" ? id.toString(radix) : id;
+  }
+}
+```
+
+제네릭은 사용하는 시점(제네릭, 인터페이스, 클래스 등등), 함수 오버로딩은 타입을 선언하는 시점(함수, 메서드)
+
+### ❏ Type assertion
+1. 타입스크립트가 추론하지 못하는 타입을 `as keyword` 를 통해 명시해주는 것
+2. `type casting`: 데이터의 타입을 변환, `type assertion` : 데이터의 타입을 명시
+
+```typescript
+let someValue: unknown = "this is a string";
+
+// 꺽쇠괄호는 react JSX가 인식을 잘 못함.
+let strLength: number = (<string>someValue).length;
+
+// as태그
+let strLength: number = (someValue as string).length;
+```
+
+3. 타입단언: 타입스크립트가 개발자의 말만 믿고 `Duck` 타입으로 인식하여 빈 객체임에도 에러를 뱉지 않음
+4. 타입선언: 객체 프로퍼티를 모두 채우도록 강제하기 대문에 실수를 저지를 위험이 낮음
+
+```typescript
+type Duck = {
+	quack: () => void;
+}
+
+const duck: {} as Duck;
+
+function add(x: string, y: string) {
+  return (x as unknown as number) + (y as unknown as number)
+}
+
+const result = add('1', '2')
+console.log(result)
+```
+
+### ❏ Index Signatrue
+1. 객체의 특정 `value` 에 접근할 때 그 `value` 의 `key` 를 문자열로 인덱싱해 참조하는 방법
+2. 객체의 프로퍼티들을 명확하게 알 수 없을 때 사용한다.
+3. 어떤 타입이 올지 알 수 있다면 정확하게 타입을 정의하는것이 실수를 방지할 수 있다.
+4. 인덱스 시그니처만 사용할 시, 타입을 표시해준 빈 객체에 에러가 나지 않습니다.
+
+```typescript
+type ArrStr = {
+	[key: string]: string | number;
+}
+
+// HTTP headers
+type HttpHeaders = {
+    [key: string]: string
+}
+
+type HttpHeaders = Record<string, string>;
+
+const headers: HttpHeaders = {
+  'Host': 'elice.io' ,
+  'Connection': 'keep-alive' ,
+  'Accept': '*/*' ,
+  'Access-Control-Request-Method': 'GET' ,
+  'Access-Control-Request-Headers': 'authorization' ,
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36' ,
+  'Sec-Fetch-Mode': 'cors' ,
+  'Sec-Fetch-Site': 'same-site' ,
+  'Sec-Fetch-Dest': 'empty' ,
+  'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7' ,
+}
+
+console.log(headers['Host']) // elice.io
+```
+
+### ❏ Decorator
+1. 함수가 한 가지 일만하면서 가독성을 높이고 반복되는 코드를 줄일 때 사용한다.
+2. 함수를 감싸는 함수: 기존 함수를 바꾸지 않고 함수를 관찰, 수정, 재정의(오버라이딩)할 수 있는 함수
+3. `babel` 플러그인을 사용해서 데코레이터 기능을 사용한다. `tsconfig.json` 에 `experimentDecorator` 옵션을 `true` 로 설정해줘야 한다.
+4. 단일책임원칙 하에 함수의 기능을 확장할 수 있다.
+5. `JS` `stage2` 에 있는 기능이므로, `TS` 에서는 실험적 기능으로써 사용 가능.
+
+### ❏ 데코레이터를 쓰기 전 알아야 할 자바스크립트 개념
+1. 일급객체
+2. 클로저: 외부함수의 실행이 끝나도 내부함수에서 외부함수의 `context` 에 접근할 수 있는 것
+3. 고차함수: 함수를 파라미터로 받아 반환하는 함수.
+
+### ❏ 고차 함수의 용도
+1. 커링: 함수의 매개변수를 받는 시점을 늦출 때
+2. 함수의 실행 시점을 미룰 때(`jest - expect`, `react - onClick`)
+3. 팩토리 함수(인스턴스 객체나 함수를 생성하여 반환하는 함수)를 만들 때
+4. 훅, 데코레이터를 만들 때
+5. 반복되는 코드를 줄일 때
+6. 클래스 메서드는 고차 함수의 파라미터로서 전달했을 때 메서드는 인스턴스에 대한 `this` 바인딩을 잃어버린다. 따라서 `higher order`함수를 호출할 때 인스턴스와 메서드를 함께 인자로 전달해줘야 함
+
+### ❏ Decorator Factory
+1. 데코레이터를 사용하려면 `tsconfig.json - experimentalDecorators: true`, `emitDecoratorMetadata: true` `yarn add reflect-metadata` 설정
+2. 고차함수: 함수를 반환하는 함수
+3. 팩토리: 어떤 인스턴스를 사용하여 반환하는 함수, 메서드
+4. 데코레이터 팩토리: 데코레이터 함수를 반환하는 함수
+5. 특정 인자만 받는다. 추가적인 인자를 주고 싶다면 고차함수에 매개변수를 추가하여 데코레이터 함수 내부에서 사용할 수 있다.
+
+```typescript
+function enumerable(value: boolean){
+	return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+		descriptor.enumerable = value;
+	};
+}
+
+class Greeter{
+	@enumerable(false)
+	greet(name: string){
+		return "Hello, " + name;
+	}
+}
+
+// decoratorFacotry 함수를 선언해주세요.
+function decoratorFactory(value: string){
+    return function(target: any, propertyKey: string, propertyDescriptor: PropertyDescriptor){
+        console.log(value)
+    }
+}
+// string 타입이고 이름이 value인 매개변수를 받습니다.
+// 메서드 데코레이터 함수를 반환합니다.
+// 메서드 데코레이터 함수의 매개변수 'target: any, propertyKey: string, propertyDescriptor: PropertyDescriptor'
+// 메서드 decorator 함수 내부에서 value를 출력해주세요.
+
+class ExampleClass {
+  @decoratorFactory("룰루랄라 퇴근이다")
+  static method() {}
+}
+
+ExampleClass.method();
+```
+
+### ❏ 클래스 데코레이터
+1. 생성자 함수를 관찰, 수정, 오버라이딩(재정의) 한다.
+2. 기존 클래스의 코드를 변경하지 않고 `property` 를 추가하거나, 생성자 함수에서 기능을 추가하고 싶을 때 사용한다.
+3. 클래스 선언 직전에 선언된다.
+4. 런타임에 함수로서 호출된다. `class` 에 `property`를 추가해도 `type system` 에서는 알지 못 함
+5. 생성자 함수에 적용된다.
+6. `target` 매개변수는 생성자 함수이다.
+7. `d.ts` 파일(타입 선언 파일), `declare class`에는 데코레이터를 사용하지 못함(`experimentalDecorators: true`)를 해도 안된다.
+
+```typescript
+declare type ClassDecorator = <TFunction extends Function>(target: TFunction) => TFunction | void;
+```
+
+### ❏ method Decorator
+1. 메서드를 관찰, 수정, 오버라이딩 할 수 있다.
+2. 메서드의 `property descriptor` 를 수정하거나 기존 메서드 앞 뒤로 기능을 추가하고 싶을 때 사용한다.
+
+```typescript
+import { UserGroup, User, Context } from "./types";
+
+function permission(group: UserGroup) {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    const originFn = descriptor.value;
+
+    // decorator function을 작성해주세요.
+    descriptor.value = function (this: any, ...args: any[]) {
+      // viewer의 group이 매개변수의 group보다 높은 경우(권한이 없는 경우) 함수를 실행하지 않고 에러메시지를 출력해주세요.
+      const user = this.context.viewer;
+      if(user.group > group){
+        console.log('permission is denied. viewer group is ' + user.group);
+        return;
+      }
+      // viewer의 group이 매개변수의 group 이하인 경우 원래 함수를 그대로 실행해주세요.
+      return originFn.apply(this, args);
+    };
+
+    return descriptor;
+  };
+}
+
+class UserService {
+  constructor(public context: Context) {}
+
+  @permission(UserGroup.NORMAL)
+  updateName(user: User, name: string) {
+    user.name = name;
+  }
+
+  @permission(UserGroup.ADMIN)
+  deactivateUser(user: User) {
+    user.status = "deactivate";
+    return user;
+  }
+}
+
+const normal: User = {
+  id: "1",
+  name: "normal",
+  status: "activate",
+  group: UserGroup.NORMAL,
+};
+
+const userService = new UserService({ viewer: normal });
+// "permission is denied. viewer group is 2" 출력
+userService.deactivateUser(normal);
+userService.updateName(normal, "elice");
+console.log(normal.name);
+```
+
+### ❏ Accessor Decorator
+1. 접근자(`getter`, `setter`) 데코레이터는 접근자를 관찰, 수정, 오버라이딩 할 수 있다.
+2. 접근자의 프로퍼티 설명자에 적용된다. 전달받는 매개변수가 메서드 데코레이터와 똑같다.(`target`, `propertyKey`, `propertyDescriptor`)
+3. `method decorator` 와 같이 `ES5` 보다 낮으면 `undefined` 이 된다. 또한 반환값도 무시된다.
+4. 같은 프로퍼티에 대한 접근자 `get`, `set` 중 하나에만 데코레이팅 가능
+
+```typescript
+function validate(regexp: string | RegExp) {
+  return function ( target: any, property: string, descriptor: PropertyDescriptor ) {
+    const actualFunction = descriptor.set;
+
+    const decoratorFunc = function (this: any, value: string) {
+      const regexpTarget =
+        typeof regexp === "string" ? new RegExp(regexp) : regexp;
+      if (!regexpTarget.test(value)) {
+        throw new Error("invalid value");
+      }
+      return actualFunction?.call(this, value);
+    };
+
+    descriptor.set = decoratorFunc;
+  };
+}
+```
+
+```typescript
+function max(maximum: number) {
+  return function (
+    target: any,
+    property: string,
+    descriptor: PropertyDescriptor
+  ) {
+    // setter 함수를 교체하려면 descriptor의 어떤 프로퍼티에 적용해야할까요?
+    const actualFunction = descriptor.set!; // 느낌표는 타입스크립트에 set함수가 있다고 가정한다. (option )
+    
+    const decoratorFunc = function (this: any, value: number) {
+      // value가 maximum보다 커지면 `exceed the maximum number: ${maximum}`를 메시지로 메시지로 하는 Error를 throw해주세요
+      if(value > maximum){
+        throw new Error(`exceed the maximum number: ${maximum}`)
+      }
+      
+      // maximum 이하일 때는 함수를 정상적으로 실행해주세요
+      return actualFunction.call(this, value);
+    };
+    
+    descriptor.set = decoratorFunc;
+  };
+}
+
+class Pagination {
+  constructor() {}
+
+  private _page: number = 0;
+
+  get page() {
+    return this._page;
+  }
+
+  @max(10)
+  set page(step: number) {
+    console.log()
+    this._page = step;
+  }
+}
+
+const pagination = new Pagination();
+
+// Error: exceed the maximum number: 10
+try {
+  while (true) {
+    pagination.page += 1;
+  }
+} catch (error) {
+  console.log(error);
+}
+```
+
+### ❏ Property Decorator
+
+1. 프로터피를 관찰, 수정, 오버라이딩 할 수 있다.
+2. 프러퍼티의 `property Descriptor` 를 수정할 때 사용할 수 있따.
+3. 프로퍼티 선언 직전에 선언된다.
+4. 인스턴스가 아닌 클래스 프로토타입의 프로퍼티에 적용된다.
+5. `taget`, `propertyKey` 두가지 인자를 받는다.
+6. `property Descriptor` 를 사용하지 않는이유: 프로퍼티의 경우, 인스턴스화 되기 전까 지 프로퍼티가 초기화되는 것을 관찰하거나 수정할 수 없음. 때문에 프로퍼티 데코레이터는 프로퍼티가 `클래스` 에 선언되었음을 관찰하는데만 사용할 수 있다.
+
+```typescript
+declare type PropertyDecorator = 
+	( target: Object, propertyKey: string | symbol) 
+		=> void | PropertyDecorator
+
+// 프로토타입 공유
+function 영혼교환식(target:any, propertyKey: string){
+	let name: string;
+
+	const getter = function () {
+		return name;
+	}
+
+	const setter = function (value: string) {
+		name = value;
+	}
+
+	return {
+		get: getter,
+		set: setter,
+		enumerable: true,
+		configurable: true,
+	} as any;
+}
+
+class Human {
+	@영혼교환식
+	public name: string;
+
+	constructor(name: string){
+		this.name = name;
+	}
+}
+
+const 햄스터 = new Human("햄스터");
+const 그녀 = new Human("그녀");
+
+그녀.name = "민석씨";
+console.log(햄스터.name) // 민석씨: 인스턴스가 아닌 클래스 프로토타입의 프로퍼티에 적용되기 때문에 값이 공유된다.
+
+// 프로토타입 Symbol
+function 영혼교환식(target:any, propertyKey: string){
+	const uniqueKey = Symbol();  // 매번 unique값을 생성
+
+	const getter = function (this: any) {
+		return this[uniqueKey];
+	}
+
+	const setter = function (this: any, value: string) {
+		this[uniqueKey] = value;
+	}
+
+	return {
+		get: getter,
+		set: setter,
+		enumerable: true,
+		configurable: true,
+	} as any;
+}
+
+class Human {
+	@영혼교환식
+	public name: string;
+
+	constructor(name: string){
+		this.name = name;
+	}
+}
+
+const 햄스터 = new Human("햄스터");
+const 그녀 = new Human("그녀");
+
+그녀.name = "민석씨";
+console.log(햄스터.name)  // 햄스터
+```
+
+1. 프로퍼티가 `null` 또는 `undefined` 일 때 기본값을 반환하는 `Default` 데코레이터만들기
+
+```typescript
+function Default(initalValue: any) {
+  return function (target: any, propertyKey: string) {
+    // 내부 함수에서 쓰일 value를 선언해주세요.
+    let value:any;
+    // value의 타입을 any로 설정해주세요
+    
+    // getter, setter 함수를 작성해주세요
+    // getter: value가 null 또는 undefined면 initalValue를 반환해주세요
+    function getter(){
+        return value ?? initalValue;
+    }
+    
+    // setter: setter 함수의 매개변수 _value를 그대로 value에 할당해주세요
+    function setter(_value: any){
+        value = _value;  // this를 붙이지 않아도 됨.
+    }
+    
+    // propertyDescriptor를 반환해주세요
+    // enumerable, configurable을 함께 설정해주세요
+    const propertyDescriptor = {
+        get: getter,
+        set: setter,
+        enumerable: true,
+        configurable: true
+    }
+    return propertyDescriptor as any;
+  };
+}
+
+class Post {
+  @Default(["짱이에요", "멋져요"])
+  public comments?: any[];
+}
+
+const post = new Post();
+console.log(post.comments);
+```
+
+### ❏ Parameter Decorator
+
+1. 클래스의 생성자 함수 또는 메서드 선언 함수에 적용된다.
+2. 매개변수가 메서드에서 선언되었다는 것을 관찰하는데에만 사용 가능. 그 이상은 `reflect-metadata` 라이브러리를 사용해야 한다.
+3. 매개변수 선언 직전에 사용된다.
+4. 3가지 인자를 받는다. 반환값은 무시된다.
+5. `reflect-metatdata` 를 통해 파라미터에 대한 메타데이터 수집, 저장.
+6. 메서드 데코레이터나 클래스 데코레이터와 함께 사용할 수 있음
+7. 파라미터 데코레이터 함수에서 반환하는 값은 무시됩니다. (반환값이 void)
+8. 파라미터 데코레이터는 메서드에서 매개변수가 선언되었다는 것만 알 수 있습니다.
+
+```typescript
+// target은 method(any, object), propertyKey는 메서드의 이름(string, symbol), 매개변수의 인덱스(순서)
+declare type ParameterDecorator = (target: Object, propertyKey: string, parameterIndex: number) => void;
+
+function watch(target: Object, propertyKey: string, parameterIndex: number){
+	console.log(`메서드 이름: ${propertyKey}, 데코레이터 인덱스: ${parameterIndex}`)
+}
+
+class Human {
+	constructor(public name: string){}
+	hello(@wath name: string){}
+}
+
+declare type ParameterDecorator = (
+  target: Object,
+  propertyKey: string | symbol,
+  parameterIndex: number
+) => void;
+```
+
+1. reflect-metadata
+
+```typescript
+import { immutableKey } from "./immutable";
+
+export function validateImmutable(
+  target: any,
+  propertyName: string,
+  descriptor: PropertyDescriptor
+) {
+  const method = descriptor.value!;
+
+  descriptor.value = function () {
+    // Reflect.getOwnMetadata를 사용해 메타데이터를 가져와주세요
+    const immutableParams:number[] = Reflect.getOwnMetadata(immutableKey, target, propertyName)
+    // 메타데이터에는 paramIndex가 저장되어있습니다.
+     
+    const args = Array.from(arguments as any)
+    // 자바스크립트 함수 내부에서 제공되는 arguments에서 메타데이터의 paramIndex만 필터링 해주세요. 그런 뒤 params 변수에 할당해주세요.
+    const params = args.filter((val, idx) => immutableParams.includes(idx));
+    
+    // params 배열을 순회하며 Object.freeze로 객체를 수정하지 못하게 막아주세요.
+    // map: 배열의 item을 변환하여 배열을 반환
+    // forEach: 배열을 반환하지 않고 각 item에 함수를 적용할 때
+    params.forEach((param) => Object.freeze(param));
+    return method.apply(this, arguments);
+  };
+}
+```
+
+### ❏ Decorator의 동작
+
+1. 여러 개의 데코레이터를 한 번에 쓰는 것(합성 함수 `g(fx))` 와 같은 매커니즘
+2. `Reflect.decorate` 를 쓸 수 있으면 호출, 없으면 인자의 개수에 따라 매개변수를 다르게 주어 데코레이터를 호출한다.(이때 호출은 아래에서 위로, 합성함수의 매커니즘처럼 작용하기 때문)
+
+```typescript
+// 평가(선언): 위에서 아래로, log -> timer
+// 적용(호출): 아래에서 위로, timer -> log
+class Human {
+	constructor(){}
+	@log()
+	@timer()
+	hello(name: string){}
+
+	const elice = new Human();
+	elice.hello("elice")
+}
+```
+
+1. 여러개의 데코레이터의 실행 순서
+
+```typescript
+/**
+ * code source: https://www.typescriptlang.org/docs/handbook/decorators.html#decorator-composition
+ */
+function first() {
+  console.log("first(): factory evaluated"); // #1
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    console.log("first(): called"); // #2
+  };
+}
+
+function second() {
+  console.log("second(): factory evaluated"); // #3
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    console.log("second(): called"); // #4
+  };
+}
+
+class ExampleClass {
+  @first()
+  @second()
+  method() {}
+}
+
+// 순서: 1 -> 3 -> 4 -> 2
+first(): factory evaluated
+second(): factory evaluated
+second(): called
+first(): called
+```
