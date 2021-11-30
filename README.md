@@ -1,29 +1,34 @@
-## 📍 엘리스 SW 엔지니어 트랙 
+## 📍 엘리스 SW 엔지니어 트랙
 
 ## 📍 O.T
+
 1. 주 5일, 총 560시간 동안 온/오프라인 병행하여 진행
-- Part 1: JS 기초(1~4주차)
-- Part 2: `Typescript`, `Node.js`, `SQL(5~9주차)` + 웹 서비스 프로젝트1
-- Part 3: `React` + 웹 서비스 프로젝트2
+
+-   Part 1: JS 기초(1~4주차)
+-   Part 2: `Typescript`, `Node.js`, `SQL(5~9주차)` + 웹 서비스 프로젝트1
+-   Part 3: `React` + 웹 서비스 프로젝트2
 
 2. 열심히 했는지 안 했는지 플랫폼에서 추천 할 수 있는 기능이 있음. 열심히 한 만큼 회사에 추천 가능성 증가
-3. 팀 프로젝트(GitLab): 기여도 확인, 커스터마이징 가능, 답을 밖에 공개하기 보다는 `GitLab`의 `private` 사용 
+3. 팀 프로젝트(GitLab): 기여도 확인, 커스터마이징 가능, 답을 밖에 공개하기 보다는 `GitLab`의 `private` 사용
 4. 수료는 전체 교육의 80% 이상 출석해야 수료
 5. 온라인 학습일 (수, 금): 로그인 / 로그아웃 시간 데이터 확인(학습시간이 7시간이 넘어야 출석으로 인정된다. 일정 시간 이상 활동하지 않으면 학습시간 기록 종료)
 6. 오프라인 교육시 선릉역, 삼성역 인근의 교육장을 이용
-   
+
 ## 📍 10.26.화. 1일차(실시간 강의)
+
 수업은 <a href='https://www.youtube.com/c/%EC%83%9D%ED%99%9C%EC%BD%94%EB%94%A91'>이고잉</a>튜터님께서 가르쳐주셨다. 내가 맨 처음 프론트엔드를 하겠다는 마음을 먹고 유튜브에서 찾아봤던 영상이 이고잉님 강의였는데, 다른 레이서들과 함께 온라인 수업을 실시간으로 가르쳐주시니까 놀라웠다.
 
 ### ❏ CSS 우선순위
+
 1. `!important` 태그
-2. `HTML` 태그 안에 직접 `style`을 지정한 태그( `inline style`은 별로 추천하지 않는다.) 
-3. `#id` 
+2. `HTML` 태그 안에 직접 `style`을 지정한 태그( `inline style`은 별로 추천하지 않는다.)
+3. `#id`
 4. `.class`, `추상class`, `수도클래스(:first-child)`
-5. `HTML` 태그 
+5. `HTML` 태그
 6. 상위 객체에 상속된 속성
 
 ### ❏ 수업 내용
+
 1. `CSS`는 `HTML` 이 등장한지 4년 이후에 나왔다.
 2. `DOM`: `JS`를 이용하여 웹 브라우저를 제어하는 방법
 3. 수업내용 이전에 배운 내용이 잇다면 처음부터 전체적인 구조를 생각하며 배운다. (제일 중요한 것은 `HTML`)
@@ -57,9 +62,11 @@
 18. `inline`: 자기 `content` 만큼의 크기만을 갖는다.
 
 ## 📍 10.27.수. 2일차(온라인 강의)
+
 오늘은 실시간 강의 대신 온라인 강의를 듣는 날이다. 기존에 `HTML/CSS`를 어느정도 알고있다고 판단하여 금방 끝날 줄 알았는데 생각보다 오래걸렸다. 매 강의마다 `이론 + 퀴즈 + 실습` 구성으로 이루어져 있는데, 실습에서 코드를 제출해야 점수가 기록되므로 알고 있는 내용이라고 그냥 건너뛸 수 없었다. 강의를 다 들은 다음 배운 내용을 점검하는 작은 테스트까지 봐야 훈련이 끝난다. 첫 날이라 8시간이 걸렸고, 온라인 강의가 있는 날은 10시 이전부터 시작해야겠다는 생각이 들었다.
 
 ### ❏ 수업 내용
+
 1. `프로그래밍`: 컴퓨터와 소통하는 방법, 웹 개발을 하기위한 언어로 브라우저와 소통하는 매개체
 2. `HTML`: 정보 또는 설계도, `CSS`: 디자인 또는 스타일링, `JS`: 기능과 효과
 3. `웹 표준`: 웹 사이트를 작성할 때 따라야 하는 공식 표준이나 기술 규격
@@ -71,7 +78,7 @@
 9. `contents`: 열린태그와 닫힌태그 사이에 있는 내용들 (`<body>`태그안의 모든 코드는 `body`의 `contents`가 된다.)
 10. `<head></head>`: 웹 사이트의 간단한 요약 정보를 담는 영역, 웹 사이트에서 노출되지 않는 정보
 11. `<body></body>`: 웹 사이트에서 눈에 보이는 정보를 담는 영역, 이미지나 텍스트처럼 출력되는 정보
-12. `<img src="logo.png" alt="회사로고">`: 이미지는 닫힌 태그가 없다.(react에는 닫힌 태그가 있다.) `src`: 삽입 할 이미지의 파일 경로, `alt`: 웹 사이트가 이미지를 출력하지 못했을 경우 텍스트 정보로 대체, `width`만 사용하면 원래 갖고있던 이미지의 비율에 맞춰 `height`를 보여준다. 
+12. `<img src="logo.png" alt="회사로고">`: 이미지는 닫힌 태그가 없다.(react에는 닫힌 태그가 있다.) `src`: 삽입 할 이미지의 파일 경로, `alt`: 웹 사이트가 이미지를 출력하지 못했을 경우 텍스트 정보로 대체, `width`만 사용하면 원래 갖고있던 이미지의 비율에 맞춰 `height`를 보여준다.
 13. `<h tag>`: 웹 사이트의 타이틀 표현, `h1` 태그는 가장 중요한 정보를 담으므로, 하나의 `html`문서에서 한번만 사용된다.
 14. `p`: `paragraph`의 약자로 본문 내용을 표현한다. 웹 사이트의 중요 정보를 담는 태그
 15. `ul`: `unOrdered list`의 약자로, 순서가 없는 리스트 생성, 주로 메뉴버튼을 만들 때 사용한다. 자식태그로는 `li`가 있다. (`ol`은 순서가 있는 리스트 생성)
@@ -100,14 +107,16 @@
 18. `<nav>`: 메뉴 버튼을 담는 공간, 네비게이션 (주로, `ul`, `li`, `a`와 함께 사용한다.)
 
 ```html
-<header>  <!-- 상단 영역 -->
-	<img src="elice_logo.png" alt="엘리스 로고">
-	<nav>  <!-- 메뉴 버튼 영역 -->
-		<ul>
-			<li><a href="">홈</a></li>
-			<li><a href="">전체 목록</a></li>
-		</ul>
-	</nav>
+<header>
+    <!-- 상단 영역 -->
+    <img src="elice_logo.png" alt="엘리스 로고" />
+    <nav>
+        <!-- 메뉴 버튼 영역 -->
+        <ul>
+            <li><a href="">홈</a></li>
+            <li><a href="">전체 목록</a></li>
+        </ul>
+    </nav>
 </header>
 ```
 
@@ -115,9 +124,9 @@
 20. `<article />`: 영역을 대표하는 타이틀 정보가 존재하기 때문에 태그 내에 구역을 대표하는 타이틀인 `<h>`태그가 존재해야 한다.
 
 ```html
-<main role="main">  <!-- 본문 영역 -->
-	<article>  <!-- 정보 영역 -->
-	</article>
+<main role="main">
+    <!-- 본문 영역 -->
+    <article><!-- 정보 영역 --></article>
 </main>
 ```
 
@@ -125,22 +134,25 @@
 22. `<div>`: 임의의 공간을 만들 때 사용
 
 ```html
-<footer>  <!-- 하단 영역 -->
-	<div>  <!-- 회사 정보 -->
-		<p>주소: 경기도 화성시 동탄공원로</p>
-		<p>이메일: ywtechit@gmail.com</p>
-	</div>
-	<div>  <!-- 전자상거래소비자보호법 필수 정보 -->
-		<p>사업자등록번호: 000-00-00000 | 대표: 안영우</p>
-		<p>통신판매업신고번호: 제0000-토끼굴-0000호</p>
-	</div>
+<footer>
+    <!-- 하단 영역 -->
+    <div>
+        <!-- 회사 정보 -->
+        <p>주소: 경기도 화성시 동탄공원로</p>
+        <p>이메일: ywtechit@gmail.com</p>
+    </div>
+    <div>
+        <!-- 전자상거래소비자보호법 필수 정보 -->
+        <p>사업자등록번호: 000-00-00000 | 대표: 안영우</p>
+        <p>통신판매업신고번호: 제0000-토끼굴-0000호</p>
+    </div>
 </footer>
 ```
 
 23. `display: block`과 `display: inline`의 큰 차이점: 줄 바꿈 현상, `width`, `height`, 상 하 배치
 24. `display: block`: `y`축 정렬 형태로 출력(줄 바꿈 현상이 보인다.) `width`, `height`로 공간을 만들고 상하 배치 작업이 가능하다. (`h`, `p`)
 25. `display: inline`: `x`축 정렬 형태로 출력(한 줄에 출력) `width`, `height`로 공간을 만들 수 없고 상하 배치 작업이 불가능하다. (`a`, `span`)
-26. `CSS` 적용 방법 3가지: 첫번째로 `inline style sheet`로 태그 안에 직접 원하는 스타일을 적용한다. (`<h1 style="color: red;">)coding 101 </h1>`) 두번째는 `internal style sheet`로 `<style>` 태그 안에 넣어서 적용한다. (`<style> h1{ background-color: yellow;}</style>`) 마지막으로 `external style sheet`로 외부에 `css`파일을 저장해두고 `<link>` 태그로 불러오기 (`<head> <link rel="stylesheet" (연결 할 문서의 정보의 성격 지정) href="style.css(경로입력)"></head>`, `link` 태그는 닫힌 태그가 없다.  ) 마지막 CSS 방법(`external`)의 장점은 `html`, `css` 각각의 문서 안에서 따로 관리하여 상대적으로 가독성이 높고 유지보수가 쉽다. (실무에서 많이 사용)
+26. `CSS` 적용 방법 3가지: 첫번째로 `inline style sheet`로 태그 안에 직접 원하는 스타일을 적용한다. (`<h1 style="color: red;">)coding 101 </h1>`) 두번째는 `internal style sheet`로 `<style>` 태그 안에 넣어서 적용한다. (`<style> h1{ background-color: yellow;}</style>`) 마지막으로 `external style sheet`로 외부에 `css`파일을 저장해두고 `<link>` 태그로 불러오기 (`<head> <link rel="stylesheet" (연결 할 문서의 정보의 성격 지정) href="style.css(경로입력)"></head>`, `link` 태그는 닫힌 태그가 없다. ) 마지막 CSS 방법(`external`)의 장점은 `html`, `css` 각각의 문서 안에서 따로 관리하여 상대적으로 가독성이 높고 유지보수가 쉽다. (실무에서 많이 사용)
 27. `CSS` 선택자: 첫번째는 타입(`type`): `h2{color: red;}` 두번째는 클래스(`class`): `.tech{color: red;}` 마지막은 식별자(`ID`): `#tech{color: red;}`
 
 ```css
@@ -153,11 +165,11 @@
     h2 {
     	color: red;
     }
-  
+
     .coding{
     	color: green;
     }
-  
+
   	#coding{
   		color: yellow;
   	}
@@ -176,18 +188,32 @@
 
 ```css
 /* 동일한 태그를 기준으로 나중에 적용한 속성 */
-p { color: red; }
-p { color: blue; }  // ✅
+p {
+    color: red;
+}
+p {
+    color: blue;
+} // ✅
 
 /* 더 구체적으로 작성된 선택자의 우선순위가 높다. */
-header p { color: red;}  // ✅ detail
-p {color: blue; }
+header p {
+    color: red;
+} // ✅ detail
+p {
+    color: blue;
+}
 
 /* `inline style > id > class > type` 순으로 우선순위가 높다. */
 <h3 style = "color: pink" id="color" class="color">color</h3>  // 1
-#color { color: blue; }  // 2
-.color { color: red; }  // 3
-h3 { color: green; }  // 4
+#color {
+    color: blue;
+} // 2
+.color {
+    color: red;
+} // 3
+h3 {
+    color: green;
+} // 4
 ```
 
 ### ❏ CSS의 주요 속성
@@ -202,25 +228,25 @@ h3 { color: green; }  // 4
 
 ```css
 .paragraph {
-	background-color: yellow;
-	background-image: url();
-	backgorund-repeat: no-repeat;
-	background-position: left;
-	background: yello url() no-repeat left;  // 한번에 입력
+    background-color: yellow;
+    background-image: url();
+    backgorund-repeat: no-repeat;
+    background-position: left;
+    background: yello url() no-repeat left; // 한번에 입력
 }
 ```
 
 ### ❏ 웹 사이트 레이아웃에 영향을 미치는 요소
 
-1️⃣ 박스모델: 공간 크기가 어떤 구조로 구성되어 있는지 확인하는 모델(`margin`, `border`, `padding`, `content`) 
+1️⃣ 박스모델: 공간 크기가 어떤 구조로 구성되어 있는지 확인하는 모델(`margin`, `border`, `padding`, `content`)
 
 1. `top`, `right`, `bottom,left` 순서로 입력가능
 2. `margin` : `border`를 기준으로 바깥에 있는 요소
 3. `padding`: `border` 와 `content` 사이의 간격
 
-2️⃣  Block요소와 Inline 요소: `block`요소는 `y` 축 정렬(`header`, `p` , `width`, `height`, `margin`, `padding`  요소 사용가능), `inline` 요소는 `x` 축 정렬 (`a`, `span`), `margin-top`, `margin-bottom` 등 상하 배치 작업 속성은 사용 불가, 줄바꿈 없음
+2️⃣ Block요소와 Inline 요소: `block`요소는 `y` 축 정렬(`header`, `p` , `width`, `height`, `margin`, `padding` 요소 사용가능), `inline` 요소는 `x` 축 정렬 (`a`, `span`), `margin-top`, `margin-bottom` 등 상하 배치 작업 속성은 사용 불가, 줄바꿈 없음
 
-3️⃣  마진 병합 현상
+3️⃣ 마진 병합 현상
 
 1. 형제지간의 마진 병합: 큰 값을 우선순위로 `space` 를 만든다. 하단의 코드에서는 `250px` 이 아니라 `150px` 로 설정된다.
 
@@ -228,8 +254,7 @@ h3 { color: green; }  // 4
 <div class="box1">Hello World</div>
 <div class="box2">Hello World</div>
 
-.box1{ margin-bottom: 150px }
-.box2{ margin-top: 100px } 
+.box1{ margin-bottom: 150px } .box2{ margin-top: 100px }
 ```
 
 기존계산으로는 `margin` 이 `250px`이 되어야 하지만 마진의 교집합이 있을때는 더 높은 값에 우선순위가 주어지므로 `150px` 만큼만 차이가 난다.(마진 병합 현상)
@@ -238,15 +263,10 @@ h3 { color: green; }  // 4
 
 ```html
 <main role="main">
-	<article>
-	</article>
+    <article></article>
 </main>
 
-.article {
-	width: 200px;
-	height: 200px;
-	margin-top: 100px;
-}
+.article { width: 200px; height: 200px; margin-top: 100px; }
 ```
 
 ![](https://images.velog.io/images/abcd8637/post/f3f010ae-1148-4137-ba50-c6105892ab0b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-27%2020.24.52.png)
@@ -255,7 +275,7 @@ tip: 부모는 그대로인데 자식 `div`만 내리려면 자식 `div`에 `pos
 
 ![](https://images.velog.io/images/abcd8637/post/43cdd193-481e-427b-8ae5-19d937d48027/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-27%2020.26.05.png)
 
-4️⃣  레이아웃에 영향을 미치는 속성
+4️⃣ 레이아웃에 영향을 미치는 속성
 
 1. `display`: 원래 `block` 과 `inline` 이 갖고있는 성격을 바꿀 때 사용. `inline-block` 을 사용하면 두 요소의 성격을 모두 가짐 `inline-block`: `x` 축 정렬이면서 공간의 크기를 만들고 상하 배치 작업까지 진행하고 싶을 때 사용
 
@@ -301,24 +321,27 @@ tip: 부모는 그대로인데 자식 `div`만 내리려면 자식 `div`에 `pos
 
 ![](https://images.velog.io/images/abcd8637/post/eaaf1b5f-1d26-402a-89e5-896b92f2ddb4/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-27%2020.27.49.png)
 
-6. `float` 을 마지막으로 사용한 태그 다음 태그에 `clear` 속성을 사용한다. 만약, `float: left` 만 되어있다면 `clear: left` ,   `float: right` 만 되어있다면 `clear: right` 양쪽은 `clear: both` 를 사용하면 된다. 보통의 경우에는 `clear: both` 를 많이 사용한다.
+6. `float` 을 마지막으로 사용한 태그 다음 태그에 `clear` 속성을 사용한다. 만약, `float: left` 만 되어있다면 `clear: left` , `float: right` 만 되어있다면 `clear: right` 양쪽은 `clear: both` 를 사용하면 된다. 보통의 경우에는 `clear: both` 를 많이 사용한다.
 
 7. 기본적으로 `html`, `body` 에 `margin`, `padding` 이 존재하므로 이를 없애주자. `*{margin:0; padding:0;}`
 
 > reference
+
 1. a태그: <a href='https://developer.mozilla.org/ko/docs/Web/HTML/Element/a'>MDN</a>
 
 ---
+
 ## 📍 10.28.목. 3일차(실시간 강의)
 
 ### ❏ CSS Transition
+
 1. `transform: rotate(45deg)`: 도형을 45도 만큼 회전(`+`는 시계방향, `-`는 반시계 방향)
 2. `transform: scale(a, b)`: 가로폭 `a`배, 세로폭 `b`배 만큼 확대 (`Equal to scaleX(a) scaleY(3)`)
 3. `transform: translate(100px, 200px)`: `x`축으로 `100px`, `y`축으로 `200px` 만큼 이동시킨다. (`x`는 `row`, `y`는 `column`)
 4. `transform: skew(10deg, 20deg)`: `x`축으로 10도, `y`축으로 20도만큼 비튼다.
 5. `margin: 200px 0 0 200px`: 한 줄로 나타내기보다는 가독성을 위해 분리해서 작성하는 것을 권장한다. 예를 들면, `margin-top: 200px`, `margin-left: 200px` 이런식으로..
 6. `transform(변형시키다)`: 하단의 코드처럼 `transform`을 여러번 사용하면 제일 마지막에 작성한 `transform` 속성만 적용된다. 여러개의 `transform`을 적용하고 싶으면 한 줄로 작성하자.
-   
+
 ```css
 /* `transform: skew(10deg, 20deg)` 코드만 적용된다. */
 <style>
@@ -349,13 +372,13 @@ tip: 부모는 그대로인데 자식 `div`만 내리려면 자식 `div`에 `pos
 
 ```css
 <style>
-  .transition { 
+  .transition {
         width: 100px;
         height: 100px;
         background-color: red;
 				transition: width 2s linear 0s;
   }
-	
+
 	.transition:hover {
 			height: 300px;
 	}
@@ -381,7 +404,7 @@ tip: 부모는 그대로인데 자식 `div`만 내리려면 자식 `div`에 `pos
         width: 300px;
         height: 300px;
         background-color: yellow;
-		
+
 				animation-name: changeWidth;
 				animation-duration: 3s;
 				animation-timing-function: linear;
@@ -389,7 +412,7 @@ tip: 부모는 그대로인데 자식 `div`만 내리려면 자식 `div`에 `pos
 				animation-iteration-count: 6;
 				animation-direction: alternate;
     }
-	
+
 		@keyframes changeWidth {
 			from {
 				width: 300px;
@@ -401,7 +424,7 @@ tip: 부모는 그대로인데 자식 `div`만 내리려면 자식 `div`에 `pos
 </style>
 ```
 
-12. `animation`과 `transition`의 주요차이는 사용자의 액션없이 자동으로 실행하는 것이 `animation`이고 사용자의 액션 (hover, click...)을 통해 보여지는 효과가 `transition`이다. 
+12. `animation`과 `transition`의 주요차이는 사용자의 액션없이 자동으로 실행하는 것이 `animation`이고 사용자의 액션 (hover, click...)을 통해 보여지는 효과가 `transition`이다.
 13. 반응형 조건(`media query`)을 작성할 때는 `<meta name="viewport" content="width=device-width, initial-scale=1.0">`를 꼭 붙여주자.
 
 ![](https://images.velog.io/images/abcd8637/post/474902cd-a9d7-43c1-ab56-f34ca407ecff/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-28%2021.54.03.png)
@@ -424,27 +447,31 @@ tip: 부모는 그대로인데 자식 `div`만 내리려면 자식 `div`에 `pos
 ```
 
 ---
+
 ## 📍 10.29.금. 4일차(온라인 강의)
+
 나름 프로젝트(<a href='https://github.com/YWTechIT/project-military-test'>병과테스트</a>, <a href='https://github.com/YWTechIT/starbucks-recipe-project'>스타벅스 히든 레시피</a>)를 진행하면서 `HTML`에 대해 많이 알고있다고 생각했는데, 4일밖에 안됐는데도 모르는 내용들이 많았고 더불어 정리 할 내용도 많았다. 현업에 뛰어들기 전에 하나라도 더 볼 수 있다는 점을 감사하게 생각하며 오늘 배운내용을 정리해본다.
 
 ### ❏ 2차원과 3차원의 속성을 결정짓는 요소인 `position` 속성 배우기
-1. `position`: 내가 만든 속성을 2차원 혹은 3차원으로 바꿀 수 있는 기능 
+
+1. `position`: 내가 만든 속성을 2차원 혹은 3차원으로 바꿀 수 있는 기능
 
 ![](https://images.velog.io/images/abcd8637/post/75fdba25-b9ea-46c6-a16c-2d675b386113/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-29%2019.56.02.png)
 
 2. 2차원과 3차원의 속성을 결정짓는 3가지 조건
 
 ```html
-1. 부모 자식 지간에 발생하는 마진 병합 현상(margin-collapse)이 일어나면 2차원 속성이다.
-2. `top`, `left`, `right`, `bottom`을 설정 할 수 있는 속성은 3차원이다.
-3. 부모가 높이 값을 갖고 있지 않을 때 자식의 높이 값이 부모의 높이 값에 영향을 준다면 2차원 속성이고, 영향을 주지 않는 다면 3차원 속성이다.
+1. 부모 자식 지간에 발생하는 마진 병합 현상(margin-collapse)이 일어나면 2차원
+속성이다. 2. `top`, `left`, `right`, `bottom`을 설정 할 수 있는 속성은
+3차원이다. 3. 부모가 높이 값을 갖고 있지 않을 때 자식의 높이 값이 부모의 높이
+값에 영향을 준다면 2차원 속성이고, 영향을 주지 않는 다면 3차원 속성이다.
 ```
 
 3. `position:static`: 2차원 속성, 마진 병합현상(margin-collapse)이 일어난다. `top`, `left`, `right`, `bottom` 속성을 사용 할 수 없다. 부모가 높이값을 갖고 있지 않을 때 자식의 높이 값이 부모의 높이값에 영향을 준다. 모든 `html`의 기본 `position` 값은 `static`이다. (`position`을 명시하지 않아도 적용된다.) 하단의 우측사진은 부모 - 자식간의 마진 병합현상으로 인해 부모까지 같이 `margin-top`이 적용된 모습이다.
 
 ![](https://images.velog.io/images/abcd8637/post/e491f6a4-a84c-476a-b3d7-7dfcef711f70/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-29%2020.15.30.png)
 
-4. `position: fixed`: 3차원, 마진 병합 현상이 일어나지 않는다. `top`, `left`, `right`, `bottom` 속성을 사용 할 수 있다. 이때 기준점은 브라우저의 좌측 상단이다. 부모가 높이 값을 갖고 있지 않을 때 자식의 높이 값이 부모의 높이 값에 영향을 줄 수 없다. 보통 `fixed`는 화면에 고정시키는 역할로 쇼핑몰에 항상 따라오는 배너를 구현할 때 사용된다. 
+4. `position: fixed`: 3차원, 마진 병합 현상이 일어나지 않는다. `top`, `left`, `right`, `bottom` 속성을 사용 할 수 있다. 이때 기준점은 브라우저의 좌측 상단이다. 부모가 높이 값을 갖고 있지 않을 때 자식의 높이 값이 부모의 높이 값에 영향을 줄 수 없다. 보통 `fixed`는 화면에 고정시키는 역할로 쇼핑몰에 항상 따라오는 배너를 구현할 때 사용된다.
 
 ![](https://images.velog.io/images/abcd8637/post/6d7c47dc-8255-40f6-a084-244b848fa9e4/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-29%2020.18.00.png)
 
@@ -452,11 +479,12 @@ tip: 부모는 그대로인데 자식 `div`만 내리려면 자식 `div`에 `pos
 
 ![](https://images.velog.io/images/abcd8637/post/e7df7821-c21a-4bcb-9c2a-db1a74626041/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-29%2020.19.41.png)
 
-6. `position: absolute`: 3차원 속성, 마진 병합 현상이 일어나지 않는다. `top`, `left`, `right`, `bottom` 속성을 사용 할 수 있다. 이때 기준점은 부모 `position`에 따라 다른데, 부모가 `position: static`이면 브라우저 좌측 상단을 기준으로 적용되고, 부모가 `position: relative`면 현재 나의 위치를 기준으로 적용된다. 부모가 높이 값을 갖고 있지 않을 때 자식의 높이 값이 부모의 높이값에 영향을 줄 수 없다. 
+6. `position: absolute`: 3차원 속성, 마진 병합 현상이 일어나지 않는다. `top`, `left`, `right`, `bottom` 속성을 사용 할 수 있다. 이때 기준점은 부모 `position`에 따라 다른데, 부모가 `position: static`이면 브라우저 좌측 상단을 기준으로 적용되고, 부모가 `position: relative`면 현재 나의 위치를 기준으로 적용된다. 부모가 높이 값을 갖고 있지 않을 때 자식의 높이 값이 부모의 높이값에 영향을 줄 수 없다.
 
 ![](https://images.velog.io/images/abcd8637/post/b8d3ebed-4ed9-4774-8a07-c056d2d44306/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-29%2020.21.17.png)
 
 ### ❏ 시작 페이지 제작하기
+
 1. 모바일을 고려 할 때 `<head>` 태그에 `<meta name="viewport" content="width=device-width, initial-scale=1.0">` 태그를 꼭 추가하자. `viewport`는 내가 보고 있는 기기의 화면을 뜻하고, `content`는 `viewport`의 너비를 디바이스의 너비로 설정하고 실제 제작되는 화면의 비율을 `1.0`배로 설정하는 코드이다. 하단의 사진은 `<meta>`태그를 적용했을 때와 `<meta>`태그를 적용하지 않았을 때의 차이를 보여주는 사진이다.
 
 ![](https://images.velog.io/images/abcd8637/post/00ecf36a-391e-4f63-a6f2-447d4261dc00/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-29%2019.54.02.png)
@@ -466,29 +494,31 @@ tip: 부모는 그대로인데 자식 `div`만 내리려면 자식 `div`에 `pos
 3. `background`: 배경 이미지의 크기를 결정짓는 `css` 속성 주로 `background-size: contain`, `background-size:: cover` 속성을 자주 사용한다. `contain`은 배경을 모두 덮어 씌운다. 이미지 전체가 나타나지만 여백이 생길 수 있다. `cover`은 배경을 사용하는 공간을 꽉 채운다. 배경 이미지의 가로 세로 비율을 유지한다. 이미지의 일부가 잘려서 출력된다.
 
 ```html
-`background-attachment`: 배경이미지의 스크롤 여부를 결정짓는 요소
-
-1. `background-attachment: scroll`: 스크롤하면 배경이미지가 고정되지 않음
-2. `background-attachment: fixed`: 스크롤하면 배경이미지가 고정되면서 같이 내려감
+`background-attachment`: 배경이미지의 스크롤 여부를 결정짓는 요소 1.
+`background-attachment: scroll`: 스크롤하면 배경이미지가 고정되지 않음 2.
+`background-attachment: fixed`: 스크롤하면 배경이미지가 고정되면서 같이 내려감
 ```
 
 4. `y`축 정렬 방법: 다음의 공식을 이용한다.
 
 ```css
-top: 50%;  /* position: fixed, relative, absolute */
-transform: translateY(-50%);  /* Y축으로 -50%만큼 이동한다. 자신의 크기를 기준으로 좌표가 형성된다. */
+top: 50%; /* position: fixed, relative, absolute */
+transform: translateY(
+    -50%
+); /* Y축으로 -50%만큼 이동한다. 자신의 크기를 기준으로 좌표가 형성된다. */
 ```
-  
+
 5. `box-sizing: border-box`: `box-model` 중 `padding`을 사용하면 공간의 크기가 바뀌지 않게 안전장치를 걸어준다. 공간에 대한 크기는 그대로인 상태에서 `padding` 값만 적용된다.
 
 ### ❏ 메인 페이지 살펴보기
+
 1. `box-shadow`: 공간의 그림자 효과를 만들 때 사용하는 `css` 속성
 
 ```css
 .box_shadow {
-	width: 300px;
-	height: 300px;
-	box-shadow: 10px 10px 10px 10px red;  /* 수평방향(x), 수직방향(y), 흐림의 반경(숫자가 클 수록 그림자의 끝이 흐려지고 0이 될수록 선명하다), 그림자가 확산되는 거리, 그림자의 색상 */
+    width: 300px;
+    height: 300px;
+    box-shadow: 10px 10px 10px 10px red; /* 수평방향(x), 수직방향(y), 흐림의 반경(숫자가 클 수록 그림자의 끝이 흐려지고 0이 될수록 선명하다), 그림자가 확산되는 거리, 그림자의 색상 */
 }
 ```
 
@@ -497,28 +527,29 @@ transform: translateY(-50%);  /* Y축으로 -50%만큼 이동한다. 자신의 �
 2. `border-radius`: 테두리의 각도를 조절
 
 ```css
-.box_shadow {		
-	width: 300px;
-	height: 300px;
-	border: solid 10px red;
-	border-radius: 30px;
+.box_shadow {
+    width: 300px;
+    height: 300px;
+    border: solid 10px red;
+    border-radius: 30px;
 }
 ```
 
 ### ❏ `form` 태그 알아보기
+
 1. `form`: 사용자가 특정 정보를 가입할 수 있도록 하는 태그
 
 ```html
 <!-- form 태그 예시 -->
 <form id="question_form">
-	<div class="form-group">
-		<label for="topic">제목</label>
-		<input type="text" id="topic" name="topic">
-	</div>
+    <div class="form-group">
+        <label for="topic">제목</label>
+        <input type="text" id="topic" name="topic" />
+    </div>
 
-	<div class="form-group">
-		<button type="submit">문의하기</button>
-	</div>
+    <div class="form-group">
+        <button type="submit">문의하기</button>
+    </div>
 </form>
 ```
 
@@ -526,14 +557,14 @@ transform: translateY(-50%);  /* Y축으로 -50%만큼 이동한다. 자신의 �
 
 ```html
 <form id="question_form">
-	 <label for="title">제목</label>
-	 <input type="text" id="title" name="title">
-		  
-	 <label for="email">이메일 주소</label>
-	 <input type="email" id="email" name="email">
-		  
-	 <label for="password">비밀번호</label>
-	 <input type="password" id="password" name="password">           
+    <label for="title">제목</label>
+    <input type="text" id="title" name="title" />
+
+    <label for="email">이메일 주소</label>
+    <input type="email" id="email" name="email" />
+
+    <label for="password">비밀번호</label>
+    <input type="password" id="password" name="password" />
 </form>
 ```
 
@@ -543,10 +574,13 @@ transform: translateY(-50%);  /* Y축으로 -50%만큼 이동한다. 자신의 �
 6. 회원가입을 할 때 사용자가 특정 정보를 기입하고 이를 서버에 전달하는 버튼을 포함한 전체 영역은 `<form>`태그로 작성한다.
 
 ---
+
 ## 📍 10.30.토. 5일차(온라인 강의)
+
 오늘은 `Git` 사용법에 대해서 배웠다. 평소에 `CLI` 환경 대신 `Github-desktop`을 사용했는데, `CLI` 명령어를 하나부터 열까지 배울 수 있어서 좋았다. 기록해놨다가 나중에 현업에서 써먹었으면 좋겠다.
 
 ### ❏ Git의 특징
+
 1. `master`는 독립성을 유지한 채 진행하고 나중에 `master`에서 주로 배포하게 끔 설정한다.
 2. 다른작업을 독립적으로 진행하고 원하는 시점에 `branch`끼리 병합 할 수 있다.
 3. 가볍고 빠르다. (서버와의 통신 없이 로컬에서 진행, 원격저장소 사용 제외)
@@ -561,12 +595,13 @@ transform: translateY(-50%);  /* Y축으로 -50%만큼 이동한다. 자신의 �
 ![](https://images.velog.io/images/abcd8637/post/4416ce2f-abf6-4b5b-8c32-57ff17bb4742/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-10-30%2017.32.24.png)
 
 ### ❏ Git 주요 명령어
+
 1. `git add`: 파일을 준비영역(staging area)로 보내야 한다. 이때 `git add` 명령어를 이용하자. 파일의 현재 상태를 확인하려면 `git status` 명령어를 이용하자.
 2. `git commit`: `comment.js` 파일을 `staging` 으로 이동하였으므로 무엇을 수정하고 추가했는지 메시지를 남겨 저장소에 저장하는 작업을 진행한다. 이때 `commit message`도 추가하고 싶다면 다음의 명령어를 사용하자. `git commit -m "message"`
 3. `git commit --amend`: 앞서 커밋한 메시지에 오타가 있거나 누락된 파일이 있는 경우 저장소 반영 내용 변경
 4. `git log --pretty=oneline` : 각 `commit` 을 한 줄로 출력
 5. `git log --graph`: `commit` 간의 관계를 아스키그래프로 출력한다. (보통 `branch` 과정에서 많이 사용한다.)
-6. `git log -S function_name`: `-S` 코드에서 추가되거나 제거된 내용 중 특정 텍스트(예시는 `function_name` ) 가 포함되어 있는지 검사한다. 
+6. `git log -S function_name`: `-S` 코드에서 추가되거나 제거된 내용 중 특정 텍스트(예시는 `function_name` ) 가 포함되어 있는지 검사한다.
 7. `git status` : `git` 명령소의 현재 상태를 알 수 있다.
 8. `untracked` : 코드의 변경 내용을 추적하는 단계가 아니다. `staging area`로 보내야 코드의 수정내용을 추적 가능함.
 9. `git reset filename` : untracked 상태로 변경
@@ -607,9 +642,10 @@ d917274... (HEAD) another snapshot
 ```
 
 8. 새로운 `branch`를 만들고 해당 `branch`로 이동하기
+
 ```shell
 # 현재 branch 확인
-$ git branch 
+$ git branch
 
 # "alice" branch 생성
 $ git branch alice
@@ -624,31 +660,35 @@ $ git checkout alice
 12. `conflict`: 병합하는 두 `Branch` 에서 같은 파일을 변경 했을 때 충돌이 발생한다. 이때 `git status` 명령어로 어느 파일에서 충돌이 발생했는지 확인 할 수 있다. 수정 완료 후 `기호(<<<<< =====, >>>>>)`들을 삭제 해준다. 수정 완료 후 `git add`, `git commit` 과정을 거쳐서 다시 `merge` 한다. master 브랜치의 변화를 지속적으로 가져와서 충돌이 발생하는 부분을 제거한다. 더 좋은 것은 master 브랜치가 자주 변경되는 일이 없도록 하는 것
 
 ### ❏ 원격 저장소
+
 1. 원격 저장소: 인터넷이나 네트워크 어딘가에 있는 저장소
 2. `Git` 원격 저장소 받아오기: `Git clone url`(기존 repository를 복사), `clone` 버튼을 누르고 `CLI`창에 `$ git clone url`을 입력한다.
-3. 원격 저장소와 로컬저장소 연결하기: `$ git remote add origin https://gitlab.com/group/project` (웹 호스트 서비스: gitlab.com, 그룹 명 group, 프로젝트 명 project) 이후 git remote 로 연결된 저장소가 무엇인지 볼 수 있음 `git remote show origin` 을 통해 어떤 원격 저장소가 있는지도 확인 가능 
+3. 원격 저장소와 로컬저장소 연결하기: `$ git remote add origin https://gitlab.com/group/project` (웹 호스트 서비스: gitlab.com, 그룹 명 group, 프로젝트 명 project) 이후 git remote 로 연결된 저장소가 무엇인지 볼 수 있음 `git remote show origin` 을 통해 어떤 원격 저장소가 있는지도 확인 가능
 4. 원격 저장소 동기화
-
 
 ```shell
 1. `$ git pull`: 원격 저장소에서 데이터 가져오기 + 나의 로컬 레포지터리와 병합(Merge)한다. (따로 `merge`하지 않아도 적용됨.)
 2. `$ git Fetch`: 원격 저장소에서 데이터 가져오기 (별개로 `merge` 단계를 거쳐야 한다.)
 ```
 
-5. `origin/master`: 내 컴퓨터에 저장되어 있는 저장소와 원격저장소를 연결하기 위해서 다음의 명령어를 사용한다. `git remote add origin https://~` 여기서 `origin`은 원격저장소의 단축이름을 origin 으로 지정한다는 의미다. origin이 아닌 다른 이름으로도 원격 저장소의 이름을 지정해 줄 수도 있다. (`git remote add foo https://~`) 원격저장소의 이름의 `default` 값은 `origin` 이다. 따라서 `clone` 으로 복사해온 저장소의 이름은 `origin` 으로 통일하게 된다. `git remote -v` 명령어를 사용하면 지정한 저장소의 이름과 주소를 함께 볼 수 있다. 
+5. `origin/master`: 내 컴퓨터에 저장되어 있는 저장소와 원격저장소를 연결하기 위해서 다음의 명령어를 사용한다. `git remote add origin https://~` 여기서 `origin`은 원격저장소의 단축이름을 origin 으로 지정한다는 의미다. origin이 아닌 다른 이름으로도 원격 저장소의 이름을 지정해 줄 수도 있다. (`git remote add foo https://~`) 원격저장소의 이름의 `default` 값은 `origin` 이다. 따라서 `clone` 으로 복사해온 저장소의 이름은 `origin` 으로 통일하게 된다. `git remote -v` 명령어를 사용하면 지정한 저장소의 이름과 주소를 함께 볼 수 있다.
 
 ---
+
 ## 📍 11.2.화(실시간 강의)
+
 앨리스 교육을 받은 기간도 어느덧 2주째가 되었다. 저번주에는 `HTML/CSS` 파트를 배워서 못 따라갈 정도로 어렵다고 느끼진 않았다. 이번주부터는 본격적으로 `JS` 과정을 배우는데, 저번주와는 다르게 이론강의 4시간, 실습강의 3시간으로 나눠서 배웠다. 이후 `JS`를 배우는 커리큘럼은 괜찮지만 나중에 `this`, `closure` 과정을 배울 때는 못 따라가진 않을까 약간의 걱정이 된다. 하지만 처음엔 뒤쳐져도 꾸준히 공부하다보면 언젠간 다 따라잡을 수 있을 것이다.
 
 ### ❏ 저번시간 복습
+
 1. git `HEAD` 혹은 `branch` 바꾸기: `git checkout <hash>`, `git checkout <branchName>`
-2. 과거 상태의 `HEAD`로 `reset` 했을 때 지금까지의 모든 커밋 보기: `git log --oneline --all` 
+2. 과거 상태의 `HEAD`로 `reset` 했을 때 지금까지의 모든 커밋 보기: `git log --oneline --all`
 3. 개발자 도구(f12)의 `CSS` 창은 상단부터 우선순위가 높은 속성값을 보여준다. (즉, 제일 위에 있는 속성값 먼저 적용된다는 얘기)
 4. `git log` 중 `HEAD`나 `master`로 찾지 못하는 `commit`이 있다면 `git reflog` 사용하기
 5. `git reset --hard hashId`: `HEAD`가 가리키는 브랜치를 움직인다.
 
 ### ❏ JS 이론 수업
+
 1. `HTML` 코드에서 `JS`를 호출하려면 `<script src=""></script>`태그를 사용하자. (css 파일 불러오는 태그인 `<link rel="stylesheet" href="style.css(경로입력)">`)와 목적이 비슷하게 `JS` 파일을 따로 불러올 수 있다.
 2. `document.write("attribute")`: 자바스크립트 출력문으로 어떤 정보를 `HTML` 화면에 출력하는 기능(실무에서는 거의 쓰이지 않는다.)
 3. `<input type="button" value="buttonName">`: `button`을 만드는 태그
@@ -662,19 +702,31 @@ $ git checkout alice
 <!-- 구현1: 주간 / 야간 두개의 버튼을 만들고 `onClick`시 바뀌는 기능을 추가한다. -->
 
 <!-- 주간 모드 -->
-<input type="button" value="day" onclick="
+<input
+    type="button"
+    value="day"
+    onclick="
       document.querySelector('body').style.backgroundColor='white';
       document.querySelector('body').style.color='black';
-">
+"
+/>
 
 <!-- 야간 모드 -->
-<input type="button" value="night" onclick="
+<input
+    type="button"
+    value="night"
+    onclick="
       document.querySelector('body').style.backgroundColor='black';
       document.querySelector('body').style.color='white';
-" />
+"
+/>
 
 <!-- 리팩토링 1: 토글기능(한 개의 버튼으로 모드 변경 가능) -->
-<input id="dn" type="button" value="night" onclick="
+<input
+    id="dn"
+    type="button"
+    value="night"
+    onclick="
       var target = document.querySelector('#dn');
       if (target.value === 'night'){
         body.style.backgroundColor='black';
@@ -685,10 +737,14 @@ $ git checkout alice
         body.style.color='black';
         target.value = 'night'
       }
-  " />
+  "
+/>
 
 <!-- 리팩토링 2: this 사용(id값을 설정 할 필요 없이 `this`를 통해 동일한 버튼이 여러개여도 각각의 기능을 보장한다. -->
-  <input type="button" value="night" onclick="
+<input
+    type="button"
+    value="night"
+    onclick="
       var target = this;
       if (target.value === 'night'){
         body.style.backgroundColor='black';
@@ -699,7 +755,8 @@ $ git checkout alice
         body.style.color='black';
         target.value = 'night'
       }
-  " />
+  "
+/>
 ```
 
 9. 변수(parameter): 익명의 데이터에 이름을 붙이는 행위, 가독성이 증가하는 장점이 있다.
@@ -707,13 +764,14 @@ $ git checkout alice
 11. 조건문: `if(true)`
 
 ### ❏ JS 실습 수업
+
 1. 줄 바꿈하는 태그: `<br>`
 2. 큰 따옴표와 작은 따옴표가 섞인 문장 출력하기: 큰 따옴표와 작은 따옴표 앞에 `\`를 붙여 출력
 
 ```javascript
 // "It's all right."
 document.write("It's all right.");
-document.write('\"It\'s all right."');
+document.write('"It\'s all right."');
 ```
 
 3. `var`, `let`, `const`의 차이: 이전에 작성한 <a href='https://ywtechit.tistory.com/227?category=951122'>글</a> 참고
@@ -748,105 +806,125 @@ NaN === NaN;
 
 ```javascript
 // 피연산자가 모두 문자열 타입이어야 하는 문맥
-"10" + 2 // 102
+"10" + 2; // 102
 
 // 피연산자가 모두 숫자 타입이어야 하는 문맥
-5 * "10" // 50
+5 * "10"; // 50
 
 // 피연산자 또는 표현식이 불리언 타입이어야 하는 문맥
-!0 // true
-if (1) {} // {}
+!0; // true
+if (1) {
+} // {}
 
 // 숫자 타입
-0 + '' // "0"
--0 + '' // "0"
-1 + '' // "1"
--1 + '' // "-1"
-NaN + '' // "NaN"
-Infinity + '' // "Infinity"
--Infinity + '' // "-Infinity"
+0 +
+    "" - // "0"
+    0 +
+    ""; // "0"
+1 +
+    "" - // "1"
+    1 +
+    ""; // "-1"
+NaN + ""; // "NaN"
+Infinity +
+    "" - // "Infinity"
+    Infinity +
+    ""; // "-Infinity"
 
 // 불리언 타입
-true + '' // "true"
-false + '' // "false"
+true + ""; // "true"
+false + ""; // "false"
 
 // null
-null + '' // "null"
+null + ""; // "null"
 
 // undefined
-undefined + '' // "undefined"
+undefined + ""; // "undefined"
 ```
 
 7. 숫자 타입으로 변환: `빈 문자열('')`, `null`, `false`는 `0으`로 `true`는 `1로` 반환된다. 객체와 빈 배열이 아닌 배열, `undefined`는 변환되지 않아 `NaN`이 된다는 것에 주의하자.
 
 ```javascript
-1 - "1" // 0
-1 * "10" // 10
-1 / 'one' // NaN
-
-// 문자열 타입
-+'' // 0
-+'0' // 0
-+'1' // 1
-+'string' // NaN
-
-// 불리언 타입
-+true // 1
-+false // 0
-
-// null 타입
-+null // 0
-
-// undefined 타입
-+undefined // NaN
+1 - "1"; // 0
+1 * "10"; // 10
+1 / "one" + // NaN
+    // 문자열 타입
+    "" + // 0
+    "0" + // 0
+    "1" + // 1
+    "string" + // NaN
+    // 불리언 타입
+    true + // 1
+    false + // 0
+    // null 타입
+    null + // 0
+    // undefined 타입
+    undefined; // NaN
 ```
 
 8. 불리언 타입으로의 변환: 아래의 값들은 `falsy`로 평가되는 `Falsy`값이다. 이 값들 외에 값은 `truthy(참으로 평가되는 값)`라고 보면 된다.
 
 ```javascript
 // 아래의 조건문은 모두 코드 블록을 실행한다.
-if (!'') {console.log("execute")}; 
-if (!false) {console.log("execute")}; 
-if (!undefined) {console.log("execute")}; 
-if (!null) {console.log("execute")}; 
-if (!0) {console.log("execute")}; 
-if (!NaN) {console.log("execute")}; 
+if (!"") {
+    console.log("execute");
+}
+if (!false) {
+    console.log("execute");
+}
+if (!undefined) {
+    console.log("execute");
+}
+if (!null) {
+    console.log("execute");
+}
+if (!0) {
+    console.log("execute");
+}
+if (!NaN) {
+    console.log("execute");
+}
 ```
 
 reference
+
 1. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
 
 ---
+
 ## 📍 7일차 11.3.수.(실시간 강의)
+
 오늘은 어제 배운 내용에 이어서 `JS` 기본 문법(object, function 등 )들을 배웠다. 강의 난이도는 2/5이다.
 
 ### ❏ 복습
+
 1. `JS`를 실행하는 코드: `개발자 도구(F12)`, `<script>`, `onclick`
-2. 이고잉님 추천 도서는 <a href='https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=236186172'>리팩터링 2판 - 마틴 파울러</a> 였는데, 내용의 40%는 변수 이름 설정의 중요성에 대해 설파했다고 한다. 
+2. 이고잉님 추천 도서는 <a href='https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=236186172'>리팩터링 2판 - 마틴 파울러</a> 였는데, 내용의 40%는 변수 이름 설정의 중요성에 대해 설파했다고 한다.
 3. 변수(parameter): 익명의 데이터에 이름을 붙인 값
 
 ### ❏ 이론강의(4시간) + 실습강의(3시간)
+
 1. 배열(array): 여러 개의 값을 순차적으로 나열한 자료구조다. 배열은 사용 빈도가 매우 높은 가장 기본적인 자료구조다. 자바스크립트는 배열을 다루기 위한 유용한 메서드를 다수 제공한다. 배열은 사용 빈도가 높으므로 배열 메소드를 능숙하게 다룰 수 있다면 코딩에 매우 도움이 된다. 배열이 가지고 있는 값을 `요소`, `element`, `색인`, `index`라고 부른다. 대부분의 프로그래밍 언어에서 인덱스의 시작은 보통 `0`부터 시작한다. `JS`도 예외는 아니다. 특이한 점은 자바스크립트에서 배열이라는 타입은 존재하지 않는다. 배열은 객체 타입이다. 배열은 객체이지만, 일반 객체와는 구별되는 독특한 특징이 있다. 일반 객체와 배열을 구분하는 가장 명확한 차이는 `값의 순서`와 `length 프로퍼티`다. 인덱스로 표현되는 값의 순서와 `length` 프로퍼티를 갖는 배열은 반복문을 통해 순차적으로 값에 접근하기 적합한 자료구조다.
-또, 자바스크립트 배열은 인덱스로 배열 요소에 접근 할 때 일반적인 배열보다 느릴 수밖에 없는 구조적인 단점을 보완하기 위해 대부분의 모던 자바스크립트 엔진은 배열을 일반 객체와 구별하여 좀 더 배열처럼 동작하도록 최적화하여 구현했다. 다음과 같이 배열과 일반 객체의 성능을 테스트해보면 배열이 일반 객체보다 약 2배정도 빠르다는 것을 알 수 있다.
+   또, 자바스크립트 배열은 인덱스로 배열 요소에 접근 할 때 일반적인 배열보다 느릴 수밖에 없는 구조적인 단점을 보완하기 위해 대부분의 모던 자바스크립트 엔진은 배열을 일반 객체와 구별하여 좀 더 배열처럼 동작하도록 최적화하여 구현했다. 다음과 같이 배열과 일반 객체의 성능을 테스트해보면 배열이 일반 객체보다 약 2배정도 빠르다는 것을 알 수 있다.
 
 ```javascript
 // 배열 선언
 const arr = ["apple", "banana", "orange"];
 
 // 배열 순회
-for(let i=0; i<arr.length; i++){
-	console.log(arr[i]);
+for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
 }
 
 // 배열 타입: object
-typeof([1, 2, 3]) // object
+typeof [1, 2, 3]; // object
 
 // 배열과 객체 순회 속도 비교
 const array = [];
 console.time("Array Performance Test");
 
-for (let i=0; i<10000000; i++){
-	array[i]=i;
+for (let i = 0; i < 10000000; i++) {
+    array[i] = i;
 }
 
 console.timeEnd("Array Performance Test"); // 약 340ms
@@ -854,24 +932,26 @@ console.timeEnd("Array Performance Test"); // 약 340ms
 const obj = {};
 console.time("Object Performance Test");
 
-for (let i=0; i<10000000; i++){
-	obj[i]=i;
+for (let i = 0; i < 10000000; i++) {
+    obj[i] = i;
 }
 
 console.timeEnd("Object Performance Test"); // 약 600ms
 ```
 
 2. `html`에서 `a`태그 모두 선택하기: `document.querySelectAll("a")`
-   
+
 ```javascript
 // 배열 길이 만큼 li태그에 값 넣기
-for (let i=0; i<names.length; i++){
-   document.write(`<li><a href="${i}.html" target="_blank">${names[i]}</a></li>`)
+for (let i = 0; i < names.length; i++) {
+    document.write(
+        `<li><a href="${i}.html" target="_blank">${names[i]}</a></li>`
+    );
 }
 
 // `a` 태그의 모든 값 색상 바꾸기
-for (let i=0; i<aTags.length; i++){
-    console.log(aTags[i].style.color = "red");
+for (let i = 0; i < aTags.length; i++) {
+    console.log((aTags[i].style.color = "red"));
 }
 ```
 
@@ -900,7 +980,10 @@ console.log(getAdditionalTax1(1000));
 
 ```html
 <!-- 리팩토링 전: onclick 기능을 일일이 나열하여 가독성이 떨어지는 단점이 있다. -->
-  <input type="button" value="night" onclick="
+<input
+    type="button"
+    value="night"
+    onclick="
       var target = this;
       if (target.value === 'night'){
         body.style.backgroundColor='black';
@@ -911,38 +994,38 @@ console.log(getAdditionalTax1(1000));
         body.style.color='black';
         target.value = 'night'
       }
-  " />
+  "
+/>
 
 <!-- 리팩토링 후: onclick 기능 코드만 따로 함수로 빼내어 가독성을 높였다. -->
-<input type="button" value="night" onclick="toggleDarkMode(this);">
+<input type="button" value="night" onclick="toggleDarkMode(this);" />
 <script>
     const body = document.querySelector("body");
-    
-    function toggleDarkMode(target){
-      if (target.value === "night"){
-        body.style.backgroundColor = "black";
-        body.style.color = "white";
-        target.value = "day";
 
-        let a = document.querySelectorAll("a");
-        for (let i=0; i<a.length; i++){
-          a[i].style.color = "white";
-        }
-        
-      }else{
-        body.style.backgroundColor = "white";
-        body.style.color = "black";
-        target.value = "night";
+    function toggleDarkMode(target) {
+        if (target.value === "night") {
+            body.style.backgroundColor = "black";
+            body.style.color = "white";
+            target.value = "day";
 
-        let a = document.querySelectorAll("a");
-        for (let i=0; i<a.length; i++){
-          a[i].style.color = "black";
+            let a = document.querySelectorAll("a");
+            for (let i = 0; i < a.length; i++) {
+                a[i].style.color = "white";
+            }
+        } else {
+            body.style.backgroundColor = "white";
+            body.style.color = "black";
+            target.value = "night";
+
+            let a = document.querySelectorAll("a");
+            for (let i = 0; i < a.length; i++) {
+                a[i].style.color = "black";
+            }
         }
-      }
     }
-  </script>
+</script>
 
-	<input type="button" value="night" onclick="toggleDarkMode(this)">
+<input type="button" value="night" onclick="toggleDarkMode(this)" />
 ```
 
 6. 객체: 서로 연관된 데이터와 처리방법을 그룹화해서 이름을 붙인 것
@@ -958,24 +1041,29 @@ let taxData = {
 ```
 
 reference
+
 1. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
 
 ---
+
 ## 📍 8일차 11.4.목.(온라인 강의)
+
 오늘은 온라인 강의로 `JS` 기초문법을 배웠다. 어제 배운 내용에서 크게 벗어나지 않는 내용이었고 추가로 배운것은 `JS`로 입력받는 방법과 `match` 정규식에 대해서 배웠다.
 
 ### ❏ 자바스크립트 소개
+
 1. 자바스크립트란 이미지 슬라이드 효과, 팝업 효과 등의 기능을 포함한 동적인 웹사이트 제작 시 사용되는 프로그래밍 언어 (HTML 은 웹사이트의 구조를 짜고, CSS 웹사이트를 꾸며주고, JS 는 사용자와 상호작용할 수 있게 만들어준다.)
 2. 자바스크립트 사용분야 : IoT(예: 전동커튼), 하이브리드 앱(예: 네이버 앱), 서버 개발(node.js)
 
 ### ❏ 자바스크립트 변수
+
 1. 변수란? 데이터를 담는 공간
 
 ```javascript
-var fruit;  // 변수 선언: 데이터를 담을 공간을 생성하는 것
-fruit = "apple";  // 변수 초기화: 생성된 변수에 공간을 생성하는 것
+var fruit; // 변수 선언: 데이터를 담을 공간을 생성하는 것
+fruit = "apple"; // 변수 초기화: 생성된 변수에 공간을 생성하는 것
 
-var fruit = "apple";  // 변수 선언 및 초기화
+var fruit = "apple"; // 변수 선언 및 초기화
 ```
 
 2. 데이터 변경: 변수 `fruit` 의 데이터를 `apple` 에서 `banana`로 변경했지만 변수는 이미 앞서 선언되었으므로 `var`로 다시 선언 할 필요가 없다.
@@ -993,6 +1081,7 @@ console.log(fruit);
 ```
 
 4. 변수 생성 시 주의 사항
+
 ```javascript
 // 변수명은 숫자로 시작 할 수 없음
 var 1str;
@@ -1008,7 +1097,7 @@ var tmax;
 
 ```javascript
 <body>
-	<script src="index.js"></script>
+    <script src="index.js"></script>
 </body>
 ```
 
@@ -1017,6 +1106,7 @@ var tmax;
 8. `document.writeln()` : 출력값 사이에 공백을 넣는 코드
 
 ### ❏ 자바스크립트 데이터 타입
+
 1. 데이터 타입: 초콜릿도 다양한 종류가 존재하듯, 변수에 전달되는 데이터 타입에도 여러가지 타입이 존재한다.
 2. 데이터 타입의 종류: `string`, `number`, `boolean`, `function`, `object`, `undefined`, `null`, `array`
 3. 문자열(`string`)
@@ -1037,29 +1127,29 @@ var str6 = 'He\'s a boy';  // 감싸주는 따옴표와 동일한 따옴표를 �
 var num1 = 10;
 var num2 = -10;
 var num3 = 3.14;
-var num4 = Number.MAX_SAFE_INTEGER  // 9007199254740991
-var num5 = Number.MIN_SAFE_INTEGER  // 9007199254740991
+var num4 = Number.MAX_SAFE_INTEGER; // 9007199254740991
+var num5 = Number.MIN_SAFE_INTEGER; // 9007199254740991
 ```
 
 5. 함수(`function`)
 
 ```js
 // 함수 표현식
-var func1 = function(){
-	console.log("func1");
-}  // 함수 생성
+var func1 = function () {
+    console.log("func1");
+}; // 함수 생성
 
-func1();  // 함수 호출
+func1(); // 함수 호출
 
 // 함수 선언식
-function func2(){
-	console.log("func2");
+function func2() {
+    console.log("func2");
 }
 
 // 매개변수: width, height
-var area = function(width, height){
-	return width * height;
-}
+var area = function (width, height) {
+    return width * height;
+};
 
 // 함수 호출 및 인자 전달
 area(10, 20);
@@ -1119,14 +1209,15 @@ var f = false;
 ```
 
 ### ❏ 자바스크립트의 프로퍼티와 메서드
+
 1. 프로퍼티, 메서드: `js`에서 사용자를 위해 사전에 작성된 편의 기능
 2. 문자열 메서드
 
 ```js
 var str1 = "Hello World";
-str1.length;  // 문자열 길이 11
-str1.charAt(0);  // 문자열 추출
-str1.split(' ');  // 공백 기준으로 문자를 나누고 배열에 담는 메서드
+str1.length; // 문자열 길이 11
+str1.charAt(0); // 문자열 추출
+str1.split(" "); // 공백 기준으로 문자를 나누고 배열에 담는 메서드
 ```
 
 3. 배열 메서드
@@ -1134,26 +1225,26 @@ str1.split(' ');  // 공백 기준으로 문자를 나누고 배열에 담는 �
 ```js
 var fruit = ["사과", "배", "포도"];
 fruit.length;
-fruit.push("딸기");  // 배열 뒤에 데이터 삽입
-fruit.unshift("레몬");  // 배열 앞에 데이터 삽입
-fruit.pop();  // 배열 뒤의 데이터 제거
-fruit.shift();  // 배열 앞의 데이터 제거
+fruit.push("딸기"); // 배열 뒤에 데이터 삽입
+fruit.unshift("레몬"); // 배열 앞에 데이터 삽입
+fruit.pop(); // 배열 뒤의 데이터 제거
+fruit.shift(); // 배열 앞의 데이터 제거
 ```
 
 4. `math` 의 수학 연산 메서드
 
 ```js
-Math.abs(-3) // 절대값
-Math.ceil(0.3) // 올림
-Math.floor(10.9)  // 내림
-Math.random()  // 임의의 숫자 출력
+Math.abs(-3); // 절대값
+Math.ceil(0.3); // 올림
+Math.floor(10.9); // 내림
+Math.random(); // 임의의 숫자 출력
 ```
 
 5. 문자를 숫자로 변환하는 메서드
 
 ```jsx
-parseInt("20.6")  // 정수 형태의 20 변환
-parseFloat("20.6")  // 실수 형태의 20.6 변환
+parseInt("20.6"); // 정수 형태의 20 변환
+parseFloat("20.6"); // 실수 형태의 20.6 변환
 ```
 
 6. 자바스크립트 출력시 역 슬래시(`\`)의 출력과 `\n` 같은 이스케이프 시퀀스를 구분하기 위해서는 앞에 `\` 를 붙여준다.
@@ -1163,65 +1254,69 @@ parseFloat("20.6")  // 실수 형태의 20.6 변환
 ```javascript
 const readline = require("readline");
 const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
+    input: process.stdin,
+    output: process.stdout,
 });
 
 // 한번 입력 받고 출력
-rl.on("line", (line) => { 
+rl.on("line", (line) => {
     // 한 줄씩 입력받은 후 실행할 코드
     // 입력된 값은 line에 저장된다.
-		console.log(line)
+    console.log(line);
     rl.close(); // close가 없으면 입력을 무한히 받는다.
 });
-rl.on('close', () => {
+rl.on("close", () => {
     // 입력이 끝난 후 실행할 코드
-})
+});
 
-// 입력이 한 줄 공백으로 주어질 때 
+// 입력이 한 줄 공백으로 주어질 때
 let input = [];
 rl.on("line", function (line) {
-  input = line.split(" ");
-	r1.close();
+    input = line.split(" ");
+    r1.close();
 }).on("close", function () {
-  console.log(input);
+    console.log(input);
 });
 ```
 
 ### ❏ 자바스크립트 match 정규식
+
 1. 다음 문자열 중 `e` 의 개수는 몇 개인가?
 
 ```js
-let lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias iste tempore voluptatem architecto pariatur obcaecati provident sint neque. Ratione debitis officia quo? Vero tempora sequi laborum maxime fugiat fuga sapiente?" 
+let lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias iste tempore voluptatem architecto pariatur obcaecati provident sint neque. Ratione debitis officia quo? Vero tempora sequi laborum maxime fugiat fuga sapiente?"
 
-// 정규식 
+// 정규식
 console.log(lorem.match(/e/g).length);
 👉🏽 23
 
 // 반복문
 let cnt=0;
 for (let x of lorem){
-	if(x === "e") cnt++ 
+	if(x === "e") cnt++
 }
 console.log(cnt);
 👉🏽 23
 ```
 
 ---
+
 ## 📍 9일차 11.5.금.(온라인 강의)
+
 오늘은 어제에 이어서 `JS` 기초 문법 및 활용에 대해서 배웠다. 문법은 어렵지 않았는데 문제를 풀 때 `edge Case`가 잘 떠오르지 않아서 조금 헤맸다.
 
 ### ❏ 자바스크립트 기초 문법 및 활용
 
 ### ❏ 연산자
+
 1. 산술 연산자: 사칙연산, `%(나머지)` , 숫자 뿐만 아니라 문자열도 산술 연산자 사용 가능 (문자열은 서로 붙어서 출력된다. `+` 는 문자열이 붙여서 출력, 나머지는 숫자로 바꿔서 계산)
 
 ```js
-console.log(20 + 10);  // 30
-console.log(20 - 10);  // 10
-console.log(20 * 10);  // 200
-console.log(20 / 10);  // 2
-console.log(20 % 10);  // 0
+console.log(20 + 10); // 30
+console.log(20 - 10); // 10
+console.log(20 * 10); // 200
+console.log(20 / 10); // 2
+console.log(20 % 10); // 0
 ```
 
 2. 증감 연산자: `++`: 1씩 증가, `--`: 1씩 감소 (전치연산자는 먼저 연산을 하고 출력한다. 후치연산자는 먼저 출력을 하고 연산한다.)
@@ -1229,41 +1324,42 @@ console.log(20 % 10);  // 0
 ```js
 let num = 10;
 
-console.log(++num);  // 11
-console.log(--num);  // 10
+console.log(++num); // 11
+console.log(--num); // 10
 
-console.log(num++);  // 10
-console.log(num--);  // 11
+console.log(num++); // 10
+console.log(num--); // 11
 ```
 
 3. 비교 연산자: 데이터의 대소비교
 
 ```js
-console.log(10 == 20);  // false, 값이 같다
-console.log(10 === 20);  // false, 데이터 타입도 같고 값도 같다.
-console.log(10 !== 20);  // true
+console.log(10 == 20); // false, 값이 같다
+console.log(10 === 20); // false, 데이터 타입도 같고 값도 같다.
+console.log(10 !== 20); // true
 
-console.log(10 > 20);  // false
-console.log(10 >= 20);  // false
-console.log(10 < 20);  // true
-console.log(10 <= 20);  // true
+console.log(10 > 20); // false
+console.log(10 >= 20); // false
+console.log(10 < 20); // true
+console.log(10 <= 20); // true
 ```
 
 4. 논리 연산자
 
 ```jsx
-console.log(10 === 10 && 20 === 30);  // false, 앞 뒤 조건 모두 참인 경우만 true를 반환하는 AND 연산자
-console.log(10 === 10 || 20 === 30);  // true, 둘 중 하나만 참이여도 true를 반환하는 OR 연산자
+console.log(10 === 10 && 20 === 30); // false, 앞 뒤 조건 모두 참인 경우만 true를 반환하는 AND 연산자
+console.log(10 === 10 || 20 === 30); // true, 둘 중 하나만 참이여도 true를 반환하는 OR 연산자
 ```
 
 ### ❏ 조건문
+
 1. `if` 문: `if(조건){수행할 명령}`
 
 ```js
 let a = 20;
 let b = 40;
-if( a < b){
-	console.log("a는 b보다 작다.");
+if (a < b) {
+    console.log("a는 b보다 작다.");
 }
 ```
 
@@ -1273,10 +1369,10 @@ if( a < b){
 let a = 20;
 let b = 40;
 
-if( a < b){
-	console.log("a는 b보다 작다.");
+if (a < b) {
+    console.log("a는 b보다 작다.");
 } else {
-	console.log("a는 b보다 작거나 같다.");
+    console.log("a는 b보다 작거나 같다.");
 }
 ```
 
@@ -1287,16 +1383,16 @@ let a = 20;
 let b = 40;
 let c = 60;
 
-if( a > b){
-	console.log("a는 b보다 크다.");
-} else if (b > c){
-	console.log("b는 c보다 크다.");
-} else if (a < c){
-	console.log("a는 c보다 작다.");
-} else if (b < c){
-	console.log("b는 c보다 크다.");
+if (a > b) {
+    console.log("a는 b보다 크다.");
+} else if (b > c) {
+    console.log("b는 c보다 크다.");
+} else if (a < c) {
+    console.log("a는 c보다 작다.");
+} else if (b < c) {
+    console.log("b는 c보다 크다.");
 } else {
-	console.log("모든 조건을 만족하지 않는다.");
+    console.log("모든 조건을 만족하지 않는다.");
 }
 ```
 
@@ -1306,20 +1402,21 @@ if( a > b){
 let a = 20;
 let b = 40;
 
-if( a !== b){
-	if (a > b) console.log("a는 b보다 크다");
-	else console.log("a는 b보다 작다");
+if (a !== b) {
+    if (a > b) console.log("a는 b보다 크다");
+    else console.log("a는 b보다 작다");
 } else {
-	console.log("a와 b는 같다.");
+    console.log("a와 b는 같다.");
 }
 ```
 
 ### ❏ 반복문
+
 1. `for` 문: `for( 초기화 한 변수값; 조건; 증감 표시){ 수행할 명령 }`
 
 ```js
-for (let i=0; i<10; i++){
-	console.log(i);
+for (let i = 0; i < 10; i++) {
+    console.log(i);
 }
 ```
 
@@ -1328,10 +1425,10 @@ for (let i=0; i<10; i++){
 ```js
 let num = 0;
 
-while (num < 10){
-	console.log(num);
-	num++;
-} 
+while (num < 10) {
+    console.log(num);
+    num++;
+}
 ```
 
 3. `do - while` 문: `do {수행할 명령} while (조건)`, `while` 의 조건과 관계없이, `do` 의 명령을 무조건 실행부터 한다. (재시도를 테스트하는 상황에 활용가능)
@@ -1340,12 +1437,13 @@ while (num < 10){
 let i = 12;
 
 do {
-	console.log(i);
-	i++;
+    console.log(i);
+    i++;
 } while (i < 10);
 ```
 
 ### ❏ 자바스크립트 활용
+
 자바스크립트를 이용하여 구현 문제들을 풀었는데, 강의에서 배운 코드 대신 내가 작성한 코드를 올린다. (테스트 문제는 올리지 않겠다.)
 
 1. 주사위 게임
@@ -1362,10 +1460,10 @@ let dice = Math.floor(Math.random() * 6) + 1;
 
 ```js
 // 나의 코드
-function isPrime(n){
-    if(n === 1) return false;
-    for (let i=2; i<Math.floor(n/2)+1; i++){
-        if (n%i===0) return false;
+function isPrime(n) {
+    if (n === 1) return false;
+    for (let i = 2; i < Math.floor(n / 2) + 1; i++) {
+        if (n % i === 0) return false;
     }
     return true;
 }
@@ -1375,9 +1473,9 @@ function isPrime(n){
 
 ```jsx
 // 나의 코드
-function reverse(str){
+function reverse(str) {
     var reverStr = "";
-    for (let i=str.length-1; i>=0; i--){
+    for (let i = str.length - 1; i >= 0; i--) {
         reverStr += str[i];
     }
     return reverStr;
@@ -1389,12 +1487,11 @@ document.write(reverse("Nice to meet you"));
 4. 구구단 출력하기
 
 ```js
-for(let i=2; i<=9; i++) {
-    for(let j=1; j<=9; j++){
-        document.write(`${i}x${j}=${i*j}`);
-        document.write("<br>")
+for (let i = 2; i <= 9; i++) {
+    for (let j = 1; j <= 9; j++) {
+        document.write(`${i}x${j}=${i * j}`);
+        document.write("<br>");
     }
-    
 }
 
 timesTable(2); // 2단만 출력
@@ -1402,36 +1499,45 @@ timesTable(3); // 3단만 출력
 ```
 
 ---
+
 ## 📍 10일차 11.6.토.(자기소개 홈페이지 만들기)
+
 오늘은 강의 대신 `HTML`, `CSS`, `JS`를 이용해서 자기소개 페이지를 만드는 과제가 있었다. 주제는 어렵지 않은데 이것저것 추가하다 보니까 다른기능을 추가하고 싶다는 생각이 많이 들어서 섣불리 끝나지는 않았다. `GitLab`에 파일을 배포하는 형식으로 진행했다. 디자인에 잼병인 내가 어떻게 홈페이지를 꾸며볼까 하다가 <a href='https://dribbble.com/'>dribble</a>이라는 사이트에서 괜찮은 템플릿을 하나 골라 비슷하게 만들었다. `header`에는 `navbar` 대신 `img`를 `blur` 처리해서 넣었고, 가운데에 선명한 사진을 또 넣었다. `body`에는 과제에 포함해야하는 질문들을 포함해서 넣었고 글만 넣기에는 뭔가 심심해서 `toggle` 버튼을 넣었다. 그리고 나의 스택을 쉽게 알려주는 사이트인 <a href='https://shields.io/'>shields.io</a>에서 `img`를 따왔다. 마지막으로 `footer`에는 내가 지금까지 만든 포트폴리오의 링크를 첨부했다. 결과물은 이 <a href='http://ywtechit.kdt-gitlab.elice.io/produce-myself/'>사이트</a>에서 볼 수 있다.
 
 ---
+
 ## 📍 11일차 11.9.화.(실시간 강의)
+
 오늘은 오랜만에 비가 내려서 새벽런닝을 하지 못했고 날씨도 급격하게 추워졌다. 벌써 11월이라니.. 2021년 올해도 벌써 1달 조금 넘게밖에 남지 않았다. 내년 2월까지 최선을 다하자..! 저번시간에 `JS I`을 통해 자기소개 <a href='http://ywtechit.kdt-gitlab.elice.io/produce-myself/'>홈페이지</a>를 만들었고, 이번주는 진도를 더 나가서 `JS II`를 배우게된다. `DOM`, `Event`, `this`, `closure` 등에 대해서 배우는데 이번주차는 어려운 파트기 때문에 복습을 더 열심히 해야겠다는 생각을 했다.
 
 ### ❏ 저번주 복습
+
 1. `indexOf(target)`: `target`이 `index` 몇 번째에 위치해있는지 반환하는 메소드(없으면 `-1` 반환)
 2. 함수에 `return` 값이 없으면 `js`엔진이 `undefined`를 리턴한다. (여담으로 `JS`엔진이 `undefined`를 반환하는 경우는 3가지가 있는데 `변수에 값을 할당하지 않은 경우`, `객체 프로퍼티에 값이 없는 경우`, `함수에 리턴값이 없는 경우`이다.)
 
 ### ❏ 브라우저의 렌더링 과정
+
 1. 브라우저는 `HTML`, `CSS`, `JS`, `img`, `font` 등 렌더링에 필요한 리소스를 요청하고, 서버로부터 응답을 받는다.
 2. 브라우저의 렌더링 엔진은 서버로부터 응답된 `HTML`, `CSS`를 파싱하여 `DOM`과 `CSSOM`을 생성하고 이들을 결합하여 렌더 트리를 생성한다.
 3. 브라우저의 `JS` 엔진은 서버로부터 응답된 `JS`를 파싱하여 `AST(Abstract Syntax Tree)`를 생성하고, 바이트코드로 변환하여 실행한다. 이때 `JS`는 `DOM API`를 통해 `DOM`이나 `CSSOM`을 변경할 수 있다. 변경된 `DOM`과 `CSSOM`은 다시 렌더트리로 결합된다.
-4. 렌더 트리를 기반으로 `HTML` 요소의 레이아웃(위치와 크기)을 계산하고(리플로우), 브라우저 화면에 `HTML` 요소를 페인팅한다.(리페인팅) 
+4. 렌더 트리를 기반으로 `HTML` 요소의 레이아웃(위치와 크기)을 계산하고(리플로우), 브라우저 화면에 `HTML` 요소를 페인팅한다.(리페인팅)
 
 ### ❏ DOM을 파싱하는 과정
-1. 위 `브라우저의 렌더링 과정`에서 `2`번 과정을 조금 더 자세하게 설명하자면 브라우저의 요청에 의해 서버가 응답한 `HTML` 코드만으로는 브라우저가 이해할 수 없다. 따라서 일련의 과정을 거쳐 브라우저가 이해할 수 있도록 바꿔줘야 하는데 `바이트` -> `문자` -> `토큰` -> `노드` -> `DOM`의 과정을 거친다. 
-2. `바이트(byte)`: `HTML` 파일이 브라우저 요청에 의해 응답되는데, 서버는 브라우저가 요청한 `HTML` 파일을 읽어 들여 메모리에 저장한 다음, 메모리에 저장된 바이트(2진수)를 인터넷을 경유하여 응답한다. 
-3. `문자`: 2진수 형태의 `HTML` 문서는 `<meta charset="UTF-8">`코드에 의해 문자열로 변환된다. 
+
+1. 위 `브라우저의 렌더링 과정`에서 `2`번 과정을 조금 더 자세하게 설명하자면 브라우저의 요청에 의해 서버가 응답한 `HTML` 코드만으로는 브라우저가 이해할 수 없다. 따라서 일련의 과정을 거쳐 브라우저가 이해할 수 있도록 바꿔줘야 하는데 `바이트` -> `문자` -> `토큰` -> `노드` -> `DOM`의 과정을 거친다.
+2. `바이트(byte)`: `HTML` 파일이 브라우저 요청에 의해 응답되는데, 서버는 브라우저가 요청한 `HTML` 파일을 읽어 들여 메모리에 저장한 다음, 메모리에 저장된 바이트(2진수)를 인터넷을 경유하여 응답한다.
+3. `문자`: 2진수 형태의 `HTML` 문서는 `<meta charset="UTF-8">`코드에 의해 문자열로 변환된다.
 4. `토큰(token)`: 문자열로 변환된 `HTML` 문서를 읽어 문법적 의미를 갖는 코드의 최소 단위인 `토큰(token)`으로 분해한다.
 5. `노드(node)`: 각 토큰들을 객체로 변환하여 `node`를 생성한다. 토큰의 내용에 따라 `문서 노드`, `요소 노드`, `어트리뷰트 노드`, `텍스트 노드`가 생성된다. 노드는 이후 `DOM`을 구성하는 기본 요소가 된다.
 6. `DOM`: `HTML` 요소는 중첩관계를 갖는데, 이러한 `HTML` 요소간의 부자관계를 반영하여 모든 노드들을 `트리 자료구조`로 구성한다. 이 노드들로 구성된 트리 자료구조를 `DOM(Document Object Model)`이라 부른다. 즉, `DOM`은 `HTML` 문서를 파싱한 결과물이다. 이 `DOM` 형태가 되어야 `js` 언어로 객체 형태에 접근이 가능하다.
 
 ### ❏ DOM(Document Object Model)
+
 1. `HTML` 문서의 계층적 구조와 정보를 표현하며 이를 제어 할 수 있는 `API`, 즉 프로퍼티와 메소드를 제공하는 트리 자료구조다.
 2. `HTML element`: `HTML 요소`는 `HTML` 문서를 구성하는 개별적인 요소를 의미한다. 예를 들어 `<div class="greeting">Hello</div>`와 같은 코드에서 `class`는 어트리뷰트 값(attribute value)이고 어트리뷰트 노드로 변환된다. `Hello`는 콘텐츠(contents)를 뜻하며 텍스트 콘텐츠는 텍스트 노드로 변환된다.
 
 ### ❏ 요소 노드 취득
+
 1. `HTML` 요소 노드를 가져오고 싶을 땐 다음의 4가지 방법을 이용하자.
 2. `Document.prototype.getElementById("id")`: 인수로 전달한 `id` 어트리뷰트 값을 갖는 하나의 요소 노드를 탐색하여 반환한다. 이때 문서노드인 `document`를 통해 호출하자. `class` 어트리뷰트와는 달리 동일한 `id` 태그 여러개가 겹쳐도 제일 처음의 노드 1개만 반환한다.
 3. `Document.prototype.getElementsByTagName("Tag")`: 인수로 전달한 태그 이름을 갖는 모든 요소 노드들을 탐색하여 반환한다. 이때 여러 개의 요소 노드 객체를 갖는 `HTMLCollection` 객체를 반환한다. `HTMLCollection`은 유사배열개체이며, 이터러블하다.
@@ -1442,32 +1548,40 @@ timesTable(3); // 3단만 출력
 8. 앞서 `4`번과 `7`번에서 등장한 `HTMLCollection`와 `NodeList`의 차이점은 다음에 알아보자.
 
 ### ❏ 자식노드 탐색
+
 1. `Node.prototype.childNodes`: 자식 노드를 모두 탐색하여 `NodeList`에 담아 반환한다. `childNodes` 프로퍼티가 반환한 `NodeList`에는 요소노드뿐 아니라 텍스트 노드도 포함되어 있다.
 2. `Element.prototype.children`: 자식 노드 중 요소 노드만 탐색하여 `HTMLCollection`에 담아 반환한다. 텍스트 노드가 포함되지 않는다.
 
 ### ❏ event
+
 1. event는 내일 이론강의 수강 이후 작성하겠다.
 
 reference
+
 1. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
 
 ---
+
 ## 📍 12일차 11.10.수.(온라인 강의)
+
 오늘은 `DOM`과 `event`를 온라인강의로 배우는 날이다. 이전 챕터와는 다르게 `DOM`은 자주 다뤄보지 않은 개념이어어서 관련 문제를 푸는데 오래걸렸다. 익숙해질때까지 반복해야겠다. `DOM`에 관한 기본적인 개념은 어제 다뤘기 때문에 오늘은 `event`를 집중적으로 다뤄볼까 한다.
 
 ### ❏ `DOM`과 이벤트 소개
+
 1. `DOM(Document Object Model)`: 문서 객체모델, 객체 지향 모델로써 구조화된 문서를 표현하는 방식(문자열로 된 코드를 트리구조 형태로 바꿔주는 것)
-2. `DOM` 은 `XML` 이나 `HTML` 문서의 구조화된 표현을 제공하여 프로그래밍 언어가 문서 구조, 스타일, 내용 등을 변경할 수 있도록 한다. 
+2. `DOM` 은 `XML` 이나 `HTML` 문서의 구조화된 표현을 제공하여 프로그래밍 언어가 문서 구조, 스타일, 내용 등을 변경할 수 있도록 한다.
 3. `DOM` 의 종류: `Core DOM`(모든 문서타입을 위한 모델), `HTML DOM`(HTML 문서를 위한 모델), `XML DOM` (문서를 위한 모델)
 4. `Document`: 웹 페이지 자체를 의미하며, 웹 페이지에 존재하는 `HTML` 요소에 접근할 때는 `Document` 객체부터 시작해야 한다.
 5. `Document Method`: HTML 요소 선택, 요소 생성, 이벤트 핸들러 추가, 객체의 선택
 
 ### ❏ 자바스크립트와 DOM
+
 1. dom 요소의 선택: `Document.prototype.getElementById("id")`, `Document.prototype.getElementsByTagName("Tag")`, `Document.prototype.getElementsByClassName("class")`, `Document.prototype.querySelector`, `Document.prototype.querySelectorAll`
 2. `dom` 스타일 변경: `document.getElementById("id").style.color = "red`
 3. `dom` 내용 변경: `document.getElementById("id").innerHTML = "Hi"`
 
 ### ❏ Node 객체
+
 1. 노드: `HTML DOM` 에서 정보를 저장하는 계층적 단위, 노드 트리는 노드들의 집합으로, 노드 간의 관계를 나타낸다. `JS`에서는 `HTML DOM` 을 이용하여 노드 트리에 포함된 모든 노드에 접근할 수 있다.
 2. 노드 트리의 모든 노드는 서로 계층적 관계를 맺고 있다.
 3. 노드의 종류: `문서 노드(document node)`(HTML 문서 전체를 나타내는 노드), `요소 노드(element node)`(모든 HTML 요소는 요소 노드로 속성을 가질 수 있는 유일한 노드), `주석 노드(comment node)`(HTML 문서의 모든 주석은 주석노드), `속성노드(attribute node)` (해당 요소 노드의 자식 노드에는 포함되지 않는다.), `텍스트 노드(text node)`(HTML 문서의 모든 텍스트는 텍스트 노드)
@@ -1483,38 +1597,40 @@ reference
 ```
 
 4. 노드 타입 접근 예제
+
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>자바스크립트 기초</title>
-</head>
-<body>
-    <div name="red"  class="fruit" id="apple">apple</div>
-		<div name="yellow" class="fruit" id="banana">banana</div>
-    <div name="red"  class="vegetable" id="carrot">carrot</div>
-		<div name="white"  class="vegetable" id="onion">onion</div>
-<script src="index.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <title>자바스크립트 기초</title>
+    </head>
+    <body>
+        <div name="red" class="fruit" id="apple">apple</div>
+        <div name="yellow" class="fruit" id="banana">banana</div>
+        <div name="red" class="vegetable" id="carrot">carrot</div>
+        <div name="white" class="vegetable" id="onion">onion</div>
+        <script src="index.js"></script>
+    </body>
 </html>
 ```
 
 ```javascript
-let $apple = document.getElementById("apple").childNodes[0];  // "apple"
-let $appleNodeValue = $apple.nodeValue;  // "apple"
-let $appleNodeType = $apple.nodeType;  // 3(텍스트 노드)
+let $apple = document.getElementById("apple").childNodes[0]; // "apple"
+let $appleNodeValue = $apple.nodeValue; // "apple"
+let $appleNodeType = $apple.nodeType; // 3(텍스트 노드)
 ```
 
 ### ❏ 이벤트(Event)
+
 1. 이벤트(Event): 웹 브라우저가 알려주는 HTML 요소에 대한 사건의 발생, JS는 발생한 이벤트에 반응하여 특정 동작을 수행할 수 있다. (mouse, scroll, keyboard, window 객체 등)
 
 ```javascript
 // 마우스 클릭 이벤트 예시
-<p onclick = "changeText(this)"> 여기를 클릭해주세요</p>
+<p onclick="changeText(this)"> 여기를 클릭해주세요</p>;
 
-function changeText(element){
-	element.innerHTML = "내용이 바뀌었읍니다."
+function changeText(element) {
+    element.innerHTML = "내용이 바뀌었읍니다.";
 }
 ```
 
@@ -1522,28 +1638,29 @@ function changeText(element){
 
 ```js
 // HTML 문서가 로드될 때 실행됨
-window.onload = function(){
-	let text = document.getElementById("text");
-	text.innerHTML = "HTML 문서가 로드되었읍니다."
-}
+window.onload = function () {
+    let text = document.getElementById("text");
+    text.innerHTML = "HTML 문서가 로드되었읍니다.";
+};
 ```
 
 3. 이벤트 타입: 이벤트의 종류를 나타내는 문자열이다. 약 200여가지의 타입이 있는데, <a href='https://developer.mozilla.org/ko/docs/Web/Events'>`MDN`</a>을 참고하자.
 
 ### 💡 이벤트 핸들러 등록
+
 1. 이벤트가 발생했을 때 브라우저에게 이벤트 핸들러의 호출을 위임하는 것
 2. 어트리뷰트 방식: 함수 호출문 등의 문을 할당하면 이벤트 핸들로가 등록된다. `HTML`과 자바스크립트는 관심사가 다르므로 혼재하는 것보다 분리하는 것이 더 좋다. 하지만 `Vue`를 담당하는 `Angular/React/Svelte/Vue.js` 같은 프레임워크 / 라이브러리에서는 이벤트 핸들러 어트리뷰트 방식으로 이벤트를 처리한다. 뷰를 구성하기 위한 구성 요소로 보기 때문에 관심사가 다르다고 생각하지 않는다.
 
 ```html
 <html>
-	<body>
-		<button onclick="sayHi('Lee')">Click me!</button>
-		<script>
-			function sayHi(name){
-				console.log(`Hi! ${name}`);
-			}
-		</script>
-	</body>
+    <body>
+        <button onclick="sayHi('Lee')">Click me!</button>
+        <script>
+            function sayHi(name) {
+                console.log(`Hi! ${name}`);
+            }
+        </script>
+    </body>
 </html>
 ```
 
@@ -1551,16 +1668,16 @@ window.onload = function(){
 
 ```html
 <html>
-	<body>
-		<button id="btn">Click me!</button>
-		<script>
-			const $button = document.getElementById("btn");
+    <body>
+        <button id="btn">Click me!</button>
+        <script>
+            const $button = document.getElementById("btn");
 
-			$button.onclick = function () {
-				console.log("button click!");
-			}
-		</script>
-	</body>
+            $button.onclick = function () {
+                console.log("button click!");
+            };
+        </script>
+    </body>
 </html>
 ```
 
@@ -1568,81 +1685,83 @@ window.onload = function(){
 
 ```html
 <html>
-	<body>
-		<button id="btn">Click me!</button>
-		<script>
-			const $button = document.getElementById("btn");
+    <body>
+        <button id="btn">Click me!</button>
+        <script>
+            const $button = document.getElementById("btn");
 
-			$button.addEventListener("click", function(){
-					console.log("button click!");
-			});
-		</script>
-	</body>
+            $button.addEventListener("click", function () {
+                console.log("button click!");
+            });
+        </script>
+    </body>
 </html>
 ```
 
 ### ❏ DOM 요소의 기본 동작 조작
+
 1. `DOM` 요소는 저마다 기본 동작이 있다. 예를 들어 `a` 요소를 클릭하면 `href` 어트리뷰트에 지정된 링크로 이동하고, `checkbox` 혹은 `radio`를 클릭하면 체크 또는 해제된다. 이벤트 객체의 `preventDefault()` 메서드는 이러한 `DOM` 요소의 기본 동작을 중단시킨다.
 
 ```html
 <html>
-	<body>
-		<a href="#">Click me!</a>
-		<input type="checkbox">
-		<script>
-			const $a = document.getElementsByTagName("a")[0];
-			$a.addEventListener("click", function(e){
-				e.preventDefault();
-			});
+    <body>
+        <a href="#">Click me!</a>
+        <input type="checkbox" />
+        <script>
+            const $a = document.getElementsByTagName("a")[0];
+            $a.addEventListener("click", function (e) {
+                e.preventDefault();
+            });
 
-			const $input = document.querySelector("input[type=checkbox]");
-			$input.addEventListener("click", function(e){
-				e.preventDefault();
-			})
-		</script>
-	</body>
+            const $input = document.querySelector("input[type=checkbox]");
+            $input.addEventListener("click", function (e) {
+                e.preventDefault();
+            });
+        </script>
+    </body>
 </html>
 ```
 
 ### ❏ 이벤트 핸들러 내부의 this
+
 1. 다음 예제의 `handleClick` 함수 내부의 `this`는 전역 객체 `window`를 가리킨다.
 
 ```html
 <html>
-	<body>
-		<button onclick="handleClick(this)">Click Me</button>
-		<script>
-			function handleClick(button){
-				console.log(button);  // button 요소
-				console.log(this);  // window
-			}
-		</script>
-	</body>
+    <body>
+        <button onclick="handleClick(this)">Click Me</button>
+        <script>
+            function handleClick(button) {
+                console.log(button); // button 요소
+                console.log(this); // window
+            }
+        </script>
+    </body>
 </html>
 ```
 
 ![](https://images.velog.io/images/abcd8637/post/78888e26-14e5-479d-81d4-b43dca931fea/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-11-10%2020.01.38.png)
 
 2. 이벤트 핸들러 프로퍼티 방식: `addEventListener` 메서드와 동일하게 모두 이벤트 핸들러 내부의 `this` 는 이벤트를 바인딩한 `DOM` 요소를 가리킨다. 즉, 이벤트 핸들러 내부의 `this` 는 이벤트 객체의 `currentTarget` 프로퍼티와 같다.
-    
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<body>
-  <button id="btn">Click me!</button>
-  <script>
-    const $button = document.querySelector("#btn");
-    
-    $button.onclick = function(e){
-      console.log(this)
-      console.log(e.currentTarget)
-      console.log(this === e.currentTarget)
-    }
-  </script>  
-</body>
+    <body>
+        <button id="btn">Click me!</button>
+        <script>
+            const $button = document.querySelector("#btn");
+
+            $button.onclick = function (e) {
+                console.log(this);
+                console.log(e.currentTarget);
+                console.log(this === e.currentTarget);
+            };
+        </script>
+    </body>
 </html>
 ```
-    
+
 ![](https://images.velog.io/images/abcd8637/post/c9e9e6cd-683d-4e3b-ac4b-47f3584ce8de/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-11-10%2020.03.38.png)
 
 3. `addEventListener`
@@ -1650,101 +1769,108 @@ window.onload = function(){
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<body>
-  <button id="btn">Click me!</button>
-  <script>
-    const $button = document.querySelector("#btn");
-    
-    $button.addEventListener("click", function(e){
-      console.log(this);
-      console.log(e.currentTarget);
-      console.log(this === e.currentTarget)
-    })
-  </script>  
-</body>
+    <body>
+        <button id="btn">Click me!</button>
+        <script>
+            const $button = document.querySelector("#btn");
+
+            $button.addEventListener("click", function (e) {
+                console.log(this);
+                console.log(e.currentTarget);
+                console.log(this === e.currentTarget);
+            });
+        </script>
+    </body>
 </html>
 ```
 
 ![](https://images.velog.io/images/abcd8637/post/7a2dc9ec-9be0-49c5-b791-a1449087836b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-11-10%2020.05.03.png)
 
 4. 화살표 함수로 정의한 핸들러 내부: 이벤트 핸들러 내부의 `this` 는 상위 스코프의 `this` 를 가리킨다. 화살표 함수는 함수 자체의 `this` 바인딩을 갖지 않는다.
-    
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<body>
-  <button id="btn">Click me!</button>
-  <script>
-     const $button = document.querySelector("#btn");
-    
-    $button.onclick = e => { 
-      console.log(this)
-      console.log(e.currentTarget)
-      console.log(this === e.currentTarget)
-    }
+    <body>
+        <button id="btn">Click me!</button>
+        <script>
+            const $button = document.querySelector("#btn");
 
-    const $button = document.querySelector("#btn");
-    
-    $button.addEventListener("click", (e) => {
-      console.log(this);
-      console.log(e.currentTarget);
-      console.log(this === e.currentTarget)
-    })
-  </script>  
-</body>
+            $button.onclick = (e) => {
+                console.log(this);
+                console.log(e.currentTarget);
+                console.log(this === e.currentTarget);
+            };
+
+            const $button = document.querySelector("#btn");
+
+            $button.addEventListener("click", (e) => {
+                console.log(this);
+                console.log(e.currentTarget);
+                console.log(this === e.currentTarget);
+            });
+        </script>
+    </body>
 </html>
 ```
 
 ![](https://images.velog.io/images/abcd8637/post/d8b4152a-0bd8-4aed-bf82-a03f2ffbe16f/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-11-10%2020.07.35.png)
 
 ---
+
 ## 📍 13일차 11.11.목.(실시간 강의)
+
 오늘은 `JS`에서 어려운 문법인 `scope`, `this`, `실행 컨텍스트`, `함수`, `restParameter`에 대해서 배웠다. 이 내용들은 저번에 읽었던 <a href='https://ywtechit.tistory.com/325?category=952803'>코어 자바스크립트</a>에 나왔던 내용이다. 책을 읽은지 약 2개월정도밖에 안됐는데 부분부분 까먹은 내용들이 있었다. 까먹지 않게 틈틈이 읽어야겠다.
 
 ### ❏ 스코프
+
 1. 변수가 작동하는 유효범위
 2. 변수에 접근 할 수 있는 범위
 3. `Global`: 어느곳에서든지 해당 변수에 접근할 수 있다. `Local`: 해당 지역에서만 접근할 수 있다.
 
 ### ❏ 실행 컨텍스트
-1. 실행 컨텍스트를 바르게 이해하면 스코프를 기반으로 식별자와 식별자에 바인딩 된 값(식별자 바인딩)을 관리하는 방식과 호이스팅이 발생하는 이유, 클로저의 동작 방식, 그리고 태스크 큐와 함께 동작하는 이벤트 핸들러와 비동기 처리의 동작 방식을 이해할 수 있다. 
+
+1. 실행 컨텍스트를 바르게 이해하면 스코프를 기반으로 식별자와 식별자에 바인딩 된 값(식별자 바인딩)을 관리하는 방식과 호이스팅이 발생하는 이유, 클로저의 동작 방식, 그리고 태스크 큐와 함께 동작하는 이벤트 핸들러와 비동기 처리의 동작 방식을 이해할 수 있다.
 2. `전역 실행 컨텍스트(GEC: Global Execution Context)`: JS가 실행될 때 가지고 시작함. `JS`에서 유일하게 하나만 존재한다. (`script`코드로 `js` 파일을 독립적으로 실행해도 전역변수는 공유된다.)
 3. `지역 실행 컨텍스트(FEC, Functional Execution Context)`: 다수의 `FEC`가 존재 할 수도 있고, 존재하지 않을 수도 있다. `FEC`는 함수단위로 실행된다. 함수 호출 시 `FEC`가 생성된다.
-4. 실행 컨텍스트에서 제일 중요한 내용은 렉시컬(lexical) 환경에 변수가 선언되어있지 않다면, 상위 `scope`에서 해당 값을 찾고, 상위 `scope`에도 값이 없다면, 전역 객체에 값을 할당한다. 다음의 코드가 이를 반증하는데 다음 `a`값은 무엇일까? 정답은 3이다. 전역 변수에 `a`값이 없는데 왜 `3`이 할당되는지는 `scope chain`을 따라가면 되는데, `outer` 내부에 `a`가 `var, let, const`로 할당된것이 아니기 때문에 현재 `scope`에서는 `target`이 없다. 따라서 상위 단계의 `scope`를 탐색하게 되고, 전역 객체까지 나갔을 때도 값이 없다면 전역객체에 `a`값을 할당하게 된다. 
+4. 실행 컨텍스트에서 제일 중요한 내용은 렉시컬(lexical) 환경에 변수가 선언되어있지 않다면, 상위 `scope`에서 해당 값을 찾고, 상위 `scope`에도 값이 없다면, 전역 객체에 값을 할당한다. 다음의 코드가 이를 반증하는데 다음 `a`값은 무엇일까? 정답은 3이다. 전역 변수에 `a`값이 없는데 왜 `3`이 할당되는지는 `scope chain`을 따라가면 되는데, `outer` 내부에 `a`가 `var, let, const`로 할당된것이 아니기 때문에 현재 `scope`에서는 `target`이 없다. 따라서 상위 단계의 `scope`를 탐색하게 되고, 전역 객체까지 나갔을 때도 값이 없다면 전역객체에 `a`값을 할당하게 된다.
 
 ```javascript
-function outer(){
-	a = 3;
+function outer() {
+    a = 3;
 }
 
 outer();
-console.log(a)  // 3
+console.log(a); // 3
 ```
 
 ### ❏ 실행 컨텍스트의 실행 과정
+
 1. `Creation Phase`: 실행 컨텍스트의 뼈대가 만들어지는 단계이며, 변수는 선언만(undefined) 이루어지며, 실질적인 할당은 이루어 지지않는다. 함수는 `pointer`만 생성된다.
 2. `Execution Phase`: 실행 컨텍스트의 실행 단계이며, 변수의 값이 할당되는 단계이다. 함수의 주소도 할당된다.
 
 ### ❏ 호이스팅
+
 1. 변수 선언 / 함수 선언을 코드의 맨 위로 끌어 올려진 것 같은 현상
 2. `var` 변수는 함수 내부에서만 호이스팅이 일어난다.(전역까지는 접근 불가)
 3. `let`, `const`는 호이스팅에 의해 선언은 이루어지지만 초기화단계는 해당 코드에 도달했을 때 진행되기 때문에, 이전까지 일시적 사각지대(TDZ)에 빠지게 된다. (선언은 되어있지만 아직 초기화가 되지않아 변수에 담길 값을 위한 공간이 메모리에 할당되지 않은 상태) 따라서 변수를 마주한 코드부터 접근이 가능하다.
 
 ```js
 // var
-console.log(a)  // undefined
+console.log(a); // undefined
 var a = 1;
 
 // let
-console.log(b)  // Cannot access 'b' before initialization
+console.log(b); // Cannot access 'b' before initialization
 let b = 1;
 
 // const
-console.log(c)  // Cannot access 'c' before initialization
+console.log(c); // Cannot access 'c' before initialization
 let c = 1;
 ```
 
 ### ❏ 자바스크립트 내장 객체
+
 다음 <a href='https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects'>`MDN`</a>을 참고하자
 
 ```javascript
@@ -1755,43 +1881,50 @@ console.log(Math.floor(Math.random() * 6));
 ```
 
 ### ❏ 함수 선언식, 함수 표현식, 화살표 함수
+
 1. 함수 선언식: 평소에 `js`를 사용할 때 함수 선언하는 방법이다. 함수 이름을 생략할 수 없는 특징이 있다. 함수 선언식은 함수 선언문 이전에 호출할 수 있다.
 
 ```jsx
-function add(a, b){
-	return a+b;
+function add(a, b) {
+    return a + b;
 }
 ```
 
 2. 함수 표현식: 함수 이름을 생략할 수 있는데, 이를 익명 함수라고 한다. 만약, 함수이름을 선언한다면 함수 내부에서만 유효한 식별자이므로 함수 이름으로 함수를 호출할 수 없다. 함수 표현식으로 정의한 함수는 함수 표현식 이전에 호출할 수 없다. 함수의 생성시점이 다르기 때문이다.
 
 ```jsx
-const add = function (a, b){
-	return a+b;
-}
+const add = function (a, b) {
+    return a + b;
+};
 ```
 
 3. 화살표 함수: `function`키워드 대신 화살표를 사용해 좀 더 간략한 방법으로 함수를 선언할 수 있다. 화살표 함수는 항상 익명 함수로 정의한다.
 
 ```jsx
 // 기본 코드
-const add = (a, b) => {return a+b};  
+const add = (a, b) => {
+    return a + b;
+};
 
 // 함수 몸체가 하나의 몸으로 구성된다면 함수 몸체를 감싸는 중괄호를 생략할 수 있다.
-const add = (a, b) => a+b;
+const add = (a, b) => a + b;
 
 // 매개변수가 1개인 경우 소괄호를 생략할 수 있다.
-const pow = n => n*n;
+const pow = (n) => n * n;
 ```
 
 reference
+
 1. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
 
 ---
+
 ## 📍 14일차 11.12.금.(온라인 강의)
+
 오늘은 `closure`, `arrow-function`, `spread operator`, `this` 등 자바스크립트 동작 원리에 대해서 배웠는데, `closure` 부분에서 막힌 부분이 조금 많았다. 아무래도 내가 지금까지 잘 사용하지 않았던 문법이어서 그런가보다. 자주자주 보고 익숙해져야겠다.
 
 ### ❏ 자바스크립트 함수가 실행되는 과정
+
 1. JS의 코드가 없는 경우
 
 ```javascript
@@ -1814,16 +1947,16 @@ reference
 // 2. this, 함수 스코프의 변수들, 그리고 스코프 체인이 형성된다.
 // 3. 스코프 체인을 따라 글로벌 환경에 도달한다.
 
-function myFunc(){
-  let a = 10;
-  let b = 20;
-  function add(first, second){
-    return first + second
-  }
-  return add(a, b);
+function myFunc() {
+    let a = 10;
+    let b = 20;
+    function add(first, second) {
+        return first + second;
+    }
+    return add(a, b);
 }
 
-myFunc()
+myFunc();
 
 // 4. 객체의 메서드의 경우, 메서드 환경의 this는 해당 객체를 가리키게 된다.
 // 5. 하지만 this가 가리키는 것은 환경에 따라 변할 수 있다.
@@ -1840,43 +1973,48 @@ myFunc()
 
 ```javascript
 let a = 10;
-function f1(){
-	let b = 20;
-	function print(v){console.log(v)};
-	function f2(){
-		let c = 30;
-		print(a+b+c);
-	}
-	f2();
+function f1() {
+    let b = 20;
+    function print(v) {
+        console.log(v);
+    }
+    function f2() {
+        let c = 30;
+        print(a + b + c);
+    }
+    f2();
 }
-f1();  // 60
+f1(); // 60
 ```
 
 ```javascript
 const o = {
-name: "Kim",
-  changeMyName: function (name) { this.name = name },
+    name: "Kim",
+    changeMyName: function (name) {
+        this.name = name;
+    },
 };
 
 const o2 = {
-  name: "Song",
+    name: "Song",
 };
 
 function callFuncWithArg(f, arg) {
-  f(arg);
+    f(arg);
 }
 
 o.changeMyName.bind(o2)("Sam");
-console.log("1번 - ", o2.name);  // "Sam"
+console.log("1번 - ", o2.name); // "Sam"
 
-callFuncWithArg(o.changeMyName, "Daniel");  // "Kim"
+callFuncWithArg(o.changeMyName, "Daniel"); // "Kim"
 console.log("2번 - ", o.name);
 
-o.changeMyName("Sam"); 
-console.log("3번 - ", o.name);  // "Sam"
+o.changeMyName("Sam");
+console.log("3번 - ", o.name); // "Sam"
 ```
 
 ### ❏ 함수가 호출되는 상황 4가지(`dynamic binding`)
+
 1. 직접 호출: 함수를 직접 호출한다 (myfunc())
 2. 메서드 호출: 객체의 메서드를 호출한다.(o.method())
 3. 생성자 호출: 생성자 함수를 호출한다. (`const p = new Person()`)
@@ -1885,56 +2023,61 @@ console.log("3번 - ", o.name);  // "Sam"
 
 ```javascript
 // 직접 호출
-function myFunc(){
-  console.log("my func called");
+function myFunc() {
+    console.log("my func called");
 }
 
 // 메소드 호출
 const o = {
-  name: "AYW",
-  printName: function(){
-    console.log(this.name);
-  }
-}
+    name: "AYW",
+    printName: function () {
+        console.log(this.name);
+    },
+};
 
-o.printName()
+o.printName();
 
 // 생성자 호출
-function Person(name){
-  this.name = name;
-  this.consoleName = function(){
-    console.log(this.name);
-  }
+function Person(name) {
+    this.name = name;
+    this.consoleName = function () {
+        console.log(this.name);
+    };
 }
 
-const p = new Person("AYW")
-console.log(p)
-p.consoleName()
+const p = new Person("AYW");
+console.log(p);
+p.consoleName();
 
-setTimeout(p.consoleName.bind(p), 1000);  // AYW
+setTimeout(p.consoleName.bind(p), 1000); // AYW
 ```
 
 ### ❏ this가 가리키는 것
+
 1. 함수는 다양한 상황에서 호출될 수 있다.
 2. 함수의 호출 환경에 따라 `this` 는 동적으로 세팅된다.
 3. `this` 가 환경에 따라 바뀌는 것을 `dynamic binding`이라고 한다.
 4. `bind`, `apply`,`call` 등으로 `this` 를 가리키는 것을 조작할 수 있다.
 5. 일반 함수와 화살표 함수의 `this` 차이
-5-1. 화살표 함수로 `this` 호출 시 `global` 을 가리킨다.
-5-2. 일반 함수로 `this` 호출 시 누가 호출 했는지에 따라 값이 동적으로 바뀐다.
+   5-1. 화살표 함수로 `this` 호출 시 `global` 을 가리킨다.
+   5-2. 일반 함수로 `this` 호출 시 누가 호출 했는지에 따라 값이 동적으로 바뀐다.
 
 ```javascript
 const o = {
-  name: "TED",
-  arrowFunc: () => { console.log(this) },
-  generalFunc: function(){console.log(this)}
-}
+    name: "TED",
+    arrowFunc: () => {
+        console.log(this);
+    },
+    generalFunc: function () {
+        console.log(this);
+    },
+};
 
-o.arrowFunc();  // global
-o.generalFunc();  // { name: 'TED', arrowFunc: [Function: arrowFunc], generalFunc: [Function: generalFunc] }
+o.arrowFunc(); // global
+o.generalFunc(); // { name: 'TED', arrowFunc: [Function: arrowFunc], generalFunc: [Function: generalFunc] }
 
-setTimeout(o.arrowFunc, 1000);  // global
-setTimeout(o.generalFunc, 1000);  // global
+setTimeout(o.arrowFunc, 1000); // global
+setTimeout(o.generalFunc, 1000); // global
 ```
 
 7. `setTimeout` 의 `this` 는 `global` 을 가리킨다.
@@ -1944,13 +2087,15 @@ setTimeout(o.generalFunc, 1000);  // global
 
 ```javascript
 const o = {
-  name: "TED",
-  printName: function(){console.log("내 이름은" + this.name)},
-}
+    name: "TED",
+    printName: function () {
+        console.log("내 이름은" + this.name);
+    },
+};
 
-o.printName();  // 내 이름은 TED
-setTimeout(o.printName, 1000);  // 내 이름은 undefined
-setTimeout(o.printName.bind(o), 1000);  // 내 이름은 TED
+o.printName(); // 내 이름은 TED
+setTimeout(o.printName, 1000); // 내 이름은 undefined
+setTimeout(o.printName.bind(o), 1000); // 내 이름은 TED
 ```
 
 ### ❏ 화살표 함수와 일반 함수의 this
@@ -1960,99 +2105,109 @@ setTimeout(o.printName.bind(o), 1000);  // 내 이름은 TED
 
 ```javascript
 const o = {
-  method(){
-    console.log(this)
-    let f1 = function(){console.log(`f1`, this)};  
-    let f2 = () => console.log(`f2`, this)  
-    f1();  // global
-    f2();  // o
-  }
+    method() {
+        console.log(this);
+        let f1 = function () {
+            console.log(`f1`, this);
+        };
+        let f2 = () => console.log(`f2`, this);
+        f1(); // global
+        f2(); // o
+    },
 };
 
-o.method()  // o
+o.method(); // o
 ```
 
 ```javascript
 window.name = "TED";
 
-const o = {name: "AYW"};
-const arrow  = (prefix) => console.log(prefix + this.name);
+const o = { name: "AYW" };
+const arrow = (prefix) => console.log(prefix + this.name);
 
-arrow("Dr. ");  // Dr. TED
-arrow.bind(o)(("Dr. "));  // Dr. TED
-arrow.call(o, "Dr. ");  // Dr. TED
-arrow.apply(o, ["Dr. "]);  // Dr. TED
+arrow("Dr. "); // Dr. TED
+arrow.bind(o)("Dr. "); // Dr. TED
+arrow.call(o, "Dr. "); // Dr. TED
+arrow.apply(o, ["Dr. "]); // Dr. TED
 ```
 
 ### ❏ closure
+
 1. 일급객체란? 다른 변수처럼 대상을 다룰 수 있는것. JS에서 함수는 일급 객체이다. JS에서 함수는 변수처럼 다룰 수 있다.
 2. 클로저는 함수의 일급 객체 성질을 이용한다.
 3. 함수가 생성될 때, 함수 내부에서 사용되는 변수들이 외부에 존재하는 경우 그 변수들은 함수의 스코프에 저장한다.
 4. 함수와 함수가 사용하는 변수들을 저장한 공간을 클로저라 한다.
 
 ```javascript
-function add(a, b){
-	return a+b;
+function add(a, b) {
+    return a + b;
 }
 
 [1, 2, 3].reduce(add, 0);
 
 (() => {
-	console.log("익명 함수를 생성한다.")
-})()
+    console.log("익명 함수를 생성한다.");
+})();
 
-function outer(a){
-	function inner(b){
-		return a + b
-	}
-	return inner(10)
+function outer(a) {
+    function inner(b) {
+        return a + b;
+    }
+    return inner(10);
 }
 
 // 함수를 변수로 생성한다.
 const Person = (name) => {
-  const printName = () => console.log(name);
-  return { printName }  // 함수를 리턴하며 closure를 생성한다.
-}
+    const printName = () => console.log(name);
+    return { printName }; // 함수를 리턴하며 closure를 생성한다.
+};
 
 const person = Person("ted");
-person.printName()
+person.printName();
 
-function printName(name){
-  console.log(name)
+function printName(name) {
+    console.log(name);
 }
 
 // 함수끼리 비교한다.
 // ===의 경우, 변수가 같은 객체(함수)를 가리키는지 체크한다.
-console.log(printName === person.printName)
+console.log(printName === person.printName);
 ```
 
 ```javascript
 // 클로저 함수 예시
 // card1과 card2와 별도의 메모리 공간에 저장된다.
 
-function createCard(){
-  let title = "";
-  let content = "";
+function createCard() {
+    let title = "";
+    let content = "";
 
-  function changeTitle(text) {title = text};
-  function changeContent(text) {content = text};
-  function print(){console.log(title), console.log(content)};
+    function changeTitle(text) {
+        title = text;
+    }
+    function changeContent(text) {
+        content = text;
+    }
+    function print() {
+        console.log(title), console.log(content);
+    }
 
-  return { changeTitle, changeContent, print };
+    return { changeTitle, changeContent, print };
 }
 
 const card1 = createCard();
-card1.changeTitle("생일 카드")
+card1.changeTitle("생일 카드");
 card1.changeContent("생일 축하해");
-card1.print()
+card1.print();
 
 const card2 = createCard();
-card2.changeTitle("감사 카드")
+card2.changeTitle("감사 카드");
 card2.changeContent("감사합니다.");
-card2.print()
+card2.print();
 ```
 
 ### ❏ Rest, spread operator
+
 1. 함수의 인자, 배열, 객체 중 나머지 값을 묶어 사용하도록 한다.
 2. 함수의 인자 중 나머지를 가리킨다.
 3. 배열의 나머지 인자를 가리킨다.
@@ -2079,10 +2234,13 @@ console.log(rest)  // { age: 23, job: 'zzz' }
 ```
 
 ---
+
 ## 📍 15일차 11.13.토.(온라인 강의)
+
 오늘은 `JS`엔진, `JS` 코드 실행, `렉시컬 환경`, `Hoisting`, `globalThis` 등에 대해서 배웠다.
 
 ### ❏ JS 엔진
+
 1. `JS` 엔진은 `JS` 코드를 읽어 실행하는 프로그램이다.
 2. `JS` 코드는 `JS` 엔진을 통해 파싱되고 실행된다.
 3. `Chrome` 브라우저의 경우 `V8` 엔진을 사용한다.
@@ -2090,38 +2248,42 @@ console.log(rest)  // { age: 23, job: 'zzz' }
 5. `node.js` 는 여러 프로그램으로 구성되며, `JS` 코드를 읽는 프로그램으로 `V8`을 사용한다.
 6. 브라우저 환경과 `node.js` 환경은 같은 `JS` 코드를 작성해도 다르게 동작할 수 있다.
 
-### ❏ JS  코드 실행
+### ❏ JS 코드 실행
+
 1. JS 엔진은 코드 실행 전 실행 컨텍스트를 실행한다.
 2. 실행 컨텍스트는 두 단계를 통해 생성된다.
 3. 생성단계에서 변수를 초기화시킨다.
 4. 실행단계에서 변수 값을 할당한다.
 
 ### ❏ 렉시컬 환경
+
 1. 함수의 렉시컬 환경은, 함수가 사용하는 변수들을 둘러싼 환경을 의미한다.
 2. 특정 변수의 값은 함수의 렉시컬 환경 내에서 찾을 수 있다.
 3. 렉시컬 환경은 실행 컨텍스트 안에 정의된 `Variable Object` 로 이해할 수 있다.
-4. 실행 컨텍스트 안에 해당 변수가 없다면, 엔진은 함수스코프 외부에서 해당 변수를 찾으려고 한다. 이것을 `scope chain` 이라 부른다. 
+4. 실행 컨텍스트 안에 해당 변수가 없다면, 엔진은 함수스코프 외부에서 해당 변수를 찾으려고 한다. 이것을 `scope chain` 이라 부른다.
 
 ### ❏ 스코프 체인(scope chain)
+
 `scope`는 식별자에 대한 유효범위다. 어떤 경계 `A`의 외부에서 선언한 변수는 `A`의 외부뿐 아니라 `A`의 내부에서도 접근이 가능하지만, `A`의 내부에서 선언한 변수는 오직 `A`의 내부에서만 접근할 수 있다. 이러한 `식별자의 유효범의`를 안에서부터 바깥으로 차례로 검색해나가는 것을 스코프체인이라고 부른다. 이때 `outerEnvironmentReference`는 현재 호출된 함수가 선언될 당시의 `L.E`를 참조하게되는데, 중요한 점은 과거 당시 `선언된 시점`이다. 다음 코드의 `foo()`와 `bar()`의 값은 1로 동일한데, 그 이유는 `function bar`가 선언된 시점의 `x`는 전역 변수인 `x`를 바라보게 된다. 즉, `this`처럼 함수를 어디서 호출했는지가 아니라 함수를 어디에서 정의했는지에 따라 상위 스코프를 결정한다. 함수가 호출된 위치는 상위 스코프 결정에 어떠한 영향도 주지 않는다. 즉, 함수의 상위 스코프는 언제나 자신이 정의된 스코프다. 함수 선언문으로 정의된 `bar` 함수는 전역에서 정의된 함수다. 그러므로 전역 코드가 실행되기 전에 먼저 평가되어 함수 객체를 생성한다. 이때 생성된 `bar` 함수 객체는 전역 스코프를 기억한다. 그리고 `bar` 함수가 호출되면 호출된 곳이 어디인지 관계없이 언제나 자신이 기억하고 있는 전역 스코프를 상위 스코프로 사용한다.
 
 ```javascript
 var x = 1;
 
-function foo(){
-  var x = 10;
-  bar();
+function foo() {
+    var x = 10;
+    bar();
 }
 
-function bar(){
-  console.log(x);
+function bar() {
+    console.log(x);
 }
 
-foo();  // 1
-bar();  // 1
+foo(); // 1
+bar(); // 1
 ```
 
 ### ❏ Hoisting
+
 1. `JS`가 코드를 읽으면, 생성 단계에서 실행 컨텍스트를 생성한다.
 2. `var` 변수는 저장 시 `undefined` 로 초기화 된다. `let` 과 `const` 는 초기화되지 않는다. (해당 코드를 읽고 나서부터 사용 가능하다.)
 3. `var`, `let` 은 변수에 재할당이 가능하지만 `const` 는 재할당이 불가능하다.
@@ -2132,14 +2294,14 @@ bar();  // 1
 // 이는 var 변수가 생성 단계에서 undefined로 초기화되는것이 원인이다.
 // 함수는 생성단계에서 함수 전체가 저장되므로 뒤에서 선언되어도 호출이 가능하다.
 
-console.log(callMe())  // undefined
+console.log(callMe()); // undefined
 
 var x = 10;
 
-console.log(callMe())  // 10
+console.log(callMe()); // 10
 
-function callMe(){
-	return x;
+function callMe() {
+    return x;
 }
 ```
 
@@ -2150,14 +2312,14 @@ function callMe(){
 // 따라서, let, const는 hoisting이 발생하지 않는다.
 // 함수는 생성단계에서 값까지 할당하지만 let, const는 생성단계에서 해당 값 이전에 접근하려고 했기 때문에 TDZ에 의해 참조에러가 난다.
 
-console.log(callMe())  // undefined
+console.log(callMe()); // undefined
 
 var x = 10;
 
-console.log(callMe())  // 10
+console.log(callMe()); // 10
 
-function callMe(){
-	return x;
+function callMe() {
+    return x;
 }
 ```
 
@@ -2167,23 +2329,24 @@ function callMe(){
 // letFor에서 i는 for 블럭안에 존재하는 변수이다.
 // 각 for block이 실행되고 i는 소멸한다. 다만, 이 경우 각 화살표 함수의 closure에 저장된다.
 
-function varFor(){
-  for(var i=0; i<3; i++){
-    setTimeout(() => console.log(i))
-  }
+function varFor() {
+    for (var i = 0; i < 3; i++) {
+        setTimeout(() => console.log(i));
+    }
 }
 
-function letFor(){
-  for(let i=0; i<3; i++){
-    setTimeout(() => console.log(i))
-  }
+function letFor() {
+    for (let i = 0; i < 3; i++) {
+        setTimeout(() => console.log(i));
+    }
 }
 
-varFor()  // 3 3 3
-letFor()  // 0 1 2
+varFor(); // 3 3 3
+letFor(); // 0 1 2
 ```
 
 ### ❏ GlobalThis
+
 1. `globalThis`: 전역 객체를 지칭하는 변수이다.
 2. 전역 객체는 환경에 다라 다르다.
 3. 브라우저 환경은 `window`, `node` 환경은 `global` 객체를 지칭한다.
@@ -2197,23 +2360,24 @@ letFor()  // 0 1 2
 
 const targetURL = "https://www.naver.com";
 const windowSize = `height=${window.innerHeight}, width=${window.innerWidth}`;
-window.open(targetURL, "target", windowSize)
+window.open(targetURL, "target", windowSize);
 
 // globalThis
 const windowSize = `height=${globalThis.innerHeight}, width=${globalThis.innerWidth}`;
-globalThis.open(targetURL, "target", windowSize)
+globalThis.open(targetURL, "target", windowSize);
 ```
 
 ### ❏ Document
+
 1. 브라우저에 로드된 웹 페이지
 2. 문서의 `title`, `URL` 등의 정보를 얻는다.
 3. `element` 생성, 검색 등의 기능 제공
 
 ```js
-function printDocumentInfo(){
-	console.log(document.URL);
-	console.log(document.title);
-	console.log(document.querySelectorAll("*"));
+function printDocumentInfo() {
+    console.log(document.URL);
+    console.log(document.title);
+    console.log(document.querySelectorAll("*"));
 }
 ```
 
@@ -2237,6 +2401,7 @@ function createTodoList(todos){
 ```
 
 ### ❏ Number, NaN
+
 1. `number` 원시타입을 감싸는 객체
 2. 유의미한 상수값, 숫자를 변환하는 메서드 등을 제공한다.
 3. `NaN`: Not a Number를 나타내는 객체
@@ -2265,24 +2430,25 @@ formatNumber("12.345");  // 12.35
 
 ```js
 // bigInt
-let bigN = 1000000000000n
+let bigN = 1000000000000n;
 
 // Math.max, Math.min
-function getMaxDiff(nums){
-	return Math.max(...nums) - Math.min(...nums);
+function getMaxDiff(nums) {
+    return Math.max(...nums) - Math.min(...nums);
 }
 
 getMaxDiff([-1, -4, -7, 11]);
 
 // Math.random
-function getRandomNumberInRange(min, max){
-	return Math.floor(Math.random() * (max - min + 1)) + min;
+function getRandomNumberInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-Array.from({ length: 10 }).map(() => getRandomNumberInRange(50, 100))
+Array.from({ length: 10 }).map(() => getRandomNumberInRange(50, 100));
 ```
 
 ### ❏ Date
+
 1. 특정 시점의 날짜를 표시하기 위한 객체
 2. 날짜와 관련된 작업을 하기 위한 여러 메서드를 포함한다.
 
@@ -2291,41 +2457,42 @@ Array.from({ length: 10 }).map(() => getRandomNumberInRange(50, 100))
 // 이 외에 년도, 월, 일, 시, 분, 초, 밀리초 등을 구할 수 있다.
 // getMonth(), getDate(), getHour()...
 
-function isWeekend(today){
-	let day = today.getDay();
-	return day === 0 || day === 6;
+function isWeekend(today) {
+    let day = today.getDay();
+    return day === 0 || day === 6;
 }
 
-console.log(isWeekend(new Date("2021/11/13")))
+console.log(isWeekend(new Date("2021/11/13")));
 
 // setDate()등의 메서드로 시간을 설정한다.
 // 설정 시 월 변경 등의 시간 변환은 Date 객체가 처리한다.
 // toDateString() 메서드는 특정 포맷의 문자열을 반환한다.
 
-function addDays(date, days){
-	date.setDate(date.getDate() + days)
-	return date.toDateString()
+function addDays(date, days) {
+    date.setDate(date.getDate() + days);
+    return date.toDateString();
 }
 
-addDays(new Date("2021/9/22"), 100)  // Fri Dec 31 2021
+addDays(new Date("2021/9/22"), 100); // Fri Dec 31 2021
 
 // getTime() 메서드는 시간을 밀리초 단위로 반환한다.
 // 이때 밀리초는 1970.1.1 시점부터 흐른 시간이다.
 // fromNow는 주어진 시간이 현재로부터 며칠이나 흘렀는지를 계산한다
-function timeDiff(date1, date2){
-	return date2.getTime() - date1.getTime()
+function timeDiff(date1, date2) {
+    return date2.getTime() - date1.getTime();
 }
 
-let dayTime = 60 * 24 * 60 * 1000
-function fromNow(date){
-	let diff = timeDiff(date, newDate())
-	return `${Math.floor(diff / dayTime)} days ago...`
+let dayTime = 60 * 24 * 60 * 1000;
+function fromNow(date) {
+    let diff = timeDiff(date, newDate());
+    return `${Math.floor(diff / dayTime)} days ago...`;
 }
 
-fromNow(new Date("2021/11/13"))
+fromNow(new Date("2021/11/13"));
 ```
 
 ### ❏ String, JSON
+
 1. 문자열 원시 타입의 래퍼객체
 2. 문자열을 조작하기 위한 여러 메서드를 포함한다.
 3. JSON - JSON 객체와 관련된 메서드를 담은 객체
@@ -2333,37 +2500,39 @@ fromNow(new Date("2021/11/13"))
 ```js
 // toUserList는 이름의 배열을 받아 리스트 태그 목록의 문자열을 계산한다.
 function toUserList(users) {
-	return users
-			.fileter((user) =>
-	!user.includes("Admin"))
-			.map((user) => 
-	user.trim().toUpperCase())
-			.map((user) => `<li>${user}</li>`)
-			.join("")	
+    return users
+        .fileter((user) => !user.includes("Admin"))
+        .map((user) => user.trim().toUpperCase())
+        .map((user) => `<li>${user}</li>`)
+        .join("");
 }
 
-console.log(toUserList(["TED", "AYW", "AYJ"]))
+console.log(toUserList(["TED", "AYW", "AYJ"]));
 ```
 
 ```js
 // JSON.stringify는 주어진 객체를 JSON 문자열로 만든다.
-JSON.stringify({name: "TED", age: 27})  // {"name":"TED","age":27}
+JSON.stringify({ name: "TED", age: 27 }); // {"name":"TED","age":27}
 
 // JSON.parse()는 주어진 JSON 문자열을 JS 객체로 만든다.
-JSON.parse('{"name":"TED","age":27}')  // { name: 'TED', age: 27 }
+JSON.parse('{"name":"TED","age":27}'); // { name: 'TED', age: 27 }
 ```
 
-reference 
+reference
+
 1. <a href='https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=206513031'>코어 자바스크립트</a>
 2. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
 
 ---
+
 ## 📍 16일차 11.16.화.(실시간 강의)
+
 어느덧 엘리스를 시작한지 4주차가 되는 날이다. 4개월의 전체 과정 중 1/4인 약 25%를 달려온 셈인데, 생각보다 시간이 빨리가서 놀랐다. 남은 3개월도 꾸준하게 배운 내용을 기록하여 미래의 기본이 탄탄한 프론트엔드가 될 나의 밑바탕이 되어보자. 오늘은 `동기 / 비동기`, `콜백 함수`, `promise`에 대해서 배웠다. 항상 콜백함수를 배울 때는 `JS` 엔진의 동작방식이랑 같이 배우게 되는데, 잘 알아둬야하는 이유는 기술 면접에서 물어보기 때문이다. 실제로 면접을 볼 때마다 `call back`과 `promise` 함수의 차이점에 대한 질문을 받았다. 그때는 뭉뚱그려 대답했는데, 이번 기회를 통해 차이점을 확실하게 알아야겠다.
 
 ### ❏ 동기 / 비동기
+
 1. 동기(synchronous): 동기적이다라는 표현은 일정한 순서에 의해 진행된다는 말인데, 보통 `python`과 같은 언어가 동기적으로 작동한다고 할 수 있다. `JS`도 마찬가지로 동기언어인데, 자바스크립트 엔진은 한 번에 하나의 태스트만 실행할 수 있는 싱글 스레드 방식이기 때문이다. 때문에, 시간이 걸리는 기능은 해당 기능이 끝날 때까지 기다려야하는 블로킹 현상이 발생하는데, 이는 동기처리 방식의 대표적인 예시이다. 장점으로는 실행 순서가 보장되어있다.
-2. 비동기(Asynchronous): 동기처리 방식과는 반대로, 다음 태스크를 블로킹하지 않고 곧바로 실행하는 것을 비동기라고 하는데, 비동기 처리 방식은 현재 실행 중인 태스크가 종료되지 않은 상태라 해도, 다음 태스크를 곧바로 실행하므로 블로킹이 발생하지 않는다는 장점이 있지만, 태스크의 실행순서가 보장받지 않는 단점이 있다. `JS`에서 `setTimeout`, `setInterval`, `HTTP 요청`, `event handler`는 비동기 처리방식으로 동작한다. 
+2. 비동기(Asynchronous): 동기처리 방식과는 반대로, 다음 태스크를 블로킹하지 않고 곧바로 실행하는 것을 비동기라고 하는데, 비동기 처리 방식은 현재 실행 중인 태스크가 종료되지 않은 상태라 해도, 다음 태스크를 곧바로 실행하므로 블로킹이 발생하지 않는다는 장점이 있지만, 태스크의 실행순서가 보장받지 않는 단점이 있다. `JS`에서 `setTimeout`, `setInterval`, `HTTP 요청`, `event handler`는 비동기 처리방식으로 동작한다.
 
 ```javascript
 // 동기 코드: 앞선 task가 종료할 때까지 나머지 task는 대기한다.
@@ -2378,12 +2547,12 @@ while (true) {
     }
 }
 
-function foo(){
-  console.log('foo')
+function foo() {
+    console.log("foo");
 }
 
-function bar(){
-  console.log('bar')
+function bar() {
+    console.log("bar");
 }
 
 foo();
@@ -2391,15 +2560,15 @@ bar();
 
 // 비동기 코드: 동시에 실행되는 특징을 갖고 있다.
 setTimeout(() => {
-        count++;
+    count++;
 }, 3000);
 
-function foo(){
-  console.log('foo')
+function foo() {
+    console.log("foo");
 }
 
-function bar(){
-  console.log('bar')
+function bar() {
+    console.log("bar");
 }
 
 foo();
@@ -2407,50 +2576,54 @@ bar();
 ```
 
 ### ❏ 콜백함수(call back)
+
 1. 콜백함수란 다른 함수의 인자로써 사용되는 함수를 말한다.
-2. 우리가 JS에서 비동기 처리를 수행할 때는 콜백함수를 사용하는데, 콜백함수의 단점은 여러개의 콜백 패턴을 사용할 때 가독성이 떨어지고, 비동기 처리 중 발생한 예외 처리가 곤란하며, 여러개의 비동기 처리를 한 번에 처리할 때 한계가 있다. 
+2. 우리가 JS에서 비동기 처리를 수행할 때는 콜백함수를 사용하는데, 콜백함수의 단점은 여러개의 콜백 패턴을 사용할 때 가독성이 떨어지고, 비동기 처리 중 발생한 예외 처리가 곤란하며, 여러개의 비동기 처리를 한 번에 처리할 때 한계가 있다.
 
 ```javascript
 // 1초가 지나고 undefined가 출력된다.
-function findUser(id){
-	let user;
+function findUser(id) {
+    let user;
 
-	setTimeout(function (){
-		console.log("1초 기다림")
-		user = {
-			id: id
-		}
-})
+    setTimeout(function () {
+        console.log("1초 기다림");
+        user = {
+            id: id,
+        };
+    });
 
-	return user
+    return user;
 }
 
 let user = findUser(1);
 
 // 콜백으로 넘겨주기: 1초가 지나고 user에 값이 할당된다.
 // 단점: 비동기를 또 넘겨주고 싶을 떄는 콜백지옥에 빠진다.
-function findUser(id, callbackFunc){
-	let user;
-	setTimeout(function(){
-		console.log("1초 기다림")
-		user = {
-			id: id
-		};
+function findUser(id, callbackFunc) {
+    let user;
+    setTimeout(function () {
+        console.log("1초 기다림");
+        user = {
+            id: id,
+        };
 
-		callbackFunc();
-	}, 5000);
-	return user;
+        callbackFunc();
+    }, 5000);
+    return user;
 }
 
-findUser(1, function(user){
-	console.log("user:", user)
-})
+findUser(1, function (user) {
+    console.log("user:", user);
+});
 
 // 이벤트 핸들링
-addEventListener("click", function(){console.log("HI")})
+addEventListener("click", function () {
+    console.log("HI");
+});
 ```
 
 ### ❏ promise
+
 1. ES6에서 비동기 처리를 위한 또 다른 패턴으로 프로미스를 도입했는데, 프로미스는 전통적인 콜백 패턴이 가진 단점(비동기처리를 연속적으로 진행할 경우 가독성이 떨어지는 문제, 비동기처리 중 예외 발생시 예외 처리의 어려움, 여러개의 비동기를 한번에 처리하기 어려움)을 보완하며 비동기 처리 시점을 명확하게 표현할 수 있다는 장점이 있다.
 2. 프로미스는 비동기 방식의 코드를 동기 방식으로 동작하게 끔 만들어주는 장점이 있다. `promise` 객체는 3가지의 상태정보를 갖는데, `pending(비동기 처리가 수행되지 않은 상태) -> 프로미스가 생성된 직후 기본 상태`, `fulfilled(비동기 처리가 수행된 상태(성공)) -> resolve 함수 호출`, `rejected(비동기 처리가 수행된 상태(실패)) -> reject 함수 호출` 여기서 `fulfilled` 혹은 `rejected` 상태를 `settled` 상태라고 한다. `settled` 상태는 `fulfilled` 또는 `rejected` 상태와 상관없이 `pending`이 아닌 상태로 비동기 처리가 수행된 상태를 말한다. 프로미스는 `pending` 상태에서 `settled` 상태로 변화할 수 있지만, `settled` 상태에서 `pending` 상태로 변화할 수 없다.
 3. `promise.prototype.then`: `then` 메서드는 두 개의 콜백 함수를 인수로 전달받는다. 즉, 첫 번째 콜백 함수는 비동기 처리가 성공했을 때 호출되는 성공 처리 콜백함수이며, 두 번째 콜백함수는 비동기 처리가 실패했을 때 호출되는 실패 처리 콜백 함수다. `reject`를 사용하지 않더라도 `then`으로 `promise`의 성공과 실패의 결과 값을 모두 받을 수 있는데 이는 `then`메소드에 두번 째 콜백 함수를 전달하는 것보다 `catch` 메소드를 사용하는 것이 가독성이 좋고 명확하기 때문에 별로 추천하지 않는다.
@@ -2459,15 +2632,19 @@ addEventListener("click", function(){console.log("HI")})
 
 지금까지 `동기 / 비동기`, `callBack`, `promise`를 짧게 알아봤는데, 결론적으로 `callBack`과 `promise`의 차이점은 `callback`으로 비동기 처리를 하려면 `callback` 함수 안에서만 처리해야하는데, `promise`는 비동기의 값이 `promise` 객체에 저장되기 때문에 함수 밖에서 처리할 수 있고, `promise`의 장점은 `callback`의 단점인 콜백 지옥, 예외 처리, 한번에 여러번 비동기 처리를 해결 할 수 있다는 장점이 있다.
 
-reference 
+reference
+
 1. <a href='https://blog.toycrane.xyz/promise-%EC%A0%95%EB%A7%90-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-a74b6e3c6722'>toy crane</a>
 2. <a href='https://www.aladin.co.kr/shop/UsedShop/wuseditemall.aspx?ItemId=251552545'>모던 자바스크립트 딥 다이브</a>
 
 ---
+
 ## 📍 17일차 11.17.수.(온라인 강의)
+
 오늘은 <a href='https://ywtechit.tistory.com/373'>어제</a> 배웠던 동기 / `비동기`, `콜백함수`, `promise`에 대해 더 자세하게 배웠다. `promise`는 3~4개월 전인가? 토스 코딩테스트에서 비동기적으로 `api` 호출하는 테스트가 나왔었는데, 그때 문제의 의도를 정확하게 파악하지 못해서 틀렸던 경험이 있었다. 프론트엔드와 비동기는 뗄레야 뗄 수 없는 관계이므로 잘 기억하자.
 
 ### ❏ 자바스크립트 제어 흐름
+
 1. 자바스크립트는 다른 멀티스레드 프로그래밍 언어`(JAVA, C++)`와 다른 방식으로 비동기 동작을 처리한다.
 2. 처음 자바스크립트를 접하는 경우, 동작에 대한 정확한 이해가 없으면 코드의 흐름을 따라가기 어렵다.
 3. 자바스크립트 내부의 비동기 동작을 이해하기 위해서는 이벤트 루프 등의 개념을 알아야만 한다.
@@ -2476,20 +2653,23 @@ reference
 6. 브라우저 환경에서는 유저 이벤트를 처리하고 화면을 그린다.
 
 ### ❏ 동기적 제어 흐름
+
 1. 동기적 제어 흐름은 현재 실행중인 코드가 종료되기 전까지 다음 라인의 코드를 실행하지 않는 것을 의미한다.
 2. 분기문, 반복문, 함수 호출은 동기적으로 실행된다.
 3. 코드의 흐름과 실제 제어 흐름이 동일하다.
 4. 싱글 스레드 환경에서 메인 스레드를 긴 시간 점유하면, 프로그램을 멈추게 한다.
 
 ### ❏ 비동기적 제어 흐름
+
 1. 비동기적 제어 흐름은 현재 실행중인 코드가 종료되기 전에 다음 라인의 코드를 실행하는 것을 의미한다.
 2. 프로미스 ,콜백 함수 등은 비동기적으로 실행된다.
 3. 코드 흐름과 실제 제어 흐름이 다르다.
 4. 비동기 작업을 기다리는 동안 메인 스레드는 다른 작업을 처리한다.
 
 ### ❏ 이벤트 루프
+
 1. JS 엔진은 비동기 처리를 제공하지 않는다.
-2. 대신, 비동기 코드는 정해진 API(`setTimeout`, `XMLHttpRequest`, `fetch`)를 제공하여 활용할 수 있다. 
+2. 대신, 비동기 코드는 정해진 API(`setTimeout`, `XMLHttpRequest`, `fetch`)를 제공하여 활용할 수 있다.
 3. `node.js` 의 경우 파일 처리 API, 암호화 API 등을 제공한다.
 
 ```js
@@ -2499,8 +2679,8 @@ setInterval(() => console.log("인터벌 타이머"), 1000);
 
 // 네트워크 처리
 fetch("https://google.com")
-		.then(() => console.log("네트워크 요청 성공"))
-		.catch(() => console.log("네트워크 요청 실패"))
+    .then(() => console.log("네트워크 요청 성공"))
+    .catch(() => console.log("네트워크 요청 실패"));
 ```
 
 4. 비동기 코드를 처리하는 모듈은 JS 엔진 외부에 있다.
@@ -2512,15 +2692,16 @@ fetch("https://google.com")
 ```js
 // 비동기 처리가 끝나면 콜백 함수를 task queue로 밀어 넣는다.
 request("user-data", (userData) => {
-	console.log("userData 로드")
-	saveUsers(userData)
-})
+    console.log("userData 로드");
+    saveUsers(userData);
+});
 
 console.log("DOM 변경");
 console.log("유저 변경");
 ```
 
 ### ❏ Promise
+
 1. 비동기 API 중 하나이다.
 2. 태스크 큐가 아닌 잡 큐(`Job queue` 혹은 `Microtask queue`)를 사용한다.
 3. 잡 큐는 태스크 큐보다 우선순위가 높다.
@@ -2574,17 +2755,13 @@ Promise.reject(new Error("에러!")).then(() => console.log("실패"))
 11. `promise.all`: 모든 `promise` 가 `settled` 될 때까지 기다린다. 만약, `promise` 의 배열을 받아 모두 성공하면 각 `promise` 의 `resolved` 값을 배열로 반환한다. 하나의 `promise` 라도 실패하면 가장 먼저 실패한 `promise` 의 실패 이유를 반환한다.
 
 ```js
-Promise.all([
-  promise1,
-  promise2,
-  promise3,
-])
-  .then((values) => {
-    console.log("모두 성공", values)
-  })
-  .catch((e) => {
-    console.log("하나라도 실패", values)
-  })
+Promise.all([promise1, promise2, promise3])
+    .then((values) => {
+        console.log("모두 성공", values);
+    })
+    .catch((e) => {
+        console.log("하나라도 실패", values);
+    });
 ```
 
 12. promise를 리턴하는 값이 같으면 `then` 을 생략할 수 있다
@@ -2592,21 +2769,22 @@ Promise.all([
 ```jsx
 // 2개의 API에 모두 then을 사용한 방식
 promise
-	.then((item) => getUserNameById(item.id))
-	.then((id) => id)
-  .catch(e => e.message);
+    .then((item) => getUserNameById(item.id))
+    .then((id) => id)
+    .catch((e) => e.message);
 
 // 2개의 API 중 한개만 then을 사용한 방식
-promise
-	.then((item) => getUserNameById(item.id))
-  .catch(e => e.message);
+promise.then((item) => getUserNameById(item.id)).catch((e) => e.message);
 ```
 
 ---
+
 ## 📍 18일차 11.18.목.(실시간 강의)
-오늘은 실시간 강의로 `Ajax`, `promise`, `async / await`, `SPA` 에 대해 배웠다. 
+
+오늘은 실시간 강의로 `Ajax`, `promise`, `async / await`, `SPA` 에 대해 배웠다.
 
 ### ❏ SPA 만들기
+
 1. SPA로 구현하려면 경로로 접속할 때 같은 파일을 내려줘야 한다.
 2. `html` 파일은 웹 서버에서 보관하고 `html` 해석은 웹 브라우저에서 한다. `html` 파일을 가공해서 고객들에게 보여주는 행위를 `client side tech, 혹은 front end` 라고 한다.
 3. `header`: 서버에서 클라이언트에게 전달하는 정보
@@ -2615,7 +2793,7 @@ promise
 6. `JSON.parse`: JSON으로 넘어온 데이터를 JS 객체 형태로 바꾼다.
 7. `Ajax`: `JS`를 사용하여 브라우저가 서버에게 비동기 방식으로 데이터를 요청하고, 서버가 응답한 데이터를 수신하여 웹페이지를 동적으로 갱신하는 프로그래밍 방식
 8. `XMLHttpRequest` 는 크로스브라우징을 고려해야한다. 지금보니까 `fetch`도 꽤나 안되는 브라우저들이 있었다.(`Edge 12-13`, `IE`, `Opera Mini`)
-9. `fetch`:  `fetch(url).then(type => type.json())` : `promise`를 `json`타입으로 바꿔준다.
+9. `fetch`: `fetch(url).then(type => type.json())` : `promise`를 `json`타입으로 바꿔준다.
 10. `XMLHttpRequest`을 `fetch` 버전으로 바꿔보기
 
 ```javascript
@@ -2650,21 +2828,24 @@ json.then(res => console.log(res))
 ```
 
 ### ❏ JSON
+
 1. 데이터를 주고받을 때 사용하기 위해 고안된 데이터 형태
 2. `get` 방식은 `data` 를 가져오기
-3. 서버로 값을 보낼 때는 `JSON` 형태로 보내고, POST 할 때는 `headers` 설정과  `JSONstringify` 를 사용하기
+3. 서버로 값을 보낼 때는 `JSON` 형태로 보내고, POST 할 때는 `headers` 설정과 `JSONstringify` 를 사용하기
 4. 짝 프로그래밍
 
 ```javascript
-fetch('/topics', {
-    method:'POST', 
-    body:JSON.stringify({title:'js', body:'js is ..'}), 
+fetch("/topics", {
+    method: "POST",
+    body: JSON.stringify({ title: "js", body: "js is .." }),
     headers: {
-        'Content-Type': 'application/json'
-    }})
+        "Content-Type": "application/json",
+    },
+});
 ```
 
 ### ❏ async / await
+
 1. `promise` 코드에 `async - await` 문법을 사용하면 비동기적인 코드를 동기적으로 관리할 수 있다.
 2. promise로 반환한 객체 앞에 `await` 를 붙이면 비동기적인 동작을 끝낼때까지 기다린다.
 3. `await` 는 전역적으로 사용하는 것이 아니라 `async`함수 내에서만 사용할 수 있다.
@@ -2721,7 +2902,7 @@ async function getTea() {
 }
 
 // 3. 위 두 개의 함수를 사용해서 coffee와 tea를 한번에 반환합니다.
-async function getDrinks() 
+async function getDrinks()
 {
     const coffee = await getCoffee();
     const tea = await getTea();
@@ -2732,15 +2913,19 @@ getDrinks().then((res)=>{console.log(res)});
 ```
 
 ### ❏ REST API
+
 1. 이고잉님의 `REST API`에 관한 짧은 <a href='https://www.youtube.com/watch?v=PmY3dWcCxXI'>영상</a> 강의 보기
 2. REST: HTTP를 기반으로 클라이언트에서 서버로 연결할 때 정해진 아키텍쳐에 따라 접근하는 방식
 3. RESTAPI: REST를 기반으로 서비스 API를 구현한 것
 
 ---
+
 ## 📍 19일차 11.19.금.(온라인 강의)
+
 오늘은 `async - await`, `error처리`, `HTTP`, `REST API`에 대해서 배웠다.
 
 ### ❏ async / await 문법
+
 1. `Promise` 를 활용한 비동기 코드를 간결하게 작성하는 문법
 2. `async / await` 문법으로 비동기 코드를 동기 코드처럼 간결하게 작성할 수 있다.
 3. `async` 함수와 `await` 키워드를 이용한다.
@@ -2755,24 +2940,22 @@ getDrinks().then((res)=>{console.log(res)});
 
 ```js
 // async 함수
-async function asyncFunc1(){
-    let data = await fetchData()
-    let user = await fetchUser(data)
-    return user
+async function asyncFunc1() {
+    let data = await fetchData();
+    let user = await fetchUser(data);
+    return user;
 }
 
 // await 키워드 실행 순서
-async function asyncFunc2(){
-	let data1 = await fetchData1()
-	let data2 = await fetchData2(data1)
-	let data3 = await fetchData(data2)
-	return data3;
+async function asyncFunc2() {
+    let data1 = await fetchData1();
+    let data2 = await fetchData2(data1);
+    let data3 = await fetchData(data2);
+    return data3;
 }
 
-function promiseFunc(){
-	return fetchData1()
-			.then(fetchData2)
-			.then(fetchData3)
+function promiseFunc() {
+    return fetchData1().then(fetchData2).then(fetchData3);
 }
 ```
 
@@ -2803,6 +2986,7 @@ async function asyncFunc(){
 16. await 키워드는 프로미스를 리턴하지 않는 함수라도 사용할 수 있습니다. 단 이 경우 리턴한 데이터는 `Promise.resolve()`로 감싸집니다.
 
 ### ❏ HTTP(HyperText Transfer Protocol)
+
 1. `Web` 에서 서버와 클라이언트 간의 통신하는 방법을 정한 것.
 2. 클라이언트는 웹 브라우저 등 서버로 요청을 보내는 대상
 3. 서버는 클라이언트가 요청을 보내기 전까지 대응하지 않음
@@ -2815,23 +2999,25 @@ async function asyncFunc(){
 10. `요청 메서드`: 클라이언트에서 서버로 요청에 의미를 부여할 때 사용하는 명령어(`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)
 
 ### ❏ REST API(Representational State Transfer API)
+
 1. HTTP를 이용하여 클라이언트가 서버의 리소스에 접근하는 방식을 규정한 아키텍쳐고 `REST API` 는 `REST` 를 기반으로 서비스 `API` 를 규정한 것
 2. API는 사용자가 특정 기능을 사용할 수 있도록 제공하는 함수
 3. `REST API` 의 요청 메소드에 응하는 서버API와 클라이언트 간 통신의 구조가 지켜야 할 좋은 방법을 명시한 것이다.
 4. 요청 메서드의 의미, URI설계, 클라이언트의 상태에 대한 동작 등을 정의한다.
-5. REST API 요청 메서드: GET - 리소스 정보를 얻음, POST  - 리소스를 생성, PUT - 리소르르 생성하거나 업데이트 DELETE - 리소스를 제거
+5. REST API 요청 메서드: GET - 리소스 정보를 얻음, POST - 리소스를 생성, PUT - 리소르르 생성하거나 업데이트 DELETE - 리소스를 제거
 
 ### ❏ Fetch API
-1. `HTTP` 를 활용할 수있는 `API` 
+
+1. `HTTP` 를 활용할 수있는 `API`
 2. 기존 `XMLHTTPRequest` 를 대체하는 `HTTP` 요청 `API` (두 함수의 큰 차이점은 `Promise` 리턴 여부)
 3. `ES6` 에 추가된 `Promise` 를 리턴하도록 정의 됨
-4. 네트워크 요청 성공 시, `Promise` 는 `resolve` 
+4. 네트워크 요청 성공 시, `Promise` 는 `resolve`
 5. 네트워크 요청 실패 시, `Promise` 는 `reject`
 6. `response.` 객체는 결과에 대한 다양한 정보를 담는다.
 7. `response.ok` : `200 <= HTTP status code <= 299` : true, 그 외 `false`
 8. `response.status`: `HTTP status code` 를 담는다.
 9. `response.url` : 요청한 `URL` 정보를 담는다
-10.  response.json(): `body` 정보를 `json` 으로 만드는 `Promise` 를 반환한다.
+10. response.json(): `body` 정보를 `json` 으로 만드는 `Promise` 를 반환한다.
 11. `body` 값은 `json()` 값을 `resolve` 해서 나온 값을 `then` 처리를 해줘야 사용가능하다. `json()` 을 한번만 사용하면 `promise` 를 사용하는 꼴이된다.
 12. `POST`: `fetch(url, options)` 로 `fetch` 메서드 옵션을 넣는다. `method` 필드로 여러 요청 메서드를 활용한다. `headers`, `body` 필드를 활용해 서버에 추가 정보를 보낸다.
 
@@ -2872,14 +3058,18 @@ fetch(serverURL, {
 ```
 
 ---
+
 ## 📍 20일차 11.20.토.(온라인 강의)
+
 오늘은 `JS`기본 내장 라이브러리인 `fetch`와 `HTTP` 비동기 외부 라이브러리인 `Axios`와의 차이점, `API` 그리고 `HTTP methods`에 대해서 배웠다. 본론으로 들어가기 전 `Window`는 `DOM document`를 포함하는 창을 나타내는 창을 말하고, `document`는 브라우저에 로드된 웹 페이지를 나타내는 객체이다. 쉽게말해 `window`는 브라우저 전체를, `document`는 브라우저 내부의 화면을 말한다.
 
 ### ❏ Axios
+
 1. `Ajax`는 비동기 `JS`란 의미로 `Asynchronous JavaScript and XML`의 약자입니다. `Ajax`는 브라우저가 가지고 있는 `XMLHttpRequest` 객체를 이용하여 화면 전체를 새로고침하지 않고 변경된 일부 데이터만 로드하는 비동기 처리가 가능합니다. `Axios`는 `Ajax`와 유사하며, `API`를 이용한 통신을 할 때 주로 사용합니다.
 2. `Axios`는 웹 브라우저와 `Node.js`를 위한 `HTTP` 비동기 통신 라이브러리입니다. 쉽게 말해 백엔드와 프론트엔드 간 통신을 쉽게 하기 위해 사용되는 것으로, `Ajax`처럼 사용되는 것입니다. 비동기 통신 라이브러리를 사용하지 않으면 모든 코드가 순차적으로 처리되어야 하므로 코드의 순서를 신경 써서 작성해야 합니다. 코드 작성이 매우 복잡해지며, 따라서 비동기 통신을 쉽게 해주는 `Axios`나 `Ajax`같은 것이 자주 사용되는 것입니다.
 
 ### ❏ Axios vs Fetch
+
 1. 둘 다 `HTTP` 요청을 처리하기 위한 `JS` 라이브러리지만 몇 가지 차이점이 존재합니다.
 2. `Fetch`의 경우 `JS`에 내장되어있기 때문에 별도의 `import`나 설치가 필요하지 않습니다. 하지만, `Axios`의 경우 설치 과정이 필요합니다.
 3. `Fetch`는 `IE`에서 사용이 불가하고 `Edge` 14버전 이상부터 사용이 가능합니다.(<a href='https://caniuse.com/?search=fetch'>caniuse</a>) 반면, `Axios`는 `Fetch`보다 많은 브라우저에서 지원하고 있어 크로스 브라우징이 더 뛰어납니다.
@@ -2887,11 +3077,12 @@ fetch(serverURL, {
 5. 무조건 `Axios`를 사용하기보다는 자신의 개발 상황에 맞는 라이브러리를 선택해야 합니다.
 
 ### ❏ API
+
 1. 운영 체제나 프로그래밍 언어가 제공하는 기능을 제어할 수 있게 만든 <a href='https://ko.wikipedia.org/wiki/%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4_(%EC%BB%B4%ED%93%A8%ED%8C%85'>인터페이스</a>를 말합니다.
 2. 만약 여러분이 밥을 먹기 위해 식당을 갔다고 해봅시다. 손님인 여러분은 요리사에게 음식 주문을 해야 밥을 먹을 수 있습니다. 하지만 직접 요리사에게 말하지는 않죠. 일반적인 경우 점원을 통해 주문을 할 텐데요. 이때 점원 역할이 바로 API라고 생각하시면 됩니다. 즉, 프로그램과 프로그램을 연결해 주는 다리 역할을 하는 것이 API입니다.
 3. 나 자신이 URL을 통해 누군가에게 해당 정보를 **요청하면,** 요청한 정보를 누군가가 나에게 다시 **전달해줍니다.**이러한 규칙을 HTTP라고 부릅니다.
 4. 요청 받은 데이터를 가져오는 것은 웹 서버의 역할이며 HTTP는 바로 그 클라이언트와 서버 간의 규칙입니다. 이때, 클라이언트의 요청을 `HTTP Request`, 서버의 응답을 `HTTP Response`라고 합니다.
-  
+
 ![](https://images.velog.io/images/abcd8637/post/392e05c2-4c10-438a-82db-301022524773/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-11-20%2007.15.58.png)
 
 5. `200 <= HTTP status code <= 299` : `true`, 그 외 `false`
@@ -2899,10 +3090,11 @@ fetch(serverURL, {
 7. `PUT` : 데이터의 전체를 바꿀 때 사용
 8. `PATCH`: 데이터의 일부만 바꿀 때 사용
 9. 예를 들어, `PUT` 으로 넘겨준 객체가 `name` 만 가지고 있다면, `email` 은 `null` 로 바뀌지만, `PATCH` 로 넘겨주면 `name` 이 변경되고, `email` 은 기존의 데이터를 유지합니다. 보통 `openAPI` 에서는 `PUT` 을 지원하지 않습니다. 주로 `API` 를 직접 만들 때 주로 `PUT` 이 사용됩니다.
-10. `openAPI` 에 `DELETE` 요청을 보내도 실제 서버에 있는 데이터가 삭제되지는 않습니다. 
+10. `openAPI` 에 `DELETE` 요청을 보내도 실제 서버에 있는 데이터가 삭제되지는 않습니다.
 11. `HTTP 204`: 요청이 성공했으나, 클라이언트가 현재 페이지에서 벗어나지 않아도 된다는 것을 나타냅니다.
 
 ### ❏ Axios 사용법
+
 ```javascript
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -2926,7 +3118,7 @@ function axiosPost() {
   const token = document.getElementById("token");
   const data =  { "email": "eve.holt@reqres.in", "password": "cityslicka" };
   const URL = "https://reqres.in/api/login";
-  
+
   axios.post(URL, data)
     .then(res => {
         token.innerHTML = res.data.token
@@ -2938,7 +3130,7 @@ export default axiosPost;
 function axiosGet() {
   const name = document.getElementById("name");
   const email = document.getElementById("email");
- 
+
   const URL = "https://reqres.in/api/users/2";
   axios.get(URL)
     .then(res => {
@@ -2956,10 +3148,10 @@ function axiosPut() {
   const name = document.getElementById("name");
   const emailEl = document.getElementById("email");
   const updateDate = document.getElementById("update_date");
-  
+
   const data = { "first_name": "White", "last_name": "Rabbit" , "email": "alice@elice.io" };
   const URL = "https://reqres.in/api/users/2";
-  
+
   axios.put(URL, data)
     .then(res => {
         const {email, first_name, last_name, updatedAt} = res.data;
@@ -2974,7 +3166,7 @@ export default axiosPut;
 function axiosDelete() {
   const statusEl = document.getElementById("status");
   const URL = "https://reqres.in/api/users/2";
-  
+
   axios.delete(URL)
     .then(res => {
         const {status} = res;
@@ -2985,42 +3177,51 @@ export default axiosDelete;
 ```
 
 ---
+
 ## 📍 21일차 11.23.화.(실시간 강의) (클린코드와 타입스크립트)
+
 이번주는 `클린코드`와 `typescript`의 `타입`, `클래스`, `인터페이스`, `Generic`, `Decorator`에 대해서 배웠다. 엘리스 엔지니어 SW트랙을 신청할 당시 제일 기대가 되었던 커리큘럼이 이번주차에 배우는 내용이었는데, 벌써 그 내용을 듣게 된다니.. 이전보다 더욱 열심히 들어야겠다. 여느때와 마찬가지로 이론수업과 실습수업으로 나뉘었는데, 실습수업은 김병철 코치님이 가르쳐주셨다. 처음에는 누군지 잘 몰랐는데 알고리즘계에서 꽤 유명한 분이셨다. 개발자 오픈채팅방에 코딩테스트 대비 순서에 대해 물어보면 항상 <a href='https://github.com/tony9402/baekjoon'>tony9402 - 코딩테스트 대비 문제집</a>부터 풀라는 얘기가 많았는데 그 레포지터리 컨트리뷰터의 2번째(<a href='https://github.com/VSFe'>VSfe</a>)분이셨다. 😲😲 저번 이고잉님이 가르쳐주실때도 신기했는데 이번에도 엄청 신기했다.. 공부 의지가 한껏 솟아오르는 계기가 되었다.
 
 ### ❏ 클린코드란
+
 1. 비즈니스 전문가 → 분석가(제품관리자 / 서비스 기획자 / 프로그래머) → 프로그래머 → 컴퓨터
 2. 좌측 방향은 목적 / 추상적, 우측 방향은 수단 / 구체적
 3. 시간이 갈수록 코드를 쓰는것보다 읽는 비중이 늘어난다.(코드 가독성의 중요성이 늘어남)
 4. 코드 재사용(반복되는 문제의 풀이는 재사용 가능, SW 개발 비용 절감)
 
 ### 💡 테스트 기법
+
 1. 수동 테스트
- - 품질 담당자가 UI를 사용해 기능 검증
- - 사람의 손으로 일일이 테스트한다.(인건비 증가)
- - 소프트웨어 회귀(시간에 따라 기능이 많아지면, 추가한 기능과 기존의 기능과의 충돌로 인해 기존의 있던 코드조차 실행이 안되는 현상이 발생한다.)
+
+-   품질 담당자가 UI를 사용해 기능 검증
+-   사람의 손으로 일일이 테스트한다.(인건비 증가)
+-   소프트웨어 회귀(시간에 따라 기능이 많아지면, 추가한 기능과 기존의 기능과의 충돌로 인해 기존의 있던 코드조차 실행이 안되는 현상이 발생한다.)
 
 2. 인수 테스트
- - 배치된 시스템을 대상으로 검증
- - 전체 시스템 이상 여부 신뢰도가 높음
- - 높은 비용(작성 / 관리 / 실행 비용)
- - 피드백 품질이 낮음(현상을 드러나지만 원인은 숨겨짐)
- - 테스터가 품질 외부를 살펴본다.
+
+-   배치된 시스템을 대상으로 검증
+-   전체 시스템 이상 여부 신뢰도가 높음
+-   높은 비용(작성 / 관리 / 실행 비용)
+-   피드백 품질이 낮음(현상을 드러나지만 원인은 숨겨짐)
+-   테스터가 품질 외부를 살펴본다.
 
 3. 자동 테스트
- - 기능을 검증하는 코드를 작성
- - 테스트 코드 작성 비용이 소비되지만 실행 비용이 낮고 결과의 신뢰도가 높음
- - 테스트 코드 작성과 관리가 프로그래머 역량에 크게 영향을 받는다.
+
+-   기능을 검증하는 코드를 작성
+-   테스트 코드 작성 비용이 소비되지만 실행 비용이 낮고 결과의 신뢰도가 높음
+-   테스트 코드 작성과 관리가 프로그래머 역량에 크게 영향을 받는다.
 
 4. 단위 테스트
- - 시스템 일부(하위 시스템)를 대상으로 검증
- - 낮은 비용
- - 높은 피드백 품질
- - 전체 시스템 이상 여부 신뢰도가 낮음
- - 단위끼리 오류가 나는 경우가 있다.
- - 테스터가 프로그램의 기능을 살펴본다.
+
+-   시스템 일부(하위 시스템)를 대상으로 검증
+-   낮은 비용
+-   높은 피드백 품질
+-   전체 시스템 이상 여부 신뢰도가 낮음
+-   단위끼리 오류가 나는 경우가 있다.
+-   테스터가 프로그램의 기능을 살펴본다.
 
 ### ❏ 타입스크립트의 역사
+
 1. ES2015부터 모듈 스펙을 제공하기 시작: 프로젝트의 규모 증가, 개발환경이 복잡해짐, `npm` 의 등장, 번들러 등장(Webpack 등등) 주석제거 / 파일압축 / 어글리파이, 트랜스파일러 등장 (Babel, Typescript 등등)
 2. `TS` 는 `JS` 의 모든 기능을 기본으로 제공한다. (슈퍼셋), 명시적인 데이터에 대한 유형 설명
 3. 자바스크립트보다 타입에 대한 추가적인 정보를 얻을 수 있다.
@@ -3045,6 +3246,7 @@ TS
 ```
 
 ### ❏ typescript의 type알아보기
+
 1. 인터페이스의 경우, 컴파일하는 과정에서 인터페이스끼리 전부 합쳐지고 해당 인터페이스에 대응하는 객체를 생성해주는 과정을 거칩니다. (JS의 호이스팅을 떠올릴 수 있지만, 실제 동작과정은 약간 다릅니다. 일반적으로 인터페이스, 클래스 등의 정의는 최상단에 고정하고 하단에 추가하거나 수정하는 것은 지양하는 편 입니다.)
 
 ```typescript
@@ -3066,7 +3268,7 @@ console.log(Color)
 enum Color {
 	Red = 2, Green, Blue
   }
-  
+
 console.log(Color[2])
 👉🏽 Red
 
@@ -3095,7 +3297,7 @@ function error(message: string): never{
 
 function infiniteLoop(): never {
   while(true){
-    /* 기능 */  
+    /* 기능 */
   }
 }
 
@@ -3133,7 +3335,7 @@ const myInfo: IUser = {
     age: 27
 }
 
-// interface는 속성 값끼리 합칠 수 있다. 
+// interface는 속성 값끼리 합칠 수 있다.
 interface IUser{
   id: number;
   name: Name;
@@ -3170,6 +3372,7 @@ console.log(uk)
 ```
 
 ### ❏ type utility 알아보기
+
 1. `typescript`는 일반적인 타입 변환을 쉽게 하기 위해서 몇 가지 유틸리티 타입을 제공합니다. 이러한 유틸리티는 전역으로 사용 가능합니다.
 
 ```typescript
@@ -3342,75 +3545,79 @@ let admin: Required<User> = {
 ```
 
 ### ❏ 타입스크립트의 함수
+
 1. 일급객체(first-class object): 함수를 변수로 선언하고, 함수에 인자를 함수로 넘길 수 있고, 함수의 리턴값을 함수로 설정할 수 있는 것을 일급객체라 부릅니다. `JS` 와 `TS` 는 모두 일급객체입니다.
 2. 일급객체의 특징 때문에 고차함수, 콜백함수를 만들 수 있다.
 
 ```ts
 // 함수 자체를 값으로 저장한다.
-let sum = function(a, b){
-  return a + b;
-}
+let sum = function (a, b) {
+    return a + b;
+};
 
-function ul(child){
-  return `<ul>${child}</ul>`
+function ul(child) {
+    return `<ul>${child}</ul>`;
 }
 
 // 함수를 리턴할 수 있다.
-function makeLi(container, contents){
-  const liList = [];
+function makeLi(container, contents) {
+    const liList = [];
 
-  for (const content of contents){
-    liList.push(`<li>${content}</li>`)
-  }
+    for (const content of contents) {
+        liList.push(`<li>${content}</li>`);
+    }
 
-  return container(liList.join(""))
+    return container(liList.join(""));
 }
 
 // 함수를 함수의 인자로 넣어줄 수 있다.
-const htmlUl = makeLi(ul, ['월', '화', '수', '목', '금', '토', '일'])
+const htmlUl = makeLi(ul, ["월", "화", "수", "목", "금", "토", "일"]);
 ```
 
 3. 함수의 선언문, 선언식
+
 ```ts
 // 함수 선언문
-function sum(a, b){
-	return a+b;
+function sum(a, b) {
+    return a + b;
 }
 
 // 함수 표현식
-const myFunc = function(a, b){
-		return a+b;
-}
+const myFunc = function (a, b) {
+    return a + b;
+};
 ```
 
 4. 함수의 가변인자
+
 ```ts
-function sum(a, b){
-	return a+b;
+function sum(a, b) {
+    return a + b;
 }
 
 const abcSum = sum(10, 20, 30);
 
 // 가변 인자식
-function sum(){
-  let s = 0;
-	for (let i=0; i< arguments.length; i++){
-		s+=arguments[i];
-	}
-	return s;
+function sum() {
+    let s = 0;
+    for (let i = 0; i < arguments.length; i++) {
+        s += arguments[i];
+    }
+    return s;
 }
 
 // arguments
-function sum(...args){
-  let s = 0;
-	for (let i=0; i< args.length; i++){
-		s+=args[i];
-	}
-	return s;
+function sum(...args) {
+    let s = 0;
+    for (let i = 0; i < args.length; i++) {
+        s += args[i];
+    }
+    return s;
 }
 ```
 
 4. 함수 호출
+
 ```ts
 // call과 apply는 인자를 하나씩 넘겨주냐 배열로 넘겨주냐의 차이
 sum(10, 20, 30, 40);
@@ -3422,22 +3629,21 @@ sum.apply(null, arr);
 ```
 
 5. 함수의 종류
+
 ```ts
 // 즉시 실행 함수
-(function(){
-  console.log(123);
-})
+(function () {
+    console.log(123);
+});
 
 // 일반함수와 화살표함수의 차이:  컨텍스트의 차이점
-const sumV2 = (a, b, ...args) => {
-
-}
+const sumV2 = (a, b, ...args) => {};
 
 const ten = () => 100;
-const hundred = x => 100 + x;
+const hundred = (x) => 100 + x;
 
 // 생성기 함수(generate function): 함수를 한번에 실행시키는 것이 아니라 텀을 두고 실행할 때
-function* gen(){
+function* gen() {
     yield 10;
     yield 20;
     return 30;
@@ -3445,9 +3651,9 @@ function* gen(){
 
 const g = gen();
 
-console.log(g.next());  // 10
-console.log(g.next());  // 20
-console.log(g.next());  // 30
+console.log(g.next()); // 10
+console.log(g.next()); // 20
+console.log(g.next()); // 30
 ```
 
 6. 함수 작성시 반환 타입 명시 권장(필수는 아님, `TS` 컴파일러는 방정식의 한쪽에만 타입이 있더라도 타입을 추론할 수 있다.)
@@ -3484,21 +3690,22 @@ let result1 = buildName("Bob");
 let result2 = buildName("Bob", undefined);
 let result3 = buildName("Bob", 'Ted');
 console.log(result1)
-👉🏽 "Bob Smith" 
+👉🏽 "Bob Smith"
 
 
-[LOG]: "Bob Smith" 
+[LOG]: "Bob Smith"
 [LOG]: "Bob Ted"
 
 console.log(result2)
 console.log(result3)
 
-undefined가 넘어가면 lastName이 없다고 판단되지만, null이 들어가면 lastName이 있다고 판단을 합니다. 
+undefined가 넘어가면 lastName이 없다고 판단되지만, null이 들어가면 lastName이 있다고 판단을 합니다.
 (undefined는 값 자체가 없다고 판단하나, null은 값은 있는데 의미없는 특별한 값이 들어있다고 보시면 좋을 것 같아요.)
 + undefined는 미리 선언된 global variable이나, null은 키워드입니다.
 ```
 
 ### ❏ 객체 지향 프로그래밍(OOP)
+
 1. `OOP` 는 컴퓨터 프로그램을 객체의 모임으로 파악하려는 프로그래밍 패러다임
 2. 프로그램을 유연하고, 변경이 용이하고, 개발과 보수를 간편하게 만든다, 직관적인 코드 분석이 가능해진다.
 3. 클래스 요소: 필드(field), 생성자(constructor, 객체가 처음 생성될 때 호출, 멤버 변수 초기화), 메소드(method)
@@ -3507,19 +3714,20 @@ undefined가 넘어가면 lastName이 없다고 판단되지만, null이 들어�
 ```ts
 class Person {
     name: string;
-    constructor(name: string){
-        this.name = name
+    constructor(name: string) {
+        this.name = name;
     }
-    say(){
-        return `Hello, ${this.name}!`
+    say() {
+        return `Hello, ${this.name}!`;
     }
 }
 
 let person = new Person("AYW");
-console.log(person.say())
+console.log(person.say());
 ```
 
 ### ❏ 클래스 만들기
+
 1. 생성자의 매개변수에 `public` 과 같은 접근 제한자를 붙이면 해당 매개변수의 이름을 가진 속성이 클래스에 선언된 것처럼 동작합니다.
 
 ```ts
@@ -3548,6 +3756,7 @@ console.log(myInfo)
 ```
 
 ### ❏ 클래스 상속받기
+
 1. 부모 클래스를 상속받는 키워드: `extends`
 
 ```ts
@@ -3570,6 +3779,7 @@ myInfo.sayHello();
 ```
 
 ### ❏ 추상 클래스
+
 1. 추상 클래스는 자신의 속성이나 메서드 앞에 `abstract`를 붙여 나를 상속하는 다른 클래스에서 이 속성이나 메서드를 구현하게 합니다.
 
 ```ts
@@ -3607,18 +3817,23 @@ myInfo.sayHello();
 ```
 
 ---
+
 ## 📍 22일차 11.24.수.(온라인 강의)
+
 오늘은 어제 배웠던 내용을 강의를 통해 다시 한번 배우는 시간을 가졌다. 클린코드, 타입스크립트 정의, `type`, `utility` 등등에 대해서 다시 배워보자.
 
 ### ❏ 클린코드란
+
 1. 클린 코드란 말 그대로 깨끗하게 작성된 코드를 의미합니다. 깨끗하게 작성된 코드란 직접적이고 단순하여 읽기가 쉽고, 코드 작성자가 아닌 누가 보더라도 의도가 명확히 드러나는 코드입니다. 이러한 코드는 가독성이 좋고, 의존성을 최대한 줄여 유지보수가 쉬운 특징이 있습니다.
 2. 프로그래머는 작성 기한을 맞추기 위해서 나쁜 코드를 양산할 수밖에 없다고 생각합니다. 하지만 나쁜 코드를 양산하면 결국 기한을 맞추지 못합니다. 오히려 엉망진창인 코드 때문에 개발 속도가 느려지고 결국 기한을 놓칩니다. 기한을 맞추는 유일한 방법은 언제나 코드를 최대한 깨끗하게 유지하는 것입니다.
 
 ### ❏ 클린코드와 타입스크립트
+
 1. 자바스크립트는 타입이 없기 때문에 실행 후에 타입 에러를 확인할 수 있습니다. 반면 타입스크립트는 같은 코드에 대해 아래와 같이 실행을 하기 전에, 미리 에러를 확인할 수 있습니다. 자바스크립트의 런타임 단계에서 발생하는 타입 에러를 타입스크립트에서는 컴파일 단계에서 미리 확인하고 고칠 수 있다. 만약, 런타임 단계에서 발생하는 에러로 인해 프로그램이 멈추면, 운영되는 서비스에 큰 차질이 생길 수 있다. 타입스크립트를 사용하면 에러를 미리 방지할 수 있다.
 2. 타입을 정의함으로써 개발자의 실수를 줄일 수 있고, 명시된 타입을 보고 해당 변수의 자료형이 무엇인지 쉽게 이해할 수 있다. 결과적으로 어던 용도로 코드가 작성되었고, 무엇을 의미하는지 파악하기 훨씬 용이하기 때문에 유지보수에 유리하고 자연스럽게 개발 속도도 빨라지게 된다.
 
 ### ❏ 타입스크립트란?
+
 1. `microsoft` 에서 개발한 오픈 소스 언어
 2. 자바스크립트의 상위 집합, JS의 한계를 해결
 3. 타입스크립트를 실행하려면 자바스크립트로 변환하는 컴파일과정이 필요하다.
@@ -3631,27 +3846,28 @@ myInfo.sayHello();
 // JS
 let a;
 a = 1;
-a = 'b';
+a = "b";
 
 const sum = (a, b) => {
-	return a+b;
-}
+    return a + b;
+};
 
-sum(1, "2")  // 12
+sum(1, "2"); // 12
 
 // TS
-let a :number;
+let a: number;
 a = 1;
-b = 'b';  // Error(컴파일 시점)
+b = "b"; // Error(컴파일 시점)
 
-const sum = (a: number, b:number) => {
-	return a + b
-}
- 
-sum(1, 2)  // 12
+const sum = (a: number, b: number) => {
+    return a + b;
+};
+
+sum(1, 2); // 12
 ```
 
 ### ❏ 타입스크립트의 기본 Type
+
 1. JS코드에 변수 함수 등의 type 정의 가능
 2. 타입 표기(type annotation)을 사용한다.
 3. 기본자료형(primitive type): `string`, `boolean`, `number`, `null`, `undefined`, `symbol(ES6)`
@@ -3669,33 +3885,35 @@ let hex: number = 0xf00d;
 let binary: number = 0b1010;
 let octal: number = 0o744;
 
-console.log(decimal, hex, binary, octal)  // 6 61453 10 484
+console.log(decimal, hex, binary, octal); // 6 61453 10 484
 
 // null
-let n:null = null;
+let n: null = null;
 
 // undefined
 let u: undefined = undefined;
 ```
 
 4. 참조자료형(reference type): object, array, function
+
 ```typescript
 // 객체, 배열, 함수 등과 같은 Object 형식의 타입, 메모리에 값을 주소로 저장하고, 출력시 메모리 주소와 일치하는 값을 출력
 // object
-function create(o: object): void{};
+function create(o: object): void {}
 
-create({prop: 0})  // object
-create([1, 2, 3])  // array
-create("string")  // error
-create(false)  // error
-create(42)  // error
+create({ prop: 0 }); // object
+create([1, 2, 3]); // array
+create("string"); // error
+create(false); // error
+create(42); // error
 
 // array
 let arr1: number[] = [1, 2, 3];
-let arr2: Array<number> = [1, 2, 33]
+let arr2: Array<number> = [1, 2, 33];
 ```
 
-5. 추가 제공 자료형: tuple, enum, any, void, never 
+5. 추가 제공 자료형: tuple, enum, any, void, never
+
 ```typescript
 // tuple: 길이와 각 요소의 타입이 정해진 배열을 저장하는 타입
 let arr: [string, number] = ["Hi", 122];
@@ -3734,7 +3952,7 @@ function neverEnd():never {
 }
 
 function neverEnd():never {  // Error: A function returning 'never' cannot have a reachable end point.
-  while(true){break} 
+  while(true){break}
 }
 
 function error(message: string):never{
@@ -3743,9 +3961,10 @@ function error(message: string):never{
 ```
 
 ### ❏ 타입스크립트의 Utility
+
 1. Typescript는 공통 타입 변환을 용이하게 하기 위해 유틸리티 타입을 제공한다.
 2. 유틸리티 타입은 전역으로 사용 가능하다
-3. `Partial<T>`, `Readonly<T>`, `Record<T>`, `Pick<T, K>`, `Omit<T, K>`,  `Exclude<T, U>`. `Extract<T, U>`, `NonNullable<T>`, `Parameters<T>` , `ConstructorParameters<T>`, `ReturnType<T>`, `Required<T>`
+3. `Partial<T>`, `Readonly<T>`, `Record<T>`, `Pick<T, K>`, `Omit<T, K>`, `Exclude<T, U>`. `Extract<T, U>`, `NonNullable<T>`, `Parameters<T>` , `ConstructorParameters<T>`, `ReturnType<T>`, `Required<T>`
 4. 제네릭이란 어떤 함수나 클래스가 사용할 타입을 생성 단계가 아닌 사용 단계에서 정의하는 프로그래밍 기법입니다.
 
 ```typescript
@@ -3833,14 +4052,16 @@ const todo: TodoPreview = {
 ```
 
 ### ❏ 함수 사용하기
+
 1. 함수를 정의 할 때 사용되는 변수는 매개변수이고 호출 할 때 사용되는 값은 인수라고 한다.
 
 ```typescript
-function add(x, y){  // 매개변수
-	return x+y;
+function add(x, y) {
+    // 매개변수
+    return x + y;
 }
 
-add(2, 5)  // 인수
+add(2, 5); // 인수
 ```
 
 2. 일급객체(first-class object): 다른 객체들에 일반적으로 적용 가능한 연산을 모두 지원하는 객체
@@ -3855,151 +4076,156 @@ add(2, 5)  // 인수
 
 ```typescript
 // 함수 선언식
-function world(name){}
+function world(name) {}
 
 // 함수 표현식
-const hi = function(name){}
+const hi = function (name) {};
 
 // 함수 생성자는 되도록 사용을 권하지 않는다
-let world5 = new Function()
+let world5 = new Function();
 ```
 
 4. `TS` 에서 함수 작성시 반환 타입을 추론하도록 하는걸 권장한다.
 5. `TS` 컴파일러는 방정식의 한쪽에만 타입이 있어도 타입추론이 가능한데, 이를 `contextual typing` 이라고 부른다. 이를 통해 프로그램에서 타입을 유지하기 위한 노력을 줄일 수 있다.
 
 ### ❏ 함수의 매개변수
+
 1. 기본 매개변수: 함수에 주어진 인자의 수는 함수가 기대하는 매개변수의 수와 일치해야 한다.
 
 ```typescript
-function buildName(firstName: string, lastName: string){
-  return firstName + lastName
+function buildName(firstName: string, lastName: string) {
+    return firstName + lastName;
 }
 
-let result1 = buildName("a", "b")
-let result2 = buildName("a", "b", "c") // Error: Expected 2 arguments, but got 3.
+let result1 = buildName("a", "b");
+let result2 = buildName("a", "b", "c"); // Error: Expected 2 arguments, but got 3.
 ```
 
 2. 선택적 매개변수: `JS` 에서는 인수가 없으면 `undefined` 로 선언이된다. `TS` 에서는 변수명 뒤에 `?` 를 사용하면 변수를 선택적으로 사용할 수 있다.
 3. 기본-초기화 매개변수: `TS` 에서 값을 제공하지 않거나, `undefined` 로 했을 때 매개변수의 값 할당 가능
 
 ```typescript
-function buildName(firstName: string, lastName: string = "TED"){
-  return firstName + lastName
+function buildName(firstName: string, lastName: string = "TED") {
+    return firstName + lastName;
 }
 
-let result1 = buildName("a");  // aTED
-let result1 = buildName("a", undefined);  // aTED
-let result1 = buildName("a", "morning");  // amorning
+let result1 = buildName("a"); // aTED
+let result1 = buildName("a", undefined); // aTED
+let result1 = buildName("a", "morning"); // amorning
 ```
 
 4. 나머지 매개변수: `...` 을 넣어주어 매개변수의 수를 무한으로 취급할 수 있다. 아무것도 넘겨주지 않으면 `[]` 이 할당된다.
 
 ```typescript
-function buildName(firstName: string, ...lastName: string[]){
-  return firstName + lastName
+function buildName(firstName: string, ...lastName: string[]) {
+    return firstName + lastName;
 }
 
-let result1 = buildName("a", "SON", "Ted");  // aSON,Ted
+let result1 = buildName("a", "SON", "Ted"); // aSON,Ted
 ```
 
 ### ❏ OOP
+
 1. 객체 지향 프로그래밍: 컴퓨터 프로그램을 객체의 모임으로 파악하려는 프로그래밍 패러다임이다. 객체들은 서로 메세지를 주고 받으며 데이터를 처리할 수 있다.
 2. 장점: 프로그램을 유연하고, 변경이 용이하게 만들어지며, 개발과 보수를 간편하게 만든다, 직관적인 코드 분석을 가능하게 한다.
 3. 중요한 특성: 강한 응집력과 약한 결합력을 지향한다.
 
 ### ❏ Class
+
 1. 클래스의 요소: 멤버, 필드, 생성자, 메소드
 2. 인스턴스: `new` 연산자에 의해 생성된 객체
 
 ```typescript
 class Person {
-  name: string;
-  constructor(name: string){
-    this.name = name;
-  }
+    name: string;
+    constructor(name: string) {
+        this.name = name;
+    }
 
-  say(){
-    return "Hello, My name is " + this.name
-  }
+    say() {
+        return "Hello, My name is " + this.name;
+    }
 }
 
 let person = new Person("TED");
-console.log(person)  // Person { name: 'TED' }
+console.log(person); // Person { name: 'TED' }
 ```
 
 ### ❏ Class 접근 제어자
+
 1. 속성, 메소드로의 접근을 제한하기 위해 사용한다.
-2. `public`, `protected`, `private` 
+2. `public`, `protected`, `private`
 3. `Java` 와 다르게 `package` 개념이 없어 `default` 접근 제어자는 없다.
 4. `public`: 프로그램 내 선언된 멤버들이 자유롭게 접근할 수 있다. 기본적으로 `public` 으로 선언된다. 명시적으로 `public` 선언도 가능하다.
 
 ```typescript
 class Person {
-  public name: string;
-  constructor(name: string){
-    this.name = name;
-  }
+    public name: string;
+    constructor(name: string) {
+        this.name = name;
+    }
 }
 
 let a = new Person("TED").name;
-console.log(a)  // TED
+console.log(a); // TED
 ```
 
 5. `private` :멤버가 포함된 클래스 외부에서 접근을 막는다.
 
 ```typescript
 class Person {
-  private name: string;
-  constructor(name: string){
-    this.name = name;
-  }
+    private name: string;
+    constructor(name: string) {
+        this.name = name;
+    }
 }
 
-new Person("TED").name;  // Error: Property 'name' is private and only accessible within class 'Person'.
+new Person("TED").name; // Error: Property 'name' is private and only accessible within class 'Person'.
 ```
 
 6. `protected`: 멤버가 포함될 클래스와 그 하위 클래스 외부에서의 접근을 막는다. (내부에서는 접근이 가능하지만, 외부에서의 접근은 불가하다)
 
 ```typescript
 class Person {
-  protected name: string;
-  constructor(name: string){
-    this.name = name;
-  }
+    protected name: string;
+    constructor(name: string) {
+        this.name = name;
+    }
 }
 
 class Employee extends Person {
-  private department: string
+    private department: string;
 
-  constructor(name: string, department: string){
-    super(name);
-    this.department = department;
-  }
+    constructor(name: string, department: string) {
+        super(name);
+        this.department = department;
+    }
 
-  public getElevatorPitch(){
-    return `good.`
-  }
+    public getElevatorPitch() {
+        return `good.`;
+    }
 }
 
 let howard = new Employee("Howard", "sales");
-console.log(howard.name)  // Error: Property 'name' is protected and only accessible within class 'Person' and its subclasses.
+console.log(howard.name); // Error: Property 'name' is protected and only accessible within class 'Person' and its subclasses.
 ```
 
 ### ❏ Class 상속
+
 1. 상속을 이용하여 존재하는 클래스를 확장해 새로운 클래스를 생성할 수 있다. `extends`
 2. 파생된 클래스는 하위클래스(subclass), 기초 클래스는 상위 클래스(super class)라고 부른다.
 
 ```typescript
 class Animal {
-  move(distanceInMeters: number){
-    console.log(`Animal moved ${distanceInMeters}m.`)
-  }
+    move(distanceInMeters: number) {
+        console.log(`Animal moved ${distanceInMeters}m.`);
+    }
 }
 
-class Dog extends Animal{
-  makeSound(){
-    console.log(`멍멍`)
-  }
+class Dog extends Animal {
+    makeSound() {
+        console.log(`멍멍`);
+    }
 }
 
 const dog = new Dog();
@@ -4007,53 +4233,56 @@ dog.move(10);
 ```
 
 ### ❏ Getters & Setters
+
 1. 비공개로 설정하려는 속성은 `private` 로 설정하고, 속성값을 읽고 수정하는 `getter/setter` 함수를 사용한다.
 2. `class` 에 직접 적용하는것을 막고, 함수를 사용해 값을 받아오거나 수정한다. 속성에 직접 접근해 수정하면 데이터 무결성이 깨질 수 있다. (캡슐화 권장)
 3. 각 객체의 멤버에 접근하는 방법을 세밀하게 제어할 수 있다.
 
 ```typescript
 class Person {
-  private _name: string
-  
-  get name(){
-    return this._name;
-  }
+    private _name: string;
 
-  set name(name: string){
-    if (name.length > 10){
-      throw new Error ("name too long")
+    get name() {
+        return this._name;
     }
-    this._name=name;
-  }
+
+    set name(name: string) {
+        if (name.length > 10) {
+            throw new Error("name too long");
+        }
+        this._name = name;
+    }
 }
 
 let person = new Person();
-console.log(person.name);  // undefined
+console.log(person.name); // undefined
 
-person.name="TED"
-console.log(person.name);  // TED
+person.name = "TED";
+console.log(person.name); // TED
 
-person.name="TEDTEDTEDTEDTED"  // throw Error
+person.name = "TEDTEDTEDTEDTED"; // throw Error
 ```
 
 ### ❏ Readonly
+
 1. 읽기만 가능한 속성을 선언하기 위해 사용한다. (변경 할 수 없다.)
 2. 선언될 때나 생성자에서 값을 설정하면 이후 수정할 수 없다.
 
 ```typescript
-class Person{
-  readonly age: number = 20;
-  constructor(age: number){
-    this.age = age;
-  }
+class Person {
+    readonly age: number = 20;
+    constructor(age: number) {
+        this.age = age;
+    }
 }
 
 let person = new Person(10);
-person.age = 30;  // Error: Cannot assign to 'age' because it is a read-only property
+person.age = 30; // Error: Cannot assign to 'age' because it is a read-only property
 ```
 
 ### ❏ static
-1. 전역 멤버를 선언할 때 사용한다. (전역멤버: 객체마다 할당되지 않고, 클래스의 모든 객체가 공유하는 멤버) 
+
+1. 전역 멤버를 선언할 때 사용한다. (전역멤버: 객체마다 할당되지 않고, 클래스의 모든 객체가 공유하는 멤버)
 2. 인스턴스가 아닌 클래스 자체에서 보이는 전역 멤버를 생성한다.
 3. 범용적으로 사용되는 값에 설정한다.
 4. `클래스명.` 을 앞에 붙여 `static` 멤버에 접근할 수 있다.
@@ -4061,23 +4290,24 @@ person.age = 30;  // Error: Cannot assign to 'age' because it is a read-only pro
 
 ```typescript
 class Grid {
-  static origin = {x: 0, y: 0}
-  calculateDistanceFromOrigin(point: {x: number, y: number}){
-    let xDist = point.x - Grid.origin.x;
-    let yDist = point.y - Grid.origin.y;
-    return Math.sqrt(xDist*xDist+yDist*yDist) / this.scale;
-  }
-  constructor(public scale: number){}
+    static origin = { x: 0, y: 0 };
+    calculateDistanceFromOrigin(point: { x: number; y: number }) {
+        let xDist = point.x - Grid.origin.x;
+        let yDist = point.y - Grid.origin.y;
+        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+    }
+    constructor(public scale: number) {}
 }
 
-let grid1 = new Grid(1.0);  // 1x scale
-let grid2 = new Grid(5.0);  // 5x scale
+let grid1 = new Grid(1.0); // 1x scale
+let grid2 = new Grid(5.0); // 5x scale
 
-console.log(grid1.calculateDistanceFromOrigin({x: 10, y:10}))  // 14.142135623730951
-console.log(grid2.calculateDistanceFromOrigin({x: 10, y:10}))  // 2.8284271247461903
+console.log(grid1.calculateDistanceFromOrigin({ x: 10, y: 10 })); // 14.142135623730951
+console.log(grid2.calculateDistanceFromOrigin({ x: 10, y: 10 })); // 2.8284271247461903
 ```
 
 ### ❏ 추상클래스
+
 1. 다른 클래스들이 파생될 수 있는 기초클래스
 2. 직접 인스턴스화 될 수 없다.
 3. `abstract` 키워드는 추상 클래스나 추상 메소드를 정의하는데 사용된다.
@@ -4085,33 +4315,34 @@ console.log(grid2.calculateDistanceFromOrigin({x: 10, y:10}))  // 2.828427124746
 
 ```typescript
 abstract class Animal {
-  protected name: string;
+    protected name: string;
 
-  constructor(name: string){
-    this.name = name;
-  }
+    constructor(name: string) {
+        this.name = name;
+    }
 
-  abstract makeSound() : void
-  move(): void {
-    console.log("move !!")
-  }
+    abstract makeSound(): void;
+    move(): void {
+        console.log("move !!");
+    }
 }
 
-class Dog extends Animal{
-  constructor(name: string){
-    super(name)  // 파생된 클래스의 생성자는 반드시 super()를 호출
-  }
+class Dog extends Animal {
+    constructor(name: string) {
+        super(name); // 파생된 클래스의 생성자는 반드시 super()를 호출
+    }
 
-  makeSound(): void {
-    console.log(this.name + "멍멍")
-  }
+    makeSound(): void {
+        console.log(this.name + "멍멍");
+    }
 }
 
-const animal = new Animal("animal");  // Error: Cannot create an instance of an abstract class.
-const dog = new Dog("진돗개")  // Dog { name: '진돗개' }
+const animal = new Animal("animal"); // Error: Cannot create an instance of an abstract class.
+const dog = new Dog("진돗개"); // Dog { name: '진돗개' }
 ```
 
 ### 💡 추상 클래스를 활용한 디자인 패턴
+
 1. 프로그램의 일부분을 서브 클래스로 캡슐화해 전체 구조를 바꾸지 않고 특정 단계의 기능을 바꾸는 것
 2. 전체적인 알고리즘은 상위 클래스에서 구현하고, 다른 부분은 하위 클래스에서 구현한다.
 3. 전체 구조는 유사하지만, 부분적으로 다른 구문에서 작성된 메소드의 코드 중복을 최소화 할 수 있다.
@@ -4143,10 +4374,13 @@ Parent에서 실행 - 하
 ```
 
 ---
+
 ## 📍 23일차 11.25.목(실시간 강의)
+
 오늘은 `interface`, `generic` 문법에 대해서 배웠다.
 
-### ❏ Interface 
+### ❏ Interface
+
 1. 타입 체크를 위해 사용되며 변수, 함수, 클래스에 사용 가능
 2. 직접 인스턴스를 생성할 수 없음. 모든 메소드는 추상 메소드다. (이때 `abstract` 키워드를 사용하지 않는다)
 3. 선언만 존재한다. (JS로 변환되면 인터페이서는 사라진다.)
@@ -4158,14 +4392,14 @@ Parent에서 실행 - 하
 ```typescript
 // 키 값을 다음처럼 정해주면 키 값은 제한이 없다.
 interface User {
-  [grade: number]: "A" | "B" | "C" | "D"
+    [grade: number]: "A" | "B" | "C" | "D";
 }
 
 let user: User = {
-  1: "A",
-  2: "B",
-  5: "D",
-}
+    1: "A",
+    2: "B",
+    5: "D",
+};
 ```
 
 8. 선택적 프로퍼티(?): `?`가 붙는 경우는 반드시 구현되지 않고 선택가능
@@ -4173,15 +4407,15 @@ let user: User = {
 ```typescript
 // 키 값을 다음처럼 정해주면 키 값은 제한이 없다.
 interface User {
-  1: string;
-  2?: string;
-  5: string
+    1: string;
+    2?: string;
+    5: string;
 }
 
 let user: User = {
-  1: "A",
-  5: "D",
-}
+    1: "A",
+    5: "D",
+};
 ```
 
 9. 클래스 선언문의 `implements` 를 붙여서 사용 가능(인터페이스를 구현하는 클래스의 일관성을 유지할 수 있는 장점을 가짐)
@@ -4193,7 +4427,7 @@ interface ITodo {
     id: number;
     content: string;
     completed: boolean;
-		sayHello(): void;
+    sayHello(): void;
 }
 
 class Todo implements ITodo {
@@ -4201,34 +4435,35 @@ class Todo implements ITodo {
         public id: number,
         public content: string,
         public completed: boolean
-    ){} 
+    ) {}
 
-		sayHello(){
-      console.log(`안녕하세요!!`)
+    sayHello() {
+        console.log(`안녕하세요!!`);
     }
 }
 
-const today = new Todo(1, "TED", true);  // 인스턴스
-console.log(today)  // Todo { id: 1, content: 'TED', completed: true }
-today.sayHello();  // 안녕하세요!!
+const today = new Todo(1, "TED", true); // 인스턴스
+console.log(today); // Todo { id: 1, content: 'TED', completed: true }
+today.sayHello(); // 안녕하세요!!
 ```
 
 9. 함수와 변수에서도 덕타입이 적용된다.(덕 타이핑: 타입 체크에서 중요한 것은 값을 실제 가지고 있느냐에 관한 것, 인터페이스에서 정의한 프로퍼티나 메소드를 가지고 있다면 그 인터페이스를 구현한 것으로 여김 덕 타이핑 또는 구조적타이핑이라 부름)
 
 ```typescript
 type IPerson = {
-  name: string
+    name: string;
+};
+
+function sayHello(person: IPerson): void {
+    console.log(`Hello ${person.name}`);
 }
 
-function sayHello(person: IPerson): void{
-  console.log(`Hello ${person.name}`)
-}
-
-const me = {name : "TED", age: 27};
+const me = { name: "TED", age: 27 };
 sayHello(me);
 ```
 
 ### ❏ 디자인패턴
+
 1. 생성패턴: 객체를 생성하는데 관련한 패턴
 2. 구조패턴: 프로그램의 구조에 관련한 패턴
 3. 행위패턴: 반복적으로 사용되는 객체들의 상호작용 패턴
@@ -4236,58 +4471,59 @@ sayHello(me);
 ```typescript
 // 전략 패턴
 interface Weapon {
-  attack: () => void;
+    attack: () => void;
 }
 
 class Sword implements Weapon {
-  public attack() {
-      console.log("검 공격");
-  }
+    public attack() {
+        console.log("검 공격");
+    }
 }
 
 class Spear implements Weapon {
-  public attack() {
-      console.log("창 공격");
-  }
+    public attack() {
+        console.log("창 공격");
+    }
 }
 
 class Bow implements Weapon {
-  public attack() {
-      console.log("활 공격");
-  }
+    public attack() {
+        console.log("활 공격");
+    }
 }
 
 class GameUser {
-  private weapon: Weapon | null = null;
+    private weapon: Weapon | null = null;
 
-  public setWeapon(weapon: Weapon) {
-      this.weapon = weapon;
-  }
+    public setWeapon(weapon: Weapon) {
+        this.weapon = weapon;
+    }
 
-  public attack() {
-      if (this.weapon === null) {
-          console.log("맨손 공격");
-      } else {
-          this.weapon.attack();
-      }
-  }
+    public attack() {
+        if (this.weapon === null) {
+            console.log("맨손 공격");
+        } else {
+            this.weapon.attack();
+        }
+    }
 }
 
 const testUser = new GameUser();
 testUser.setWeapon(new Spear());
-testUser.attack();  // 창 
+testUser.attack(); // 창
 
-testUser.setWeapon(new Bow()); 
-testUser.attack();  // 활 공격
+testUser.setWeapon(new Bow());
+testUser.attack(); // 활 공격
 
 testUser.setWeapon(new Sword());
-testUser.attack();  // 검 공격
+testUser.attack(); // 검 공격
 
 testUser.setWeapon(null);
-testUser.attack();  // 맨손 공격
+testUser.attack(); // 맨손 공격
 ```
 
 ### ❏ 제네릭(Generic)
+
 1. 데이터타입을 일반화 함
 2. 자료형을 정하지 않고 여러 타입을 사용할 수 있게 한다.(범용적인 함수를 쓰고 싶을 때?, 여러가지 타입을 사용하고 싶을 때)
 3. 재사용성이 높은 함수를 만들어줄때 사용됨
@@ -4296,34 +4532,34 @@ testUser.attack();  // 맨손 공격
 ```typescript
 // class 문법에서의 제네릭
 class Stack<T> {
-  private data: T[] = []; 
+    private data: T[] = [];
 
-  constructor(){}
+    constructor() {}
 
-  push(item: T): void {
-    this.data.push(item);
-  }
+    push(item: T): void {
+        this.data.push(item);
+    }
 
-  pop():T | undefined{
-    return this.data.pop()
-  }
+    pop(): T | undefined {
+        return this.data.pop();
+    }
 }
 
 // 인스턴스의 타입을 유연하게 설정할 수 있다.
 const numberStack = new Stack<number>();
 const stringStack = new Stack<string>();
 numberStack.push(1);
-stringStack.push('a')
+stringStack.push("a");
 
 // 함수에서의 제네릭
 function getSize<T>(arr: T[]): number {
-  return arr.length;
+    return arr.length;
 }
 
 const arr1 = [1, 2, 3];
 getSize<number>(arr1);
 
-const arr2 = ['a', 'b', 'c'];
+const arr2 = ["a", "b", "c"];
 getSize<string>(arr2);
 ```
 
@@ -4331,136 +4567,138 @@ getSize<string>(arr2);
 
 ```typescript
 // 1
-function toPair<T, U>(a: T, b: U): [T, U]{
-  return [a, b];
+function toPair<T, U>(a: T, b: U): [T, U] {
+    return [a, b];
 }
 
 toPair<number, string>(1, "1");
 toPair<string, boolean>("Hello", true);
 
 // 2
-function logText<T>(text: T[]): number{
-  return text.length;
+function logText<T>(text: T[]): number {
+    return text.length;
 }
 
 // 3
-interface Mobile<T>{
-  name: string;
-  price: number;
-  option: T;
+interface Mobile<T> {
+    name: string;
+    price: number;
+    option: T;
 }
 
 let myInfo: Mobile<boolean> = {
-  name: "TED",
-  price: 6000,
-  option: true
-}
+    name: "TED",
+    price: 6000,
+    option: true,
+};
 
 let yourInfo: Mobile<object> = {
-  name: "TED",
-  price: 6000,
-  option: {
-    age: 28,
-    color: "orange",
-  }
-}
+    name: "TED",
+    price: 6000,
+    option: {
+        age: 28,
+        color: "orange",
+    },
+};
 
 // 함수에서의 제네릭
 // <T>는 text의 인자는 T로 받고 리턴값도 T 타입으로 해준다.
 interface GenericLogTextFn {
-  <T>(text: T): T;
+    <T>(text: T): T;
 }
 
 interface GenericLogTextFn<T> {
-  (text: T): T
+    (text: T): T;
 }
 
-function logText<T>(text: T): T{
-  return text;
+function logText<T>(text: T): T {
+    return text;
 }
 
 let myString: GenericLogTextFn<string> = logText;
-console.log(myString)
+console.log(myString);
 
 interface Mobile<T> {
-  name: string;
-  price: number;
-  option: T;
+    name: string;
+    price: number;
+    option: T;
 }
 
 interface OptionType {
-  color: string;
-  coupon: boolean;
+    color: string;
+    coupon: boolean;
 }
 
 const m1: Mobile<OptionType> = {
-  name: "s21",
-  price: 1000,
-  option: { color: "red", coupon: false },
+    name: "s21",
+    price: 1000,
+    option: { color: "red", coupon: false },
 };
 
 // 제네릭 상속
 interface User {
-  name: string;
-  age: number;
+    name: string;
+    age: number;
 }
 
 interface Book {
-  price: number;
+    price: number;
 }
 
-let user: User = { name: "a", age : 10 };
+let user: User = { name: "a", age: 10 };
 let book: Book = { price: 3000 };
 
-function showName<T extends { name : string }>(data: T){
-  return data.name;
+function showName<T extends { name: string }>(data: T) {
+    return data.name;
 }
 ```
 
 ### ❏ Non-null assertion operator
+
 1. `Null` 이 아닌 어선셜 연산자는 피연산자가 `null` 이 아니라고 컴파일러에게 전달하여 일시적으로 `Null` 제약조건을 완화합니다. 권장하지 않는 문법이고 대신 `&&` 을 사용한다.
 
 ### ❏ Union type
 
 ```typescript
 // example1
-function getAge(age: number | string){
-  return typeof age === "number" ? age.toFixed() : age;
+function getAge(age: number | string) {
+    return typeof age === "number" ? age.toFixed() : age;
 }
 
 const myAge = getAge(28);
-console.log(myAge)
+console.log(myAge);
 
 const yourAge = getAge("25");
-console.log(yourAge)
+console.log(yourAge);
 
 // union 기호
 interface Person {
-  name: string;
-  age: number;
+    name: string;
+    age: number;
 }
 
 interface Developer {
-  name: string;
-  skill: string;
+    name: string;
+    skill: string;
 }
- 
+
 // 겹치는 속성만 사용 가능
-function introduce(someone: Person | Developer){
-  someone.name;
-  someone.age;  // Error
-  someone.skill;  // Error
+function introduce(someone: Person | Developer) {
+    someone.name;
+    someone.age; // Error
+    someone.skill; // Error
 }
 
 // 모든 속성 사용 가능
-function introduce(someone: Person & Developer){
-  someone.name;
-  someone.age;  // 사용 가능
-  someone.skill;  // 사용 가능
+function introduce(someone: Person & Developer) {
+    someone.name;
+    someone.age; // 사용 가능
+    someone.skill; // 사용 가능
 }
 ```
 
 ### ❏ 제약 조건(constraints / keyof)
+
 1. 제네릭 타입에 어느정도 힌트를 주고 제약을 걸기 위해 사용, 최소한 `length` 속성이 있어야 에러가 나지 않는다
 
 ```typescript
@@ -4484,45 +4722,47 @@ function logText1<T extends LengthWise & Rect>(text: T){
 ```
 
 ### ❏ keyof를 사용한 제약
+
 1. 객체의 속성을 제약하고 싶을 때 사용
 
 ```typescript
 // 객체 안에서의 속성만 사용하는 문법
-function getProperty<T, O extends keyof T>(obj: T, key: O){
-  return obj[key]
+function getProperty<T, O extends keyof T>(obj: T, key: O) {
+    return obj[key];
 }
 
-let obj = { a: 1, b: 2, c: 3 }
+let obj = { a: 1, b: 2, c: 3 };
 // 'a' | 'b' | 'c'
-console.log(getProperty(obj, 'c'));
+console.log(getProperty(obj, "c"));
 ```
 
 ### ❏ 기타 기능 및 개념
+
 1. Type Assertion: 타입 추론기능은 강력하지만 한계 존재, 타입단언(type assertion)은 타입스크립트가 추정하지 못하는 부분까지 개발자가 선언하는것
 2. as
 
 ```typescript
 let a;
 a = 10;
-a = 'abc';
+a = "abc";
 let b = a;
 
 b = a as string;
 
-interface Person{
-  name: string;
-  age: number;
+interface Person {
+    name: string;
+    age: number;
 }
 
-interface Developer{
-  name: string;
-  skill: string;
+interface Developer {
+    name: string;
+    skill: string;
 }
 
-function introduce(someone: Person | Developer){
-  someone.name;
-  (someone as Person).age;
-  (someone as Developer).skill;
+function introduce(someone: Person | Developer) {
+    someone.name;
+    (someone as Person).age;
+    (someone as Developer).skill;
 }
 ```
 
@@ -4530,71 +4770,72 @@ function introduce(someone: Person | Developer){
 
 ```typescript
 // 함수
-function doSomeThing(id: string | number){
-  if (typeof id === 'string'){
-      console.log(id.trim());
-  }else {
-    console.log(id);
-  }
+function doSomeThing(id: string | number) {
+    if (typeof id === "string") {
+        console.log(id.trim());
+    } else {
+        console.log(id);
+    }
 }
 
 // 클래스
 class Diner {}
 class Merchant {}
 
-function doSomething(user: Diner | Merchant){
-  if(user instanceof Diner){
-  }else{   
-  }
+function doSomething(user: Diner | Merchant) {
+    if (user instanceof Diner) {
+    } else {
+    }
 }
 
 // 메소드
 interface Bird {
-  fly(): string;
+    fly(): string;
 }
 
 interface Fish {
-  swim(): number;
+    swim(): number;
 }
 
-function doSomething(animal: Fish | Bird){
-  if('swim' in animal){
-    console.log((animal as Fish).swim())
-  }else{
-    console.log((animal as Bird).fly())
-  }
+function doSomething(animal: Fish | Bird) {
+    if ("swim" in animal) {
+        console.log((animal as Fish).swim());
+    } else {
+        console.log((animal as Bird).fly());
+    }
 }
 
 doSomething({
-  swim: () => {
-    return 82
-  }
-})
+    swim: () => {
+        return 82;
+    },
+});
 
 doSomething({
-  fly: () => {
-    return "Hello"
-  }
-})
+    fly: () => {
+        return "Hello";
+    },
+});
 
 // 타입 확인
 function isFish(animal: Fish | Bird): animal is Fish {
-  return (animal as Fish).swim !== undefined;
+    return (animal as Fish).swim !== undefined;
 }
 
-function doSomething(animal: Fish | Bird){
-  if (isFish(animal)) {
-    animal.swim()
-  }else{
-    animal.fly()
-  }
+function doSomething(animal: Fish | Bird) {
+    if (isFish(animal)) {
+        animal.swim();
+    } else {
+        animal.fly();
+    }
 }
 ```
 
 ### ❏ 실습
+
 1. 클래스 vs 추상클래스: 어떤 메서드는 그냥 구현해도 되고, 어떤 메서드는 정의 되지 않은 메서드 일 수 있다.(사용하려면 상속이 필요하다)
 2. 인터페이스: 추상클래스와 달리 `abstract` 를 사용하지 않음. 구성되는 것의 타입만 명시해서(생성자나 메서드 구현을 작성할 필요가 없다.) (하나의 interface에 여러 데이터가 뭉치지 않도록 분산시킬 수 있기 때문에 다중상속이 가능하다.)
-3. `interface` vs `type` vs `abstract`  
+3. `interface` vs `type` vs `abstract`
 
 ```typescript
 // 인터페이스: 상속이 가능하며, 다중 상속도 가능하다. 내부에서 메서드 구현을 할 수 없다.
@@ -4623,11 +4864,13 @@ abstract class Test {
 5. `interface` 활용 예시: 데이터베이스 조작(로그인, 게시물, 등등)
 6. ORM: SQL문을 대신해서 내가 알고있는 프로그래밍 언어로 DB로 조작하는 방법(나중에 SQL문으로 변환된다)
 
-### ❏  Generic
-1. 선언한 시점에 타입을 사용하는것이 아니라  사용 할 때 모든 타입을 마음대로 넣을 수 있다.
+### ❏ Generic
+
+1. 선언한 시점에 타입을 사용하는것이 아니라 사용 할 때 모든 타입을 마음대로 넣을 수 있다.
 2. 타입에 제한을 걸기 위해 `<T extends string | number>` 처럼 사용할 수 있다.
 
 ### ❏ 자바스크립트의 동적인 타입 예시
+
 1. `true == "true"`: `false` abstract equality composition (피연산자에 `number` 씌우고 비교한다)
 2. `010-03=5`, 0붙어서 8진수가 된다. (16진수는 ox, 2진수는 ob)
 3. `1+'1' = '11'`(`+` 는 문자열 우선순위), `11-'1' = 10`(`-` 는 `Number`만 지원한다.)
@@ -4637,10 +4880,13 @@ abstract class Test {
 7. `1+2+"3" = 33`
 
 ---
+
 ## 📍 24일차 11.26.금(온라인 강의)
+
 오늘은 `interface`와 `generic`에 대한 개념을 강의로 배웠다.
 
 ### ❏ Interface란?
+
 1. 일반적으로 변수, 함수, 클래스에 타입 체크를 위해 사용된다.
 2. 직접 인스턴스를 생성할 수 없고, 모든 메소드가 추상 메소드이다.
 3. 추상 클래스의 추상 메소드와 달리 `abstract` 키워드는 사용할 수 없다.
@@ -4648,16 +4894,17 @@ abstract class Test {
 5. 정의한 프로퍼티 값을 누락하거나, 정의하지 않는 값을 인수로 전달하면 컴파일시 에러가 발생한다.
 
 ### ❏ interface를 사용하는 이유
+
 1. 타입의 이름을 짓고 코드 안의 계약을 정의한다.
 2. 프로젝트 외부에서 사용하는 코드의 계약을 정의하는 강력한 방법이다.
 
 ```typescript
-interface Person{
-	name: string
+interface Person {
+    name: string;
 }
 
-function sayName(obj: Person){
-	console.log(obj.name);
+function sayName(obj: Person) {
+    console.log(obj.name);
 }
 
 let person = { name: "june" };
@@ -4665,15 +4912,18 @@ sayName(person);
 ```
 
 ### ❏ Properties
+
 1. 컴파일러는 프로퍼티의 두 가지 요소를 검사한다. (필수요소 프로퍼티의 유무, 프로퍼티 타입)
 2. 아래 예약어로 프로퍼티를 세밀하게 컨트롤 할 수 있다.(?, readonly)
 
 ### ❏ Optional Properties
+
 1. 프로퍼티 선언 시 이름 끝에 `?` 를 붙여 표시한다.
 2. 인터페이스에 속하지 않는 프로퍼티의 사용을 방지하면서, 사용 가능한 프로퍼티를 기술할 때 사용한다.
 3. 객체 안의 몇 개의 프로퍼티만 채워 함수에 전달하는 `option bags` 같은 패턴에 유용하다.
 
 ### ❏ Readonly Properties
+
 1. 객체가 처음 생성될 때만 값 설정이 가능하고, 이후 수정이 불가능하다.
 2. 프로퍼티 이름 앞에 `readonly` 를 붙여 사용한다.
 
@@ -4683,56 +4933,57 @@ interface Point {
     readonly y: number;
 }
 
-let point: Point = { x: 10, y: 20};
-point.x = 5  // Error: Cannot assign to 'x' because it is a read-only property.
+let point: Point = { x: 10, y: 20 };
+point.x = 5; // Error: Cannot assign to 'x' because it is a read-only property.
 ```
 
 3. readonly 와 const 의 공통점: 생성 후 배열을 변경하지 않음을 보장한다. 변수에는 const, 프로퍼티에는 readonly 를 사용한다.
 
 ### ❏ interface Type
+
 1. TS에서 인터페이스는 함수, 클래스에서 사용할 수 있다.
 
 ```typescript
 // function type: 함수의 인자 타입, 반환값 타입 정의
 interface CountStar {
-  (star: string[]): number
+    (star: string[]): number;
 }
 
 const myStars = ["*", "*", "*"];
 
-const getCountStar: CountStar = stars => {
-  return stars.length;
-}
+const getCountStar: CountStar = (stars) => {
+    return stars.length;
+};
 
-console.log(getCountStar(myStars))
+console.log(getCountStar(myStars));
 
 // class type: 클래스가 특정 계약을 충족하도록 명시적으로 강제한다.
-interface Animal{
-	makeSound(): void;
+interface Animal {
+    makeSound(): void;
 }
 
-class Dog implements Animal{
-	makeSound(): void {
-		console.log("멍멍")
-	}
+class Dog implements Animal {
+    makeSound(): void {
+        console.log("멍멍");
+    }
 }
 ```
 
 2. 인터페이스와 클래스는 인터페이스간의 확장이 가능하다.
 
 ```typescript
-interface Animal{
-	makeSound(): void;
+interface Animal {
+    makeSound(): void;
 }
 
-interface Dog extends Animal{
-	speed: number
+interface Dog extends Animal {
+    speed: number;
 }
 
-class Bulldog implements Dog{
-	makeSound(): void {
-		console.log("멍멍")
-	}
+class Bulldog implements Dog {
+    makeSound(): void {
+        console.log("멍멍");
+    }
 }
 ```
 
@@ -4740,16 +4991,16 @@ class Bulldog implements Dog{
 
 ```typescript
 interface Counter {
-  (start: number): string;
-  interval: number;
-  reset(): void;
+    (start: number): string;
+    interval: number;
+    reset(): void;
 }
 
 function getCounter(): Counter {
-  let counter = function (start: number) {} as Counter;
-  counter.interval = 123;
-  counter.reset = function(){}
-  return counter
+    let counter = function (start: number) {} as Counter;
+    counter.interval = 123;
+    counter.reset = function () {};
+    return counter;
 }
 
 let c = getCounter();
@@ -4759,93 +5010,99 @@ c.interval = 5.0;
 ```
 
 ### ❏ 디자인패턴
-1. 객체가 할 수 있는 행위들을 전략으로 만들어두고, 동적으로 행위의 수정이 필요한 경우 전략을 바꾸는 것만으로 수정이 가능하도록 만든 패턴이다. 
+
+1. 객체가 할 수 있는 행위들을 전략으로 만들어두고, 동적으로 행위의 수정이 필요한 경우 전략을 바꾸는 것만으로 수정이 가능하도록 만든 패턴이다.
 2. 하단의 코드를 살펴보면 메소드를 직접 변경하는것이 아니라 새로운 `interface` 를 생성하고 해당 `interface` 를 적용하면 `Pay` 메소드를 구현할 수 있다.
 
 ### ❏ 제네릭이란?
+
 1. 정적 `type` 언어는 클래스나 함수를 정의 할 때 `type` 을 선언해야 한다.
 2. `Generic` 은 코드를 작성할 때가 아니라 코드가 수행될 때 타입을 명시한다. 코드를 작성할 때 식별자를 써서 아직 정해지지 않은 타입을 표시한다. (일반적인 식별자는 `T`, `U`, `V` 를 사용한다.)
 
 ### ❏ 제네릭을 사용하는 이유
+
 1. 재 사용성이 높은 함수와 클래스를 생성할 수 있다.(여러 타입에서 동작가능, 코드의 가독성 향상)
 2. 예상치 못한 오류를 쉽게 포착한다. (`any` : 타입을 체크하지 않아 관련 메소드의 힌트를 얻지 못한다. 컴파일 시 컴파일러가 오류를 찾지 못한다.)
 3. `Generic` 은 타입을 체크해 컴파일러가 오류를 찾을 수 있다.
 4. `any` 를 지양하고 다양한 타입을 사용하려면 `Generic` 혹은 `Union` 문법을 권장한다.
 
 ### ❏ Generic으로 함수와 클래스 만들기
+
 ```typescript
 // function
-function sort<T>(items: T[]){
-  return items.sort();
+function sort<T>(items: T[]) {
+    return items.sort();
 }
 
 const numbers: number[] = [1, 3, 2];
-const strings: string[] = ["a", "b", "c"]
+const strings: string[] = ["a", "b", "c"];
 
 sort<number>(numbers);
-sort<string>(strings)
+sort<string>(strings);
 
 // class
 // stack
-class Stack<T>{
-  protected data: T[] = [];
+class Stack<T> {
+    protected data: T[] = [];
 
-  push(item: T){
-    this.data.push(item);
-  }
+    push(item: T) {
+        this.data.push(item);
+    }
 
-  pop(): T|undefined{
-    return this.data.pop()
-  }
+    pop(): T | undefined {
+        return this.data.pop();
+    }
 }
 
 const stack = new Stack();
-console.log(stack)
-stack.push(1)
-stack.pop()
+console.log(stack);
+stack.push(1);
+stack.pop();
 
 // queue
 class Queue<T> {
-  private data: Array<T> = []
-  // 제네릭을 활용하여 push()와 pop() 메소드를 구현해주세요.
-  push(item: T){
-    this.data.push(item);
-  }
-  
-  pop(): T | undefined{
-    return this.data.pop();
-  }
+    private data: Array<T> = [];
+    // 제네릭을 활용하여 push()와 pop() 메소드를 구현해주세요.
+    push(item: T) {
+        this.data.push(item);
+    }
+
+    pop(): T | undefined {
+        return this.data.pop();
+    }
 }
 
-const numberQueue = new Queue<number>()  // nunberQueue안에 구성된 타입은 number 형이다.
+const numberQueue = new Queue<number>(); // nunberQueue안에 구성된 타입은 number 형이다.
 
-numberQueue.push(0)
-console.log(numberQueue.pop())
+numberQueue.push(0);
+console.log(numberQueue.pop());
 ```
 
 ### ❏ Union
+
 1. `|` 을 사용하여 두 개 이상의 타입을 선언하는 방식
 2. `union` 과 `generic` 은 모두 여러 타입을 다룰 수 있다. (`union` 은 공통된 메소드만 사용가능하다, 리턴값은 선언된 `union` 타입으로 지정된다.)
 
 ```typescript
 // Union
 const printMessage = (message: string | number) => {
-  return message;
-}
+    return message;
+};
 
 const message1 = printMessage(1322);
 const message2 = printMessage("hellow");
 
 // Generic
 const printMessage = <T>(message: T) => {
-  return message;
-}
+    return message;
+};
 
 const message1 = printMessage<number>(1322);
 const message2 = printMessage<string>("hellow");
 ```
 
 ### ❏ 제약조건(constraints / keyof)
+
 1. 원하지 않는 속성에 접근하는 것을 막기 위해 `Generic` 에 제약조건을 사용한다.
 2. `Constraints`: 특정 타입들로만 동작하는 `Generic` 함수를 만들 때 사용한다.
 3. `Keyof`: 두 객체를 비교할 때 사용한다.
@@ -4854,57 +5111,61 @@ const message2 = printMessage<string>("hellow");
 // constraints: Generic T에 제약 조건을 설정한다.(string | number)
 // 제약 조건을 벗어나는 타입을 선언하면 에러가 발생한다
 const printMessage = <T extends string | number>(message: T) => {
-  return message;
-}
+    return message;
+};
 
 printMessage<number>(1322);
 printMessage<string>("hello");
-printMessage<boolean>(true);  // Error: Type 'boolean' does not satisfy the constraint 'string | number'
+printMessage<boolean>(true); // Error: Type 'boolean' does not satisfy the constraint 'string | number'
 
 // keyof: 두 객체를 비교할 때 사용한다.
 // U의 값인 `not in obj` 가 `T`의 키 값 중 존재하지 않기 때문에 오류가 발생한다.
-const printMessage = <T extends object, U extends keyof T>(obj:T, key:U) => {
-  return obj[key]
-}
+const printMessage = <T extends object, U extends keyof T>(obj: T, key: U) => {
+    return obj[key];
+};
 
-console.log(printMessage({a: 1, b: 2, c: 3}, "a"));
-console.log(printMessage({a: 1, b: 2, c: 3}, "not in obj"));  // Error: Argument of type '"not in obj"' is not assignable to parameter of type '"a" | "b" | "c"'.
+console.log(printMessage({ a: 1, b: 2, c: 3 }, "a"));
+console.log(printMessage({ a: 1, b: 2, c: 3 }, "not in obj")); // Error: Argument of type '"not in obj"' is not assignable to parameter of type '"a" | "b" | "c"'.
 ```
 
 ### ❏ 디자인 패턴
+
 1. `Factory Pattern`: 객체를 생성하는 인터페이스만 미리 정의하고 인스턴스를 만들 클래스의 결정은 서브 클래스가 내리는 패턴
 2. 여러개의 서브 클래스를 가진 슈퍼 클래스가 있을 때, 입력에 따라 하나의 서브 클래스의 인스턴스를 반환한다.
 
 ---
+
 ## 📍 25일차 11.27.토(온라인 강의)
+
 오늘은 `typescript` 심화 그리고 `decorator`에 대해서 배웠다. 지금까지의 프로젝트를 하면서 많이 접해보지 않아 내용이 어렵게 느껴졌다. 나중에 기억에 잘 남으려면 실전에서 많이 사용해야겠지??
 
 ### ❏ Union Type, Intersection type
-1. 기존 타입, 인터페이스의 변경은 이미 그 타입을 사용하고 있는 코드에 똑같은 변경을 가해줘야 한다. 만약, 해당 타입을 쓰는 모든 코드에 변경을 가하지 않고 특정 코드만 자유롭게 타입을 확장하고 싶을 땐 어떻게 해야할까? 
+
+1. 기존 타입, 인터페이스의 변경은 이미 그 타입을 사용하고 있는 코드에 똑같은 변경을 가해줘야 한다. 만약, 해당 타입을 쓰는 모든 코드에 변경을 가하지 않고 특정 코드만 자유롭게 타입을 확장하고 싶을 땐 어떻게 해야할까?
 
 ```typescript
 // Animal 인터페이스에 메소드를 추가하게 되면 해당 인터페이스를 implements하는 다른 class들에도 동일한 메소드를 추가해야 한다.
- interface Animal {
-  eat: () => void;
-  sleep: () => void;
-  
+interface Animal {
+    eat: () => void;
+    sleep: () => void;
 }
 
 class Dog implements Animal {
-    eat(){};
-    sleep(){};
+    eat() {}
+    sleep() {}
 }
 
 class Cat implements Animal {
-    eat(){};
-    sleep(){};
+    eat() {}
+    sleep() {}
 }
 ```
 
 2. 그럴때는 `Intersection(And)`, : A타입이면서 B타입 `Union(Or)` A타입, B타입 둘 중 하나를 사용한다.
 
 ### ❏ Union
-1. `|`  부호를 사용한다.
+
+1. `|` 부호를 사용한다.
 
 ```typescript
 // one의 타입은 string과 number 둘 중 하나
@@ -4917,15 +5178,16 @@ let one: string | number;
 // 에러 케이스
 type A = string | number;
 
-interface StrOrNum extends A {  // Error: An interface can only extend an object type or intersection of object types with statically known members.
-  a: string;
+interface StrOrNum extends A {
+    // Error: An interface can only extend an object type or intersection of object types with statically known members.
+    a: string;
 }
 
 // 정상 케이스(유니온 타입의 확장)
-type A = {a: string & (string | number)};   
+type A = { a: string & (string | number) };
 
 interface StrOrNum extends A {
-  a: string;
+    a: string;
 }
 ```
 
@@ -4934,41 +5196,42 @@ interface StrOrNum extends A {
 ```typescript
 // Human인지 Dog인지 확신할 수 없어서 컴파일 단계에서 에러
 type Human = {
-  think: () => void;
-}
+    think: () => void;
+};
 
 type Dog = {
-  bark: () => void;
-}
+    bark: () => void;
+};
 
 declare function getEliceType(): Human | Dog;
 
 const elice = getEliceType();
-elice.think();  // Error: Property 'think' does not exist on type 'Human | Dog'. Property 'think' does not exist on type 'Dog'.
-elice.bark();  // Error: Property 'bark' does not exist on type 'Human | Dog'. Property 'bark' does not exist on type 'Human'.
+elice.think(); // Error: Property 'think' does not exist on type 'Human | Dog'. Property 'think' does not exist on type 'Dog'.
+elice.bark(); // Error: Property 'bark' does not exist on type 'Human | Dog'. Property 'bark' does not exist on type 'Human'.
 ```
 
 ### ❏ Intersection type
+
 1. `&` 사용
 2. `A` 타입이면서 `B` 타입이라는 의미
 
 ```typescript
 type Human = {
-  think: () => void;
-}
+    think: () => void;
+};
 
 type Developer = {
-  work: () => void;
-}
+    work: () => void;
+};
 
 const elice: Human & Developer = {
-    think(){
-      console.log("I'm thinking")
+    think() {
+        console.log("I'm thinking");
     },
-    work(){
-      console.log("I'm working")
-    }
-}
+    work() {
+        console.log("I'm working");
+    },
+};
 ```
 
 3. `Intersection type` 은 기존 타입을 대체하지 않으면서, 기존 타입에 새로운 필드를 추가하고 싶을 때 사용한다.
@@ -4977,38 +5240,38 @@ const elice: Human & Developer = {
 // Student 메서드를 추가하고 싶을 때
 // 전
 type Human = {
-  think: () => void;
-}
+    think: () => void;
+};
 
 type Developer = {
-  work: () => void;
-}
+    work: () => void;
+};
 
-const elice: Human & Developer & Student= {
-    think(){
-      console.log("I'm thinking")
+const elice: Human & Developer & Student = {
+    think() {
+        console.log("I'm thinking");
     },
-    work(){
-      console.log("I'm working")
+    work() {
+        console.log("I'm working");
     },
-}
+};
 
 // 후
 type Student = {
-  study: () => void;
-}
+    study: () => void;
+};
 
-const elice: Human & Developer & Student= {
-    think(){
-      console.log("I'm thinking")
+const elice: Human & Developer & Student = {
+    think() {
+        console.log("I'm thinking");
     },
-    work(){
-      console.log("I'm working")
+    work() {
+        console.log("I'm working");
     },
-    study(){
-      console.log("I'm studying")
+    study() {
+        console.log("I'm studying");
     },
-}
+};
 ```
 
 4. 각 타입에 겹치는 필드가 있다면 어떨까?
@@ -5016,124 +5279,124 @@ const elice: Human & Developer & Student= {
 ```typescript
 // 타입이 같을 때
 type Developer = {
-  output: string;
-  develop: () => void;
-}
+    output: string;
+    develop: () => void;
+};
 
 type Designer = {
-  output: string;
-  design: () => void;
-}
+    output: string;
+    design: () => void;
+};
 
 const 개자이너: Developer & Designer = {
-  output : "띠용",
-  develop(){
-    console.log("I'm working")
-  },
-  design(){
-    console.log("I'm working")
-  },
-}
+    output: "띠용",
+    develop() {
+        console.log("I'm working");
+    },
+    design() {
+        console.log("I'm working");
+    },
+};
 
 // 타입이 다를 때
 type Developer = {
-  output: number;
-  develop: () => void;
-}
+    output: number;
+    develop: () => void;
+};
 
 type Designer = {
-  output: string;
-  design: () => void;
-}
+    output: string;
+    design: () => void;
+};
 
 const 띠용: Developer & Designer = {
-  output : "며용",  // Error: Type 'string' is not assignable to type 'never'.
-  develop(){
-    console.log("I'm working")
-  },
-  design(){
-    console.log("I'm working")
-  },
-}
+    output: "며용", // Error: Type 'string' is not assignable to type 'never'.
+    develop() {
+        console.log("I'm working");
+    },
+    design() {
+        console.log("I'm working");
+    },
+};
 
 // 타입이 포함관계 일 때
 type Developer = {
-  output: number;
-  develop: () => void;
-}
+    output: number;
+    develop: () => void;
+};
 
 type Designer = {
-  output: number | string;
-  design: () => void;
-}
+    output: number | string;
+    design: () => void;
+};
 
 const 띠용: Developer & Designer = {
-  // output : "며용",  Error: Type 'string' is not assignable to type 'number'.
-  output : 28,
-  develop(){
-    console.log("I'm working")
-  },
-  design(){
-    console.log("I'm working")
-  },
-
-}
+    // output : "며용",  Error: Type 'string' is not assignable to type 'number'.
+    output: 28,
+    develop() {
+        console.log("I'm working");
+    },
+    design() {
+        console.log("I'm working");
+    },
+};
 ```
 
 ### ❏ Type Guard
+
 1. 데이터의 타입을 알 수 없거나, 될 수 있는 타입이 여러 개라고 가정할 때 조건문을 통해 데이터의 타입을 좁혀나가는 것
 2. 데이터의 타입에 따라 대응하여 에러를 최소화 할 수 있음. 타입을 통해 가드하는 코드, 방어적인 코드를 짤 수 있음
 
 ```typescript
 // Human인지 Dog인지 확신할 수 없어서 컴파일 단계에서 에러
 type Human = {
-  think: () => void;
-}
+    think: () => void;
+};
 
 type Dog = {
-  bark: () => void;
-}
+    bark: () => void;
+};
 
 declare function getEliceType(): Human | Dog;
 
 const elice = getEliceType();
-elice.think();  // Error: Property 'think' does not exist on type 'Human | Dog'. Property 'think' does not exist on type 'Dog'.
-elice.bark();  // Error: Property 'bark' does not exist on type 'Human | Dog'. Property 'bark' does not exist on type 'Human'.
+elice.think(); // Error: Property 'think' does not exist on type 'Human | Dog'. Property 'think' does not exist on type 'Dog'.
+elice.bark(); // Error: Property 'bark' does not exist on type 'Human | Dog'. Property 'bark' does not exist on type 'Human'.
 
 // 타입스크립트가 타입을 추론할 수 있도록 단서를 줘보면 어떨까
 type Human = {
-  think: () => void;
-}
+    think: () => void;
+};
 
 type Dog = {
-	tail: string;
-  bark: () => void;
-}
+    tail: string;
+    bark: () => void;
+};
 
 declare function getEliceType(): Human | Dog;
 
 const elice = getEliceType();
 
-if ('tail' in elice){
-	elice.bark();
-}else{
-	elice.think();
+if ("tail" in elice) {
+    elice.bark();
+} else {
+    elice.think();
 }
 ```
 
 3. 구별된 유니온으로 타입 가드하는 방법: 조건문을 통해 어떤 타입인지 추론한다.
 
 ```typescript
-// 서버에서 오는 응답 또는 함수의 결과가 여러 갈래로 나뉠 때 사용 
+// 서버에서 오는 응답 또는 함수의 결과가 여러 갈래로 나뉠 때 사용
 type SuccessResponse = {
-  status: true;
-  data: any;
-}
+    status: true;
+    data: any;
+};
 
 type FailureResponse = {
-  status: false;
-  error: Error;
-}
+    status: false;
+    error: Error;
+};
 
 type CustomResponse = SuccessResponse | FailureResponse;
 
@@ -5141,10 +5404,10 @@ declare function getData(): CustomResponse;
 
 const response: CustomResponse = getData();
 
-if (response.status){
-  console.log(response.data)
-}else if(response.status === false){
-  console.log(response.error)
+if (response.status) {
+    console.log(response.data);
+} else if (response.status === false) {
+    console.log(response.error);
 }
 ```
 
@@ -5152,35 +5415,35 @@ if (response.status){
 
 ```typescript
 class Developer {
-  develop(){
-    console.log("I'm working")
-  }
+    develop() {
+        console.log("I'm working");
+    }
 }
 
 class Designer {
-  design(){
-    console.log("I'm working")
-  }
+    design() {
+        console.log("I'm working");
+    }
 }
 
 const work = (worker: Developer | Designer) => {
-  if (worker instanceof Designer){
-    worker.design()
-  }else if (worker instanceof Developer){
-    worker.develop()
-  }
-}
+    if (worker instanceof Designer) {
+        worker.design();
+    } else if (worker instanceof Developer) {
+        worker.develop();
+    }
+};
 ```
 
 5. `typeof` : 데이터의 타입을 반환하는 연산자 (`data==null` 동등연산자를 사용하면 `null`, `undefined` 둘다 체크한다. 그러나, `null` 과 `undefined` 는 따로 체크하는 습관을 기르자, )
 
 ```typescript
 const add = (arg?: number) => {
-  if (typeof arg === 'undefined'){
-    return 0;
-  }
-  return arg+arg;
-}
+    if (typeof arg === "undefined") {
+        return 0;
+    }
+    return arg + arg;
+};
 ```
 
 6. `in` : 오브젝트의 `key`중에 문자열 `A` 가 존재하는지 확인할 때
@@ -5188,22 +5451,22 @@ const add = (arg?: number) => {
 ```typescript
 // 문자열 A는 key(field, property 이름)을 의미한다.
 type Human = {
-  think: () => void;
-}
+    think: () => void;
+};
 
 type Dog = {
-	tail: string;
-  bark: () => void;
-}
+    tail: string;
+    bark: () => void;
+};
 
 declare function getEliceType(): Human | Dog;
 
 const elice = getEliceType();
 
-if ('tail' in elice){
-	elice.bark();
-}else{
-	elice.think();
+if ("tail" in elice) {
+    elice.bark();
+} else {
+    elice.think();
 }
 ```
 
@@ -5214,29 +5477,29 @@ type Action = "click" | "hover" | "scroll";
 
 // switch
 const doPhotoAction = (action: Action) => {
-  switch(action) {
-    case "click":
-      showPhoto()
-      break;
-    case "hover":
-      zoomInPhoto()
-      break;
-    case "scroll":
-      loadPhotoMore()
-      break;
-  }
-}
+    switch (action) {
+        case "click":
+            showPhoto();
+            break;
+        case "hover":
+            zoomInPhoto();
+            break;
+        case "scroll":
+            loadPhotoMore();
+            break;
+    }
+};
 
 // if
 const doPhotoAction = (action: Action) => {
-  if(action === "click"){
-    showPhoto()
-  }else if(action === "hover"){
-    zoomInPhoto()
-  }else{
-    loadPhotoMore()
-  }
-}
+    if (action === "click") {
+        showPhoto();
+    } else if (action === "hover") {
+        zoomInPhoto();
+    } else {
+        loadPhotoMore();
+    }
+};
 ```
 
 8. `type-guard` 에 유용한 오픈소스
@@ -5246,19 +5509,20 @@ const doPhotoAction = (action: Action) => {
 import is from "@sindresorhus/is";
 
 const getString = (arg?: string) => {
-  if (is.nullOrUndefined(arg)){
-    return "";
-  }
+    if (is.nullOrUndefined(arg)) {
+        return "";
+    }
 
-  if (is.emptyStringOrWhiteSpace(arg)){
-    return '';
-  }
+    if (is.emptyStringOrWhiteSpace(arg)) {
+        return "";
+    }
 
-  return arg;
-}
+    return arg;
+};
 ```
 
 ### ❏ Optional Chaning
+
 1. 접근하는 객체의 프로퍼티가 `null` 또는 `undefined` 일 수 있는 `optional property` 인 경우 `if` 문을 사용하지 않고 넘어가게 하는 체이닝 방법
 2. `es2020` 에서 추가된 문법이며, 객체가 `null` 또는 `undefined` 이면 `undefined` 를 리턴, 그렇지 않은 경우 데이터 값을 리턴
 3. `&&` 와 `?.` 의 차이점: `&&` 는 `falsy` 한 값 체크, `?.` 는 `null` 과 `undefined` 만 체크
@@ -5308,59 +5572,62 @@ function petDog(dog?: Dog) {
 ```
 
 ### ❏ Nullish Coalescing Operator
+
 1. `es2020` 에서 추가된 문법이며, 좌항이 `null`, `undefined` 인 경우에만 `B` 를 리턴
-2. `A ?? B`:  `falsy` 값을 그대로 리턴하고 싶은 경우 사용
+2. `A ?? B`: `falsy` 값을 그대로 리턴하고 싶은 경우 사용
 
 ```typescript
 // price가 0인 경우 -1 반환
-function getPrice1(product: {price?: number}){
-  return product.price || -1;
+function getPrice1(product: { price?: number }) {
+    return product.price || -1;
 }
 
 // price가 0인 경우 0 반환
-function getPrice2(product: {price?: number}){
-  return product.price ?? -1;
+function getPrice2(product: { price?: number }) {
+    return product.price ?? -1;
 }
 
-console.log(0 ?? -1)  // 0
-console.log(0 || -1)  // -1
+console.log(0 ?? -1); // 0
+console.log(0 || -1); // -1
 ```
 
 3. falsy한 값(false로 평가되는 값) 0과 empty string(‘’)이 올 수 있는 변수에 **`||`** 를 쓰면 0, ‘’를 false로 인식하기 때문에 의도치 못한 결과를 초래할 수 있습니다. 실무에서 흔하게 저지르는 실수이기도 합니다. default 값을 지정해줄 때는 **`||`** 이 아니라 **`??`**을 쓰는 것을 권장합니다.
 
 ### ❏ Function overloading
+
 1. 파라미터의 타입만 다르고 비슷한 코드가 반복되고 있는 상황, 코드의 중복을 줄이고 재사용성을 높일때 사용
-2. 파라미터의 형태가 다양한 여러 케이스에 대응하는 같은 이름을 가진 함수를 만드는 것, 함수의 다형성을 지원하는 것 
-3. 함수의 이름이 같아야한다. 매개변수의 순서는 같아야한다. 반환 타입이 같아야 한다. `function` 키워드로만 가능하다, 
+2. 파라미터의 형태가 다양한 여러 케이스에 대응하는 같은 이름을 가진 함수를 만드는 것, 함수의 다형성을 지원하는 것
+3. 함수의 이름이 같아야한다. 매개변수의 순서는 같아야한다. 반환 타입이 같아야 한다. `function` 키워드로만 가능하다,
 4. 함수 오버로딩의 타입 선언부는 런타임에서 제거되고 구현부만 남기때문에, 실제 구현, 정의하는 함수는 하나여야만 한다.
 
 ```typescript
 // 매개변수가 같을 때
 class User {
-  constructor(private id: string){}
+    constructor(private id: string) {}
 
-  setId(id: string): void;
-  setId(id: number): void;
-  setId(id: string | number): void{
-    this.id = typeof id === "number" ? id.toString() : id;
-  }
+    setId(id: string): void;
+    setId(id: number): void;
+    setId(id: string | number): void {
+        this.id = typeof id === "number" ? id.toString() : id;
+    }
 }
 
 // 매개변수의 개수가 다를 때(순서만 지켜주면 된다.)
 class User {
-  constructor(private id: string){}
+    constructor(private id: string) {}
 
-  setId(id: string): void;
-  setId(id: number, radix: number): void;
-  setId(id: string | number, radix?: number): void{
-    this.id = typeof id === "number" ? id.toString(radix) : id;
-  }
+    setId(id: string): void;
+    setId(id: number, radix: number): void;
+    setId(id: string | number, radix?: number): void {
+        this.id = typeof id === "number" ? id.toString(radix) : id;
+    }
 }
 ```
 
 제네릭은 사용하는 시점(제네릭, 인터페이스, 클래스 등등), 함수 오버로딩은 타입을 선언하는 시점(함수, 메서드)
 
 ### ❏ Type assertion
+
 1. 타입스크립트가 추론하지 못하는 타입을 `as keyword` 를 통해 명시해주는 것
 2. `type casting`: 데이터의 타입을 변환, `type assertion` : 데이터의 타입을 명시
 
@@ -5393,6 +5660,7 @@ console.log(result)
 ```
 
 ### ❏ Index Signatrue
+
 1. 객체의 특정 `value` 에 접근할 때 그 `value` 의 `key` 를 문자열로 인덱싱해 참조하는 방법
 2. 객체의 프로퍼티들을 명확하게 알 수 없을 때 사용한다.
 3. 어떤 타입이 올지 알 수 있다면 정확하게 타입을 정의하는것이 실수를 방지할 수 있다.
@@ -5400,33 +5668,35 @@ console.log(result)
 
 ```typescript
 type ArrStr = {
-	[key: string]: string | number;
-}
+    [key: string]: string | number;
+};
 
 // HTTP headers
 type HttpHeaders = {
-    [key: string]: string
-}
+    [key: string]: string;
+};
 
 type HttpHeaders = Record<string, string>;
 
 const headers: HttpHeaders = {
-  'Host': 'elice.io' ,
-  'Connection': 'keep-alive' ,
-  'Accept': '*/*' ,
-  'Access-Control-Request-Method': 'GET' ,
-  'Access-Control-Request-Headers': 'authorization' ,
-  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36' ,
-  'Sec-Fetch-Mode': 'cors' ,
-  'Sec-Fetch-Site': 'same-site' ,
-  'Sec-Fetch-Dest': 'empty' ,
-  'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7' ,
-}
+    Host: "elice.io",
+    Connection: "keep-alive",
+    Accept: "*/*",
+    "Access-Control-Request-Method": "GET",
+    "Access-Control-Request-Headers": "authorization",
+    "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-site",
+    "Sec-Fetch-Dest": "empty",
+    "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
+};
 
-console.log(headers['Host']) // elice.io
+console.log(headers["Host"]); // elice.io
 ```
 
 ### ❏ Decorator
+
 1. 함수가 한 가지 일만하면서 가독성을 높이고 반복되는 코드를 줄일 때 사용한다.
 2. 함수를 감싸는 함수: 기존 함수를 바꾸지 않고 함수를 관찰, 수정, 재정의(오버라이딩)할 수 있는 함수
 3. `babel` 플러그인을 사용해서 데코레이터 기능을 사용한다. `tsconfig.json` 에 `experimentDecorator` 옵션을 `true` 로 설정해줘야 한다.
@@ -5434,11 +5704,13 @@ console.log(headers['Host']) // elice.io
 5. `JS` `stage2` 에 있는 기능이므로, `TS` 에서는 실험적 기능으로써 사용 가능.
 
 ### ❏ 데코레이터를 쓰기 전 알아야 할 자바스크립트 개념
+
 1. 일급객체
 2. 클로저: 외부함수의 실행이 끝나도 내부함수에서 외부함수의 `context` 에 접근할 수 있는 것
 3. 고차함수: 함수를 파라미터로 받아 반환하는 함수.
 
 ### ❏ 고차 함수의 용도
+
 1. 커링: 함수의 매개변수를 받는 시점을 늦출 때
 2. 함수의 실행 시점을 미룰 때(`jest - expect`, `react - onClick`)
 3. 팩토리 함수(인스턴스 객체나 함수를 생성하여 반환하는 함수)를 만들 때
@@ -5447,6 +5719,7 @@ console.log(headers['Host']) // elice.io
 6. 클래스 메서드는 고차 함수의 파라미터로서 전달했을 때 메서드는 인스턴스에 대한 `this` 바인딩을 잃어버린다. 따라서 `higher order`함수를 호출할 때 인스턴스와 메서드를 함께 인자로 전달해줘야 함
 
 ### ❏ Decorator Factory
+
 1. 데코레이터를 사용하려면 `tsconfig.json - experimentalDecorators: true`, `emitDecoratorMetadata: true` `yarn add reflect-metadata` 설정
 2. 고차함수: 함수를 반환하는 함수
 3. 팩토리: 어떤 인스턴스를 사용하여 반환하는 함수, 메서드
@@ -5454,24 +5727,32 @@ console.log(headers['Host']) // elice.io
 5. 특정 인자만 받는다. 추가적인 인자를 주고 싶다면 고차함수에 매개변수를 추가하여 데코레이터 함수 내부에서 사용할 수 있다.
 
 ```typescript
-function enumerable(value: boolean){
-	return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-		descriptor.enumerable = value;
-	};
+function enumerable(value: boolean) {
+    return function (
+        target: any,
+        propertyKey: string,
+        descriptor: PropertyDescriptor
+    ) {
+        descriptor.enumerable = value;
+    };
 }
 
-class Greeter{
-	@enumerable(false)
-	greet(name: string){
-		return "Hello, " + name;
-	}
+class Greeter {
+    @enumerable(false)
+    greet(name: string) {
+        return "Hello, " + name;
+    }
 }
 
 // decoratorFacotry 함수를 선언해주세요.
-function decoratorFactory(value: string){
-    return function(target: any, propertyKey: string, propertyDescriptor: PropertyDescriptor){
-        console.log(value)
-    }
+function decoratorFactory(value: string) {
+    return function (
+        target: any,
+        propertyKey: string,
+        propertyDescriptor: PropertyDescriptor
+    ) {
+        console.log(value);
+    };
 }
 // string 타입이고 이름이 value인 매개변수를 받습니다.
 // 메서드 데코레이터 함수를 반환합니다.
@@ -5479,14 +5760,15 @@ function decoratorFactory(value: string){
 // 메서드 decorator 함수 내부에서 value를 출력해주세요.
 
 class ExampleClass {
-  @decoratorFactory("룰루랄라 퇴근이다")
-  static method() {}
+    @decoratorFactory("룰루랄라 퇴근이다")
+    static method() {}
 }
 
 ExampleClass.method();
 ```
 
 ### ❏ 클래스 데코레이터
+
 1. 생성자 함수를 관찰, 수정, 오버라이딩(재정의) 한다.
 2. 기존 클래스의 코드를 변경하지 않고 `property` 를 추가하거나, 생성자 함수에서 기능을 추가하고 싶을 때 사용한다.
 3. 클래스 선언 직전에 선언된다.
@@ -5496,10 +5778,13 @@ ExampleClass.method();
 7. `d.ts` 파일(타입 선언 파일), `declare class`에는 데코레이터를 사용하지 못함(`experimentalDecorators: true`)를 해도 안된다.
 
 ```typescript
-declare type ClassDecorator = <TFunction extends Function>(target: TFunction) => TFunction | void;
+declare type ClassDecorator = <TFunction extends Function>(
+    target: TFunction
+) => TFunction | void;
 ```
 
 ### ❏ method Decorator
+
 1. 메서드를 관찰, 수정, 오버라이딩 할 수 있다.
 2. 메서드의 `property descriptor` 를 수정하거나 기존 메서드 앞 뒤로 기능을 추가하고 싶을 때 사용한다.
 
@@ -5507,49 +5792,51 @@ declare type ClassDecorator = <TFunction extends Function>(target: TFunction) =>
 import { UserGroup, User, Context } from "./types";
 
 function permission(group: UserGroup) {
-  return function (
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
-    const originFn = descriptor.value;
+    return function (
+        target: any,
+        propertyKey: string,
+        descriptor: PropertyDescriptor
+    ) {
+        const originFn = descriptor.value;
 
-    // decorator function을 작성해주세요.
-    descriptor.value = function (this: any, ...args: any[]) {
-      // viewer의 group이 매개변수의 group보다 높은 경우(권한이 없는 경우) 함수를 실행하지 않고 에러메시지를 출력해주세요.
-      const user = this.context.viewer;
-      if(user.group > group){
-        console.log('permission is denied. viewer group is ' + user.group);
-        return;
-      }
-      // viewer의 group이 매개변수의 group 이하인 경우 원래 함수를 그대로 실행해주세요.
-      return originFn.apply(this, args);
+        // decorator function을 작성해주세요.
+        descriptor.value = function (this: any, ...args: any[]) {
+            // viewer의 group이 매개변수의 group보다 높은 경우(권한이 없는 경우) 함수를 실행하지 않고 에러메시지를 출력해주세요.
+            const user = this.context.viewer;
+            if (user.group > group) {
+                console.log(
+                    "permission is denied. viewer group is " + user.group
+                );
+                return;
+            }
+            // viewer의 group이 매개변수의 group 이하인 경우 원래 함수를 그대로 실행해주세요.
+            return originFn.apply(this, args);
+        };
+
+        return descriptor;
     };
-
-    return descriptor;
-  };
 }
 
 class UserService {
-  constructor(public context: Context) {}
+    constructor(public context: Context) {}
 
-  @permission(UserGroup.NORMAL)
-  updateName(user: User, name: string) {
-    user.name = name;
-  }
+    @permission(UserGroup.NORMAL)
+    updateName(user: User, name: string) {
+        user.name = name;
+    }
 
-  @permission(UserGroup.ADMIN)
-  deactivateUser(user: User) {
-    user.status = "deactivate";
-    return user;
-  }
+    @permission(UserGroup.ADMIN)
+    deactivateUser(user: User) {
+        user.status = "deactivate";
+        return user;
+    }
 }
 
 const normal: User = {
-  id: "1",
-  name: "normal",
-  status: "activate",
-  group: UserGroup.NORMAL,
+    id: "1",
+    name: "normal",
+    status: "activate",
+    group: UserGroup.NORMAL,
 };
 
 const userService = new UserService({ viewer: normal });
@@ -5560,6 +5847,7 @@ console.log(normal.name);
 ```
 
 ### ❏ Accessor Decorator
+
 1. 접근자(`getter`, `setter`) 데코레이터는 접근자를 관찰, 수정, 오버라이딩 할 수 있다.
 2. 접근자의 프로퍼티 설명자에 적용된다. 전달받는 매개변수가 메서드 데코레이터와 똑같다.(`target`, `propertyKey`, `propertyDescriptor`)
 3. `method decorator` 와 같이 `ES5` 보다 낮으면 `undefined` 이 된다. 또한 반환값도 무시된다.
@@ -5567,72 +5855,76 @@ console.log(normal.name);
 
 ```typescript
 function validate(regexp: string | RegExp) {
-  return function ( target: any, property: string, descriptor: PropertyDescriptor ) {
-    const actualFunction = descriptor.set;
+    return function (
+        target: any,
+        property: string,
+        descriptor: PropertyDescriptor
+    ) {
+        const actualFunction = descriptor.set;
 
-    const decoratorFunc = function (this: any, value: string) {
-      const regexpTarget =
-        typeof regexp === "string" ? new RegExp(regexp) : regexp;
-      if (!regexpTarget.test(value)) {
-        throw new Error("invalid value");
-      }
-      return actualFunction?.call(this, value);
+        const decoratorFunc = function (this: any, value: string) {
+            const regexpTarget =
+                typeof regexp === "string" ? new RegExp(regexp) : regexp;
+            if (!regexpTarget.test(value)) {
+                throw new Error("invalid value");
+            }
+            return actualFunction?.call(this, value);
+        };
+
+        descriptor.set = decoratorFunc;
     };
-
-    descriptor.set = decoratorFunc;
-  };
 }
 ```
 
 ```typescript
 function max(maximum: number) {
-  return function (
-    target: any,
-    property: string,
-    descriptor: PropertyDescriptor
-  ) {
-    // setter 함수를 교체하려면 descriptor의 어떤 프로퍼티에 적용해야할까요?
-    const actualFunction = descriptor.set!; // 느낌표는 타입스크립트에 set함수가 있다고 가정한다. (option )
-    
-    const decoratorFunc = function (this: any, value: number) {
-      // value가 maximum보다 커지면 `exceed the maximum number: ${maximum}`를 메시지로 메시지로 하는 Error를 throw해주세요
-      if(value > maximum){
-        throw new Error(`exceed the maximum number: ${maximum}`)
-      }
-      
-      // maximum 이하일 때는 함수를 정상적으로 실행해주세요
-      return actualFunction.call(this, value);
+    return function (
+        target: any,
+        property: string,
+        descriptor: PropertyDescriptor
+    ) {
+        // setter 함수를 교체하려면 descriptor의 어떤 프로퍼티에 적용해야할까요?
+        const actualFunction = descriptor.set!; // 느낌표는 타입스크립트에 set함수가 있다고 가정한다. (option )
+
+        const decoratorFunc = function (this: any, value: number) {
+            // value가 maximum보다 커지면 `exceed the maximum number: ${maximum}`를 메시지로 메시지로 하는 Error를 throw해주세요
+            if (value > maximum) {
+                throw new Error(`exceed the maximum number: ${maximum}`);
+            }
+
+            // maximum 이하일 때는 함수를 정상적으로 실행해주세요
+            return actualFunction.call(this, value);
+        };
+
+        descriptor.set = decoratorFunc;
     };
-    
-    descriptor.set = decoratorFunc;
-  };
 }
 
 class Pagination {
-  constructor() {}
+    constructor() {}
 
-  private _page: number = 0;
+    private _page: number = 0;
 
-  get page() {
-    return this._page;
-  }
+    get page() {
+        return this._page;
+    }
 
-  @max(10)
-  set page(step: number) {
-    console.log()
-    this._page = step;
-  }
+    @max(10)
+    set page(step: number) {
+        console.log();
+        this._page = step;
+    }
 }
 
 const pagination = new Pagination();
 
 // Error: exceed the maximum number: 10
 try {
-  while (true) {
-    pagination.page += 1;
-  }
+    while (true) {
+        pagination.page += 1;
+    }
 } catch (error) {
-  console.log(error);
+    console.log(error);
 }
 ```
 
@@ -5646,116 +5938,117 @@ try {
 6. `property Descriptor` 를 사용하지 않는이유: 프로퍼티의 경우, 인스턴스화 되기 전까 지 프로퍼티가 초기화되는 것을 관찰하거나 수정할 수 없음. 때문에 프로퍼티 데코레이터는 프로퍼티가 `클래스` 에 선언되었음을 관찰하는데만 사용할 수 있다.
 
 ```typescript
-declare type PropertyDecorator = 
-	( target: Object, propertyKey: string | symbol) 
-		=> void | PropertyDecorator
+declare type PropertyDecorator = (
+    target: Object,
+    propertyKey: string | symbol
+) => void | PropertyDecorator;
 
 // 프로토타입 공유
-function 영혼교환식(target:any, propertyKey: string){
-	let name: string;
+function 영혼교환식(target: any, propertyKey: string) {
+    let name: string;
 
-	const getter = function () {
-		return name;
-	}
+    const getter = function () {
+        return name;
+    };
 
-	const setter = function (value: string) {
-		name = value;
-	}
+    const setter = function (value: string) {
+        name = value;
+    };
 
-	return {
-		get: getter,
-		set: setter,
-		enumerable: true,
-		configurable: true,
-	} as any;
+    return {
+        get: getter,
+        set: setter,
+        enumerable: true,
+        configurable: true,
+    } as any;
 }
 
 class Human {
-	@영혼교환식
-	public name: string;
+    @영혼교환식
+    public name: string;
 
-	constructor(name: string){
-		this.name = name;
-	}
+    constructor(name: string) {
+        this.name = name;
+    }
 }
 
 const 햄스터 = new Human("햄스터");
 const 그녀 = new Human("그녀");
 
 그녀.name = "민석씨";
-console.log(햄스터.name) // 민석씨: 인스턴스가 아닌 클래스 프로토타입의 프로퍼티에 적용되기 때문에 값이 공유된다.
+console.log(햄스터.name); // 민석씨: 인스턴스가 아닌 클래스 프로토타입의 프로퍼티에 적용되기 때문에 값이 공유된다.
 
 // 프로토타입 Symbol
-function 영혼교환식(target:any, propertyKey: string){
-	const uniqueKey = Symbol();  // 매번 unique값을 생성
+function 영혼교환식(target: any, propertyKey: string) {
+    const uniqueKey = Symbol(); // 매번 unique값을 생성
 
-	const getter = function (this: any) {
-		return this[uniqueKey];
-	}
+    const getter = function (this: any) {
+        return this[uniqueKey];
+    };
 
-	const setter = function (this: any, value: string) {
-		this[uniqueKey] = value;
-	}
+    const setter = function (this: any, value: string) {
+        this[uniqueKey] = value;
+    };
 
-	return {
-		get: getter,
-		set: setter,
-		enumerable: true,
-		configurable: true,
-	} as any;
+    return {
+        get: getter,
+        set: setter,
+        enumerable: true,
+        configurable: true,
+    } as any;
 }
 
 class Human {
-	@영혼교환식
-	public name: string;
+    @영혼교환식
+    public name: string;
 
-	constructor(name: string){
-		this.name = name;
-	}
+    constructor(name: string) {
+        this.name = name;
+    }
 }
 
 const 햄스터 = new Human("햄스터");
 const 그녀 = new Human("그녀");
 
 그녀.name = "민석씨";
-console.log(햄스터.name)  // 햄스터
+console.log(햄스터.name); // 햄스터
 ```
 
 1. 프로퍼티가 `null` 또는 `undefined` 일 때 기본값을 반환하는 `Default` 데코레이터만들기
 
 ```typescript
 function Default(initalValue: any) {
-  return function (target: any, propertyKey: string) {
-    // 내부 함수에서 쓰일 value를 선언해주세요.
-    let value:any;
-    // value의 타입을 any로 설정해주세요
-    
-    // getter, setter 함수를 작성해주세요
-    // getter: value가 null 또는 undefined면 initalValue를 반환해주세요
-    function getter(){
-        return value ?? initalValue;
-    }
-    
-    // setter: setter 함수의 매개변수 _value를 그대로 value에 할당해주세요
-    function setter(_value: any){
-        value = _value;  // this를 붙이지 않아도 됨.
-    }
-    
-    // propertyDescriptor를 반환해주세요
-    // enumerable, configurable을 함께 설정해주세요
-    const propertyDescriptor = {
-        get: getter,
-        set: setter,
-        enumerable: true,
-        configurable: true
-    }
-    return propertyDescriptor as any;
-  };
+    return function (target: any, propertyKey: string) {
+        // 내부 함수에서 쓰일 value를 선언해주세요.
+        let value: any;
+        // value의 타입을 any로 설정해주세요
+
+        // getter, setter 함수를 작성해주세요
+        // getter: value가 null 또는 undefined면 initalValue를 반환해주세요
+        function getter() {
+            return value ?? initalValue;
+        }
+
+        // setter: setter 함수의 매개변수 _value를 그대로 value에 할당해주세요
+        function setter(_value: any) {
+            value = _value; // this를 붙이지 않아도 됨.
+        }
+
+        // propertyDescriptor를 반환해주세요
+        // enumerable, configurable을 함께 설정해주세요
+        const propertyDescriptor = {
+            get: getter,
+            set: setter,
+            enumerable: true,
+            configurable: true,
+        };
+        return propertyDescriptor as any;
+    };
 }
 
 class Post {
-  @Default(["짱이에요", "멋져요"])
-  public comments?: any[];
+    @Default(["짱이에요", "멋져요"])
+    public comments?: any[];
 }
 
 const post = new Post();
@@ -5775,21 +6068,27 @@ console.log(post.comments);
 
 ```typescript
 // target은 method(any, object), propertyKey는 메서드의 이름(string, symbol), 매개변수의 인덱스(순서)
-declare type ParameterDecorator = (target: Object, propertyKey: string, parameterIndex: number) => void;
+declare type ParameterDecorator = (
+    target: Object,
+    propertyKey: string,
+    parameterIndex: number
+) => void;
 
-function watch(target: Object, propertyKey: string, parameterIndex: number){
-	console.log(`메서드 이름: ${propertyKey}, 데코레이터 인덱스: ${parameterIndex}`)
+function watch(target: Object, propertyKey: string, parameterIndex: number) {
+    console.log(
+        `메서드 이름: ${propertyKey}, 데코레이터 인덱스: ${parameterIndex}`
+    );
 }
 
 class Human {
-	constructor(public name: string){}
-	hello(@wath name: string){}
+    constructor(public name: string) {}
+    hello(@wath name: string) {}
 }
 
 declare type ParameterDecorator = (
-  target: Object,
-  propertyKey: string | symbol,
-  parameterIndex: number
+    target: Object,
+    propertyKey: string | symbol,
+    parameterIndex: number
 ) => void;
 ```
 
@@ -5799,27 +6098,31 @@ declare type ParameterDecorator = (
 import { immutableKey } from "./immutable";
 
 export function validateImmutable(
-  target: any,
-  propertyName: string,
-  descriptor: PropertyDescriptor
+    target: any,
+    propertyName: string,
+    descriptor: PropertyDescriptor
 ) {
-  const method = descriptor.value!;
+    const method = descriptor.value!;
 
-  descriptor.value = function () {
-    // Reflect.getOwnMetadata를 사용해 메타데이터를 가져와주세요
-    const immutableParams:number[] = Reflect.getOwnMetadata(immutableKey, target, propertyName)
-    // 메타데이터에는 paramIndex가 저장되어있습니다.
-     
-    const args = Array.from(arguments as any)
-    // 자바스크립트 함수 내부에서 제공되는 arguments에서 메타데이터의 paramIndex만 필터링 해주세요. 그런 뒤 params 변수에 할당해주세요.
-    const params = args.filter((val, idx) => immutableParams.includes(idx));
-    
-    // params 배열을 순회하며 Object.freeze로 객체를 수정하지 못하게 막아주세요.
-    // map: 배열의 item을 변환하여 배열을 반환
-    // forEach: 배열을 반환하지 않고 각 item에 함수를 적용할 때
-    params.forEach((param) => Object.freeze(param));
-    return method.apply(this, arguments);
-  };
+    descriptor.value = function () {
+        // Reflect.getOwnMetadata를 사용해 메타데이터를 가져와주세요
+        const immutableParams: number[] = Reflect.getOwnMetadata(
+            immutableKey,
+            target,
+            propertyName
+        );
+        // 메타데이터에는 paramIndex가 저장되어있습니다.
+
+        const args = Array.from(arguments as any);
+        // 자바스크립트 함수 내부에서 제공되는 arguments에서 메타데이터의 paramIndex만 필터링 해주세요. 그런 뒤 params 변수에 할당해주세요.
+        const params = args.filter((val, idx) => immutableParams.includes(idx));
+
+        // params 배열을 순회하며 Object.freeze로 객체를 수정하지 못하게 막아주세요.
+        // map: 배열의 item을 변환하여 배열을 반환
+        // forEach: 배열을 반환하지 않고 각 item에 함수를 적용할 때
+        params.forEach((param) => Object.freeze(param));
+        return method.apply(this, arguments);
+    };
 }
 ```
 
@@ -5842,7 +6145,7 @@ class Human {
 }
 ```
 
-1. 여러개의 데코레이터의 실행 순서
+3. 여러개의 데코레이터의 실행 순서
 
 ```typescript
 /**
@@ -5881,4 +6184,115 @@ first(): factory evaluated
 second(): factory evaluated
 second(): called
 first(): called
+```
+
+---
+
+## 📍 26일 11.30.화(실시간 강의)
+
+오늘부터는 `FE`가 아닌 `BE`에 대해서 간략하게 배운다. 여러 프레임워크 중 `Node.js`에 대해서 배우는데 한번 알아보자. 실시간 강의 때는 주로 실습을 하느라 이론을 많이 배우지 못했다. 내일 온라인 강의에서 더 자세하게 알아봐야겠다.
+
+### ❏ Node.js
+1. Chrome V8 javscript 엔진으로 빌드된 `javascript` 런타임입니다.
+2. `Node.js`의 메인스레드는 하나이다. `JS`가 단일쓰레드인것처럼 `node.js`도 한 번에 한줄씩 실행한다.
+3. `Docker`, `Auto scaling` 등을 이용해 `node.js`의 단일 스레드의 단점을 보완 할 수 있다.
+4. `offLoading`: 메인스레드와 이벤트 루프는 서로 영향을 받지 않고 계속 실행된다.(저수준의 오래 걸리는 일은 `node.js`에게, 고수준의 로직은 메인스레드에서 실행한다.)
+5. `LinkedIn`, `NETFLIX`, `UBER` 등에서 `node.js`를 사용한다.
+6. <a href='https://glitch.com/'>Glich</a> 사이트를 통해 온라인에서 무료로 `node.js` 환경을 구축할 수 있다.
+7. 예전의 `JS`는 퍼포먼스가 굉장히 떨어졌다. -> 이상한 코드를 집어넣으면 홈페이지가 느려진다. -> `firefox - spidermonkey`로 인해 성능이 매우 좋아졌다. > `microsoft - node.js`는 해당 환경을 브라우저가 아닌 로컬환경에서 작동시키기 위해 만들었다.
+8. 런타임 환경: 컴퓨터가 실행되는 동안 프로세스나 프로그램을 위한 소프트웨어 서비스를 제공하는 가상 머신 상태
+9. 컴파일 에러: 프로그램 동작 전에 발생하는 에러
+10. 런타임 에러: 프로그램이 잘 동작하다가 중간에 발생하는 에러
+11. `prettier`: 개발자가 작성한 코드를 통일시키는 방법
+12. `eslint`: 자잘한 문법을 잡아준다. 코드를 분석하여 문법적인 오류, 안티 패턴ㅇ르 찾아준다.
+13. `npm init`: `package.json` 생성
+14. `npm init`: `package.json` 생성
+15. `npm i eslint --save-dev`: eslint 설치
+16. 라이브러리 ESLint 설치
+17. `npm i -g npm`
+18. `./node_modules/.bin/eslint --init` : eslint 환경설정
+19. `npm i prettier`: 프리티어 설치
+20. `./node_modules/.bin/prettier filename`
+21. `./node_modules/.bin/prettier filename write`
+22. `format`: format on save
+23. `formatter`: 어떤 문법규칙으로 정리할지 선택하는 기능
+24. `npm i eslint-plugin-airbnb`: airbnb 문법 사용
+
+```javascript
+const http = require("http");  // http 모듈 호출
+const port = 9999;
+
+http.createServer((req, res) => {
+    res.end("Hello, world!");  // end: 담길데이터 다 담겼으니까 요청 글자를 보낸다.
+}).listen(port, () => {
+    console.log("서버가 켜졌어요!!!");
+});
+
+// 이후 F5 -> node.js실행
+// res.end("<p style='color:red'>gimotti!!!</p>");처럼 innerHTML와 같은 코드로도 보낼 수 있다.
+```
+
+25. `commonJS` 방식은 `Node.js`에서 사용하는 방식으로 ES2015 의 모듈 개념이 나오기 전부터 사용됨. 기본은 `CommonJS` 이나, `package.json`을 수정하면 사용할 수 있음
+
+```javascript
+// CommonJS(default)
+const http = require("http");
+
+// ES2015, but 실질적인 사용은 2019년부터
+import http from "http";
+```
+
+26. 동일한 `IP주소` 여도 포트번호를 통해 다르게 연결 할 수 있다.(default: 80)
+27. `JS: Express.js` , `TS: Nest.js + Typescript` (해외에서 많이 쓰이고, 국내에서는 스프링을 많이 쓴다. 스프링은 전자정부에서 권장하는 프레임워크라서 많이 사용된다. 러닝커브가 상당히 빡세다.)
+28. docker: 서버에 무엇인가를 설치할 때 오류가 발생함. 이런 문제를 줄이기 위해 나왔다. 설치가 이미 완료된 컨테이너를 가지고 잇다. 서비스에 올리기만 하면 바로 사용가능함. 모든 기술은 필요에 의해 나왔기 때문에 왜 기술을 사용하는지에 대해 알아두자.
+29. 요즘 개발은 서버와 프론트를 컨테이너 안에 두고 깃허브에서 작성한 코드 커밋 → 테스트 → 빌드 → 자동으로 서버에 올린다. 이러한 과정을 `CI/CD` 라고 부른다.
+
+### ❏ 내장 모듈
+1. `node.js` 내부에서 제공하는 모듈
+2. 모듈명이 같으면 현재 폴더를 기준으로 가장 가까운 모듈을 먼저 가져온다.
+3. `require('fs').readFileSync`: 동기적으로 파일을 불러온다. (아무런 인코딩을 하지 않으면 `byte` 형태로 값을 불러온다. `Buffer`: 16진수 형태)
+
+```javascript
+const fs = require("fs");
+const result = fs.readFileSync("./test");
+const buf = Buffer.from([97, 98, 99, 100, 101]);
+console.log(buf.compare(result)); // 0: 서로 같으면 0을 반환, 1이면 `buf` 가 더 크고, -1이면 `result`가 더 크다.
+
+// 에러처리는 try-catch문으로 실행
+```
+
+4. `node.js` 데이터 구조: `stream` : 데이터를 작은 청크로 쪼개 처리한다. 큰 데이터를 처리하거나 비동기적으로 얻을 수 있는 데이터를 처리할 때 유용하다.
+
+```javascript
+const fs = require("fs");
+const stream = fs.createReadStream("src/test");
+stream.pipe(process.stdout);
+```
+
+5. `__filename`, `__dirname`: 파일 경로, 폴더 경로 표시하는 명령어
+
+```javascript
+console.log("__dirname", __dirname);
+cosnole.log("__filename", __filename);
+```
+
+6. `dns`: `dns` 정보접근
+
+```javascript
+// family: verson(IPv4, IPv6...)
+const dns = require("dns");
+dns.lookup("google.com", (err, address, family) => {
+    console.log(address, family);
+});
+```
+
+7. `path`: 경로설정
+
+```javascript
+const path = require("path");
+const fs = require("fs");
+
+// 절대 경로 넣기
+const filePath = path.resolve(__dirname, "./test.txt");
+const fileContent = fs.readFilSync(filepath, "utf-8");
 ```
