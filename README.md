@@ -6187,7 +6187,6 @@ first(): called
 ```
 
 ---
-
 ## 📍 26일 11.30.화(실시간 강의)
 
 오늘부터는 `FE`가 아닌 `BE`에 대해서 간략하게 배운다. 여러 프레임워크 중 `Node.js`에 대해서 배우는데 한번 알아보자. 실시간 강의 때는 주로 실습을 하느라 이론을 많이 배우지 못했다. 내일 온라인 강의에서 더 자세하게 알아봐야겠다.
@@ -6295,4 +6294,386 @@ const fs = require("fs");
 // 절대 경로 넣기
 const filePath = path.resolve(__dirname, "./test.txt");
 const fileContent = fs.readFilSync(filepath, "utf-8");
+```
+
+---
+## 📍 27일 12.1.수(온라인 강의)
+오늘은 2021년 마지막 해의 첫 날이다. 그날 배운 내용들을 복습하는 글도 27번째 쓰고있는데, 22년 2월까지 하루도 빠짐없이 복습하는 글을 작성했으면 좋겠다. 현업에 뛰어들어서 볼 지금의 글들이 밤톨이나마 도움이 된다면 나의 목표는 달성한 것이다. 강의에서는 어제 실시간 강의로 간략하게 배웠던 `node.js`, `express.js`, `module` 등에 대해서 조금 자세하게 배웠다.
+  
+### ❏ node.js의 등장 배경
+1. 웹의 발전에 의해 등장함. 단방향 통신 위주였던 `WEB1.0` 에서 사용자와 상호작용하는 `WEB2.0` 으로 발전하게 되면서 웹페이지의 동작은 더욱 복잡해졌고, 복잡한 `JS` 를 실행하기위해 고성능의 `JS` 실행기가 필요해졌다. 크롬에서는 웹브라우저를 위한 `V8` 엔진을 만들게 됨 `V8` 엔진으로 인해 `JS` 속도가 상당히 빨라지게 됐고, `V8` 엔진을 이용해서 웹 브라우저에서만 사용하는것이 아닌 어느 환경에서나 동작시킬 수 있도록 만들어진것이 `node.js` 이다. 즉, `js` 를 어느환경에서나 실행할 수 있게 해주는 실행기라고 할 수 있다.
+2. 브라우저에서의 `JS`: 브라우저에서 실행, 웹 내부 제한된 동작, 웹 프론트 개발자의 언어
+3. `node.js`: 크로스 플랫폼 실행, 제한 없는 동작, 다양한 어플리케이션 개발, 모든 개발자의 언어가 되었다.
+4. `FE` : React.js, `BE`: Express.js,(최근 가장 인기 있는 웹서비스 구성), `Mobile`: React-native,(한가지 코드로 IOS와 Android 개발), `Desktop-app`: Electron(discord, slack 등 앱개발), `Machine-Learning`: Brain.js (JS로 구현하는 딥러닝)
+
+![](https://images.velog.io/images/abcd8637/post/ad5ca1e3-ba08-42f4-83a8-47bf8ff67d4b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2009.20.00.png)
+
+### ❏ node.js의 특징
+1. 싱글 스레드 - 비동기 - 이벤트 기반
+2. 스레드: 명령을 실행하는 단위, 싱글스레드는 한 번에 한 가지 동작만 실행 가능, 멀티쓰레드는 동시에 여러 동작 수행 가능하다.
+3. 장점: 스레드가 늘어나지 않기 때문에 리소스 관리에 효율적
+4. 단점: 스레드 기반의 작업들의 효율이 떨어짐(CPU 연산 작업)
+5. 그래서 `node.js` 는 비동기 동작으로 스레드 기반의 작업을 최소화한다.
+6. 비동기: 동작을 실행한 후 완료가 되길 기다리지 않는 방식, 동작의 완료를 기다리지 않기 때문에 다른 동작을 바로 실행 가능, `node.js` 는 싱글 스레드이기 때문에 비동기 방식을 사용함.
+7. 멀티스레드는 한번에 여러가지 동작을 수행하기 때문에 동작을 수행하고 완료를 기다리는 동안 `CPU` 리소스가 낭비되는 반면, 싱글스레드는 한번에 여러가지 동작을 수행할 수 없지만 동작의 완료를 기다리지 않기 때문에 `CPU` 리소스를 효율적으로 사용할 수 있다.
+8. 이벤트 기반: 비동기 동작의 완료를 처리하는 방법. 비동기 방식은 특정 동작을 실행한 후, 해당 동작을 전혀 신경쓰지 않음. 대신 해당 동작이 완료될 경우 실행 할 함수를 미리 등록함. 비동기 동작이 완료되면 미리 등록된 함수를 실행한다.
+9. `node.js` 는 싱글 스레드기 때문에 비동기 동작이 필요하고 비동기 동작을 구현하기 위해 이벤트 기반의 동작 방식을 사용한다.
+
+![](https://images.velog.io/images/abcd8637/post/099e18f8-03f5-482c-a601-06272f907e33/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2009.27.01.png)
+
+### ❏ node.js 시작하기
+1. `node.js` 는 빠르게 개발 중이므로 보안 이슈 및 버그 수정, 최신기술을 빠르게 적용한다. 급변하는 기술은 가장 안정적인 최신 버전을 선택하는 것이 최선이다.
+2. `LTS(Long-term support)`: `node.js` 의 안정적이고, 오래 지원하는 버전 명
+3. 가장 최신의 기술보다 안정적이고 최신의 버전을 선택하자.
+
+### ❏ ES6
+1. `ECMA6` 버전 이후를 통틀어 일반적으로 `ES6` 라고 부름
+2. `ECMAScript`: 계속해서 발전해가는 `JS` 의 표준문법, 2015년 `ES6` 이후 많은 현대적인 문법이 추가됨
+3. `let`, `const`: 상수와 변수 구분 가능
+4. `Template String`: 기존에는 줄 바꿈은 `\n` 를 사용했으나 `backtick` 사용시 `\n`을 사용하지 않아도 된다. 변수는 `${}` 와 같이 사용할 수 있다.
+5. `arrow-function`: 기존 함수는 `function` 으로 선언했으나, `()=>{}` 와 같이 간결하게 표현 가능하다.
+6. `class`: 기존에는 객체 지향을 구현하기 위해 `function` 과 `prototype` 을 사용했다. `class` 는 `function` 으로 선언하고 클래스의 멤버나 메소드를 구현할 때는 `prototype` 을 사용했다. 이는 직관적이지 않고 가독성이 떨어졌다. `ES6` 에서 `class` 형태로 객체 지향적인 코드를 작성할 수 있다.
+7. `destructing`: `Object` 에서 값을 꺼낼 때 일일이 작성하지 않고 `{} = obj` 처럼 변수를 꺼낼 수 있다.
+
+### ❏ 비동기 코딩
+1. 비동기: 이벤트 기반 동작을 코드로 구현하는 방법
+2. `callback`: 전통적인 `JS` 의 이벤트 기반 코딩 방식
+
+```javascript
+// callback
+// getUsers로 넘기는 함수가 이벤트 함수이고, 이러한 형태를 콜백이라 부른다.
+// 쿼리가 완료되면 오류가 있는지, 혹은 성공했는지 여부를 인자형태로 받는다.
+// 에러와 결과를 같이 전달하는 것이 표준으로 자리잡혀 있음
+
+db.getUsers((err, users) => {
+	console.log(users)
+});
+
+// callback-hell
+// async1, async2, async3...을 동기적으로 실행해야 하는 경우, node.js는 기본적으로 비동기 동작을 callback으로 처리하기 때문에 콜백지옥 현상이 일어난다.
+db.getUsers((err, users) => {
+	if (err) {
+		return;
+	}
+	async1(users, (r1) => {
+		async2(r1, (r2) => {
+			async3(r2, (r3) => {
+				...
+			});
+		});
+	});
+});
+```
+
+3. `Promise`: callback 의 단점을 보완한 비동기 코딩 방식
+
+```javascript
+// promise: 함수의 동작이 완료되면 then에 등록된 callback을 실행한다. 오류가 발생한 경우 catch문의 callback 실행
+// promise.chaning으로 코드를 간결하게, short-hand 표현으로 더욱 간결하게 표현 가능
+db.getUsersPromise()
+	.then((users) => {
+		return promise1(users);
+})
+	.then(r1 => promise2(r1))
+	.catch(... );
+
+// callback을 promise 함수로 변경하기
+// async1 함수의 실행 결과에 따라 resolve, reject로 분리
+// reject는 catch에 등록된 callback 실행, resolve는 then에 등록된 callback 실행
+function getUsersPromise(params){
+	return new Promise((resolve, reject) => {
+		getUsers(params, (err, users) => {
+			if(err){
+				reject(arr);
+				return;
+			}
+			resolve(users);
+		});
+	});
+}
+```
+
+4. `Async-await`: `promise` 의 단점을 보완한 비동기 코딩 방식, `promise` 의 다른 문법
+
+```javascript
+// async-await: 리턴 값은 promise
+// await 한 promise 함수가 완료될 때까지 다음 라인으로 넘어가지 않음
+// 순차적 프로그래밍처럼 작성 가능하다.
+async function doSomething() => {
+	const r1 = await promise1();
+	const r2 = await promise2(r1);
+	const r3 = await promise3(r1, r2);
+	...
+	return r3;
+}
+
+doSomething().then(r3 => {
+	console.log(r3);
+});
+
+// err처리
+async function doSomething(msg) => {
+	try {
+		const r1 = await promise1();
+		console.log(r);
+	}catch(e){
+		console.log(e)
+	}
+}
+
+// parallel run: promise 함수를 동시에 실행시키고 등록된 모든 함수가 마무리되면 결과값을 한꺼번에 반환
+// 총 2초의 시간 소요
+async function parallel(){
+	const [r1, r2] = await Promise.all([
+		promise1(),
+		promise2(),
+	]);
+	console.log(r1, r2);
+}
+
+// 총 3초의 시간 소요
+async function doSomething() => {
+	const r1 = await promise1();
+	const r2 = await promise2();
+	console.log(r1, r2)
+}
+```
+
+5. `callback-hell` : `promise chaining` 으로 해결
+6. `promise-hell`: `async-await` 으로 해결
+7. 대부분 가독성이 좋은 `async-await` 을 사용하지만, 상황에 따라 `callback`, `promise` 를 구사할 줄 알아야 한다.
+
+### ❏ 이벤트 루프
+1. 이벤트를 처리하는 반복되는 동작(loop)
+2. `node.js` 가 비동기 - 이벤트 동작을 처리하는 일련의 반복 동작이며, 비동기 코딩이 어떤 순서로 수행되는지에 대해 이해할 수 있다.
+3. 브라우저와 `node.js` 의 이벤트 루프는 기본적인 동작방식에 큰 차이가 없음. 이벤트루프의 기본적인 동작 원리를 이해하는 것이 중요하다.
+4. `call stack`: `LIFO` 스택, 이벤트 루프는 콜스택이 비어있을 때까지 스택의 함수를 실행한다.
+5. `message queue`: `setTimeout` 같은 지연실행 함수를 등록하는 `FIFO` 큐, 콜스택이 비어있을 경우 이벤트 루프에 의해 등록된 함수를 콜 스택에 추가한다.(setTimeout은 콜스택이 비어있을 때 실행)
+6. `job queue`: `Promise` 에 등록된 콜백을 등록하는 `FIFO` 큐, 상위 함수가 종료되기 전에 콜스택이 비어있지 않더라도 잡큐에 등록된 콜백을 콜스택에 추가한다.(promise는 상위함수가 종료되기 전 실행)
+
+### ❏ npm
+1. `npm(node package manager)`: `node.js` 프로젝트를 관리하는 필수적인 도구(온라인 저장소 + 커맨드라인 도구)
+2. `npm 저장소`: 필요한 라이브러리나 도구를 손쉽게 검색 가능. `node.js` 의 인기로, 거대한 생태계를 보유
+3. 커맨드라인 도구: 프로젝트 관리를 위한 다양한 명령어 제공(프로젝트 설정 / 관리, 프로젝트 의존성 관리)
+4. `npm init`: 해당 디렉토리 안에서 `package.json` 이라는 파일을 만들고, 이 디렉터리는 `node.js` 프로젝트가 된다.
+5. `package.json`: 프로젝트 관련 정보들이 저장되는 파일. 이 파일을 직접 수정하거나 `npm` 명령어를 사용하여 프로젝트의 정보를 수정할 수 있음
+6. 의존성: 프로젝트 내에서 라이브러리를 관리하는 방법, 프로젝트가 실행되기 위해 라이브러리에 의존하기 때문에 이러한 라이브러리들을 `dependency(의존성)` 이라고 부른다.
+7. 라이브러리: 특정 기능을 수행하는 코드의 묶음, 복잡한 기능을 직접 작성하지 않고, 다른 사람이 구현한 것을 사용하는 방법(`node.js` 에서는 패키지라고도 부른다.)
+8. `npm install`(약어 `npm i`): 프로젝트 의존성 관리 가능(의존성 추가, 의존성 내려받기, 개발용 의존성 추가, 전역 패키지 추가)
+9. `npm install [package-name]`: 필요한 패키지를 프로젝트에 추가한다. 추가된 패키지는 `package.json` 의 `dependencies` 안에 추가되며, `node_modules` 디렉터리에 저장된다.
+10. `npm install [package-name] --save-dev`: 개발용 의존성은 배포 전까지만 사용하느 의존성(유닛 테스트 라이브러리 등)인데, `--save-dev` 옵션을 이용하면 개발용 의존성을 추가할 수 있다. 개발용 의존성은 `package.json-devDependencies` 에 추가된다. 기본적으로 `node_modules` 디렉터리는 코드 관리나 배포시에 업로드 하지 않는데, 의존성이 많아지면 용량이 너무 커지고 운영체제별로 실행되는 코드가 다른 경우가 존재하기 때문이다.
+11. `npm install --production`: 프로젝트 배포시 개발용 의존성을 포함하지 않고 내려받는다. `package.json-dependencies` 만 `node_modules` 에 내려받는다.
+12. `npm install [package-name]@[version]`: `~1.13.0`: 1.13.x버전 설치, `~^1.13.0`: 1.x.x 버전 설치, 가장 왼쪽의 0이 아닌 버전을 고정, `0.13.0`: 0.13.0 버전만 설치(버전이 달라 오류가 날 때 주로 사용)
+13. 프로젝트에 의존성을 추가하면 `package-lock.json` 이라는 파일이 생성됨. 프로젝트에 의존성을 추가하면 자동으로 `^`최신버전으로 추가가 되는데, 의존성 버전이 갑자기 변경되지 않도록, 설치된 버전을 고정하는 역할을 한다.
+14. `npm install [package-name] —global`: 패키지를 전역 패키지 디렉토리에 내려받는다. 커맨드라인 도구들을 주로 전역 패키지로 추가해서 받음(`express-generator,pm2`)
+15. 로컬 패키지: `package.json` 에 선언되어 있고, `node_modules` 에 저장된 패키지
+16. 전역 패키지: `npm install -g` 를 통해 내려받아, 전역 패키지 저장소에 저장된 패키지
+17. 전역 패키지도 프로젝트에서 사용할 수 있으나, 프로젝트의 의존성이 `package.json` 내에 명시적으로 선언되어 있는 것이 프로젝트 관리의 좋은 방향이다.
+18. `npm remove [package-name]`: 의존성 패키지를 삭제한다. `dependencies`, `devDependencies` 에서 삭제하고 `node_modules` 에서도 삭제한다.
+19. `npm run [script-name]` : 스크립트(간단한 동작을 수행하는 코드)를 실행한다.
+20. `npm script` : 의존성 패키지를 사용할 수 있음
+21. `npm test`: 코드 유닛테스트 등에 사용
+22. `npm start`: 프로젝트 실행
+23. `npm stop`: 프로젝트 종료
+24. `run` 을 제외하고 사용할 수 있을뿐, `npm` 내부적으로 코드를 제공해 주는것은 아니다.
+
+### ❏ npx
+1. `npm` 패키지를 설치하지 않고 사용할 수 있게 해주는 도구, 프로젝트에 추가하거나 전역 패키지로 추가하지 않고 `npx` 를 이용하여 바로 실행할 수 있음
+2. `gist` 코드를 다운받지 않고 바로 실행 가능(코드를 잘 확인하고 실행해야 함)
+
+```javascript
+// npm
+npm i cowsay -g
+cowsay hi
+
+// npx
+npx cowsay hi
+npx node@12 index.js
+```
+
+### ❏ module
+1. 간단한 프로그램이라면 파일 하나로도 가능, 프로젝트가 커지면 기능에 맞게 코드를 분리하는 것이 중요하다. 모듈은 코드를 분리하기 위한 방법
+2. 반복되는 코드는 모듈로 분리하여 사용(재사용성 증가)
+3. 패키지는 모듈의 모음, `npm` 패키지들은 많은 모듈을 포함하고 있는 코드 모음
+4. `process`: 현재 실행프로세스 관련 기능 제공(`arch`, `argv`, `env`, `abort`, `kill`, `exit`)
+5. `fs`: 파일 입출력을 하기 위해 사용(`readFile`, `writeFile`, `watch` 로 파일 / 디렉터리 변경 이벤트 감지)
+6. `http`: `http` 서버, 클라이언트를 위해 사용, `createServer` 함수로 서버 생성, `request` 함수로 `http` 요청 생성
+7. 기타 기본제공 모듈 확인하기: <a href='https://nodejs.org/dist/latest-v14.x/docs/api/'>node.js/doc</a>
+
+### ❏ 모듈의 작성과 사용
+1. `require` 함수를 통해 모듈을 `load` 할 수 있음
+2. 의존성 패키지, 직접 작성한 모듈 사용 가능
+3. `node.js` 의 모듈은 첫 `require` 시 `cache` , 두 번 실행하지 않음
+4. 모듈 코드를 여러 번 실행하기 위해선 함수 모듈로 작성
+5. 의존성 패키지들은 `require('package-name')` 로 `load` 가능하다. 패키지를 사용하려면 `node_modules` 에 내려받아져 있어야 함
+
+```javascript
+
+const name = "elice";
+const age = 5;
+const nationality = "korea";
+
+// 모듈의 기본적인 사용법
+// 모듈이 load 될 때 사용될 값을 module.exports로 내보냄
+module.exports = {
+	name,
+	age,
+	nationality
+}   
+
+// 변수명으로 export 하는 모듈 작성하기
+// 모듈을 object로 만들고, 각 key - value를 지정해서 내보냄
+exports.name = name;
+exports.age = age;
+exports.nationality = nationality;
+
+const student = require('./elice');  // { name: "alice", age: 5, nationality: "korea" }
+
+// 함수를 export하는 모듈
+module.exports = (name, age, nationality) => {
+	return {
+		name,
+		age,
+		nationality
+	}
+}
+
+// npm 패키지 모듈
+const dayjs = require('dayjs');
+console.log(dayjs());
+
+// 직접 작성한 모듈
+const myModule = require('./my-module');
+console.log(myModule);
+
+// 함수형 모듈: 함수형은 load한 즉시 실행되지 않음
+const myFunctionModule = require('./my-function-module');
+console.log(myFunctionModule(name, age, nationality));
+
+// json 모듈: json파일도 load가능, object로 자동파싱
+const myData = require('./my-data');
+console.log(myData)
+```
+
+### ❏ ES Module
+1. ES6에서 등장한 JS의 공식적인 표준 모듈
+2. JS는 기본적으로 모듈을 제공하지 않았다.
+3. `node.js` 는 독자적인 방식을 통해 모듈을 지원하고 있었다(common js)
+4. ES module의 등장으로 `node.js` 에서는 2가지 모듈을 지원해야한다.
+5. `commonjs` 는 `module.exports`, `require` 로 모듈을 사용, `ES module` 은 `export` 와 `import` 로 모듈을 만들고 사용
+6. 현재 `ES Module` 은 `node.js` 에서 기본적으로 사용하기에 제약이 많다.(프로젝트 타입을 `module` 로 변경, `commonjs` 모듈 `import` 시 문제 발생 등)
+
+### ❏ 웹의 이해
+1. 웹 서비스는 기본적으로 `HTTP` 요청과 응답의 반복으로 이루어짐. `HTTP` 요청은 사용자가 어떤 데이터가 필요한지를 서버에게 알리는 역할, `HTTP` 응답은 `HTTP` 요청에 해당하는 적절한 데이터를 전달하는 역할
+
+![](https://images.velog.io/images/abcd8637/post/8709385a-0f67-4f2c-9cb0-b856268bea83/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2013.54.35.png)
+
+2. 정적 웹(Web 1.0): 사용자와 상호작용하지 않는 페이지 - 단방향 통신, `Link` 를 통한 페이지 이동 정도만 가능, 일반적으로 변하지 않는 `html` 파일로 제공
+3. 동적 웹(Web 2.0): 사용자와 상호작용을 함 - 양방향 통신, 구글 맵, 웹, 채팅 등 사용자가 다양한 기능을 수행할 수 있음, `FE` 와 `BE` 가 유기적으로 통신하며 동작한다. 현대적인 웹은 대부분 동적 웹이다.
+4. `CSR` : 프론트엔드에서 사용자가 페이지에서 보는 동적인 부분을 대부분 처리하는 방식(사이트가 변하는 부분을 프론트엔드에서 처리, 페이지 리소스들이 미리 정의, `API` 통신이용, `API` 호출이 완료된 후에 보여준다. 복잡한 프로젝트 구성, 개발 사이즈가 커진다.)
+5. `SSR`: 백엔드에서 페이지 대부분의 영역을 처리해서 프론트엔드로 전달하는 방식(프론트엔드는 `HTTP` 응답을 받아 화면에 표시, 백엔드에서 필요한 데이터가 포함된 페이지를 만들어서 `HTTP` 응답에 전달, 백엔드에서 `HTML` 파일을  작성해서 프론트로 전달, 쉬운 구성, 작은 개발사이즈, 로딩이 느려보이고, 페이지가 이동하면 페이지가 깜빡인다.)
+6. 웹서버는 `HTTP` 요청과 `HTTP` 응답으로 이루어지는데 클라이언트는 서버로 `HTTP` 요청을 보내고, 서버는 `HTTP` 응답을 보낸다.
+
+### ❏ 웹 프레임워크
+1. 웹 서비스에 필요한 기능들을 제공해주는 다양한 도구들의 모음, 필요한 부분만 집중해서 개발 할 수 있음
+2. `HTTP 요청`, `HTTP 응답`, `라우팅`, `HTML Templating`
+3. 라우팅: `HTTP` 요청에 따라 알맞은 응답을 보내주는 경로를 설정하는 일
+4. `HTML Templating`: `SSR` 을 구현하기 위한 방법, `SSR` 에서 응답으로 보낼 `HTML` 을 서버에서 작성하기 위해 `HTML Template` 를 통해 미리 페이지의 뼈대를 작성 가능
+5. `node.js` 의 다양한 웹 프레임워크: `Express.js`, `Koa.js`, `Nest.js`, `Hapi`, `Sails.js`, `Meteor.js` 등등
+
+### ❏ Express.js 시작하기
+1. `node.js` 웹 프레임워크 중 가장 유명한 웹 프레임워크
+2. 필요에 따라 유연하게 구조 설정 가능
+3. 다양한 미들웨어를 통해 필요한 기능을 간단하게 추가 기능
+4. 모든 동작이 명시적으로 구성되기 때문에, 웹 프레임워크의 동작 방식을 이해하기 가장 좋은 프레임워크
+5. `npm init express`
+6. `express-generator`: 프로젝트 생성기, 리액트의 `CRA` 와 비슷함
+
+```javascript
+// npm 시작
+npm i -g express-generator
+express my-web
+cd my-web
+npm i
+npm start
+
+// npx 시작
+npx express-generator
+cd my-web
+npm i
+npm start
+```
+
+### ❏ Express.js 구조
+
+![](https://images.velog.io/images/abcd8637/post/0d5266c7-d607-4288-8b5a-0b8863ae3cfe/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2014.21.14.png)
+
+### ❏ Express.js 동작방식
+1. `express-generator` 로 만들어진 프로젝트 디렉토리에 접근하여, `npm start` 로 `Express.js` 프로젝트를 실행할수 있고 `[localhost:3000](http://localhost:3000)` 에 접속하여 페이지를 확인할 수 있다.
+
+```javascript
+1. localhost:3000 접속
+2. app.js -> app.use('/', indexRouter);
+3. routes/index.js -> router.get('/', ...)
+4. routes/index.js -> res.render('index', ...)
+5. views/index.jade
+```
+
+2. app.js: `express()` 로 생성되는 `app` 객체를 확인할 수 있다. `Express.js` 의 기능을 담은 객체
+3. 라우팅: `app라우팅`, `express 라우팅`
+4. `path parameter`: 주소의 일부를 변수처럼 사용할 수 있다.
+
+```js
+1. /users/:id - /users/123, /users/456 등으로 접속했을 때 라우팅 적용
+2. /messges/:from-:to /message/123-456/ 등으로 접속했을 때 라우팅 적용
+```
+
+5. `request handler - request`:  라우팅에 적용되는 함수, `HTTP` 요청과 응답을 다룰 수 있는 함수로, 설정된 라우팅 경로에 해당하는 요청이 들어오면 `Request handler` 함수가 실행됨
+
+![](https://images.velog.io/images/abcd8637/post/c0917c7f-e341-426f-9d3d-47833c4ec7e5/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2015.02.32.png)
+
+```javascript
+// 설정된 라우팅 경로에 해당하는 요청이 들어오면 `request handler` 함수를 실행한다.
+router.get('/:id', (req, res) => {
+	const id = req.params.id
+	res.send(`hello ${id}`);
+});
+```
+
+6. `resquest-handler - response`: HTTP 응답을 처리하는 객체, HTTP 응답의 데이터를 전송하거나, 응답 상태 및 헤더를 설정할 수 있음
+
+![](https://images.velog.io/images/abcd8637/post/491ccb9e-2905-4a01-97df-f766b09f0b0f/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2015.03.04.png)
+
+```javascript
+// path parameter
+const express = require('express');
+
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send("hi");
+});
+
+// path parameter 사용하기
+app.get('/say/:greeting', (req, res) => {
+    const { greeting } = req.params;
+    res.send(greeting);
+});
+
+app.listen(8080);
+
+// router 연결
+const express = require('express');
+const userRouter = require('./routes/users');
+
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send("OK");
+});
+
+/* 라우터를 '/users' 경로에 연결 */
+app.use('/users', userRouter)
+
+app.listen(8080);
 ```
