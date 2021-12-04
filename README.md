@@ -7044,3 +7044,267 @@ app.use((req, use, next) => {
 
 ### ❏ 미들웨어 작성과 사용
 이하 실습 코드 생략
+
+---
+## 📍 30일차 12.4.토(온라인 강의)
+오늘은 `mongoDB`와 `express.js`를 연동하여 `CRUD`하는 법을 배웠다. 예전에 `mongoDB`를 이용하여 최신 기사를 한눈에 보여주는 <a href='https://blog.naver.com/abcd8637/222152180429'>지금 뉴스!</a> 프로젝트를 진행했으나, `AWS` 무료 티어기간이 끝나서 취소하는 바람에 서버를 닫았다. 그때는 `Robo 3T` 프로그램으로 `mongoDB`를 조작했는데 이번에는 <a href='https://www.mongodb.com/ko-kr'>mongoDB</a> 홈페이지에 `cloud` 기능과 연동하는 법을 배웠다. mongoDB 홈페이지에서 다루니까 훨씬 `UX`가 좋았다.
+
+### ❏ MongoDB
+1. 대표적인 `NoSQL`, `Document DB` mongo는 Humongous에서 따온 말로, 엄청나게 큰 DB, 대용량 데이터를 처리하기 좋게 만들어짐
+2. `NoSQL` (Not Only SQL): 구조화된 질의어를 사용하지 않는 데이터베이스, 자료간의 관계에 초점을 두지 않음. 데이터를 구조화하지 않고 유연하게 저장함  
+3. `RDB` (Relational Database): 관계형 데이터 베이스, 자료들의 관계를 주요하게 다룸, SQL 질의어를 사용하기 위해 데이터를 구조화 해야함
+4. 왜 `NoSQL`을 사용하는가? `SQL`을 사용하기 위해서는 데이터를 구조화하는 것이 필수이다.(`DDL`) 스키마에 정의된 데이터가 아니면 저장할 수 없는 제약이 따르는데, `NoSQL` 을 사용하면 사전작업 없이 DB 를 사용할 수 있다.(DB크기에 관여하지 않고 프로젝트를 빠르게 진행할 수 있음)
+
+```SQL
+// MySQL
+CREATE DATABASE simple_board
+
+CREATE TABLE posts (
+	id NOT NULL AUTO INCREAMENT
+	title VARCHAR(30),
+	content TEXT,
+	PRIMARY KEY(id)
+)
+
+INSERT INTO posts (title, content)
+VALUES
+('first title', 'first content'),
+('second title', 'second content')
+
+// MongoDB
+use simple_board
+db.posts.insert([
+	{
+		title: 'first title',
+		content: 'first content'
+	},
+	{
+		title: 'first title',
+		content: 'first content'
+	}
+])
+```
+
+5. NoSQL은 다양한 종류가 있지만, 대표적으로 자료를 문서로 저장하는 `DocumentDB` 가 일반적, 이 외에, `key-value`, `Graph`, `large collection` 등의 `NoSQL DB` 가 존재한다.
+6. `mongoDB` 를 직접 설치하거나 `Cloud` 서비스를 사용할 수 있음. 직접 설치하면 귀찮고 어렵지만, 원하는 만큼 얼마든지 데이터를 사용할 수 있음. `Cloud` 를 사용하면 쉽고 빠르게 시작 가능하지만, 사용량에 따라 요금이 부과된다.
+7. 직접 설치하기: 직접 모든 DB 관련 설정을 해야한다. sharding 이나 replication 등의 작업이 필요할 때 운영지식과 노하우가 요구된다. 무료로 제공하는 community version 을 제공함
+8. `mongoDB cloud`: 모든 DB 기능을 웹에서 관리 가능하다. 특별한 노하우없이 DB 운용 가능하고 `512MB`까지는 평생 무료로 사용가능
+9. `mongoDB compass`: mongoDB에 접속하여 Database, collection, document 등을 시각화하여 관리할 수 있게 도와주는 도구, MySQL workbench 와 유사
+
+### ❏ MongoDB의 기본 개념
+1. `Database`: 하나 이상의 `collection` 을 가질 수 있는 저장소, `SQL`에서의 `database` 와 유사 
+2. `Collection`: 하나 이상의 `Document`가 저장되는 공간. SQL 에서의 table 과 유사하다. 하지만, collection 이 document 의 구조를 정의하지 않음
+3. `Document`: `mongoDB` 에 저장되는 자료, SQL 에서 row 와 유사하지만, 구조제약 없이 유연하게 저장 가능, JSON 과 유사한 BSON 을 사용하여 다양한 자료형을 지원한다.
+4. `document - objectID` : 각 document 의 유일한 키 값, SQL 의 primary key 와 유사하다. 하나씩 증가하는 값이 아닌 document 를 생성할 때 자동으로 생성되는 값(timestamp + random value + auto increament)
+
+### ❏ Mongoose ODM
+1. `ODM(Object Data Modeling)`: MongoDB의 collection에 집중하여 관리하도록 도와주는 패키지 Collection 을 모델화하여, 관련 기능들을 쉽게 사용할 수 있도록 도와줌
+2. `MongoDB` 는 기본 `Node.js` 드라이버는 연결상태를 관리하기 어려움 이때, `Mongoose` 를 사용하면 간단하게 데이터베이스와의 연결상태를 관리해줌.
+3. 스키마 관리: 스키마를 정의하지 않고 데이터를 사용하는 것은 NoSQL 의 장점이지만, 데이터 형식을 미리 정의 해야 코드 작성과 프로젝트 관리에 유용함. `Mongoose` 는 `Code-level` 에서 스키마를 정의하고 관리할 수 있게 해줌, 중간단계에서 체크해주고 관리함
+4. `populate`: `mongoDB`는 `join` 을 제공하지 않음. `join` 과 유사한 기능을 사용하기 위해서 `aggregate` 라는 복잡한 쿼리를 사용하지만 `Mongoose` 에서 `populate` 를 사용하여 간단하게 구현할 수 있음
+
+### ❏ Mongoose ODM 사용순서
+1. 스키마 정의 → 모델 만들기 → 데이터베이스 연결 → 모델 사용
+2. 스키마 정의: `Collection` 에 저장될 `Document` 의 스키마를 `Code-level` 에서 관리할 수 있도록 `schema` 를 작성할 수 있음. 다양한 형식을 미리 지정하여 생성, 수정 작업 시 데이터 형식을 체크해주는 기능을 제공함. `timestamps` 옵션을 사용하면 생성, 수정 시간을 자동으로 기록해 줌
+
+```javascript
+const { Schema } = require('mongoose');
+
+const PostSchema = new Schema({
+	title: String,
+	content: String,
+}, {
+	timestamps: true,
+});
+
+module.exports = PostSchema
+```
+
+3. 모델 만들기: 작성된 스키마를 `mongoose` 에서 사용할 수 있는 모델로 만들어야 함. 모델의 이름을 지정하여 `populate` 등에서 해당 이름으로 모델을 호출 할 수 있음
+
+```javascript
+const mongoose = require('mongoose');
+const PostSchema = require('./schemas/board');
+exports.Post = mongoose.model('Post', PostSchema)
+```
+
+4. 데이터베이스 연결하기: `connect` 함수를 이용하여 간단하게 DB 에 연결할 수 있음. `mongoose` 는 자동으로 연결을 관리해주기 때문에 직접 연결 상태를 체크하지 않아도 모델 사용 시 연결 상태를 확인하여 사용이 가능할 때 작업을 실행 함
+
+```javascript
+const mongoose = require('mongoose');
+const { Post } = require('./models');
+mongoose.connect('mongodb://localhose:27017/myapp');
+```
+
+### ❏ 모델 사용하기 - 간단한 CRUD
+
+![](https://images.velog.io/images/abcd8637/post/5f2948d4-a672-49e9-bcd5-92c2d5ba714d/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-04%2012.09.12.png)
+
+1. `CREATE`: create 함수를 사용하여 Document생성, create 함수에는 Document Object 나 (단일 Document) Document Object 의 Array 전달 가능(복수Document), create 는 생성된 Document 를 반환해줌
+
+```javascript
+const { Post } = require('./models');
+
+async function main(){
+	const created = await Post.create({
+		title: 'first title',
+		content: 'second title',
+	})
+
+	const multipleCreated = await Post.create([
+		item1,
+		item2
+	])
+}
+```
+
+2. `FIND(READ)`: find 관련 함수를 사용하여 document 를 검색, query 를 사용하여 검색하거나 findById 를 사용하면 objectID 로 document 를 검색할 수 있음
+
+```javascript
+const { Post } = require('./models');
+async function main() {
+	const listPost = await Post.find(query);
+	const onePost = await Post.findOne(query);
+	const postById = await Post.findById(id);
+}
+```
+
+3. `query` : MongoDB 에도 SQL where 와 유사한 조건절 사용 가능. MongoDB 의 query 는 BSON 형식으로 기본 문법 그대로 mongoose 에서도 사용 가능, {key: value}로 `exact match`
+
+```javascript
+Person.find({
+	name: 'AYW',
+	age: {
+		$lt: 20,  // less then: 미만(and)
+		$gte: 10,  // grater then equal: 이상(and)
+	},
+	languages: {
+		$in: ['ko', 'en']  // in: 존재하면(and)
+	},
+	$or: [  // or: acive이거나 true인 값 중 하나
+		{ status: 'ACTIVE' },
+		{ isFresh: true },
+	]
+})
+```
+
+4. `mongoose` 는 쿼리 값으로 배열로 전달하면 자동으로 `$in` 쿼리를 생성해준다.
+
+```javascript
+Person.find({name: ['elice', 'ted' ]})  // { name: { $in: ['elice', 'ted' ]}}
+```
+
+5. `UPDATE`: update 관련 함수를 사용하여 document 를 수정, find~ 함수들은 검색된 document를 업데이트를 반영하여 반환해준다. 반면, update 는 기본적으로 $set operator 를 사용하여 document 를 통째로 변경하지 않는다.
+
+```javascript
+async function main(){
+	const updateResult = await Post.updateOne(query, {});
+	const updateResults = await Post.updateMany(query, {});
+	const postById = await Post.updateOne(query, {});
+	const onePost = await Post.findOneAndUpdate(query, {})
+}
+```
+
+6. `DELETE` : delete 관련 함수들을 사용하여 document 삭제결과를 리턴한다. find~ 함수들은 검색된 document 를 반환해준다.
+
+```javascript
+async function main(){
+	const deleteResult = await Post.deleteOne(query, {});
+	const deleteResults = await Post.deleteMany(query, {});
+	const onePost = await Post.findOneAndDelete(query, {});
+	const postById = await Post.findByIdAndDelete(query, {})
+}
+```
+
+7. `populate`:  document 안에 document 를 담지 않고 objectID 를 가지고 reference 하여 사용할 수 있는 방법, document 에는 reference 되는 ObjectID 를 담고, 사용할 때 populate 하여 하위 Document 처럼 사용할 수 있게 해줌
+
+```javascript
+const Post = new Schema({
+	user: {
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	comments: {
+		type: Schema.Types.ObjectId,
+		ref: 'Comment'
+	}
+})
+
+const post = await Post.find().populate(['user', 'comments']);
+```
+
+### ❏ Express.js + Mongoose ODM
+1. `Express.js` 는 프로젝트 구조를 자유롭게 구성할 수 있기 때문에 어느 부분에 `Mongoose ODM` 을 위치시키면 좋을지 적절한 위치를 결정하는 것이 중요
+2. 일반적으로 `models` 디렉터리에 `Schema` 와 `Model` 을 같이 위치시킨다. `app` 객체는 어플리케이션 시작을 의미하는 부분으로 해당 부분에 데이터베이스 연결을 명시하는 `mongoose.connect` 를 위치한다. 특별한 제약이 있는것은 아니다.
+
+![](https://images.velog.io/images/abcd8637/post/015977e8-b060-4a36-876b-28414b573f3c/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-04%2016.34.38.png)
+
+3. `Express.js` 어플리케이션은 종료되지 않고 동작하기 때문에, 계속해서 DB 가 정상적으로 동작하는지 파악하기 위해 동작 중에 발생하는 DB 연결 관련 이벤트에 대한 처리를 하는 것이 좋음
+
+```javascript
+// connection events
+mongoose.connect('----');
+mongoose.connection.on('connected', () => {});  // 연결완료
+mongoose.connection.on('disconnected', () => {});  // 연결끊김
+mongoose.connection.on('reconnected', () => {});  // 재연결 완료
+mongoose.connection.on('reconnectFailed', () => {});  // 재연결 시도 횟수 초과
+```
+
+### ❏ Sequelize ORM
+1. `ORM`(Object-Relational Mapping): `MySQL`, `PostgreSQL` 등의 `RDBMS` 를 이용하는 간단한 방법 `ODM` 이 단순히 모델에 집중하여 관리하는 것에 반해, `ORM` 은 테이블 관계와 쿼리 등의 기능을 더욱 단순화하는 용도로 주로 사용
+2. `sequelize` 도 연결을 관리하는 간단한 방법을 제공, `mongoose` 가 `mongoDB` 만 연결이 가능한데에 반해, `sequelize` 는 `MySQL`, `PostgreSQL` , `SQLite` 등 다양한 `RDBMS` 에 연결가능하다.
+3. 나중에 `node.js`로 관계형 데이터베이스를 구현하고 싶으면 `Sequelize`를 공부하자.
+
+```javascript
+// connect db
+const sequelize = new Sequelize('database', 'usename', 'password', {
+	host: 'localhost',
+	dialect: 'mysql'
+})
+```
+
+4. 스키마 작성: `define` 을 통해 `Schema` 생성, `sequelize` 는 `Schema`가 `DDL도` 생성해준다.
+
+```javascript
+const User = sequelize.define('User', {
+	name: {
+		type: DataTypes.STRING(10),
+		allowNull: false,
+	},
+	age : {
+		type: DataTypes.Integer,
+	}
+}, {})
+```
+
+5. 관계 정의: 테이블 간의 관계를 `Code-level` 로 관리 할 수 있다. 이를 이용하면 외래키 설정과 제약조건까지 `DDL` 로 생성한다. 또한 다대다 관계 설정을 통해 `relation table` 도 자동으로 생성한다.
+
+```SQL
+User.hasMany(Post);
+Post.belongsTo(User);
+Foo.belongsToMany(Bar);
+Bar.belongsToMany(Foo);
+```
+
+6. 쿼리: Operator 를 이용해 SQL 쿼리를 코드로 작성 가능, 스키마의 관계 설정을 한 경우 include 를 사용하여 자동으로 join 쿼리 생성 가능 
+
+```SQL
+User.findAll({
+	where: {
+		name: 'elice',
+		age: {
+			[Op.lt]: 20,
+			[Op.gte]: 10.
+		},
+	},
+	include: User,
+})
+```
+
+7. `Synchronization`: `define`된 model 데이터를 바탕으로 DDL 을 자동으로 실행해줌. 직접 데이터베이스에 접속하여 테이블 생성 및 관리를 할 필요가 없음. 자동으로 생성된 DDL 을 따르지 않으면 테이블 관리가 어려워 짐
+
+```javascript
+sequelize.sync();
+```
+
+8. `Sequelize ORM` 를 사용하면 데이터베이스에 직접 DDL 을 사용하지 않고, JS 코드로 테이블 및 관계를 관리할 수 있다. 또한 RDB 의 어려운 점 중 하나인 join 을 includes 옵션을 통해 간단하게 사용할 수 있다.
