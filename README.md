@@ -7444,3 +7444,513 @@ program.command('remove').action(async () =>
 4. `app.use(express.urlencoded({extended: false}))`: js 내부 모듈 중 `query-string` 모듈이 있는데 우리가 사용하기 편하게 분석해서 `req.body` 에 넣어주고. `extended: true` 를 사용하면 `qs` 모듈을 이용해서 `req.body` 에 넣어준다. (`query-string` 에 비해 보안성에서 뛰어나다?정도의 차이, 단점은 버전관리) 
 5. POST로 한글(유니코드)을 넘길때 몇몇 프록시에서 한글이 깨지는 경우가 있다. (대부분은 지원함)
 6. 개발시 귀찮더라도 범용성있게 작성해야한다. (안되는 브라우저를 위해서)
+
+---
+## 📍 32일차 12.8.수. 온라인 강의
+오늘은 `CRUD를 이용하여 게시판 만들기`,` Template Engine`, `Pug`, `PM2`을 배웠다. `node.js`의 기본언어는 `JS`인데, 한가지의 언어로 프론트와 백을 다룬다고 생각하니까 가슴이 웅장해졌다. (아직은 어색하지만..) 자주 살펴보며 눈에 익히는 것이 아무래도 좋겠지??
+
+### ❏ 게시판 만들기
+1. 웹 서비스 개발의 기본을 학습하기 좋다. 게시판을 통해 기본기를 잘 다지면 무엇이든 응용 가능
+2. 게시판 목록, 보기, 수정, 작성, 삭제
+3. 회원가입, 로그인, 비밀번호 찾기, pagination, 구글 로그인, 유저 작성글 모아보기
+
+### ❏ Template Engine
+1. 서버에서 클라이언트로 보낼 `HTML` 형태를 미리 템플릿으로 작성하고 동작시에 미리 작성된 템플릿에 데이터를 넣어 완성된 `HTML`을 생성한다.
+2. 템플릿 엔진은 템플릿 작성 문법과 템플릿을 `HTML` 형태로 변환하는 기능을 제공한다.
+
+![](https://images.velog.io/images/abcd8637/post/87224629-659a-4550-ac3d-4e76a6144652/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-08%2009.10.41.png)
+
+3. `Express.js`의 템플릿엔진: `EJS`(html과 유사한 문법), `Mustache`(간단한 데이터 치환정도만 제공하는 경량화 된 템플릿 엔진), `Pug`(들여쓰기 표현식을 사용한 간략한 표기와 레이아웃 등 강력한 기능을 제공)
+
+### ❏ Pug
+1. 들여쓰기 표현식을 이용해 가독성이 좋고 개발 생산성을 높인다.
+2. `HTML`을 잘 몰라도 문법적인 실수를 줄일 수 있다.
+3. `layout`, `include`, `mixin` 등 강력한 기능을 제공한다.
+4. `HTML` 닫기 태그 없이 들여쓰기로 블럭을 구분한다.
+5. `=` 을 이용해 전달받은 변수를 사용할 수 있다.
+6. `id` 나 `class` 는 태그 뒤에 이어서 바로 사용하고, `()` 를 이용해서 `attribute` 를 사용한다.
+7. `each-in`: `for` 과 비슷한 태그
+8. `if, else if, else` : 조건문
+
+```pug
+// index.pug
+html
+	head
+		title= title   // title 변수 사용
+	body
+		h1#greeting 안녕하세요
+		a.link(href="/") 홈으로
+
+// each, if
+each item in arr
+	if item.name == 'new'
+		h1 New Document
+	else
+		h1= `${item.name}`
+
+// layout.pug
+html
+	head
+		title= title
+	body
+		block content
+
+// main.pug, 반복되는 웹사이트의 틀을 작성하고 extends하며 개발하면 매우 편리하다.
+extends layout  // layout을 extends하면 block 부분에 작성한 HTML 태그가 포함됨
+block content  // block을 포함한 템플릿은 layout으로 사용가능
+	h1 Main Page
+
+// include, layout은 바깥에 선언하고 가져다 쓰고, include는 조각을 만들어서 가져다 쓴다.
+// 자주 반복되는 구문을 미리 작성하고 include하여 사용한다.
+// 일반적인 텍스트파일도 include하여 템플릿에 포함 가능하다.
+
+// title.pug
+h1= title
+
+// main.pug
+extend layout
+block content
+	include titie
+	div.content
+		안녕하세요
+	pre
+		include article.txt
+
+// mixin, 템플릿을 함수처럼 사용할 수 있다. 
+// include는 값을 지정할 수 없지만, mixin은 파라미터를 지정하여 값을 넘겨받아 템플릿에 사용할 수 있다.
+
+// listItem.pug 
+mixin listItem(title, name)
+	tr
+		td title
+		td name
+
+// main.pug
+include listItem
+table
+	body
+		listItem('제목', '이름')
+```
+
+### ❏ Express.js와 pug의 연동
+1. `app.set` 을 이용해 템플릿이 저장되는 디렉토리를 지정하고, 어떤 템플릿 엔진을 사용할지 지정할 수 있다.
+2. `res.render` 함수는 `app.set` 에 지정된 값을 이용해 화면에 그리는 기능을 수행한다. `render` 함수의 첫 번재 인자는 템플릿의 이름, 두번째인자는 템플릿에 전달되는 값
+
+```javascript
+// app.js
+app.set('views', 
+	path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+// request handler
+res.render('main', {
+	title: 'Hello Express',
+});
+```
+
+3. `app.locals` : `render` 함수에 전달되지 않은 값이나 함수를 사용할 수 있다. 템플릿에 전역으로 사용될 값을 지정하는 역할
+
+```javascript
+// app.js
+app.locals.appName = "Express"
+
+// main.pug
+h1= appName
+<h1>Express</h1>
+```
+
+### ❏ Express-generator 사용 시 템플릿 엔진 지정하기
+1. `express-generator` 는 기본적으로 `jade` 라는 템플릿 엔진을 사용한다.
+2. `jade` 는 `pug` 의 이전 이름으로, 최신 지원을 받으려면 템플릿 엔진을 `pug` 로 지정해야 한다. 
+3. `--view`: 템플릿 엔진을 지정할 수 있다.
+
+```javascript
+$ express --view=pug myapp
+```
+
+### ❏ 게시판 CRUD 만들기
+1. 데이터를 다루는 네 가지 기본적인 기능 
+2. Create: 게시글 작성기능, 제목, 내용, 작성자, 작성 시간 등의 정보를 기록함, 게시글의 제목과 내용은 최소 n글자 이상이어야 함
+3. Read: 게시글의 목록과 게시글의 상세를 볼 수 있어야 함. 목록은 간략화된 정보를 보여줌, 게시글 상세는 제목, 작성자, 내용, 작성 시간, 수정 시간 등의 상세한 정보를 보여줘야 한다.
+4. Update: 게시글은 수정이 가능해야한다. 제목, 내용을 수정하고, 수정 시간을 기록한다. (게시글 수정은 작성자만 가능하다. + 회원기능)
+5. Delete: 게시글 삭제하기, (게시글 삭제는 작성자만 가능하다. + 회원기능)
+6. 모델선언하기: `ID` 는 url에 사용하기 좋은 값이 아니기 때문에 `shortId` 로 생성한다. 제목, 내용, 작성자를 `string` 타입으로 스키마에 선언한다.(작성자는 회원가입 후 실시) `timestamps`옵션으로 작성 시간, 수정 시간을 자동으로 기록해준다.
+
+```javascript
+// shortId 타입을 mongoose custom type으로 선언
+// nanoid: 중복 없는 문자열 생성
+// default를 이용해 모델 생성시 자동으로 아이디 생성
+const { nanoid } = require('nanoid');
+
+const shortId = {
+	type: String,
+	default: () => {return nanoid()},
+	require: true,
+	index: true,
+}
+
+module.exports = shortId;
+```
+
+### ❏ 게시글 작성 흐름
+1. `/posts?write=true` 로 작성페이지 접근
+2. `<form action="/posts" method="post">` 를 이용해 `post` 요청 전송
+3. `[router.post](http://router.post)` 를 이용하여 `post` 요청 처리
+4. `res.redirect` 를 이용하여 `post` 완료 처리
+
+```javascript
+// ./routes/posts.js
+const { Router } = require('express');
+
+const router = Router();
+
+router.get('/', (req, res, next) => {
+	if (req.query.write){
+		res.render('posts/edit');  // write 값이 있으면 edit파일로 연결한다.
+		return;
+	}
+	...
+});
+
+module.exports = router;
+
+// ./views/posts/edit.pug
+...
+form(action='/posts', method="post")
+	table
+		tbody
+			tr
+				th 제목
+				td: input(type='text' name='title')
+			tr
+				th 내용
+				td: textarea(name='content')
+			td
+				td(colspan="2")
+					input(type="submit" value="등록")
+
+// ./routes/posts.js
+const { Post } = require('./models);
+
+router.post('/', async (req, res, next) => {
+	const { title, content } = req.body;
+	try{
+		await Post.create({
+			title,
+			content,
+	});
+	res.redirect('/');  // 게시글 작성 후 홈 화면으로 이동하기
+	} catch(err){
+		next(err);
+	}
+}
+```
+
+### ❏ 게시글 목록 및 상세 흐름
+1. `/posts` 로 목록 페이지 접근
+2. `<a href='/posts/:shortId'>` 를 이용하여 상세 URL link
+3. `router.get('/:shortId')` path parameter를 이용하여 요청을 처리함
+
+```javascript
+// ./routes/posts.js
+// 처음 접속시 모든 리스트를 불러온다.
+router.get('/', async(req, res, next) => {
+	const posts = await Post.find({});
+	res.render('/posts/list', { posts });  // posts/list에 { posts } 값이 넘어간다.
+});
+
+router.get('/:shortId', async(req, rse, next) => {
+	const { shortId } = req.params;
+	const post = await Post.findOne({ shortId });
+	if(!post){
+		next(new Error('Post notfound!');
+		return;
+	}
+	res.render('posts/view', { post });  // posts/view로 값 보내기
+});
+
+// ./views/posts/list.pug
+...
+	table
+		tbody
+			each post in posts  // each로 반복문 돌기
+				tr
+					td
+						a(href='/posts/${post.shortId}') = post.title 
+					td= post.author
+					td= formatDate(post.createdAt)  // formatDate: custom function
+		tfoot
+			tr
+				td(colsapn='3')
+					a(href="/posts?write=true") 등록하기
+
+// app.js
+// dayjs 패키지 사용
+const dayjs = require('dayjs');
+app.locals.formatDate = (date) => {
+	return dayjs(date).format('YYYY-MM-DD HH:mm:ss');
+}
+
+// ./views/posts/view.pug
+...
+	table
+		tbody
+			tr
+				td(colspan="2")= post.title
+			tr
+				td= post.author
+				td= formatDate(post.createdAt)
+			tr
+				td(colspan="2"): pre= post.content
+			tr
+				td: a(href='/posts/${post.shortId}?edit=true') 수정
+				td button(onclick=`deletePost("${post.shortId}")`) 삭제	
+```
+
+### ❏ 게시글 수정 흐름
+1. `/posts/{shortId}?edit=true` 로 수정페이지 접근
+2. 작성페이지를 수정페이지로도 동작하도록 작성
+3. `<form action="/posts/:shortId" method="post">` 를 이용해 `post` 요청 전송
+4. html form 은 `PUT method`를 지원하지 않기 때문에 `post` 사용
+5. `res.redirect` 는 항상 GET요청으로 넘어간다.
+
+```javascript
+// ./routes/posts.js
+router.get('/:shortId', async (req, res, next) => {
+	if (req.query.edit){
+		res.render('posts/edit', { post });
+	}
+	...
+});
+
+// 수정 요청 처리하기
+router.get('/:shortId', async (req, res, next) => {
+	const { shortId } = req.params;
+	const { title, content } = req.body;
+	const post = await Post.findOneAndUpdate({ shortId }, { title, content })  // shortId를 찾아 새로운 title, content로 바꾸겠다.
+	if(!post){  // 상세 post가 없으면
+		next(new Error('Post notfound');
+		return;
+	}
+	res.redirect(`/posts/${shortId}`);  // redirect는 항상 GET요청으로 넘어간다.
+});
+
+// ./views/posts/edit.pug
+...
+	- var action = post ? `/posts/${post.shortId}` : "/posts"  // post가 있는 경우에는 상세 페이지로 이동, 그렇지 않은 경우는 작성하기 위한 URL로 보낸다.
+	form(action=action, method="post")
+		table
+			tr
+				th 제목
+				td: input(type="text" name="title" value=post&post.title) // post가 있으면 제목을 post.title로 채우기
+			tr
+				th 내용
+				td: textarea(name="content")= post&&post.content  // post가 있으면 내용을 post.content로 채우기
+			td
+				td(colspan="2")
+					- var value = post ? "수정" : "등록"
+					input(type="submit" value=value)
+```
+
+### ❏ 게시글 삭제 흐름
+1. 게시글 상세 페이지에 삭제 버튼 추가
+2. `html form` 은 DELETE 메서드를 지원하지 않음
+3. `JS` 를 이용해 `fetch` 함수로 `HTTP Delete` 요청 전송
+4. `router.delete` 의 응답을 `fetch` 에서 처리
+
+```javascript
+// posts/view.pug
+td
+	button.delete(onclick='deletePost("${post.shortId}")') 삭제
+
+// delete.pug, promise로 실행된다.
+script(type="text/javascript").
+	function deletePost(shortId){
+		fetch('/posts/' + shortId, { method: 'delete' })
+			.then((res) => {
+				if (res.ok) {
+					alert('삭제가 완료되었습니다.');
+					window.location.href='/posts';  // 삭제 완료 후 게시글 목록으로 이동
+				}else{
+					alert('오류가 발생했습니다.');
+					console.log(res.statusText);
+				}
+			}) 
+		.catch((err) => {
+			console.log(err);
+			alert('오류가 발생했습니다.');
+		});
+}
+
+// 삭제 요청 처리하기
+// ./routes/posts.js
+router.delete('/:shortId', async (req, res, next) => {
+	const { shortId } = req.params;
+	try{
+		await Post.delete({ shortId });  // mongoDB 내 해당 데이터 삭제
+		res.send('OK');
+	}catch(e){
+		next(e);
+	}
+});
+```
+
+### ❏ Async Request Handler
+1. 공식적으로 사용되는 `express` 기술은 아니고 패턴 중 하나임.
+2. `async` 함수를 조금 더 쉽게 사용할 수 있고, 비동기 실행 중 오류 처리를 더 간단하게 할 수 있는 장점이 있다.
+3. `request handler` 에서 오류를 처리하기 위한 방법 (`promise().catch(next)`, `async function, try - catch, next`)
+4. `async` 의 비동기 처리는 매우 편리하지만, 매번 `try-catch` 구문을 작성하는 것은 귀찮고 실수하기 쉬움 따라서 `request handler` 를 `async function` 으로 작성하면서 `try-catch next` 를 자동으로 할 수 있도록 구성한 아이디어
+5. `asyncHandler` 는 `requestHandler` 를 매개변수로 갖는 함수형 미들웨어, 전달된 `requestHandler` 는 `try-catch` 로 감싸져 `asyncHandler` 내에서 실행되고, `throw` 되는 에러는 자동으로 오류처리 미들웨어로 전달되도록 구성됨.
+6. 오류처리를 올바르게 사용하지 않으면 `express` 앱이 종료될 수 있다.
+7. `next` 인자는 제거하고 `try-catch` 구문을 제거해도 동일하게 오류 처리가 가능하다.
+
+```javascript
+const asyncHandler = (requestHandler) => {
+	return async (req, res, next) => {
+		try{
+			await requestHandler(req, res);
+		}catch(err){
+			next(err);
+		}
+	}
+}
+
+router.get('/', asyncHandler(async (req, res) => {
+	const posts = await Post.find({});
+	if (posts.length < 1){
+		throw new Error('Not found');
+	}
+	res.render('posts/lists', { posts });
+});
+
+// 실제 적용 코드(next 인자는 빼줘야한다.)
+// posts.js
+const { Router } = require('express');
+const { Post } = require('../models');
+const asyncHandler = require('../utils/async-handler');
+
+const router = Router();
+
+router.get('/', asyncHandler(async (req, res) => {
+  if (req.query.write) {
+    res.render('post/edit');
+    return;
+  }
+  
+  const posts = await Post.find({});
+  
+  res.render('post/list', { posts });
+}));
+
+router.get('/:shortId', asyncHandler(async (req, res) => {
+  const { shortId } = req.params;
+  const post = await Post.findOne({ shortId });
+  
+  if (req.query.edit) {
+    res.render('post/edit', { post });
+    return;
+  }
+  
+  res.render('post/view', { post });
+}));
+
+router.post('/', asyncHandler(async (req, res) => {
+  const { title, content } = req.body;
+  
+  if (!title || !content) {
+      throw new Error('제목과 내용을 입력해 주세요');
+  }
+
+  const post = await Post.create({ title, content });
+  res.redirect(`/posts/${post.shortId}`);
+}));
+
+router.post('/:shortId', asyncHandler(async (req, res) => {
+  const { shortId } = req.params;
+  const { title, content } = req.body;
+  if (!title || !content) {
+      throw new Error('제목과 내용을 입력해 주세요');
+  }
+    
+  await Post.updateOne({ shortId }, { title, content });
+  res.redirect(`/posts/${shortId}`);
+}));
+
+router.delete('/:shortId', asyncHandler(async (req, res) => {
+  const { shortId } = req.params;
+  await Post.deleteOne({ shortId });
+  res.send('OK');
+}));
+
+module.exports = router;
+```
+
+### ❏ Pagination
+1. 데이터가 많아지면 한 페이지의 목록에 모든 데이터를 표현하기 어려움. 따라서 데이터를 균일한 수로 나누어 페이지로 분리하는 것(ex, 10개씩 나누어 1페이지는 10~20, 2페이지는 11~20번까지 보여주기)
+2. `page`: 현재 페이지, `perPage`: 페이지 당 게시글 수
+3. `/posts?page=1&perPage=10` 처럼 `url query` 를 사용해 전달, `url query` 는 문자열로 넘어가기 때문에 사용시 `number` 로 형 변환을 해줘야 한다.
+
+```javascript
+router.get( => {
+	const page = 
+			Number(req.query.page || 1)  // `page`가 없으면 default 1
+	const perPage = 
+			Number(req.query.perPage || 10)  // `perPage`가 없으면 default 10
+})
+```
+
+4. `mongoDB` 의 `limit`, `skip` 을 사용하여 구현도 가능하다. (`limit`: 검색 결과 수 제한, skip: 검색 시 포함하지 않을 데이터 수)
+
+```javascript
+// 데이터의 순서가 유지 될 수 있도록 sort를 사용한다.
+// 최신순으로 정렬하고 처음부터 몇개의 게시물을 제외시키고 나머지 게시물은 몇개씩 가져오는지
+router.get(... => {
+	const total = await Post.countDocument({});
+	const posts = await Post.find({})
+		.sort({ createdAt: -1 })  // 최신순정렬
+		.skip(perPage * (page - 1))
+		.limit(perPage);
+	const totalPage = Math.ceil(total / perPage);  // 게시글 수 / 페이지 당 게시글 수 = 총 페이지 수 
+})
+
+// pug
+// patination이 필요한 페이지에서 해당 템플릿을 include한 후, + pagination으로 mixin을 사용 함.
+// 현재 페이지는 b 태그로 굵게 표시
+mixin pagination(path)
+p
+  - for(let i=1; i<=totalPage; i++)
+		a(href=`${path}?page=${i}&perPage=${perPage}`)
+			if i == page
+				b= i
+			else
+				= i
+      = " "
+
+include pagination
+tr
+	td
+		+pagination("/posts")
+```
+
+### ❏ PM2 (Process Manager)
+1. `Node.js` 의 작업을 관리해주는 `Process Manager`
+2. `node` 명령어로 실행 시 오류 발생이나 실행 상태 관리를 할 수 없음
+3. `pm2` 는 작업 관리를 위한 다양한 유용한 기능을 제공해 줌
+4. 안정적인 프로세스 실행: 오류발생 시 자동 재실행
+5. 빠른 개발환경: 소스 코드 변경 시 자동 재실행
+6. 배포 시 편리한 관리: pm2에 모든 프로세스를 한 번에 관리
+7. `pm2 init simple`, `pm2 init` 이후 `pm2 start` 명령어 실행 개발 시 `watch` 옵션 사용하여 파일 변경 시 서버 자동 재실행 구성
+
+```javascript
+// ecosystem.config.js
+module.exports = {
+	apps: [{
+		name: 'simple-board',
+		script: './bin/www',
+		watch: '.',  // 모든 경로를 바라본다.
+		ignore_watch: 'views',
+	}],
+}
+
+$ pm2 start
+```
