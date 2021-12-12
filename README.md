@@ -8004,3 +8004,322 @@ $ pm2 start
 17. `AWS - route 53` 에서 `DNS` 에 `SSL` 을 직접 붙인다. `ELB` 에도 `SSL` 을 붙여야한다. 이후 뒷단에 있는 `EC2` 서버로 넘어간다.
 18. `ELB` 를 쓰는 이유는 `autoScaling` 을 쓰기 위함이다.
 19. 인스턴스를 늘릴 때는 사용률이 51%를 넘어섰을 때 이때 서버가 터져버리면 다음서버는 `@ + 51%` 가 되는데 다음 서버가 50이면 서버가 터져버린다. 
+
+---
+## 📍 34일차 12.10.금. 온라인 강의
+오늘은 `회원가입`, `passport.js`, `session-store`, `댓글 기능`을 배웠다.
+
+### ❏ 회원가입
+1. 이메일, 이름, 패스워드의 간단한 정보만 사용(이메일 형식이 올바른지 확인, 비밀번호 최소 길이 설정, 패스워드와 패스워드 확인 문자가 일치하는지 확인)
+2. 회원의 비밀번호를 `DB`에 그대로 저장하면, 관리자가 모든 회원의 비밀번호를 알 수 있고, `DB`가 해킹되면 보안 취약점이 발견하게 되므로 `hash`값으로 비밀번호를 저장한다.(`hash`는 문자열을 되돌릴 수 없는 방식), 비밀번호의 `hash`값을 `DB`에 저장하고, 로그인 시 전달된 비밀번호를 `hash`하여 저장된 값과 비교해 로그인을 처리한다.
+3. `node.js`의 기본제공 모듈인 `crypto` 모듈을 사용하여 `hash` 값을 얻을 수 있다. 간단하게 `sha1` 알고리즘을 사용하거나, 보다 강력한 `sha224`, `sha256` 등의 알고리즘도 사용할 수 있다.
+
+```javascript
+const hash = crypto.createHash('sha1');
+hash.update(password);
+hash.digest("hex");
+```
+
+4. 회원가입 페이지 구현 -> `script`를 이용해 이메일 형식, 비밀번호 확인 문자 -> `form`을 이용해 `post` 요청 전송 -> 회원가입 처리 및 `redirect`
+
+```javascript
+// 비밀번호 hash 값 저장
+// 이미 존재하는 회원인지 체크
+// 가입 후 메인화면으로 redirect
+
+router.post(... => {
+	const { email, name, password } = req.body;
+	const pwHash = getHash(password);
+	const exists = await User.findOne({ email })
+
+	if (exists){
+		throw new Error("이미 가입된 메일입니다.");  // try - catch 문이 아니므로 async request handler를 사용한다.
+	}
+
+	await User.create({
+		email,
+		name,
+		password: pwHash,
+	})
+
+	res.redirect('/');  // 메인화면으로 보내기
+})
+```
+
+### ❏ passport란?
+1. `express.js` 어플리에키션에 간단하게 사용자 인증 기능을 구현하게 도와주는 패키지, 유지 세션 관리 및 다양한 로그인 방식 추가 기능 제공
+2. `passport-local`: 다양한 로그인 방식을 구현하기 위해 `strategy`라는 인터페이스를 제공한다. `strategy`는 인터페이스에 맞게 설계된 다양한 구현체(facebook, google, ...)들이 있다. `passport-local` 은 `username`, `password`를 사용하는 로그인 구현체를 의미한다.
+
+```javascript
+1. 로그인 화면 구성
+2. passport-local strategy로 로그인 구현하기
+3. passport.js 설정하기
+4. passport로 요청 처리하기
+
+// passport-local stratgy
+// config 정보 전달 -> authenticate 실행(config를 인자로 전달받음 이메일, 패스워드, 완료처리 콜백함수(done)) -> 데이터 찾기
+
+const config = {
+	usernameField: 'email',
+	passwordField: 'password',
+}
+
+const local = new LocalStrategy(config, )
+
+..., async(email, password, done) => {
+	try{
+		const user = await User.findOne({ email });
+		if(!user){
+			throw new Error("회원을 찾을 수 없읍니다.");
+		}
+
+		if(user.password !== getHash(password)){
+			throw new Error("비밀번호가 일치하지 않읍니다.");		
+		}
+
+	// 세션에 저장되는 유저 정보의 최소화
+    // 첫 번째 인자: error, 두번째인자: data
+		done (null, {
+			shortId: user.shortId,
+			email: user.email,
+			name: user.name
+		});
+	}catch(e){
+		done(e, null)
+	}
+}
+
+// passport.js
+// 작성한 strategy를 passport.user를 이용해 사용하도록 선언해야 함
+// passport.use를 이용해 strategy를 사용하도록 선언한 후 passport.authenticate를 사용해 해당 strategy를 이용해 요청을 처리할 수 있음
+const local = require('./strategies/local');
+passport.use(local);
+
+// routes/auth.js
+router.post('/', 
+	passport.authenticate('local');
+...
+
+// app.js
+// passport.authenticate 함수를 http 라우팅에 연결하면 passport가 자동으로 해당하는 strategy를 사용하는 request handler를 자동 생성
+// express-session과 passport.session()을 사용하면 passport가 로그인 시 유저 정보를 세션에 저장하고 가져오는 동작을 자동으로 수행해 줌
+const session = require('express-session');
+app.use(session({
+	secret: 'secret',
+	resave: false,
+	saveUninitialized: true,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use('/auth', authRouter);
+
+// session 유저 활용하기
+// session을 이용해 user를 사용할 때는 serializeUser와 deserializeUser를 설정한다.
+// 이는 세션에 user정보를 변환하여 저장하고 가져오는 기능을 제공한다.(회원 id만 세션에 저장하고 사용 시 회원정보를 디비에서 찾아서 사용)
+// 세션 사용 시 위 두 함수를 작성하지 않으면 passport 로그인이 동작하지 않음
+passport.serializeUser((user, callback) => {
+	callback(null, user)
+})
+
+passport.deserializeUser((obj, callback) => {
+	callback(null, obj)
+})
+
+// logout 
+// passport는 req.logout 함수를 통해 세션의 로그인 정보를 삭제하여, 로그아웃 기능을 구현할 수 있다.
+router.get('/logout', ... {
+	req.logout();
+	res.redirect('/');
+})
+
+// login 확인 미들웨어
+// 로그인을 필수로 설정하고 싶은 경우, 미들웨어를 사용하여 체크할 수 있음
+function loginRequired(req, res, next){
+	if(!req.user){
+		res.redirect('/');
+		return;
+	}
+	next();
+}
+
+app.use('/posts', loginRequired, postsRouter)  // 로그인이 확인되면 postsRouter로 넘어간다.
+```
+
+### ❏ Session
+1. 웹 서버가 클라이언트의 정보를 클라이언트별로 구분하여 서버에 저장하고, 클라이언트 요청시 `session ID`를 사용하여 클라이언트의 정보를 다시 확인하는 기술(클라이언트가 정보를 저장하고 요청시 정보를 보낸 `Cookie`와 대조 됨)
+2. 서버는 세션을 생성하여 세션의 구분자인 `session ID`를 클라이언트에 전달함. 클라이언트 요청시 `session ID`를 함께 담아서 전송, 서버는 전달받은 `session ID`로 해당하는 세션을 찾아 클라이언트 정보를 확인함
+3. `express-session` 패키지를 사용하여 간단하게 `session` 동작을 구현할 수 있다. 특별한 설정 없이 자동으로 `session`동작을 구현해줌, ㅈ동으로 `session ID`를 클라이언트에게 전달, `session ID`로 클라이언트 정보 확인
+
+### ❏ Session Store를 사용하는 이유
+1. `express-session` 패키지는 `session` 을 기본적으로 메모리에 저장함. 따라서 현재 구현된 어플리케이션을 종료 후 다시 실행하면 모든 유저의 로그인 해제됨, 혹은 서버가 여러 대 있을 경우, 서버 간 세션정보를 공유할 수 없음
+
+### ❏ MongoDB - Session Store
+1. `connect-mongo` 패키지를 이용해 `MongoDB` 를 `session store` 로 사용할 수 있다. 
+2. `connect-mongo` 패키지는 `express-session` 패키지의 옵션으로 전달 가능하다. 자동으로 `session` 값이 변경될 때 `update` 되고 `session` 이 호출될 때 `find` 함
+3. 재부팅되어도 `data` 가 삭제되지 않기 때문에 `session-data` 를 유지 할 수 있다.
+4. 세션데이터를 몽고디비에 저장하고 관리하는 기능을 자동으로 수행해 줌
+
+```javascript
+// connect-mongo 패키지를 이용해 express-session 설정시 store 옵션에 전달 및 mongoUrl 설정
+const mongoStore = require('connect-mongo');
+
+app.use(session({
+	secret: 'secret',
+	resave: false,
+	saveUninitialized: true,
+	store: mongoStore.create({
+		mongoUrl: 'mongoUrl',
+	}),
+});
+```
+
+### ❏ 회원과 게시글의 연동
+1. 게시글 작성시 로그인된 회원 정보를 작성자로 추가
+
+```javascript
+// PostSchema에 author 추가
+// populate를 사용하기 위해 ObjectID 사용
+// ref를 유저 모델의 이름은 'User'로 선언
+author: {
+	type: Schema.Types.ObjectId,
+	ref: 'User',
+	required: true,
+}
+
+// 게시글에 작성자 추가
+// req.user에는 straegy에는 최소한의 정보인 shortId, email, username만 가지고 있다.
+// Post 생성 시 user의 ObjectID를 전달해야하는데, User에서 shortId로 회원을 검색하여 한 번 더 검증
+// 객체가 주어지면 자동으로 ObjectID 사용
+const author = await User.find({
+	shortId: req.user.shortId,
+})
+
+if(!author){
+	throw new Error('No User')
+}
+
+await Post.create({
+	title,
+	content,
+	author,  // author만 들어가있는게 아니고 user객체 data전체가 들어가는데, mongoDB가 여기서 _id만 꺼내서 저장해준다.
+})
+```
+
+2. 게시글 - 작성자는 populate 하여 사용하도록 구현
+
+```javascript
+// populate
+// 자동으로 user collection에서 author를 찾아서 넣어준다.
+const posts = await Post
+	.find({})
+	.populate('author');
+
+res.render('posts/list', { posts });  // posts를 반복문으로 꺼내 쓸 수 있다.
+```
+
+3. 게시글 수정, 삭제 시 로그인된 유저와 작성자가 일치하는지 확인
+
+```javascript
+
+// 수정, 삭제 시 유저 확인
+const post = await Post.find({ shortId }).populate('author');
+
+if(post.author.shortId !== req.user.shortId) {
+	throw new Error ('Not Authorized');
+}
+```
+
+4. 작성자의 게시글 모아 보기 기능 구현: 기본적으로 `MongoDB` 는 `Document` 검색 시 전체 문서를 하나씩 확인하기 때문에 매우 비효율적인 검색을 수행한다. 데이터가 많아질 경우 속도 저하의 큰 원인이 된다. 검색을 위해 `Document` 를 정렬하는 기능을 제공함. index 를 설정하면 주어진 쿼리를 효율적으로 수행하여 성능을 향상시킬 수 있다.
+
+```javascript
+// index: true 옵션을 사용하면 mongoose가 자동으로 MongoDB에 인덱스를 생성해줌
+// 이미 데이터가 많을 때 index 추가시 작업시간이 길어져 MongoDB가 응답하지 않을 수 있다. 예상되는 인덱스를 미리 추가하는 것이 좋음(처음부터 설정))
+author: {
+	type: Schema.Types.ObjectId,
+	ref: 'User',
+	required: true,
+	index: true,
+}
+```
+
+5. 회원 게시글 라우팅 추가하기: RESTful 한 구성을 위해 /users/{userId}/posts 로 구성, 게시글 목록 view 는 기존에 작성한 posts/list.pug 를 재활용
+
+```javascript
+// /routes/users.js
+router.get('/:shortId/posts', ... => {
+	const { shortId } = req.params;
+	const user = await User.find({ shortId });
+	const posts = await Post
+			.find({ author: user })
+			.populate('author');
+	res.render('posts/list', { posts, user });
+})
+
+h2= user ? `${user.name}의 게시글` : `전체 게시글`
+td: a(href=`/users/${post.author.shortId}/posts`)
+	= post.author.name
+```
+
+### ❏ CSR로 댓글 기능 구현하기
+1. 페이지 로드 시 필요한 리소스를 클라이언트에 선언(HTML Template, 브라우저에 표시되지 않는 HTML element를 작성해두고 JS로 이를 화면에 반복적으로 그릴 수 있게 하는 기술)
+2. 클라이언트에서 필요한 데이터를 비동기 호출
+3. 클라이언트가 전달받은 데이터를 가공, 리소스를 사용하여 화면에 표시
+4. `HTML template` 사용하여 한 개의 댓글이 표시될 모양을 선언(JS로 조작하기 위해 `id`, `class` 를 선언하는 것이 유용하다)
+5. `CSR` 을 구현하기 위해서는 `HTML` 이 아닌 데이터만 주고받을 수 있는 `API` 를 구성해야한다.(JSON 사용), 댓글 작성 시 댓글목록을 다시 불러와 그리는 형식으로 구현
+6. `sub-schema` 를 이용하여 `Post` 스키마에 `Comment` 를 배열로 추가
+
+```javascript
+const CommentSchema = new Schema({
+	content: String,
+	author: {
+		type: Schema.Types.ObjectId,
+		ref: "User",
+	},
+}, {
+	timestamps: true
+});
+
+const PostShema = new Schma({
+	...
+	comments: [CommentSchema],
+  ...
+})
+```
+
+7. 댓글 작성: `api/posts/{postId}/comments` 경로로 댓글 작성 기능 구현, 게시글 업데이트시 `${push}` 를 사용하여 `comments` 배열에 새로 작성된 댓글 추가(동시에 들어오는 요청을 정확하게 처리), `api` 는 `render` 대신 `json` 으로 응답
+
+```javascript
+// 댓글 업데이트 
+await Post.updateOne({ shortId }, {
+	$push: { comments: {
+		content,
+		author,
+		}},
+});
+
+res.json({ result: 'success' });
+
+// 댓글 목록
+// find에 populate하지 않고, User (model)의 populate를 사용하는 방법도 가능
+await User.populate(posts.comments, {
+		path: 'author'
+});
+```
+
+8. 비동기 HTTP 요청은 `fetch` 함수를 이용함.
+
+```js
+// 댓글 작성하기
+// 호출 결과의 성공 여부를 확인하여, 댓글 다시 불러오기 실행
+fetch('url', {
+	method: "post",
+	headers: { ~ },
+	body: JSON.stringify({ content }),
+})
+```
+
+### ❏ MongoDB Aggregation
+1. MongoDB에서 Document들을 가공, 연산하는 기능
+2. RDMBS에서 SQL로 수행할 수 있는 기능들을 유사하게 구현할 수 있음 (SQL의 GROUP BY, DISTINCT, COUNT, JOIN 등)
+3. mongoDB의 find는 검색 필터링과 정렬 이외의 기능을 제공하지 않음, 다른 collection에서 데이터를 가져오거나, 그룹화할때는 Aggregation을 통해 이를 수행할 수 있음
