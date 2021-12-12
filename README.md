@@ -8323,3 +8323,221 @@ fetch('url', {
 1. MongoDB에서 Document들을 가공, 연산하는 기능
 2. RDMBS에서 SQL로 수행할 수 있는 기능들을 유사하게 구현할 수 있음 (SQL의 GROUP BY, DISTINCT, COUNT, JOIN 등)
 3. mongoDB의 find는 검색 필터링과 정렬 이외의 기능을 제공하지 않음, 다른 collection에서 데이터를 가져오거나, 그룹화할때는 Aggregation을 통해 이를 수행할 수 있음
+
+---
+## 📍 35일차 12.11.토. 온라인 강의
+오늘은 `JWT` 그리고 회원 비밀번호 찾기, `SMTP`를 이용하여 메일 발송기능, 비밀번호 초기화, `OAuth`, 웹 서버 소프트웨어인 `Nginx`에 대해서 배웠다. 나중에 로그인 관련 기능을 구현할 때 써먹으면 도움이 되는 내용이라서 까먹지 않고 기억해야겠다.
+
+### ❏ JWT(Json Web Token)
+1. 인증을 위한 정보를 특별한 저장소를 이용하지 않고, 전자 서명을 이용하여 확인하는 방법
+2. `header`(토큰의 타입(jwt), 데이터 서명방식), `payload`(전달되는 데이터), `signature` (헤더와 페이로드의 전자서명)로 구성되어 있다.
+3. `JWT` 는 `Web Token`, 데이터를 웹에서 사용하기 위한 스펙이므로 웹에서 문제없이 사용할 수 있는 문자열로만 구성된 `base64` 인코딩을 사용한다.
+4. `JWT` 의 `payload` 는 단순히 정보를 `base64 encode` → `decode` 시 정보가 노출된다 → 민감한 정보는 제외하고 토큰을 생성한다.
+5. 서버는 `JWT` 를 생성할 때, 비공개키를 이용하여 서명을 함. `payload` 를 조작할 경우 서명(signature)이 일치하지 않기 때문에 인증 실패
+6. 사용자 로그인 → 서버는 로그인된 유저 정보를 JWT 로 생성하여 클라이언트에 전달 → 클라이언트는 전달받는 JWT 를 이용하여 인증이 필요한 요청에 사용 
+
+![](https://images.velog.io/images/abcd8637/post/080642e9-3012-4b15-8761-b2bc72473699/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-11%2009.31.32.png)
+
+### ❏ JWT 사용 이유
+1. `session` 은 기본적으로 웹 브라우저를 위한 통신 스펙
+2. 모바일 앱 등, 웹 브라우저가 아닌 어플리케이션의 경우 `session` 을 활용하기 부적합함, `JWT` 를 사용하면 어느 클라이언트에서나 동일한 방식의 사용자 인증을 구현 가능
+
+### ❏ JWT + Cookie
+1. `cookie`: 웹 서비스에서 사용하는 정보를 클라이언트(브라우저)에 저장하고, `HTTP` 요청시 이를 함께 전송하여 클라이언트 정보를 서버에 전달하는 기술
+2. `session`: 클라이언트 정보를 서버 측 저장소에 저장하고 사용(`session id` 로 `session store` 에서 확인해서 클라이언트 정보를 확인함), 
+3. `session` 을 사용한 유저 로그인: `cookie에 session ID` 저장 → `session store` 에서 유저 정보 가져오기
+4. `JWT` 를 쿠키처럼 사용하는 경우: `JWT` 로 요청 → 서명 확인 후 유저 정보 사용(DB 접근이 한단계 줄어서 효율적인 인증 구현 가능)
+5. 로그인 로직에서 `JWT` 생성 후 쿠키로 전달 → `passport-jwt` 패키지로  `JWT 로그인 미들웨어` 작성 및 사용
+
+```js
+// token 생성 및 미들웨어 선언하기
+setUserToken = (res, user) => {
+	const token = jwt.sign(user, secret);
+	res.cookie('token', token);  // res.cookie 함수를 사용하여 token을 클라이언트 쿠키로 전달
+}
+
+---
+router.post('/', passport.authenticate('local'),
+	(req, res, next) => {
+		setUserToken(res, req.user);  // 쿠키를 브라우저에 저장함
+
+	res.redirect('/');
+});
+
+// passport-jwt 사용하기
+// 요청된 JWT토큰의 서명을 확인하고 인증하는 기능을 구현
+const JwtStrategy = require('passport-jwt').Strategy;
+
+const cookieExtractor = (req) => {
+	const { token } = req.cookies;
+
+	return token;
+};
+
+const opts = {
+	secretOrKey: secret,  // import
+	jwtFromRequest: cookieExtractor,
+}
+
+module.exports = new JwtStrategy(opts, (user, done) => {
+	done(null, user)
+})
+
+---
+passport.use(jwt);
+```
+
+6. `JWT` 토큰은 기본적으로 모든 요청에 포함한다. 요청에 토큰이 있는 경우 로그인된 상태로 처리하기 위해 모든 요청에 공통적으로 적용할 수 있는 미들웨어로 `JWT` 로그인을 추가
+7. 로그아웃은 간단하게 클라이언트 쿼리를 삭제하여 처리 가능, `token` 값을 `null` 로 전달하고 `cookie` 의 만료시간을 0으로 설정하여 클라이언트가 쿠키를 바로 만료시키도록 전달
+
+```js
+// jwt middleware
+app.use((req, res, next) => {
+	if(!req.cookies.token){
+		next();
+		return;
+	}
+
+	return passport.authenticate('jwt')(req, res, next);  // req.user에 저장
+}); 
+
+// jwt logout
+res.cookie('token', null, {
+	maxAge: 0,  // 쿠키 만료 시키기
+})
+```
+
+### ❏ 회원 비밀번호 찾기 구현
+1. 임의의 문자열로 비밀번호 초기화
+2. 초기화된 문자열을 메일로 전달 → 메일 발송기능 개발 필요
+3. 초기화 후 첫 로그인 시 비밀번호 변경 요청
+
+### ❏ 메일 발송기능 구현 방법
+1. `SMTP` 서버 이용: 네이버 구글 등의 메일서버를 이용하여 무료로 발송 가능, 메일 발송 및 관리 기능 직접 개발 필요
+2. 메일 발송 서비스 이용(Mailgun, Sendgrid): 메일 발송 api 제공 및 관리용 웹페이지 제공, 사용량에 따라 유료 과금
+
+### 💡 SMTP란?
+1. `Simple Mail Transfer Protocol`: 메일 전송을 위한 표준 규약, `SMTP` 서버란 표준 규약을 통해 메일 전송하는 기능을 구현한 서버
+2. `Node.js` 에서 메일 발송하기: `Nodemailer` 패키지를 사용하여 `SMTP` 서버(gmail, naver...)를 통해 메일 발송하기, 직접 만드는 것은 비효율적이다.
+3. `Nodemailer` 에서 `gmail` 을 사용하기 위해서는 앱 비밀번호 설정 필요, 한번 설정하면 재 확인 불가
+
+```js
+const nodemailer = require('nodemailer');
+
+const transport = nodemailer
+	.createTransport({
+		service: 'Gmail',
+		auth: {
+			user: "google account",
+			pass: "app password",
+		},
+});
+
+const message = {
+	from: "login account",
+	to: "mail address",
+	subject: "title",
+	text: "message",
+};
+
+transport.sendMail(message, (err, info) => {
+	if (err) {
+		console.error('err', err);
+		return;
+	}
+	cosnole.log('ok', info);
+})
+```
+
+### ❏ 비밀번호 초기화 기능
+```js
+// 임의의 문자열을 만들어주는 함수
+function generateRandomPassword(){
+	return Math.floor(
+		Math.random() * (10 ** 8)
+		).toString().padStart('0', 8);
+}
+---
+
+// email을 받아서 generateRandomPassword로 사용자의 비밀번호 초기화 후 메일로 발송
+router.post('/reset-password', asyncHandler(... => {
+	const { email } = req.body;
+	const randomPassword = generateRandomPassword();
+	await User.findOneAndUpdate({ email }, {
+		password: getHash(password),
+	});
+
+	await sendEmail(email, '...', password);
+	res.redirect('/');
+}));
+```
+
+### ❏ 비밀번호 초기화 후 로그인 시 비밀번호 변경 요청
+```js
+// 비밀번호 변경
+const UserSchema = ...
+	passwordReset:{
+		type: Boolean,
+		default: false,
+	} 
+...
+
+---
+
+router.poast('/reset-password', ...
+	await User.findOneAndUpdate({
+	...
+	passwordReset: true
+})
+
+// 비밀번호 변경 요청
+function checkPasswordReset(req, res, next){
+	if(req.user && req.user.passwordReset){
+		res.redirect('/update-password');
+		return;
+	}
+
+	next();
+}
+
+router.poast('/update-password', ...
+	await User.findOneAndUpdate({
+	...
+	passwordReset: false
+})
+```
+
+### ❏ OAuth의 이해
+1. `open authorization`: 서비스 제공자가 다른 서비스에게 데이터를 제공하기 위해 서비스 사용자에게 제공하는 사용자 인증방식의 표준
+2. 서비스 제공자에게 인증 요청 → 인증 완료 후 사용자 정보를 요청한 서비스로 전달 → 인증 정보를 이용해 서비스 제공자의 데이터 사용
+3. 구글 `OAuth` 인증 요청 → 인증된 `OAuth Token` 을 기록 → `OAuth Token` 을 사용하여 구글 캘린더 `API` 사용
+4. 웹 서비스 제공자는 ID, PW 로그인을 구현할 필요가 없음
+5. 웹 서비스 사용자는 ID, PW 를 입력할 필요가 없음
+
+### ❏ 구글 로그인 구현하기
+1. 구글 클라우드 플랫폼 프로젝트 생성
+2. API 및 서비스 → OAuth 동의화면 설정
+3. 사용자 인증정보 → OAuth 클라이언트 ID 만들기
+4. passport-google-oauth20 연동
+5. `passport-google-oauth20` : passport-strategy 인터페이스의 구글 로그인 집합체(OAuth 인증을 구현하기 위해서는 인증 요청, 데이터 수신 등의 복잡한 작업 필요), `passport-google-oauth2.0` 은 손쉽게 구글 `OAuth 2.0` 을 구현해주는 패키지
+
+### ❏ Nginx
+1. 최근 신규 프로젝트에서 가장 많이 채택되고 있는 웹 서버 소프트웨어(웹 서버 소프트웨어: `HTTP` 요청을 받아 파일이나 프로그램 실행 결과를 `HTTP` 응답으로 보내주는 소프트웨어)
+2. `Java - Tomcat`, `PHP - fastcgi` 등 다른 언어가 `HTTP` 요청을 처리를 위한 의존성이 있는 것에 반해, `Node.js` 는 기본적으로 `HTTP` 요청을 수신하고, 응답하는 기능이 이미 있다. 따라서 웹 서버 소프트웨어 없이도 스스로 동작할 수 있다. 하지만, `node.js` 단독으로 사용하게 되면 `HTTPS`, `도메인 연결`, `static file caching` 등의 기능을 `production-level` 서비스를  구축할 수는 없다. 따라서 `node.js` 앞 단에 웹 서버 소프트웨어를 붙여서 사용한다. `HTTP` 요청과 응답은 node.js에서 자체적으로 사용이 가능하다.
+3. `Nginx` 의 `reverse-proxy` 기능을 사용해, `Node.js` 와 `Nginix` 를 연결할 수 있다. `reverse-proxy` 는 `HTTP` 요청을 다른 서버에 전달하는 기능인데, `Nginx` 가 요청을 받아, 설정된 내용에 해당하는 요청만 `node.js` 에 전달한다.
+
+![](https://images.velog.io/images/abcd8637/post/9d61eb15-28cf-47e0-9c8e-5b6cdb9ea673/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-11%2016.38.13.png)
+
+```js
+// 외부에서 온 모든 요청을 localhost:3000으로 전달하는 설정 파일
+// HTTPS, file caching들의 작업은 Nginx의 설정방법을 참고하기
+server {
+	listen 80;
+	server_name www.example.com;
+
+	location / {
+		proxy_pass http://localhost:3000;
+		proxy_http_version 1.1;
+	}
+}
+```
