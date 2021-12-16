@@ -8583,7 +8583,7 @@ server {
 1. 문서화 시켜줄 수 있는 기능, 프로젝트의 정보를 넣어두면 된다.(스크럼 내용 등)
 
 ---
-## 📍 36일차 12.15.화. 프로젝트 2일차 TLDR
+## 📍 36일차 12.15.수. 프로젝트 2일차 TLDR
 
 1. `Cannot delete branch 'image-upload'`: branch checkout으로 다른 branch로 옮기고 삭제하기
 2. `onload()`메소드보다는 `addEventListener('load')` 사용하기
@@ -8593,3 +8593,21 @@ server {
 6. input태그에서 `debounce` 적용하기
 7. input태그에서 `datalist`는 추천하는 선택지를 나타냄
 8. `CSS 방법론`: BEM
+
+---
+## 📍 37일차 12.16.목. 프로젝트 3일차 TLDR
+1. `JPG`와 `JPEG`는 같은 압축파일형식이다. 원래는 `jpeg`로 사용되었으나, DOS 사용시절 확장자의 길이는 3자로 제한됨으로 인해 jpg로 줄여 사용했다.
+2. `exif`는 디지털 카메라에서 이용되는 이미지 파일 포맷이다. jpg, tiff6.0, RIFF, WAV 파일 확장자에만 사용가능하다.(JPEG 2000, PNG, GIF에서는 지원하지 않는다.)
+3. `JPEG2000`은 `JPEG`보다 높은 압축률과 이미지 품질을 얻기 위해 개발되었다. 대부분의 웹 브라우저에서 지원되지 않는다.(현재 `safari`에서만 사용가능)
+4. `js` import시 오류가 뜨면 다음과 같이 설정하자
+
+```
+"settings": {
+    "import/ignore": [".js$", "node_modules/*"]
+},
+```
+
+5. `eslint` 설정 `npm ci `
+6. `form` 데이터 전송은 `/post/tmp`로 넘겨주고 서버에서 처리 후 `/post/:id`로 `redirect`시킨다.
+7. 서버는 `router/index.js/updatePath(path)`
+8. 위치 입력받는 `input`은 1개로 만들어 놓고 `debounce`, `EXIF`라이브러리로 위치 적용하기
