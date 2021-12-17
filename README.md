@@ -8583,7 +8583,7 @@ server {
 1. 문서화 시켜줄 수 있는 기능, 프로젝트의 정보를 넣어두면 된다.(스크럼 내용 등)
 
 ---
-## 📍 36일차 12.15.수. 프로젝트 2일차 TLDR
+## 📍 37일차 12.15.수. 프로젝트 2일차 TLDR
 
 1. `Cannot delete branch 'image-upload'`: branch checkout으로 다른 branch로 옮기고 삭제하기
 2. `onload()`메소드보다는 `addEventListener('load')` 사용하기
@@ -8595,7 +8595,7 @@ server {
 8. `CSS 방법론`: BEM
 
 ---
-## 📍 37일차 12.16.목. 프로젝트 3일차 TLDR
+## 📍 38일차 12.16.목. 프로젝트 3일차 TLDR
 1. `JPG`와 `JPEG`는 같은 압축파일형식이다. 원래는 `jpeg`로 사용되었으나, DOS 사용시절 확장자의 길이는 3자로 제한됨으로 인해 jpg로 줄여 사용했다.
 2. `exif`는 디지털 카메라에서 이용되는 이미지 파일 포맷이다. jpg, tiff6.0, RIFF, WAV 파일 확장자에만 사용가능하다.(JPEG 2000, PNG, GIF에서는 지원하지 않는다.)
 3. `JPEG2000`은 `JPEG`보다 높은 압축률과 이미지 품질을 얻기 위해 개발되었다. 대부분의 웹 브라우저에서 지원되지 않는다.(현재 `safari`에서만 사용가능)
@@ -8611,3 +8611,12 @@ server {
 6. `form` 데이터 전송은 `/post/tmp`로 넘겨주고 서버에서 처리 후 `/post/:id`로 `redirect`시킨다.
 7. 서버는 `router/index.js/updatePath(path)`
 8. 위치 입력받는 `input`은 1개로 만들어 놓고 `debounce`, `EXIF`라이브러리로 위치 적용하기
+
+---
+## 📍 39일차 12.17.금. 프로젝트 4일차 TLDR
+1. `addEventListener`의 `event` 타입 전달 시 `on` 접두사를 제외하고 사용한다.(예. onchange -> change, onclick -> click, oninput -> input)
+2. `event` 중 `change` 이벤트는 요소가 포커스를 잃을 때까지 이벤트가 실행되지 않고 다른 곳을 클릭하면 이벤트가 트리거 되는 반면, `input` 이벤트는 요소가 변경될 때마다 이벤트가 트리거 된다.
+3. 자동완성기능에 `addEventListener`를 적용할 때 `change`와 `datalist+option`을 사용하면 `debounce`를 적용하지 않아도 된다. (change 이벤트는 요소의 포커스가 잃을 때 적용되기 때문에 글씨가 입력하는 중간에 이벤트가 발생하지 않는다.) 하지만, `UI`수정이 자유롭지 못하다. 반면, `input` 이벤트에 자동완성기능을 직접 구현한다면, `debounce`로 최적화를 시켜주자(input 이벤트는 입력할 때마다 이벤트가 일어나기 때문) `UI`수정은 `datalist+option`방법보다 비교적 자유롭다.
+4. `debounce`: 일정 시간안에 연속적인 이벤트가 발생하면 일정시간 이후에 한번만 실행된다. 예를 들어 `input` 값을 `api` 통신할 때
+5. `trigger`: 일정 시간안에 연속적인 이벤트가 발생하면 일정시간 내 딱 한번만 이벤트가 실행되는 기법
+6. 배열의 값을 변경해서 적용할 때는 `map`을, 배열을 순회하면서 변수를 뽑아내려고 하면 `forEach`를 사용하자
