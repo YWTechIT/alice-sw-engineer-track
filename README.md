@@ -8620,3 +8620,39 @@ server {
 4. `debounce`: 일정 시간안에 연속적인 이벤트가 발생하면 일정시간 이후에 한번만 실행된다. 예를 들어 `input` 값을 `api` 통신할 때
 5. `trigger`: 일정 시간안에 연속적인 이벤트가 발생하면 일정시간 내 딱 한번만 이벤트가 실행되는 기법
 6. 배열의 값을 변경해서 적용할 때는 `map`을, 배열을 순회하면서 변수를 뽑아내려고 하면 `forEach`를 사용하자
+
+---
+## 📍 40일차 12.18.토. 프로젝트 5일차 TLDR
+1. 비동기 함수가 중첩되어있을 때 `return` 하려면 `return new Promise`에 `resolve`를 넣어주어 꺼내주자.
+2. 함수에 단순히 `return`을 넣고 `console.log` 찍으면 `undefined`가 나온다.
+3. JS에서 라이브러리 사용시 npm install 이후 import from으로 불러오기
+
+```javascript
+// getGPSData
+function getGPSData(img) {
+  return new Promise((resolve, reject) => {
+    img.addEventListener("load", function () {
+      EXIF.getData(this, async function () {
+        const GPSLatitude = EXIF.getTag(this, "GPSLatitude");
+        const GPSLatitudeRef = EXIF.getTag(this, "GPSLatitudeRef");
+        const GPSLongitude = EXIF.getTag(this, "GPSLongitude");
+        const GPSLongitudeRef = EXIF.getTag(this, "GPSLongitudeRef");
+
+        if (GPSLatitude === undefined || GPSLongitude === undefined)
+          reject("GPS 정보가 없습니다.");
+
+        const latitudeDecimal = changeToDecimal(GPSLatitude, GPSLatitudeRef);
+        const longitudeDecimal = changeToDecimal(GPSLongitude, GPSLongitudeRef);
+
+        const response = await fetchAddressAPI(
+          longitudeDecimal,
+          latitudeDecimal,
+        );
+
+        const [ wide_addr, local_addr ] = response;
+        resolve(`${wide_addr} ${local_addr}`);
+      });
+    });
+  });
+}
+```
