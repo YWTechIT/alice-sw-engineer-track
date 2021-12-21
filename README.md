@@ -6187,11 +6187,13 @@ first(): called
 ```
 
 ---
+
 ## 📍 26일차 11.30.화(실시간 강의)
 
 오늘부터는 `FE`가 아닌 `BE`에 대해서 간략하게 배운다. 여러 프레임워크 중 `Node.js`에 대해서 배우는데 한번 알아보자. 실시간 강의 때는 주로 실습을 하느라 이론을 많이 배우지 못했다. 내일 온라인 강의에서 더 자세하게 알아봐야겠다.
 
 ### ❏ Node.js
+
 1. Chrome V8 javscript 엔진으로 빌드된 `javascript` 런타임입니다.
 2. `Node.js`의 메인스레드는 하나이다. `JS`가 단일쓰레드인것처럼 `node.js`도 한 번에 한줄씩 실행한다.
 3. `Docker`, `Auto scaling` 등을 이용해 `node.js`의 단일 스레드의 단점을 보완 할 수 있다.
@@ -6218,11 +6220,11 @@ first(): called
 24. `npm i eslint-plugin-airbnb`: airbnb 문법 사용
 
 ```javascript
-const http = require("http");  // http 모듈 호출
+const http = require("http"); // http 모듈 호출
 const port = 9999;
 
 http.createServer((req, res) => {
-    res.end("Hello, world!");  // end: 담길데이터 다 담겼으니까 요청 글자를 보낸다.
+    res.end("Hello, world!"); // end: 담길데이터 다 담겼으니까 요청 글자를 보낸다.
 }).listen(port, () => {
     console.log("서버가 켜졌어요!!!");
 });
@@ -6247,6 +6249,7 @@ import http from "http";
 29. 요즘 개발은 서버와 프론트를 컨테이너 안에 두고 깃허브에서 작성한 코드 커밋 → 테스트 → 빌드 → 자동으로 서버에 올린다. 이러한 과정을 `CI/CD` 라고 부른다.
 
 ### ❏ 내장 모듈
+
 1. `node.js` 내부에서 제공하는 모듈
 2. 모듈명이 같으면 현재 폴더를 기준으로 가장 가까운 모듈을 먼저 가져온다.
 3. `require('fs').readFileSync`: 동기적으로 파일을 불러온다. (아무런 인코딩을 하지 않으면 `byte` 형태로 값을 불러온다. `Buffer`: 16진수 형태)
@@ -6297,10 +6300,13 @@ const fileContent = fs.readFilSync(filepath, "utf-8");
 ```
 
 ---
+
 ## 📍 27일차 12.1.수(온라인 강의)
+
 오늘은 2021년 마지막 해의 첫 날이다. 그날 배운 내용들을 복습하는 글도 27번째 쓰고있는데, 22년 2월까지 하루도 빠짐없이 복습하는 글을 작성했으면 좋겠다. 현업에 뛰어들어서 볼 지금의 글들이 밤톨이나마 도움이 된다면 나의 목표는 달성한 것이다. 강의에서는 어제 실시간 강의로 간략하게 배웠던 `node.js`, `express.js`, `module` 등에 대해서 조금 자세하게 배웠다.
-  
+
 ### ❏ node.js의 등장 배경
+
 1. 웹의 발전에 의해 등장함. 단방향 통신 위주였던 `WEB1.0` 에서 사용자와 상호작용하는 `WEB2.0` 으로 발전하게 되면서 웹페이지의 동작은 더욱 복잡해졌고, 복잡한 `JS` 를 실행하기위해 고성능의 `JS` 실행기가 필요해졌다. 크롬에서는 웹브라우저를 위한 `V8` 엔진을 만들게 됨 `V8` 엔진으로 인해 `JS` 속도가 상당히 빨라지게 됐고, `V8` 엔진을 이용해서 웹 브라우저에서만 사용하는것이 아닌 어느 환경에서나 동작시킬 수 있도록 만들어진것이 `node.js` 이다. 즉, `js` 를 어느환경에서나 실행할 수 있게 해주는 실행기라고 할 수 있다.
 2. 브라우저에서의 `JS`: 브라우저에서 실행, 웹 내부 제한된 동작, 웹 프론트 개발자의 언어
 3. `node.js`: 크로스 플랫폼 실행, 제한 없는 동작, 다양한 어플리케이션 개발, 모든 개발자의 언어가 되었다.
@@ -6309,6 +6315,7 @@ const fileContent = fs.readFilSync(filepath, "utf-8");
 ![](https://images.velog.io/images/abcd8637/post/ad5ca1e3-ba08-42f4-83a8-47bf8ff67d4b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2009.20.00.png)
 
 ### ❏ node.js의 특징
+
 1. 싱글 스레드 - 비동기 - 이벤트 기반
 2. 스레드: 명령을 실행하는 단위, 싱글스레드는 한 번에 한 가지 동작만 실행 가능, 멀티쓰레드는 동시에 여러 동작 수행 가능하다.
 3. 장점: 스레드가 늘어나지 않기 때문에 리소스 관리에 효율적
@@ -6322,11 +6329,13 @@ const fileContent = fs.readFilSync(filepath, "utf-8");
 ![](https://images.velog.io/images/abcd8637/post/099e18f8-03f5-482c-a601-06272f907e33/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2009.27.01.png)
 
 ### ❏ node.js 시작하기
+
 1. `node.js` 는 빠르게 개발 중이므로 보안 이슈 및 버그 수정, 최신기술을 빠르게 적용한다. 급변하는 기술은 가장 안정적인 최신 버전을 선택하는 것이 최선이다.
 2. `LTS(Long-term support)`: `node.js` 의 안정적이고, 오래 지원하는 버전 명
 3. 가장 최신의 기술보다 안정적이고 최신의 버전을 선택하자.
 
 ### ❏ ES6
+
 1. `ECMA6` 버전 이후를 통틀어 일반적으로 `ES6` 라고 부름
 2. `ECMAScript`: 계속해서 발전해가는 `JS` 의 표준문법, 2015년 `ES6` 이후 많은 현대적인 문법이 추가됨
 3. `let`, `const`: 상수와 변수 구분 가능
@@ -6336,6 +6345,7 @@ const fileContent = fs.readFilSync(filepath, "utf-8");
 7. `destructing`: `Object` 에서 값을 꺼낼 때 일일이 작성하지 않고 `{} = obj` 처럼 변수를 꺼낼 수 있다.
 
 ### ❏ 비동기 코딩
+
 1. 비동기: 이벤트 기반 동작을 코드로 구현하는 방법
 2. `callback`: 전통적인 `JS` 의 이벤트 기반 코딩 방식
 
@@ -6444,6 +6454,7 @@ async function doSomething() => {
 7. 대부분 가독성이 좋은 `async-await` 을 사용하지만, 상황에 따라 `callback`, `promise` 를 구사할 줄 알아야 한다.
 
 ### ❏ 이벤트 루프
+
 1. 이벤트를 처리하는 반복되는 동작(loop)
 2. `node.js` 가 비동기 - 이벤트 동작을 처리하는 일련의 반복 동작이며, 비동기 코딩이 어떤 순서로 수행되는지에 대해 이해할 수 있다.
 3. 브라우저와 `node.js` 의 이벤트 루프는 기본적인 동작방식에 큰 차이가 없음. 이벤트루프의 기본적인 동작 원리를 이해하는 것이 중요하다.
@@ -6452,6 +6463,7 @@ async function doSomething() => {
 6. `job queue`: `Promise` 에 등록된 콜백을 등록하는 `FIFO` 큐, 상위 함수가 종료되기 전에 콜스택이 비어있지 않더라도 잡큐에 등록된 콜백을 콜스택에 추가한다.(promise는 상위함수가 종료되기 전 실행)
 
 ### ❏ npm
+
 1. `npm(node package manager)`: `node.js` 프로젝트를 관리하는 필수적인 도구(온라인 저장소 + 커맨드라인 도구)
 2. `npm 저장소`: 필요한 라이브러리나 도구를 손쉽게 검색 가능. `node.js` 의 인기로, 거대한 생태계를 보유
 3. 커맨드라인 도구: 프로젝트 관리를 위한 다양한 명령어 제공(프로젝트 설정 / 관리, 프로젝트 의존성 관리)
@@ -6478,6 +6490,7 @@ async function doSomething() => {
 24. `run` 을 제외하고 사용할 수 있을뿐, `npm` 내부적으로 코드를 제공해 주는것은 아니다.
 
 ### ❏ npx
+
 1. `npm` 패키지를 설치하지 않고 사용할 수 있게 해주는 도구, 프로젝트에 추가하거나 전역 패키지로 추가하지 않고 `npx` 를 이용하여 바로 실행할 수 있음
 2. `gist` 코드를 다운받지 않고 바로 실행 가능(코드를 잘 확인하고 실행해야 함)
 
@@ -6492,6 +6505,7 @@ npx node@12 index.js
 ```
 
 ### ❏ module
+
 1. 간단한 프로그램이라면 파일 하나로도 가능, 프로젝트가 커지면 기능에 맞게 코드를 분리하는 것이 중요하다. 모듈은 코드를 분리하기 위한 방법
 2. 반복되는 코드는 모듈로 분리하여 사용(재사용성 증가)
 3. 패키지는 모듈의 모음, `npm` 패키지들은 많은 모듈을 포함하고 있는 코드 모음
@@ -6501,6 +6515,7 @@ npx node@12 index.js
 7. 기타 기본제공 모듈 확인하기: <a href='https://nodejs.org/dist/latest-v14.x/docs/api/'>node.js/doc</a>
 
 ### ❏ 모듈의 작성과 사용
+
 1. `require` 함수를 통해 모듈을 `load` 할 수 있음
 2. 의존성 패키지, 직접 작성한 모듈 사용 가능
 3. `node.js` 의 모듈은 첫 `require` 시 `cache` , 두 번 실행하지 않음
@@ -6508,7 +6523,6 @@ npx node@12 index.js
 5. 의존성 패키지들은 `require('package-name')` 로 `load` 가능하다. 패키지를 사용하려면 `node_modules` 에 내려받아져 있어야 함
 
 ```javascript
-
 const name = "elice";
 const age = 5;
 const nationality = "korea";
@@ -6516,10 +6530,10 @@ const nationality = "korea";
 // 모듈의 기본적인 사용법
 // 모듈이 load 될 때 사용될 값을 module.exports로 내보냄
 module.exports = {
-	name,
-	age,
-	nationality
-}   
+    name,
+    age,
+    nationality,
+};
 
 // 변수명으로 export 하는 모듈 작성하기
 // 모듈을 object로 만들고, 각 key - value를 지정해서 내보냄
@@ -6527,35 +6541,36 @@ exports.name = name;
 exports.age = age;
 exports.nationality = nationality;
 
-const student = require('./elice');  // { name: "alice", age: 5, nationality: "korea" }
+const student = require("./elice"); // { name: "alice", age: 5, nationality: "korea" }
 
 // 함수를 export하는 모듈
 module.exports = (name, age, nationality) => {
-	return {
-		name,
-		age,
-		nationality
-	}
-}
+    return {
+        name,
+        age,
+        nationality,
+    };
+};
 
 // npm 패키지 모듈
-const dayjs = require('dayjs');
+const dayjs = require("dayjs");
 console.log(dayjs());
 
 // 직접 작성한 모듈
-const myModule = require('./my-module');
+const myModule = require("./my-module");
 console.log(myModule);
 
 // 함수형 모듈: 함수형은 load한 즉시 실행되지 않음
-const myFunctionModule = require('./my-function-module');
+const myFunctionModule = require("./my-function-module");
 console.log(myFunctionModule(name, age, nationality));
 
 // json 모듈: json파일도 load가능, object로 자동파싱
-const myData = require('./my-data');
-console.log(myData)
+const myData = require("./my-data");
+console.log(myData);
 ```
 
 ### ❏ ES Module
+
 1. ES6에서 등장한 JS의 공식적인 표준 모듈
 2. JS는 기본적으로 모듈을 제공하지 않았다.
 3. `node.js` 는 독자적인 방식을 통해 모듈을 지원하고 있었다(common js)
@@ -6564,6 +6579,7 @@ console.log(myData)
 6. 현재 `ES Module` 은 `node.js` 에서 기본적으로 사용하기에 제약이 많다.(프로젝트 타입을 `module` 로 변경, `commonjs` 모듈 `import` 시 문제 발생 등)
 
 ### ❏ 웹의 이해
+
 1. 웹 서비스는 기본적으로 `HTTP` 요청과 응답의 반복으로 이루어짐. `HTTP` 요청은 사용자가 어떤 데이터가 필요한지를 서버에게 알리는 역할, `HTTP` 응답은 `HTTP` 요청에 해당하는 적절한 데이터를 전달하는 역할
 
 ![](https://images.velog.io/images/abcd8637/post/8709385a-0f67-4f2c-9cb0-b856268bea83/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2013.54.35.png)
@@ -6571,10 +6587,11 @@ console.log(myData)
 2. 정적 웹(Web 1.0): 사용자와 상호작용하지 않는 페이지 - 단방향 통신, `Link` 를 통한 페이지 이동 정도만 가능, 일반적으로 변하지 않는 `html` 파일로 제공
 3. 동적 웹(Web 2.0): 사용자와 상호작용을 함 - 양방향 통신, 구글 맵, 웹, 채팅 등 사용자가 다양한 기능을 수행할 수 있음, `FE` 와 `BE` 가 유기적으로 통신하며 동작한다. 현대적인 웹은 대부분 동적 웹이다.
 4. `CSR` : 프론트엔드에서 사용자가 페이지에서 보는 동적인 부분을 대부분 처리하는 방식(사이트가 변하는 부분을 프론트엔드에서 처리, 페이지 리소스들이 미리 정의, `API` 통신이용, `API` 호출이 완료된 후에 보여준다. 복잡한 프로젝트 구성, 개발 사이즈가 커진다.)
-5. `SSR`: 백엔드에서 페이지 대부분의 영역을 처리해서 프론트엔드로 전달하는 방식(프론트엔드는 `HTTP` 응답을 받아 화면에 표시, 백엔드에서 필요한 데이터가 포함된 페이지를 만들어서 `HTTP` 응답에 전달, 백엔드에서 `HTML` 파일을  작성해서 프론트로 전달, 쉬운 구성, 작은 개발사이즈, 로딩이 느려보이고, 페이지가 이동하면 페이지가 깜빡인다.)
+5. `SSR`: 백엔드에서 페이지 대부분의 영역을 처리해서 프론트엔드로 전달하는 방식(프론트엔드는 `HTTP` 응답을 받아 화면에 표시, 백엔드에서 필요한 데이터가 포함된 페이지를 만들어서 `HTTP` 응답에 전달, 백엔드에서 `HTML` 파일을 작성해서 프론트로 전달, 쉬운 구성, 작은 개발사이즈, 로딩이 느려보이고, 페이지가 이동하면 페이지가 깜빡인다.)
 6. 웹서버는 `HTTP` 요청과 `HTTP` 응답으로 이루어지는데 클라이언트는 서버로 `HTTP` 요청을 보내고, 서버는 `HTTP` 응답을 보낸다.
 
 ### ❏ 웹 프레임워크
+
 1. 웹 서비스에 필요한 기능들을 제공해주는 다양한 도구들의 모음, 필요한 부분만 집중해서 개발 할 수 있음
 2. `HTTP 요청`, `HTTP 응답`, `라우팅`, `HTML Templating`
 3. 라우팅: `HTTP` 요청에 따라 알맞은 응답을 보내주는 경로를 설정하는 일
@@ -6582,6 +6599,7 @@ console.log(myData)
 5. `node.js` 의 다양한 웹 프레임워크: `Express.js`, `Koa.js`, `Nest.js`, `Hapi`, `Sails.js`, `Meteor.js` 등등
 
 ### ❏ Express.js 시작하기
+
 1. `node.js` 웹 프레임워크 중 가장 유명한 웹 프레임워크
 2. 필요에 따라 유연하게 구조 설정 가능
 3. 다양한 미들웨어를 통해 필요한 기능을 간단하게 추가 기능
@@ -6609,6 +6627,7 @@ npm start
 ![](https://images.velog.io/images/abcd8637/post/0d5266c7-d607-4288-8b5a-0b8863ae3cfe/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2014.21.14.png)
 
 ### ❏ Express.js 동작방식
+
 1. `express-generator` 로 만들어진 프로젝트 디렉토리에 접근하여, `npm start` 로 `Express.js` 프로젝트를 실행할수 있고 `[localhost:3000](http://localhost:3000)` 에 접속하여 페이지를 확인할 수 있다.
 
 ```javascript
@@ -6628,15 +6647,15 @@ npm start
 2. /messges/:from-:to /message/123-456/ 등으로 접속했을 때 라우팅 적용
 ```
 
-5. `request handler - request`:  라우팅에 적용되는 함수, `HTTP` 요청과 응답을 다룰 수 있는 함수로, 설정된 라우팅 경로에 해당하는 요청이 들어오면 `Request handler` 함수가 실행됨
+5. `request handler - request`: 라우팅에 적용되는 함수, `HTTP` 요청과 응답을 다룰 수 있는 함수로, 설정된 라우팅 경로에 해당하는 요청이 들어오면 `Request handler` 함수가 실행됨
 
 ![](https://images.velog.io/images/abcd8637/post/c0917c7f-e341-426f-9d3d-47833c4ec7e5/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-01%2015.02.32.png)
 
 ```javascript
 // 설정된 라우팅 경로에 해당하는 요청이 들어오면 `request handler` 함수를 실행한다.
-router.get('/:id', (req, res) => {
-	const id = req.params.id
-	res.send(`hello ${id}`);
+router.get("/:id", (req, res) => {
+    const id = req.params.id;
+    res.send(`hello ${id}`);
 });
 ```
 
@@ -6646,16 +6665,16 @@ router.get('/:id', (req, res) => {
 
 ```javascript
 // path parameter
-const express = require('express');
+const express = require("express");
 
 const app = express();
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
     res.send("hi");
 });
 
 // path parameter 사용하기
-app.get('/say/:greeting', (req, res) => {
+app.get("/say/:greeting", (req, res) => {
     const { greeting } = req.params;
     res.send(greeting);
 });
@@ -6663,26 +6682,29 @@ app.get('/say/:greeting', (req, res) => {
 app.listen(8080);
 
 // router 연결
-const express = require('express');
-const userRouter = require('./routes/users');
+const express = require("express");
+const userRouter = require("./routes/users");
 
 const app = express();
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
     res.send("OK");
 });
 
 /* 라우터를 '/users' 경로에 연결 */
-app.use('/users', userRouter)
+app.use("/users", userRouter);
 
 app.listen(8080);
 ```
 
 ---
+
 ## 📍 28일차 12.2.목(실시간 강의)
+
 바쁘게 살면 시간이 빨리 가는것처럼 느껴지는 특징이 있는데, 지금의 내가 그렇다. 엄청 많이 한것같지도 않은데 벌써 목요일이다. 얼른 수료하고 취업전선에 뛰어들고 싶다. 오늘은 `npm`, `API`, `RESTAPI`, `express.js`, `middleware`에 관한 내용을 배웠다.
 
 ### ❏ npm
+
 1. `npm init`: `package.json` 파일 생성
 2. `package.json`: 모듈을 관리하는 파일
 3. `package.json - dependencies`: 내가 설치한 라이브러리를 보여준다. 버전 앞에 `^`는 버전을 대략적으로 보여준다. 업데이트 부분에서 자세하게 다룬다.
@@ -6701,7 +6723,8 @@ app.listen(8080);
 16. `scripts`: `CLI` 명령어 설정
 
 ### ❏ API
-1. 내장 라이브러리로 사용하다 외부에 데이터를 저장해서 서버와 통신기기간에 정보를 주고받는 값을 말한다. 
+
+1. 내장 라이브러리로 사용하다 외부에 데이터를 저장해서 서버와 통신기기간에 정보를 주고받는 값을 말한다.
 2. `soap`, `rest`: 정보 교환의 표준성 개발을 의미하는데, `soap`는 `xml` 기반으로 `html`처럼 코드가 복잡해서 이를 보완하기 위해 나온 것이 `rest`다. `rest`는 `json` 기반으로 코드가 간결하다.
 3. `--print=hHbB`: 헤더를 통해 보낸값과 받은 값을 보여주는 명령어
 4. `npm install --save-dev nodemon`: `node.js`의 코드가 바뀔 때마다 자동으로 새로고침해주는 라이브러리, 개발용으로만 사용하고 배포할때는 사용하지 않는 것을 권장한다.
@@ -6716,7 +6739,7 @@ http://localhost:9999/routes/is_odd_2?number=13&number3=1
 ```javascript
 // GET
 1. 데이터를 읽거나 검색할때 사용하는 메서드 (성공시 200 return)
-2. GET 요청은 읽을 때만 사용, 수정될 때는 사용지 않아야 한다. 
+2. GET 요청은 읽을 때만 사용, 수정될 때는 사용지 않아야 한다.
 
 // POST
 1. 주로 새로운 리소스를 생성할 때 사용 됨(일반적으로 성공 시 201return)
@@ -6725,8 +6748,8 @@ http://localhost:9999/routes/is_odd_2?number=13&number3=1
 
 7. `.dotenv`: 함부로 노출할 수 없는 값(APIKEY, password 등)을 `env` 폴더에 저장해서 사용한다. (`gitignore`를 꼭 적용하자.)
 
-
 ### ❏ MiddleWare
+
 1. `서버`와 `클라이언트`사이에 존재, 각기 분리된 2개 이상의 프로그램 사이에서, 매개역할을 하거나 연합시켜주는 프로그램. `next()`를 작성하지 않으면 해당 미들웨어에서만 실행하고 다음 미들웨어로 넘어가지 않는다.
 2. `Express.js`에서 미들웨어는 순차적으로 코드를 실행한다.
 3. 인증파트에서 `middleware`를 사용하고 인증이 되었으면, 내 주문, 선물함, 결제내역 등을 보는데 사용 될 수 있다.
@@ -6736,7 +6759,7 @@ http://localhost:9999/routes/is_odd_2?number=13&number3=1
 // middle ware의 절차적인 프로세스1
 app.use('/', (req, res, next) => {
 	console.log('middelware 1');
-	next();  // next가 없으면 넘어가지 않는다. 
+	next();  // next가 없으면 넘어가지 않는다.
 }
 
 app.use('/', (req, res, next) => {
@@ -6856,32 +6879,36 @@ userRouter.post('/:id/nickname', (req, res) => {
 ```
 
 5. 에러핸들링
+
 ```javascript
 const user = USERS[value];
 
-if(!user){
-	const err = new Error("User not found");
-	err.statusCode = 404;
-	throw err;
+if (!user) {
+    const err = new Error("User not found");
+    err.statusCode = 404;
+    throw err;
 }
 
 req.user = user;
-next()
+next();
 
 // express에서 4개의 인자를 준다. error 핸들링 미들웨어로 인식
 app.use((err, req, res, next) => {
-	res.statusCode = err.statusCode || 500;
-	res.send(err.message)
-})
+    res.statusCode = err.statusCode || 500;
+    res.send(err.message);
+});
 ```
 
 ---
+
 ## 📍 29일차 12.3.금(온라인 강의)
+
 어제에 이어서 `express.js` 사용법 그리고 `middleware`, `postman`을 이용한 `RESTAPI`실습을 배웠다. 실습을 하면서 느낀건 <a href='https://velog.io/@abcd8637/%EC%B5%9C%EC%A2%85%EB%A9%B4%EC%A0%91-SW-%EC%A0%95%EA%B8%80%EC%82%AC%EA%B4%80%ED%95%99%EA%B5%90-%ED%9B%84%EA%B8%B0'>예전</a>에 정글사관학교 면접보기 전 과제 시험에서 게시판 `CRUD` 구현하는 과제가 있었는데, `R, U` 기능을 해결하지 못했었다. 이전의 기억을 트라우마로 갖고있어 `CRUD`를 조금 회피(?)하게 되었지만, 이번에 완전히 정복하겠다는 의지로 공부했다. 나중에 백엔드 엔지니어와 협업할 때 서버에 관해 대화를 할 때 말이 잘 통할정도로 성장하고 싶다.
 
 ### ❏ middleWare
+
 1. 미들웨어는 `Express.js`동작의 핵심이다. `HTTP` 요청과 응답 사이에서 단계별 동작을 수행해주는 함수를 뜻한다.
-2. `HTTP` 요청이 들어온 순간부터 `express.js` 가 실행된다. 미들웨어는 `HTTP` 요청과 응답 객체를 처리하거나, 다음 미들웨어를 실행 할 수 있다.(순차적으로 처리한다.) `HTTP` 응답이 마무리 될때까지 미들웨어 동작 사이클이 실행된다. 
+2. `HTTP` 요청이 들어온 순간부터 `express.js` 가 실행된다. 미들웨어는 `HTTP` 요청과 응답 객체를 처리하거나, 다음 미들웨어를 실행 할 수 있다.(순차적으로 처리한다.) `HTTP` 응답이 마무리 될때까지 미들웨어 동작 사이클이 실행된다.
 3. `req`, `res`, `next` 를 가진 함수를 작성하면 해당 함수는 미들웨어를 동작할 수 있다.
 
 ```javascript
@@ -6894,17 +6921,17 @@ app.use((err, req, res, next) => {
 
 ```javascript
 const logger = (req, res, next) => {
-	console.log(`Request ${req.path}`);
-	next();
-}
+    console.log(`Request ${req.path}`);
+    next();
+};
 
 const auth = (req, res, next) => {
-	if(!isAdmin(req)){
-		res.send("Not Authorized");
-		return;
-	}
-	next();
-}
+    if (!isAdmin(req)) {
+        res.send("Not Authorized");
+        return;
+    }
+    next();
+};
 ```
 
 5. `middleware`는 적용되는 위치에 따라 어플리케이션 미들웨어, 라우터 미들웨어, 오류처리 미들웨어로 분류가능하다. 필요한 동작 방식에 따라 미들웨어를 적용할 위치를 결정한다.
@@ -6954,20 +6981,20 @@ app.get('/', logger, (req, res, next) => {
 ```javascript
 // next에 인자로 넘기면 중간을 건너뛰고 마지막 오류처리 미들웨어가 실행된다.
 app.use((req, res, next) => {
-	if(!isAdmin(req)){
-		next(new Error("Not Authorized"))
-		return;
-	}
-	next();
-})
+    if (!isAdmin(req)) {
+        next(new Error("Not Authorized"));
+        return;
+    }
+    next();
+});
 
-app.get('/', logger, (req, res, next) => {
-	res.send('Hello Router!')
-})
+app.get("/", logger, (req, res, next) => {
+    res.send("Hello Router!");
+});
 
 app.use((err, req, res, next) => {
-	res.send('Error Occurred!')
-})
+    res.send("Error Occurred!");
+});
 ```
 
 7. 함수형 미들웨어: 하나의 미들웨어를 작성하고, 작동모드를 선택해서 사용하고 싶을 경우, 미들웨어를 함수형으로 작성하여 사용한다. (예, API 별로 사용자의 권한을 다르게 제한하고 싶은 경우)
@@ -6990,6 +7017,7 @@ app.use('/users', auth('member'), userRouter);
 8. 요약: 미들웨어는 HTTP 요청과 응답 사이에서 작동하는 함수, req, res, next 를 인자로 가질 수 있다. app 혹은 router 객체에 연결해서 사용가능하다. next 에 인자로 넘기면 오류처리 미들웨어가 실행된다. 미들웨어에 값을 설정하고 싶다면 함수형 미들웨어로 설정하라.
 
 ### ❏ REST API
+
 1. `REST` 아키텍쳐를 준수하는 웹 `API`, `RESTFul` 이라고도 부른다.
 2. `API` : 서비스나 프로그램간에 미리 정해진 기능을 실행할 수 있도록 하는 규약
 3. `REST`: 웹에서 자료를 전송하기 위한 표현 방법의 아키텍쳐, 기본적인 REST 가이드를 따르면 조금 더 좋은 구조의 API를 구성할 수 있음
@@ -6999,16 +7027,19 @@ app.use('/users', auth('member'), userRouter);
 7. restapi는 rest 아키텍쳐를 준수하는 웹 api를 의미하며, rest 아키텍쳐를 준수하는 간단한 방법으로 url을 통한 자원의 표현 방법과 http method를 통한 api 동작의 정의 정도만 사용해도 훌륭한 rest api를 구현할 수 있다.
 
 ### ❏ JSON
-1. JS에서 객체를 표현하는 표현식으로 시작했다. 데이터를 표현하는 방법이 단순하고 이해하기 쉬워서 데이터를 전송할 때 많이  사용한다.
+
+1. JS에서 객체를 표현하는 표현식으로 시작했다. 데이터를 표현하는 방법이 단순하고 이해하기 쉬워서 데이터를 전송할 때 많이 사용한다.
 2. 웹 api는 데이터를 문자열로 전송한다. 어떤 객체를 웹 api를 통해 문자열로 전달하기 위해 json을 사용한다.
 3. `value` 에는 어떤 값이라도 사용 될 수 있다.
 
 ### ❏ Express.js로 REST API 구현하기
+
 1. 간단한 메모의 작성, 삭제, 확인기능 api 구현
 2. express-generator를 사용하지않고 MVC패턴 구현
 
 ### ❏ MVC 패턴
-1. 프로젝트의 기능들을 어떻게 분리할지에 대한 하나의 구성 방법 
+
+1. 프로젝트의 기능들을 어떻게 분리할지에 대한 하나의 구성 방법
 2. model: 데이터에 접근하는 기능, 데이터 그 자체, 데이터의 읽기 쓰기는 `model` 을 통해서만 표현
 3. view: 데이터를 표현하는기능, controller에 의해 데이터를 전달받고 화면에 표시하는 기능
 4. controller: model을 통해 데이터에 접근하여 처리 결과를 view에 전달하는 기능, 라우팅 함수가 controller기능을 수행한다.
@@ -7018,40 +7049,45 @@ app.use('/users', auth('member'), userRouter);
 ```javascript
 // 이전에 next()에 인자로 넘겨줌
 app.use((err, req, res, next) => {
-	res.status(500);
+    res.status(500);
 
-	res.json({
-		result: "fail",
-		error: err.message
-	})
-})
+    res.json({
+        result: "fail",
+        error: err.message,
+    });
+});
 ```
 
-7. 모든 라우팅이 적용 된 이후 사용되는 미들웨어는 설정된 경로가 없는 요청을 처리하는 Route Handler 로 동작한다. Express.js 는 기본적으로 404 페이지를 가지고 있지만, 직접 처리가 필요할 때  Route Handler 를 추가한다.
+7. 모든 라우팅이 적용 된 이후 사용되는 미들웨어는 설정된 경로가 없는 요청을 처리하는 Route Handler 로 동작한다. Express.js 는 기본적으로 404 페이지를 가지고 있지만, 직접 처리가 필요할 때 Route Handler 를 추가한다.
 
 ```javascript
 app.use((req, use, next) => {
-	res.status(404);
-	res.send({
-		result: 'fail',
-		error: `Page not found ${req.path}`
-	})
-})
+    res.status(404);
+    res.send({
+        result: "fail",
+        error: `Page not found ${req.path}`,
+    });
+});
 ```
 
 ### ❏ postman
+
 1. API 테스트 도구로 HTTP 요청을 손쉽게 작성하여 테스트해볼 수 있게 도움을 준다.
 
 ### ❏ 미들웨어 작성과 사용
+
 이하 실습 코드 생략
 
 ---
+
 ## 📍 30일차 12.4.토(온라인 강의)
+
 오늘은 `mongoDB`와 `express.js`를 연동하여 `CRUD`하는 법을 배웠다. 예전에 `mongoDB`를 이용하여 최신 기사를 한눈에 보여주는 <a href='https://blog.naver.com/abcd8637/222152180429'>지금 뉴스!</a> 프로젝트를 진행했으나, `AWS` 무료 티어기간이 끝나서 취소하는 바람에 서버를 닫았다. 그때는 `Robo 3T` 프로그램으로 `mongoDB`를 조작했는데 이번에는 <a href='https://www.mongodb.com/ko-kr'>mongoDB</a> 홈페이지에 `cloud` 기능과 연동하는 법을 배웠다. mongoDB 홈페이지에서 다루니까 훨씬 `UX`가 좋았다.
 
 ### ❏ MongoDB
+
 1. 대표적인 `NoSQL`, `Document DB` mongo는 Humongous에서 따온 말로, 엄청나게 큰 DB, 대용량 데이터를 처리하기 좋게 만들어짐
-2. `NoSQL` (Not Only SQL): 구조화된 질의어를 사용하지 않는 데이터베이스, 자료간의 관계에 초점을 두지 않음. 데이터를 구조화하지 않고 유연하게 저장함  
+2. `NoSQL` (Not Only SQL): 구조화된 질의어를 사용하지 않는 데이터베이스, 자료간의 관계에 초점을 두지 않음. 데이터를 구조화하지 않고 유연하게 저장함
 3. `RDB` (Relational Database): 관계형 데이터 베이스, 자료들의 관계를 주요하게 다룸, SQL 질의어를 사용하기 위해 데이터를 구조화 해야함
 4. 왜 `NoSQL`을 사용하는가? `SQL`을 사용하기 위해서는 데이터를 구조화하는 것이 필수이다.(`DDL`) 스키마에 정의된 데이터가 아니면 저장할 수 없는 제약이 따르는데, `NoSQL` 을 사용하면 사전작업 없이 DB 를 사용할 수 있다.(DB크기에 관여하지 않고 프로젝트를 빠르게 진행할 수 있음)
 
@@ -7092,48 +7128,54 @@ db.posts.insert([
 9. `mongoDB compass`: mongoDB에 접속하여 Database, collection, document 등을 시각화하여 관리할 수 있게 도와주는 도구, MySQL workbench 와 유사
 
 ### ❏ MongoDB의 기본 개념
-1. `Database`: 하나 이상의 `collection` 을 가질 수 있는 저장소, `SQL`에서의 `database` 와 유사 
+
+1. `Database`: 하나 이상의 `collection` 을 가질 수 있는 저장소, `SQL`에서의 `database` 와 유사
 2. `Collection`: 하나 이상의 `Document`가 저장되는 공간. SQL 에서의 table 과 유사하다. 하지만, collection 이 document 의 구조를 정의하지 않음
 3. `Document`: `mongoDB` 에 저장되는 자료, SQL 에서 row 와 유사하지만, 구조제약 없이 유연하게 저장 가능, JSON 과 유사한 BSON 을 사용하여 다양한 자료형을 지원한다.
 4. `document - objectID` : 각 document 의 유일한 키 값, SQL 의 primary key 와 유사하다. 하나씩 증가하는 값이 아닌 document 를 생성할 때 자동으로 생성되는 값(timestamp + random value + auto increament)
 
 ### ❏ Mongoose ODM
+
 1. `ODM(Object Data Modeling)`: MongoDB의 collection에 집중하여 관리하도록 도와주는 패키지 Collection 을 모델화하여, 관련 기능들을 쉽게 사용할 수 있도록 도와줌
 2. `MongoDB` 는 기본 `Node.js` 드라이버는 연결상태를 관리하기 어려움 이때, `Mongoose` 를 사용하면 간단하게 데이터베이스와의 연결상태를 관리해줌.
 3. 스키마 관리: 스키마를 정의하지 않고 데이터를 사용하는 것은 NoSQL 의 장점이지만, 데이터 형식을 미리 정의 해야 코드 작성과 프로젝트 관리에 유용함. `Mongoose` 는 `Code-level` 에서 스키마를 정의하고 관리할 수 있게 해줌, 중간단계에서 체크해주고 관리함
 4. `populate`: `mongoDB`는 `join` 을 제공하지 않음. `join` 과 유사한 기능을 사용하기 위해서 `aggregate` 라는 복잡한 쿼리를 사용하지만 `Mongoose` 에서 `populate` 를 사용하여 간단하게 구현할 수 있음
 
 ### ❏ Mongoose ODM 사용순서
+
 1. 스키마 정의 → 모델 만들기 → 데이터베이스 연결 → 모델 사용
 2. 스키마 정의: `Collection` 에 저장될 `Document` 의 스키마를 `Code-level` 에서 관리할 수 있도록 `schema` 를 작성할 수 있음. 다양한 형식을 미리 지정하여 생성, 수정 작업 시 데이터 형식을 체크해주는 기능을 제공함. `timestamps` 옵션을 사용하면 생성, 수정 시간을 자동으로 기록해 줌
 
 ```javascript
-const { Schema } = require('mongoose');
+const { Schema } = require("mongoose");
 
-const PostSchema = new Schema({
-	title: String,
-	content: String,
-}, {
-	timestamps: true,
-});
+const PostSchema = new Schema(
+    {
+        title: String,
+        content: String,
+    },
+    {
+        timestamps: true,
+    }
+);
 
-module.exports = PostSchema
+module.exports = PostSchema;
 ```
 
 3. 모델 만들기: 작성된 스키마를 `mongoose` 에서 사용할 수 있는 모델로 만들어야 함. 모델의 이름을 지정하여 `populate` 등에서 해당 이름으로 모델을 호출 할 수 있음
 
 ```javascript
-const mongoose = require('mongoose');
-const PostSchema = require('./schemas/board');
-exports.Post = mongoose.model('Post', PostSchema)
+const mongoose = require("mongoose");
+const PostSchema = require("./schemas/board");
+exports.Post = mongoose.model("Post", PostSchema);
 ```
 
 4. 데이터베이스 연결하기: `connect` 함수를 이용하여 간단하게 DB 에 연결할 수 있음. `mongoose` 는 자동으로 연결을 관리해주기 때문에 직접 연결 상태를 체크하지 않아도 모델 사용 시 연결 상태를 확인하여 사용이 가능할 때 작업을 실행 함
 
 ```javascript
-const mongoose = require('mongoose');
-const { Post } = require('./models');
-mongoose.connect('mongodb://localhose:27017/myapp');
+const mongoose = require("mongoose");
+const { Post } = require("./models");
+mongoose.connect("mongodb://localhose:27017/myapp");
 ```
 
 ### ❏ 모델 사용하기 - 간단한 CRUD
@@ -7143,29 +7185,26 @@ mongoose.connect('mongodb://localhose:27017/myapp');
 1. `CREATE`: create 함수를 사용하여 Document생성, create 함수에는 Document Object 나 (단일 Document) Document Object 의 Array 전달 가능(복수Document), create 는 생성된 Document 를 반환해줌
 
 ```javascript
-const { Post } = require('./models');
+const { Post } = require("./models");
 
-async function main(){
-	const created = await Post.create({
-		title: 'first title',
-		content: 'second title',
-	})
+async function main() {
+    const created = await Post.create({
+        title: "first title",
+        content: "second title",
+    });
 
-	const multipleCreated = await Post.create([
-		item1,
-		item2
-	])
+    const multipleCreated = await Post.create([item1, item2]);
 }
 ```
 
 2. `FIND(READ)`: find 관련 함수를 사용하여 document 를 검색, query 를 사용하여 검색하거나 findById 를 사용하면 objectID 로 document 를 검색할 수 있음
 
 ```javascript
-const { Post } = require('./models');
+const { Post } = require("./models");
 async function main() {
-	const listPost = await Post.find(query);
-	const onePost = await Post.findOne(query);
-	const postById = await Post.findById(id);
+    const listPost = await Post.find(query);
+    const onePost = await Post.findOne(query);
+    const postById = await Post.findById(id);
 }
 ```
 
@@ -7173,67 +7212,69 @@ async function main() {
 
 ```javascript
 Person.find({
-	name: 'AYW',
-	age: {
-		$lt: 20,  // less then: 미만(and)
-		$gte: 10,  // grater then equal: 이상(and)
-	},
-	languages: {
-		$in: ['ko', 'en']  // in: 존재하면(and)
-	},
-	$or: [  // or: acive이거나 true인 값 중 하나
-		{ status: 'ACTIVE' },
-		{ isFresh: true },
-	]
-})
+    name: "AYW",
+    age: {
+        $lt: 20, // less then: 미만(and)
+        $gte: 10, // grater then equal: 이상(and)
+    },
+    languages: {
+        $in: ["ko", "en"], // in: 존재하면(and)
+    },
+    $or: [
+        // or: acive이거나 true인 값 중 하나
+        { status: "ACTIVE" },
+        { isFresh: true },
+    ],
+});
 ```
 
 4. `mongoose` 는 쿼리 값으로 배열로 전달하면 자동으로 `$in` 쿼리를 생성해준다.
 
 ```javascript
-Person.find({name: ['elice', 'ted' ]})  // { name: { $in: ['elice', 'ted' ]}}
+Person.find({ name: ["elice", "ted"] }); // { name: { $in: ['elice', 'ted' ]}}
 ```
 
 5. `UPDATE`: update 관련 함수를 사용하여 document 를 수정, find~ 함수들은 검색된 document를 업데이트를 반영하여 반환해준다. 반면, update 는 기본적으로 $set operator 를 사용하여 document 를 통째로 변경하지 않는다.
 
 ```javascript
-async function main(){
-	const updateResult = await Post.updateOne(query, {});
-	const updateResults = await Post.updateMany(query, {});
-	const postById = await Post.updateOne(query, {});
-	const onePost = await Post.findOneAndUpdate(query, {})
+async function main() {
+    const updateResult = await Post.updateOne(query, {});
+    const updateResults = await Post.updateMany(query, {});
+    const postById = await Post.updateOne(query, {});
+    const onePost = await Post.findOneAndUpdate(query, {});
 }
 ```
 
 6. `DELETE` : delete 관련 함수들을 사용하여 document 삭제결과를 리턴한다. find~ 함수들은 검색된 document 를 반환해준다.
 
 ```javascript
-async function main(){
-	const deleteResult = await Post.deleteOne(query, {});
-	const deleteResults = await Post.deleteMany(query, {});
-	const onePost = await Post.findOneAndDelete(query, {});
-	const postById = await Post.findByIdAndDelete(query, {})
+async function main() {
+    const deleteResult = await Post.deleteOne(query, {});
+    const deleteResults = await Post.deleteMany(query, {});
+    const onePost = await Post.findOneAndDelete(query, {});
+    const postById = await Post.findByIdAndDelete(query, {});
 }
 ```
 
-7. `populate`:  document 안에 document 를 담지 않고 objectID 를 가지고 reference 하여 사용할 수 있는 방법, document 에는 reference 되는 ObjectID 를 담고, 사용할 때 populate 하여 하위 Document 처럼 사용할 수 있게 해줌
+7. `populate`: document 안에 document 를 담지 않고 objectID 를 가지고 reference 하여 사용할 수 있는 방법, document 에는 reference 되는 ObjectID 를 담고, 사용할 때 populate 하여 하위 Document 처럼 사용할 수 있게 해줌
 
 ```javascript
 const Post = new Schema({
-	user: {
-		type: Schema.Types.ObjectId,
-		ref: 'User'
-	},
-	comments: {
-		type: Schema.Types.ObjectId,
-		ref: 'Comment'
-	}
-})
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+    },
+    comments: {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+    },
+});
 
-const post = await Post.find().populate(['user', 'comments']);
+const post = await Post.find().populate(["user", "comments"]);
 ```
 
 ### ❏ Express.js + Mongoose ODM
+
 1. `Express.js` 는 프로젝트 구조를 자유롭게 구성할 수 있기 때문에 어느 부분에 `Mongoose ODM` 을 위치시키면 좋을지 적절한 위치를 결정하는 것이 중요
 2. 일반적으로 `models` 디렉터리에 `Schema` 와 `Model` 을 같이 위치시킨다. `app` 객체는 어플리케이션 시작을 의미하는 부분으로 해당 부분에 데이터베이스 연결을 명시하는 `mongoose.connect` 를 위치한다. 특별한 제약이 있는것은 아니다.
 
@@ -7243,38 +7284,43 @@ const post = await Post.find().populate(['user', 'comments']);
 
 ```javascript
 // connection events
-mongoose.connect('----');
-mongoose.connection.on('connected', () => {});  // 연결완료
-mongoose.connection.on('disconnected', () => {});  // 연결끊김
-mongoose.connection.on('reconnected', () => {});  // 재연결 완료
-mongoose.connection.on('reconnectFailed', () => {});  // 재연결 시도 횟수 초과
+mongoose.connect("----");
+mongoose.connection.on("connected", () => {}); // 연결완료
+mongoose.connection.on("disconnected", () => {}); // 연결끊김
+mongoose.connection.on("reconnected", () => {}); // 재연결 완료
+mongoose.connection.on("reconnectFailed", () => {}); // 재연결 시도 횟수 초과
 ```
 
 ### ❏ Sequelize ORM
+
 1. `ORM`(Object-Relational Mapping): `MySQL`, `PostgreSQL` 등의 `RDBMS` 를 이용하는 간단한 방법 `ODM` 이 단순히 모델에 집중하여 관리하는 것에 반해, `ORM` 은 테이블 관계와 쿼리 등의 기능을 더욱 단순화하는 용도로 주로 사용
 2. `sequelize` 도 연결을 관리하는 간단한 방법을 제공, `mongoose` 가 `mongoDB` 만 연결이 가능한데에 반해, `sequelize` 는 `MySQL`, `PostgreSQL` , `SQLite` 등 다양한 `RDBMS` 에 연결가능하다.
 3. 나중에 `node.js`로 관계형 데이터베이스를 구현하고 싶으면 `Sequelize`를 공부하자.
 
 ```javascript
 // connect db
-const sequelize = new Sequelize('database', 'usename', 'password', {
-	host: 'localhost',
-	dialect: 'mysql'
-})
+const sequelize = new Sequelize("database", "usename", "password", {
+    host: "localhost",
+    dialect: "mysql",
+});
 ```
 
 4. 스키마 작성: `define` 을 통해 `Schema` 생성, `sequelize` 는 `Schema`가 `DDL도` 생성해준다.
 
 ```javascript
-const User = sequelize.define('User', {
-	name: {
-		type: DataTypes.STRING(10),
-		allowNull: false,
-	},
-	age : {
-		type: DataTypes.Integer,
-	}
-}, {})
+const User = sequelize.define(
+    "User",
+    {
+        name: {
+            type: DataTypes.STRING(10),
+            allowNull: false,
+        },
+        age: {
+            type: DataTypes.Integer,
+        },
+    },
+    {}
+);
 ```
 
 5. 관계 정의: 테이블 간의 관계를 `Code-level` 로 관리 할 수 있다. 이를 이용하면 외래키 설정과 제약조건까지 `DDL` 로 생성한다. 또한 다대다 관계 설정을 통해 `relation table` 도 자동으로 생성한다.
@@ -7286,7 +7332,7 @@ Foo.belongsToMany(Bar);
 Bar.belongsToMany(Foo);
 ```
 
-6. 쿼리: Operator 를 이용해 SQL 쿼리를 코드로 작성 가능, 스키마의 관계 설정을 한 경우 include 를 사용하여 자동으로 join 쿼리 생성 가능 
+6. 쿼리: Operator 를 이용해 SQL 쿼리를 코드로 작성 가능, 스키마의 관계 설정을 한 경우 include 를 사용하여 자동으로 join 쿼리 생성 가능
 
 ```SQL
 User.findAll({
@@ -7310,10 +7356,13 @@ sequelize.sync();
 8. `Sequelize ORM` 를 사용하면 데이터베이스에 직접 DDL 을 사용하지 않고, JS 코드로 테이블 및 관계를 관리할 수 있다. 또한 RDB 의 어려운 점 중 하나인 join 을 includes 옵션을 통해 간단하게 사용할 수 있다.
 
 ---
+
 ## 📍 31일차 12.7.화 데이터 베이스 연동(실시간 강의)
+
 이번주는 `node.js`를 바탕으로 `mongoDB`를 이용하여 데이터베이스를 연동하여 회원가입과 로그인 기능을 구현한다. 프론트엔드를 준비하고 있어 `DB`를 많이 공부하진 않았지만 이번 기회를 계기로 `DB`와 친해져보고 게시판 `CRUD`와 페이지네이션을 구현해보고 싶다.
 
 ### ❏ DataBase
+
 1. 여러 사람이 공유하여 사용 할 목적으로 체계화하여 관리되는 데이터의 집합(`DBMS`에 의해 제어 됨)
 2. 데이터 공유: 여러명이 동시에 공유하더라도 안정성, 정확성을 갖춤
 3. 데이터 중복 최소화: 하나의 데이터베이스에 여러 테이블을 나누어 데이터 중복 최소화
@@ -7325,6 +7374,7 @@ sequelize.sync();
 9. 수평확장: `NoSQL`에서 더 많은 인스턴스를 만들어 더 큰 로드를 감당한다. `NoSQL`은 데이터 구조가 정해져 있지 않아 인스턴스를 무제한 늘릴 수 있다.(운영비용이 받쳐준다면..)
 
 ### ❏ DBMS
+
 1. Oracle: 가장 먼저 상업용으로 발표된 관계형 데이터베이스, DB시장 점유율 1위지만, 비용이 많이들고, 대기업에서 주로 사용한다.
 2. MySQL: `MySQL`사에서 만든 오픈소스 데이터베이스, `Oracle`에 비해 대용량 데이터 처리는 어려움
 3. PostgreSQL: 객체 관계형 데이터베이스 시스템, 오픈소스, 다양한 데이터베이스 객체를 사용자가 임의 생성가능
@@ -7333,6 +7383,7 @@ sequelize.sync();
 6. 행 = 튜플 = 레코드
 
 ### ❏ NoSQL
+
 1. `key-value`: `Redis`, `AWS DynamoDB`, `value`는 어떤 값이든 가능, 가장 단순한 형태
 2. `doucment`: `DynamoDB`, `CouchDB`, 각 레코드가 하나의 문서가 됨, 문서는 데이터베이스에 따라 `XML`, `YAML`, `JSON`, `BSON` 등을 사용한다.
 3. `graph-based`: `Neo4j`, `AWS Neptune`, 그래프 이론을 바탕으로 데이터베이스를 그래프로 표현한다. 관계기반문제에 유리함
@@ -7396,6 +7447,7 @@ await users.deleteOne({
 ```
 
 ### ❏ 관계형 데이터베이스(RDB)
+
 1. 가장 고전적이고 널리 알려진 데이터베이스 모델
 2. 데이터의 규격인 스키마(테이블)와 각종 제약 조건을 정하고, 그에 맞게 데이터 저장
 3. 대부분의 경우 `SQL`로 상호작용한다.
@@ -7438,23 +7490,28 @@ program.command('remove').action(async () =>
 6. `Sequelize`: 객체의 메서드를 활용하는 것처럼 쿼리 로직을 작성가능, Node.js 의 대표적인 ORM, Promise 기반으로 구현되었기 때문에 비동기 로직을 편리하게 작성할 수 있다.
 
 ### ❏ CRUD 사용자 추가하기
+
 1. 웹의 성능을 포기해도 사용자가 편리하게 끔 만들자.
 2. 데이터를 넣고 지우는것보다 전체를 새로 그려내는경우가 빠를 때가 있다.
 3. `app.use(express.json())`: req.body에 값을 넣어준다. ()
-4. `app.use(express.urlencoded({extended: false}))`: js 내부 모듈 중 `query-string` 모듈이 있는데 우리가 사용하기 편하게 분석해서 `req.body` 에 넣어주고. `extended: true` 를 사용하면 `qs` 모듈을 이용해서 `req.body` 에 넣어준다. (`query-string` 에 비해 보안성에서 뛰어나다?정도의 차이, 단점은 버전관리) 
+4. `app.use(express.urlencoded({extended: false}))`: js 내부 모듈 중 `query-string` 모듈이 있는데 우리가 사용하기 편하게 분석해서 `req.body` 에 넣어주고. `extended: true` 를 사용하면 `qs` 모듈을 이용해서 `req.body` 에 넣어준다. (`query-string` 에 비해 보안성에서 뛰어나다?정도의 차이, 단점은 버전관리)
 5. POST로 한글(유니코드)을 넘길때 몇몇 프록시에서 한글이 깨지는 경우가 있다. (대부분은 지원함)
 6. 개발시 귀찮더라도 범용성있게 작성해야한다. (안되는 브라우저를 위해서)
 
 ---
+
 ## 📍 32일차 12.8.수. 온라인 강의
+
 오늘은 `CRUD를 이용하여 게시판 만들기`,` Template Engine`, `Pug`, `PM2`을 배웠다. `node.js`의 기본언어는 `JS`인데, 한가지의 언어로 프론트와 백을 다룬다고 생각하니까 가슴이 웅장해졌다. (아직은 어색하지만..) 자주 살펴보며 눈에 익히는 것이 아무래도 좋겠지??
 
 ### ❏ 게시판 만들기
+
 1. 웹 서비스 개발의 기본을 학습하기 좋다. 게시판을 통해 기본기를 잘 다지면 무엇이든 응용 가능
 2. 게시판 목록, 보기, 수정, 작성, 삭제
 3. 회원가입, 로그인, 비밀번호 찾기, pagination, 구글 로그인, 유저 작성글 모아보기
 
 ### ❏ Template Engine
+
 1. 서버에서 클라이언트로 보낼 `HTML` 형태를 미리 템플릿으로 작성하고 동작시에 미리 작성된 템플릿에 데이터를 넣어 완성된 `HTML`을 생성한다.
 2. 템플릿 엔진은 템플릿 작성 문법과 템플릿을 `HTML` 형태로 변환하는 기능을 제공한다.
 
@@ -7463,6 +7520,7 @@ program.command('remove').action(async () =>
 3. `Express.js`의 템플릿엔진: `EJS`(html과 유사한 문법), `Mustache`(간단한 데이터 치환정도만 제공하는 경량화 된 템플릿 엔진), `Pug`(들여쓰기 표현식을 사용한 간략한 표기와 레이아웃 등 강력한 기능을 제공)
 
 ### ❏ Pug
+
 1. 들여쓰기 표현식을 이용해 가독성이 좋고 개발 생산성을 높인다.
 2. `HTML`을 잘 몰라도 문법적인 실수를 줄일 수 있다.
 3. `layout`, `include`, `mixin` 등 강력한 기능을 제공한다.
@@ -7516,10 +7574,10 @@ block content
 	pre
 		include article.txt
 
-// mixin, 템플릿을 함수처럼 사용할 수 있다. 
+// mixin, 템플릿을 함수처럼 사용할 수 있다.
 // include는 값을 지정할 수 없지만, mixin은 파라미터를 지정하여 값을 넘겨받아 템플릿에 사용할 수 있다.
 
-// listItem.pug 
+// listItem.pug
 mixin listItem(title, name)
 	tr
 		td title
@@ -7533,18 +7591,18 @@ table
 ```
 
 ### ❏ Express.js와 pug의 연동
+
 1. `app.set` 을 이용해 템플릿이 저장되는 디렉토리를 지정하고, 어떤 템플릿 엔진을 사용할지 지정할 수 있다.
 2. `res.render` 함수는 `app.set` 에 지정된 값을 이용해 화면에 그리는 기능을 수행한다. `render` 함수의 첫 번재 인자는 템플릿의 이름, 두번째인자는 템플릿에 전달되는 값
 
 ```javascript
 // app.js
-app.set('views', 
-	path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
 
 // request handler
-res.render('main', {
-	title: 'Hello Express',
+res.render("main", {
+    title: "Hello Express",
 });
 ```
 
@@ -7560,8 +7618,9 @@ h1= appName
 ```
 
 ### ❏ Express-generator 사용 시 템플릿 엔진 지정하기
+
 1. `express-generator` 는 기본적으로 `jade` 라는 템플릿 엔진을 사용한다.
-2. `jade` 는 `pug` 의 이전 이름으로, 최신 지원을 받으려면 템플릿 엔진을 `pug` 로 지정해야 한다. 
+2. `jade` 는 `pug` 의 이전 이름으로, 최신 지원을 받으려면 템플릿 엔진을 `pug` 로 지정해야 한다.
 3. `--view`: 템플릿 엔진을 지정할 수 있다.
 
 ```javascript
@@ -7569,7 +7628,8 @@ $ express --view=pug myapp
 ```
 
 ### ❏ 게시판 CRUD 만들기
-1. 데이터를 다루는 네 가지 기본적인 기능 
+
+1. 데이터를 다루는 네 가지 기본적인 기능
 2. Create: 게시글 작성기능, 제목, 내용, 작성자, 작성 시간 등의 정보를 기록함, 게시글의 제목과 내용은 최소 n글자 이상이어야 함
 3. Read: 게시글의 목록과 게시글의 상세를 볼 수 있어야 함. 목록은 간략화된 정보를 보여줌, 게시글 상세는 제목, 작성자, 내용, 작성 시간, 수정 시간 등의 상세한 정보를 보여줘야 한다.
 4. Update: 게시글은 수정이 가능해야한다. 제목, 내용을 수정하고, 수정 시간을 기록한다. (게시글 수정은 작성자만 가능하다. + 회원기능)
@@ -7580,19 +7640,22 @@ $ express --view=pug myapp
 // shortId 타입을 mongoose custom type으로 선언
 // nanoid: 중복 없는 문자열 생성
 // default를 이용해 모델 생성시 자동으로 아이디 생성
-const { nanoid } = require('nanoid');
+const { nanoid } = require("nanoid");
 
 const shortId = {
-	type: String,
-	default: () => {return nanoid()},
-	require: true,
-	index: true,
-}
+    type: String,
+    default: () => {
+        return nanoid();
+    },
+    require: true,
+    index: true,
+};
 
 module.exports = shortId;
 ```
 
 ### ❏ 게시글 작성 흐름
+
 1. `/posts?write=true` 로 작성페이지 접근
 2. `<form action="/posts" method="post">` 를 이용해 `post` 요청 전송
 3. `[router.post](http://router.post)` 를 이용하여 `post` 요청 처리
@@ -7647,6 +7710,7 @@ router.post('/', async (req, res, next) => {
 ```
 
 ### ❏ 게시글 목록 및 상세 흐름
+
 1. `/posts` 로 목록 페이지 접근
 2. `<a href='/posts/:shortId'>` 를 이용하여 상세 URL link
 3. `router.get('/:shortId')` path parameter를 이용하여 요청을 처리함
@@ -7676,7 +7740,7 @@ router.get('/:shortId', async(req, rse, next) => {
 			each post in posts  // each로 반복문 돌기
 				tr
 					td
-						a(href='/posts/${post.shortId}') = post.title 
+						a(href='/posts/${post.shortId}') = post.title
 					td= post.author
 					td= formatDate(post.createdAt)  // formatDate: custom function
 		tfoot
@@ -7704,10 +7768,11 @@ app.locals.formatDate = (date) => {
 				td(colspan="2"): pre= post.content
 			tr
 				td: a(href='/posts/${post.shortId}?edit=true') 수정
-				td button(onclick=`deletePost("${post.shortId}")`) 삭제	
+				td button(onclick=`deletePost("${post.shortId}")`) 삭제
 ```
 
 ### ❏ 게시글 수정 흐름
+
 1. `/posts/{shortId}?edit=true` 로 수정페이지 접근
 2. 작성페이지를 수정페이지로도 동작하도록 작성
 3. `<form action="/posts/:shortId" method="post">` 를 이용해 `post` 요청 전송
@@ -7753,6 +7818,7 @@ router.get('/:shortId', async (req, res, next) => {
 ```
 
 ### ❏ 게시글 삭제 흐름
+
 1. 게시글 상세 페이지에 삭제 버튼 추가
 2. `html form` 은 DELETE 메서드를 지원하지 않음
 3. `JS` 를 이용해 `fetch` 함수로 `HTTP Delete` 요청 전송
@@ -7775,7 +7841,7 @@ script(type="text/javascript").
 					alert('오류가 발생했습니다.');
 					console.log(res.statusText);
 				}
-			}) 
+			})
 		.catch((err) => {
 			console.log(err);
 			alert('오류가 발생했습니다.');
@@ -7796,6 +7862,7 @@ router.delete('/:shortId', async (req, res, next) => {
 ```
 
 ### ❏ Async Request Handler
+
 1. 공식적으로 사용되는 `express` 기술은 아니고 패턴 중 하나임.
 2. `async` 함수를 조금 더 쉽게 사용할 수 있고, 비동기 실행 중 오류 처리를 더 간단하게 할 수 있는 장점이 있다.
 3. `request handler` 에서 오류를 처리하기 위한 방법 (`promise().catch(next)`, `async function, try - catch, next`)
@@ -7836,27 +7903,27 @@ router.get('/', asyncHandler(async (req, res) => {
     res.render('post/edit');
     return;
   }
-  
+
   const posts = await Post.find({});
-  
+
   res.render('post/list', { posts });
 }));
 
 router.get('/:shortId', asyncHandler(async (req, res) => {
   const { shortId } = req.params;
   const post = await Post.findOne({ shortId });
-  
+
   if (req.query.edit) {
     res.render('post/edit', { post });
     return;
   }
-  
+
   res.render('post/view', { post });
 }));
 
 router.post('/', asyncHandler(async (req, res) => {
   const { title, content } = req.body;
-  
+
   if (!title || !content) {
       throw new Error('제목과 내용을 입력해 주세요');
   }
@@ -7871,7 +7938,7 @@ router.post('/:shortId', asyncHandler(async (req, res) => {
   if (!title || !content) {
       throw new Error('제목과 내용을 입력해 주세요');
   }
-    
+
   await Post.updateOne({ shortId }, { title, content });
   res.redirect(`/posts/${shortId}`);
 }));
@@ -7886,15 +7953,16 @@ module.exports = router;
 ```
 
 ### ❏ Pagination
+
 1. 데이터가 많아지면 한 페이지의 목록에 모든 데이터를 표현하기 어려움. 따라서 데이터를 균일한 수로 나누어 페이지로 분리하는 것(ex, 10개씩 나누어 1페이지는 10~20, 2페이지는 11~20번까지 보여주기)
 2. `page`: 현재 페이지, `perPage`: 페이지 당 게시글 수
 3. `/posts?page=1&perPage=10` 처럼 `url query` 를 사용해 전달, `url query` 는 문자열로 넘어가기 때문에 사용시 `number` 로 형 변환을 해줘야 한다.
 
 ```javascript
 router.get( => {
-	const page = 
+	const page =
 			Number(req.query.page || 1)  // `page`가 없으면 default 1
-	const perPage = 
+	const perPage =
 			Number(req.query.perPage || 10)  // `perPage`가 없으면 default 10
 })
 ```
@@ -7910,7 +7978,7 @@ router.get(... => {
 		.sort({ createdAt: -1 })  // 최신순정렬
 		.skip(perPage * (page - 1))
 		.limit(perPage);
-	const totalPage = Math.ceil(total / perPage);  // 게시글 수 / 페이지 당 게시글 수 = 총 페이지 수 
+	const totalPage = Math.ceil(total / perPage);  // 게시글 수 / 페이지 당 게시글 수 = 총 페이지 수
 })
 
 // pug
@@ -7933,6 +8001,7 @@ tr
 ```
 
 ### ❏ PM2 (Process Manager)
+
 1. `Node.js` 의 작업을 관리해주는 `Process Manager`
 2. `node` 명령어로 실행 시 오류 발생이나 실행 상태 관리를 할 수 없음
 3. `pm2` 는 작업 관리를 위한 다양한 유용한 기능을 제공해 줌
@@ -7956,15 +8025,19 @@ $ pm2 start
 ```
 
 ---
+
 ## 📍 33일차 12.9.목. 실시간 강의
+
 오늘은 `graphQL`, `인증`에 대해서 배웠다. 실습시간 마지막에는 `HTTP / HTTPS(SSL)`의 차이, `cookie-session, JWT` 방식의 차이에 대해서 알려주셨는데 너무 유익했다. `restAPI`와 `graphQL`의 차이는 내겐 스승과도 같으신 <a href='https://blog.toycrane.xyz/rest-api%EA%B0%80-%EA%B0%80%EA%B3%A0-graphql%EC%9D%B4-%EC%99%94%EB%8B%A4-a9e400b77902'>튜터님</a> 미디움을 참고하면 도움이 많이 된다.
 
 ### ❏ REST API vs gql API
+
 1. `gql` 은 하나의 `Endpoint` 만 존재
 2. `REST API` 는 `End point` 마다 데이터베이스 `SQL` 쿼리가 달라짐
 3. `gql API` 는 `gql` 스키마의 타입마다 데이터베이스 `SQL` 쿼리가 달라짐
 
 ### ❏ GraphQL
+
 1. FACEBOOK에서 2015년에 발표한 새로운 api 규격
 2. `type system` 을 기본적으로 갖추고 있어서 `REST` 보다 훨씬 안정적
 3. `Apollo`, `Prisma` 등 방대하고 강력한 오픈 소스 툴들로 양질의 개발자 경험 개선을 기대한다.
@@ -7972,12 +8045,14 @@ $ pm2 start
 5. `CLI` 로 `post` 요청시 쌍 따옴표를 빼도 보내진다.
 
 ### ❏ OAuth
+
 1. 접근권한 위임을 위한 공개 표준
 2. 유저 진입장벽이 매우 낮아짐(원클릭으로 로그인 가능)
 3. 유저가 비밀번호를 기억할 필요가 없어짐
 4. 유저 허용 여부에 따라 이메일, 프로필 사진, 닉네임 등의 기본 정보를 얻을 수 있다.
 
 ### ❏ 기타 내용들
+
 1. 프로젝트를 할 때 `F/E` 를 나누기보다는 기능별로 담당하자(ex, `login + front + back` / `pay + front + back`)과 같이 수평적으로 제작)
 2. 프론트와 백을 나눠서 개발하면 속도에서 차이가 난다. (처음은 백엔드가 느리다. DB, 보안, 인프라 등등... 나중엔 반응형때문에 프론트 개발 속도가 늦어진다. 서로 의견충돌이 난다. 즉, 전체적인 프로젝트가 늦어지기 때문에 친한친구나 숙련된 분들과 하면 기능별로 쪼개서 개발하는것을 권장한다.)
 3. 템플릿 엔진: `html` 코드인데, 그 안에서 반복, 조건절로 `view` 를 만들어줄 때 사용한다.(일일이 따로 만들면 중복되는 코드가 많기 때문에 로직을 붙여서 자동으로 `html` 코드를 만들어줄 때) `EJS`, `JADE -> PUG` , `nunjunks` 사용빈도: `nunjunks` → `EJS`
@@ -7990,11 +8065,11 @@ $ pm2 start
 
 4. `passport` : 로그인 구현시 편리하게 도와주는 친구, 이게 없으면 `header`, `session` 관리를 직접 해줘야 한다. 써드파티 로그인도 지원한다.
 5. 로그인 혹은 마이페이지를 보여주는 기능 등의 서버로부터 인증을 받아야하는 상황일 때 선택지는 크게 3가지 `cookie`, `cookie - session` , `JWT` 방식이 있다. 서버는 절대 한개로 운영하지 않고, 2개 이상으로 운영되는데 요청은 한 곳에서 들어온다. 이때 요청을 여러개의 서버 중 한곳으로 분배해주는 장치가 필요한데, 이것이 `LB(load balancer` 다. `AWS` 에서는 `ELB(elastic load balancer)` 라고 부른다.( `elastic: 탄력적인, 고무의`), `cookie-session` 는 `DB` 가 필요하고, `JWT` 는 `DB` 가 필요하지 않다.
-6. `cookie` 방식은 클라이언트에 저장되는 `key - value` 로 이루어진 데이터다. 인증 유효시간을 설정할 수 있고, 유효시간이 정해진다면 클라이언트가 종료되어도 쿠키가  유지된다. 그러나, 중요정보를 쿠키에 담고있으므로 해커에게 탈취당하면 사용자의 정보를 모두 빼앗길 수 있다. 그래서 쿠키자체로는 보안과는 상관없는 개인 장바구니, 자동로그인 설정 등에 사용한다.
-7.  `cookie-session` 방식은 `client` 에서 요청을 보내면  `server` 에서 `cookie` 의 값을 가지고 있다가  `cookie` 와 일치하는 `session` 을 해당 서버에서 찾고 `cookie` 를 사용자에게 보내준다. 그런데, 여러개의 서버가 연결되어있다고 가정해보자.  `server 1`에 현재 `cookie`를 가지고 있다가 연결이 끊겨 다시 `LB` 를 거쳐가서 2번째 `server` 로 연결이 되면,  `cookie` 가 없기 때문에 지금 요청한 사용자가 인가된 사용자인지 모른다.  이럴 때는 서버에 `session` 데이터를 저장하지않고,  `DB`(redis) 를 이용해 해당 `session` 데이터를 `DB` 에 저장한다.  `DB` 에서 쿠키에 맞는 세션데이터를 찾고 해당하는 데이터가 있으면 리퀘스트를 돌려준다. `DB` 단이 붙었기 때문에 요청량이 많아지면 시간이 오래 걸릴 수 있다.
-8. `JWT` 방식은 `cookie-session` 방식과 다르게  `DB` 단이 필요없다.  `JWT` 는 일종의 신분증이라고 생각하면 편하다.  `JWT` 는 `JSON web Token` 를 뜻하는데, 토큰의 특성상 위조가 상당히 어렵다. 그러나 한번 탈취되면 보안에 굉장히 취약해진다. 이를 방지하고자 만료시간이 생겼다. 이때 만료시간은 보통 5-30분 길면 1주일정도로 세팅한다. 요청이 오면 `JWT` 를 발급해준다. `mypage` 로 요청이 날라오면 요청과 함께 온 `JWT` 가 위조되었는지 확인한다.  서버에 저장되어있는 `JWT` 와 일치하면 `mypage` 요청을 같이 보내준다. `cookie-session` 방식처럼 `DB` 단에서 세션 데이터를 확인할 일이 사라진다.
-9.  `http` (80), `https` (443): 보안 유무, `get` 은 `URL` 에 `post` 는 `http.body` 에 요청이 넘어간다. 그래서 `http.body` 도 `postman` 같은 프로그램으로 열어볼 수 있다. 따라서 `http` 에서 `get`, `post` 의 보안은 안전하지 않다.(`id`, `pw`, `cookie` 가 평문으로 날아간다.) 특히, `cookie` 를 도청하게 되면 다른 사이트에서 재사용할 수 있따. (`cookie` 는 로그인을 성공한 사람에게 넘겨주기때문에 노출되면 위험하다.) `https` 는 이런 `id`, `pw`, `cookie` 가 암호화가 되어 서버로 날아간다. 그래서 중간에 해커가 탈취하기 힘들다. `curl` 명령어
-10. `http -> https`:  `DNS` 가 담당한다. `http` 로 요청이 날라오면 `DNS` 에서 다시 클라이언트로 반송처리 시키고 클라이언트에서 `DNS` 한테 `https` 로 요청하게 된다.  `server` 에서 `client` 로 갈 때 `https` 로 변환한다.(항상 그런것은 아니고 대부분 캐싱이 되어있어서 중간에 다시 옴)
+6. `cookie` 방식은 클라이언트에 저장되는 `key - value` 로 이루어진 데이터다. 인증 유효시간을 설정할 수 있고, 유효시간이 정해진다면 클라이언트가 종료되어도 쿠키가 유지된다. 그러나, 중요정보를 쿠키에 담고있으므로 해커에게 탈취당하면 사용자의 정보를 모두 빼앗길 수 있다. 그래서 쿠키자체로는 보안과는 상관없는 개인 장바구니, 자동로그인 설정 등에 사용한다.
+7. `cookie-session` 방식은 `client` 에서 요청을 보내면 `server` 에서 `cookie` 의 값을 가지고 있다가 `cookie` 와 일치하는 `session` 을 해당 서버에서 찾고 `cookie` 를 사용자에게 보내준다. 그런데, 여러개의 서버가 연결되어있다고 가정해보자. `server 1`에 현재 `cookie`를 가지고 있다가 연결이 끊겨 다시 `LB` 를 거쳐가서 2번째 `server` 로 연결이 되면, `cookie` 가 없기 때문에 지금 요청한 사용자가 인가된 사용자인지 모른다. 이럴 때는 서버에 `session` 데이터를 저장하지않고, `DB`(redis) 를 이용해 해당 `session` 데이터를 `DB` 에 저장한다. `DB` 에서 쿠키에 맞는 세션데이터를 찾고 해당하는 데이터가 있으면 리퀘스트를 돌려준다. `DB` 단이 붙었기 때문에 요청량이 많아지면 시간이 오래 걸릴 수 있다.
+8. `JWT` 방식은 `cookie-session` 방식과 다르게 `DB` 단이 필요없다. `JWT` 는 일종의 신분증이라고 생각하면 편하다. `JWT` 는 `JSON web Token` 를 뜻하는데, 토큰의 특성상 위조가 상당히 어렵다. 그러나 한번 탈취되면 보안에 굉장히 취약해진다. 이를 방지하고자 만료시간이 생겼다. 이때 만료시간은 보통 5-30분 길면 1주일정도로 세팅한다. 요청이 오면 `JWT` 를 발급해준다. `mypage` 로 요청이 날라오면 요청과 함께 온 `JWT` 가 위조되었는지 확인한다. 서버에 저장되어있는 `JWT` 와 일치하면 `mypage` 요청을 같이 보내준다. `cookie-session` 방식처럼 `DB` 단에서 세션 데이터를 확인할 일이 사라진다.
+9. `http` (80), `https` (443): 보안 유무, `get` 은 `URL` 에 `post` 는 `http.body` 에 요청이 넘어간다. 그래서 `http.body` 도 `postman` 같은 프로그램으로 열어볼 수 있다. 따라서 `http` 에서 `get`, `post` 의 보안은 안전하지 않다.(`id`, `pw`, `cookie` 가 평문으로 날아간다.) 특히, `cookie` 를 도청하게 되면 다른 사이트에서 재사용할 수 있따. (`cookie` 는 로그인을 성공한 사람에게 넘겨주기때문에 노출되면 위험하다.) `https` 는 이런 `id`, `pw`, `cookie` 가 암호화가 되어 서버로 날아간다. 그래서 중간에 해커가 탈취하기 힘들다. `curl` 명령어
+10. `http -> https`: `DNS` 가 담당한다. `http` 로 요청이 날라오면 `DNS` 에서 다시 클라이언트로 반송처리 시키고 클라이언트에서 `DNS` 한테 `https` 로 요청하게 된다. `server` 에서 `client` 로 갈 때 `https` 로 변환한다.(항상 그런것은 아니고 대부분 캐싱이 되어있어서 중간에 다시 옴)
 11. `SSL` 인증서: 이 사이트가 안전한지 확인하는 인증서(대표적으로 `AWS` certificate manager에서 발급해준다. 인증기관에 비용을 지불하면 `DNS` 에 붙여준다. 만약, `SSL` 인증서가 없으면 다시 브라우저로 리턴하거나 에러를 발생시킨다.)
 12. `node template engine` 은 서버에서 파일을 보내줘서 브라우저단에서 띄우기만 한다. 이런 방식은 `SSR`, 반대로 `CSR` 은 리액트에서 파일을 만들고 데이터만 서버에 요청해서 둘다 합치면 `CSR` 이 된다.
 13. `SSR` 은 검색엔진이 데이터를 모두 읽을 수 있다. `CSR` 은 파일을 한번 거쳐서 탐색해야하기 때문에 바로 노출이 되진 않는다(feat. CORS)
@@ -8003,19 +8078,22 @@ $ pm2 start
 16. 실 서비스할때는 내부 웹서버보다 `nginx`를 직접 붙이는 편이 더 좋다. `node.js` 는 내부 웹서버도 배포하기 충분하다.
 17. `AWS - route 53` 에서 `DNS` 에 `SSL` 을 직접 붙인다. `ELB` 에도 `SSL` 을 붙여야한다. 이후 뒷단에 있는 `EC2` 서버로 넘어간다.
 18. `ELB` 를 쓰는 이유는 `autoScaling` 을 쓰기 위함이다.
-19. 인스턴스를 늘릴 때는 사용률이 51%를 넘어섰을 때 이때 서버가 터져버리면 다음서버는 `@ + 51%` 가 되는데 다음 서버가 50이면 서버가 터져버린다. 
+19. 인스턴스를 늘릴 때는 사용률이 51%를 넘어섰을 때 이때 서버가 터져버리면 다음서버는 `@ + 51%` 가 되는데 다음 서버가 50이면 서버가 터져버린다.
 
 ---
+
 ## 📍 34일차 12.10.금. 온라인 강의
+
 오늘은 `회원가입`, `passport.js`, `session-store`, `댓글 기능`을 배웠다.
 
 ### ❏ 회원가입
+
 1. 이메일, 이름, 패스워드의 간단한 정보만 사용(이메일 형식이 올바른지 확인, 비밀번호 최소 길이 설정, 패스워드와 패스워드 확인 문자가 일치하는지 확인)
 2. 회원의 비밀번호를 `DB`에 그대로 저장하면, 관리자가 모든 회원의 비밀번호를 알 수 있고, `DB`가 해킹되면 보안 취약점이 발견하게 되므로 `hash`값으로 비밀번호를 저장한다.(`hash`는 문자열을 되돌릴 수 없는 방식), 비밀번호의 `hash`값을 `DB`에 저장하고, 로그인 시 전달된 비밀번호를 `hash`하여 저장된 값과 비교해 로그인을 처리한다.
 3. `node.js`의 기본제공 모듈인 `crypto` 모듈을 사용하여 `hash` 값을 얻을 수 있다. 간단하게 `sha1` 알고리즘을 사용하거나, 보다 강력한 `sha224`, `sha256` 등의 알고리즘도 사용할 수 있다.
 
 ```javascript
-const hash = crypto.createHash('sha1');
+const hash = crypto.createHash("sha1");
 hash.update(password);
 hash.digest("hex");
 ```
@@ -8047,6 +8125,7 @@ router.post(... => {
 ```
 
 ### ❏ passport란?
+
 1. `express.js` 어플리에키션에 간단하게 사용자 인증 기능을 구현하게 도와주는 패키지, 유지 세션 관리 및 다양한 로그인 방식 추가 기능 제공
 2. `passport-local`: 다양한 로그인 방식을 구현하기 위해 `strategy`라는 인터페이스를 제공한다. `strategy`는 인터페이스에 맞게 설계된 다양한 구현체(facebook, google, ...)들이 있다. `passport-local` 은 `username`, `password`를 사용하는 로그인 구현체를 의미한다.
 
@@ -8074,7 +8153,7 @@ const local = new LocalStrategy(config, )
 		}
 
 		if(user.password !== getHash(password)){
-			throw new Error("비밀번호가 일치하지 않읍니다.");		
+			throw new Error("비밀번호가 일치하지 않읍니다.");
 		}
 
 	// 세션에 저장되는 유저 정보의 최소화
@@ -8096,7 +8175,7 @@ const local = require('./strategies/local');
 passport.use(local);
 
 // routes/auth.js
-router.post('/', 
+router.post('/',
 	passport.authenticate('local');
 ...
 
@@ -8126,7 +8205,7 @@ passport.deserializeUser((obj, callback) => {
 	callback(null, obj)
 })
 
-// logout 
+// logout
 // passport는 req.logout 함수를 통해 세션의 로그인 정보를 삭제하여, 로그아웃 기능을 구현할 수 있다.
 router.get('/logout', ... {
 	req.logout();
@@ -8147,15 +8226,18 @@ app.use('/posts', loginRequired, postsRouter)  // 로그인이 확인되면 post
 ```
 
 ### ❏ Session
+
 1. 웹 서버가 클라이언트의 정보를 클라이언트별로 구분하여 서버에 저장하고, 클라이언트 요청시 `session ID`를 사용하여 클라이언트의 정보를 다시 확인하는 기술(클라이언트가 정보를 저장하고 요청시 정보를 보낸 `Cookie`와 대조 됨)
 2. 서버는 세션을 생성하여 세션의 구분자인 `session ID`를 클라이언트에 전달함. 클라이언트 요청시 `session ID`를 함께 담아서 전송, 서버는 전달받은 `session ID`로 해당하는 세션을 찾아 클라이언트 정보를 확인함
 3. `express-session` 패키지를 사용하여 간단하게 `session` 동작을 구현할 수 있다. 특별한 설정 없이 자동으로 `session`동작을 구현해줌, ㅈ동으로 `session ID`를 클라이언트에게 전달, `session ID`로 클라이언트 정보 확인
 
 ### ❏ Session Store를 사용하는 이유
+
 1. `express-session` 패키지는 `session` 을 기본적으로 메모리에 저장함. 따라서 현재 구현된 어플리케이션을 종료 후 다시 실행하면 모든 유저의 로그인 해제됨, 혹은 서버가 여러 대 있을 경우, 서버 간 세션정보를 공유할 수 없음
 
 ### ❏ MongoDB - Session Store
-1. `connect-mongo` 패키지를 이용해 `MongoDB` 를 `session store` 로 사용할 수 있다. 
+
+1. `connect-mongo` 패키지를 이용해 `MongoDB` 를 `session store` 로 사용할 수 있다.
 2. `connect-mongo` 패키지는 `express-session` 패키지의 옵션으로 전달 가능하다. 자동으로 `session` 값이 변경될 때 `update` 되고 `session` 이 호출될 때 `find` 함
 3. 재부팅되어도 `data` 가 삭제되지 않기 때문에 `session-data` 를 유지 할 수 있다.
 4. 세션데이터를 몽고디비에 저장하고 관리하는 기능을 자동으로 수행해 줌
@@ -8175,6 +8257,7 @@ app.use(session({
 ```
 
 ### ❏ 회원과 게시글의 연동
+
 1. 게시글 작성시 로그인된 회원 정보를 작성자로 추가
 
 ```javascript
@@ -8211,22 +8294,19 @@ await Post.create({
 ```javascript
 // populate
 // 자동으로 user collection에서 author를 찾아서 넣어준다.
-const posts = await Post
-	.find({})
-	.populate('author');
+const posts = await Post.find({}).populate("author");
 
-res.render('posts/list', { posts });  // posts를 반복문으로 꺼내 쓸 수 있다.
+res.render("posts/list", { posts }); // posts를 반복문으로 꺼내 쓸 수 있다.
 ```
 
 3. 게시글 수정, 삭제 시 로그인된 유저와 작성자가 일치하는지 확인
 
 ```javascript
-
 // 수정, 삭제 시 유저 확인
-const post = await Post.find({ shortId }).populate('author');
+const post = await Post.find({ shortId }).populate("author");
 
-if(post.author.shortId !== req.user.shortId) {
-	throw new Error ('Not Authorized');
+if (post.author.shortId !== req.user.shortId) {
+    throw new Error("Not Authorized");
 }
 ```
 
@@ -8262,6 +8342,7 @@ td: a(href=`/users/${post.author.shortId}/posts`)
 ```
 
 ### ❏ CSR로 댓글 기능 구현하기
+
 1. 페이지 로드 시 필요한 리소스를 클라이언트에 선언(HTML Template, 브라우저에 표시되지 않는 HTML element를 작성해두고 JS로 이를 화면에 반복적으로 그릴 수 있게 하는 기술)
 2. 클라이언트에서 필요한 데이터를 비동기 호출
 3. 클라이언트가 전달받은 데이터를 가공, 리소스를 사용하여 화면에 표시
@@ -8290,20 +8371,25 @@ const PostShema = new Schma({
 7. 댓글 작성: `api/posts/{postId}/comments` 경로로 댓글 작성 기능 구현, 게시글 업데이트시 `${push}` 를 사용하여 `comments` 배열에 새로 작성된 댓글 추가(동시에 들어오는 요청을 정확하게 처리), `api` 는 `render` 대신 `json` 으로 응답
 
 ```javascript
-// 댓글 업데이트 
-await Post.updateOne({ shortId }, {
-	$push: { comments: {
-		content,
-		author,
-		}},
-});
+// 댓글 업데이트
+await Post.updateOne(
+    { shortId },
+    {
+        $push: {
+            comments: {
+                content,
+                author,
+            },
+        },
+    }
+);
 
-res.json({ result: 'success' });
+res.json({ result: "success" });
 
 // 댓글 목록
 // find에 populate하지 않고, User (model)의 populate를 사용하는 방법도 가능
 await User.populate(posts.comments, {
-		path: 'author'
+    path: "author",
 });
 ```
 
@@ -8320,34 +8406,40 @@ fetch('url', {
 ```
 
 ### ❏ MongoDB Aggregation
+
 1. MongoDB에서 Document들을 가공, 연산하는 기능
 2. RDMBS에서 SQL로 수행할 수 있는 기능들을 유사하게 구현할 수 있음 (SQL의 GROUP BY, DISTINCT, COUNT, JOIN 등)
 3. mongoDB의 find는 검색 필터링과 정렬 이외의 기능을 제공하지 않음, 다른 collection에서 데이터를 가져오거나, 그룹화할때는 Aggregation을 통해 이를 수행할 수 있음
 
 ---
+
 ## 📍 35일차 12.11.토. 온라인 강의
+
 오늘은 `JWT` 그리고 회원 비밀번호 찾기, `SMTP`를 이용하여 메일 발송기능, 비밀번호 초기화, `OAuth`, 웹 서버 소프트웨어인 `Nginx`에 대해서 배웠다. 나중에 로그인 관련 기능을 구현할 때 써먹으면 도움이 되는 내용이라서 까먹지 않고 기억해야겠다.
 
 ### ❏ JWT(Json Web Token)
+
 1. 인증을 위한 정보를 특별한 저장소를 이용하지 않고, 전자 서명을 이용하여 확인하는 방법
 2. `header`(토큰의 타입(jwt), 데이터 서명방식), `payload`(전달되는 데이터), `signature` (헤더와 페이로드의 전자서명)로 구성되어 있다.
 3. `JWT` 는 `Web Token`, 데이터를 웹에서 사용하기 위한 스펙이므로 웹에서 문제없이 사용할 수 있는 문자열로만 구성된 `base64` 인코딩을 사용한다.
 4. `JWT` 의 `payload` 는 단순히 정보를 `base64 encode` → `decode` 시 정보가 노출된다 → 민감한 정보는 제외하고 토큰을 생성한다.
 5. 서버는 `JWT` 를 생성할 때, 비공개키를 이용하여 서명을 함. `payload` 를 조작할 경우 서명(signature)이 일치하지 않기 때문에 인증 실패
-6. 사용자 로그인 → 서버는 로그인된 유저 정보를 JWT 로 생성하여 클라이언트에 전달 → 클라이언트는 전달받는 JWT 를 이용하여 인증이 필요한 요청에 사용 
+6. 사용자 로그인 → 서버는 로그인된 유저 정보를 JWT 로 생성하여 클라이언트에 전달 → 클라이언트는 전달받는 JWT 를 이용하여 인증이 필요한 요청에 사용
 
 ![](https://images.velog.io/images/abcd8637/post/080642e9-3012-4b15-8761-b2bc72473699/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-11%2009.31.32.png)
 
 ### ❏ JWT 사용 이유
+
 1. `session` 은 기본적으로 웹 브라우저를 위한 통신 스펙
 2. 모바일 앱 등, 웹 브라우저가 아닌 어플리케이션의 경우 `session` 을 활용하기 부적합함, `JWT` 를 사용하면 어느 클라이언트에서나 동일한 방식의 사용자 인증을 구현 가능
 
 ### ❏ JWT + Cookie
+
 1. `cookie`: 웹 서비스에서 사용하는 정보를 클라이언트(브라우저)에 저장하고, `HTTP` 요청시 이를 함께 전송하여 클라이언트 정보를 서버에 전달하는 기술
-2. `session`: 클라이언트 정보를 서버 측 저장소에 저장하고 사용(`session id` 로 `session store` 에서 확인해서 클라이언트 정보를 확인함), 
+2. `session`: 클라이언트 정보를 서버 측 저장소에 저장하고 사용(`session id` 로 `session store` 에서 확인해서 클라이언트 정보를 확인함),
 3. `session` 을 사용한 유저 로그인: `cookie에 session ID` 저장 → `session store` 에서 유저 정보 가져오기
 4. `JWT` 를 쿠키처럼 사용하는 경우: `JWT` 로 요청 → 서명 확인 후 유저 정보 사용(DB 접근이 한단계 줄어서 효율적인 인증 구현 가능)
-5. 로그인 로직에서 `JWT` 생성 후 쿠키로 전달 → `passport-jwt` 패키지로  `JWT 로그인 미들웨어` 작성 및 사용
+5. 로그인 로직에서 `JWT` 생성 후 쿠키로 전달 → `passport-jwt` 패키지로 `JWT 로그인 미들웨어` 작성 및 사용
 
 ```js
 // token 생성 및 미들웨어 선언하기
@@ -8393,63 +8485,66 @@ passport.use(jwt);
 ```js
 // jwt middleware
 app.use((req, res, next) => {
-	if(!req.cookies.token){
-		next();
-		return;
-	}
+    if (!req.cookies.token) {
+        next();
+        return;
+    }
 
-	return passport.authenticate('jwt')(req, res, next);  // req.user에 저장
-}); 
+    return passport.authenticate("jwt")(req, res, next); // req.user에 저장
+});
 
 // jwt logout
-res.cookie('token', null, {
-	maxAge: 0,  // 쿠키 만료 시키기
-})
+res.cookie("token", null, {
+    maxAge: 0, // 쿠키 만료 시키기
+});
 ```
 
 ### ❏ 회원 비밀번호 찾기 구현
+
 1. 임의의 문자열로 비밀번호 초기화
 2. 초기화된 문자열을 메일로 전달 → 메일 발송기능 개발 필요
 3. 초기화 후 첫 로그인 시 비밀번호 변경 요청
 
 ### ❏ 메일 발송기능 구현 방법
+
 1. `SMTP` 서버 이용: 네이버 구글 등의 메일서버를 이용하여 무료로 발송 가능, 메일 발송 및 관리 기능 직접 개발 필요
 2. 메일 발송 서비스 이용(Mailgun, Sendgrid): 메일 발송 api 제공 및 관리용 웹페이지 제공, 사용량에 따라 유료 과금
 
 ### 💡 SMTP란?
+
 1. `Simple Mail Transfer Protocol`: 메일 전송을 위한 표준 규약, `SMTP` 서버란 표준 규약을 통해 메일 전송하는 기능을 구현한 서버
 2. `Node.js` 에서 메일 발송하기: `Nodemailer` 패키지를 사용하여 `SMTP` 서버(gmail, naver...)를 통해 메일 발송하기, 직접 만드는 것은 비효율적이다.
 3. `Nodemailer` 에서 `gmail` 을 사용하기 위해서는 앱 비밀번호 설정 필요, 한번 설정하면 재 확인 불가
 
 ```js
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
-const transport = nodemailer
-	.createTransport({
-		service: 'Gmail',
-		auth: {
-			user: "google account",
-			pass: "app password",
-		},
+const transport = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+        user: "google account",
+        pass: "app password",
+    },
 });
 
 const message = {
-	from: "login account",
-	to: "mail address",
-	subject: "title",
-	text: "message",
+    from: "login account",
+    to: "mail address",
+    subject: "title",
+    text: "message",
 };
 
 transport.sendMail(message, (err, info) => {
-	if (err) {
-		console.error('err', err);
-		return;
-	}
-	cosnole.log('ok', info);
-})
+    if (err) {
+        console.error("err", err);
+        return;
+    }
+    cosnole.log("ok", info);
+});
 ```
 
 ### ❏ 비밀번호 초기화 기능
+
 ```js
 // 임의의 문자열을 만들어주는 함수
 function generateRandomPassword(){
@@ -8473,13 +8568,14 @@ router.post('/reset-password', asyncHandler(... => {
 ```
 
 ### ❏ 비밀번호 초기화 후 로그인 시 비밀번호 변경 요청
+
 ```js
 // 비밀번호 변경
 const UserSchema = ...
 	passwordReset:{
 		type: Boolean,
 		default: false,
-	} 
+	}
 ...
 
 ---
@@ -8508,6 +8604,7 @@ router.poast('/update-password', ...
 ```
 
 ### ❏ OAuth의 이해
+
 1. `open authorization`: 서비스 제공자가 다른 서비스에게 데이터를 제공하기 위해 서비스 사용자에게 제공하는 사용자 인증방식의 표준
 2. 서비스 제공자에게 인증 요청 → 인증 완료 후 사용자 정보를 요청한 서비스로 전달 → 인증 정보를 이용해 서비스 제공자의 데이터 사용
 3. 구글 `OAuth` 인증 요청 → 인증된 `OAuth Token` 을 기록 → `OAuth Token` 을 사용하여 구글 캘린더 `API` 사용
@@ -8515,6 +8612,7 @@ router.poast('/update-password', ...
 5. 웹 서비스 사용자는 ID, PW 를 입력할 필요가 없음
 
 ### ❏ 구글 로그인 구현하기
+
 1. 구글 클라우드 플랫폼 프로젝트 생성
 2. API 및 서비스 → OAuth 동의화면 설정
 3. 사용자 인증정보 → OAuth 클라이언트 ID 만들기
@@ -8522,8 +8620,9 @@ router.poast('/update-password', ...
 5. `passport-google-oauth20` : passport-strategy 인터페이스의 구글 로그인 집합체(OAuth 인증을 구현하기 위해서는 인증 요청, 데이터 수신 등의 복잡한 작업 필요), `passport-google-oauth2.0` 은 손쉽게 구글 `OAuth 2.0` 을 구현해주는 패키지
 
 ### ❏ Nginx
+
 1. 최근 신규 프로젝트에서 가장 많이 채택되고 있는 웹 서버 소프트웨어(웹 서버 소프트웨어: `HTTP` 요청을 받아 파일이나 프로그램 실행 결과를 `HTTP` 응답으로 보내주는 소프트웨어)
-2. `Java - Tomcat`, `PHP - fastcgi` 등 다른 언어가 `HTTP` 요청을 처리를 위한 의존성이 있는 것에 반해, `Node.js` 는 기본적으로 `HTTP` 요청을 수신하고, 응답하는 기능이 이미 있다. 따라서 웹 서버 소프트웨어 없이도 스스로 동작할 수 있다. 하지만, `node.js` 단독으로 사용하게 되면 `HTTPS`, `도메인 연결`, `static file caching` 등의 기능을 `production-level` 서비스를  구축할 수는 없다. 따라서 `node.js` 앞 단에 웹 서버 소프트웨어를 붙여서 사용한다. `HTTP` 요청과 응답은 node.js에서 자체적으로 사용이 가능하다.
+2. `Java - Tomcat`, `PHP - fastcgi` 등 다른 언어가 `HTTP` 요청을 처리를 위한 의존성이 있는 것에 반해, `Node.js` 는 기본적으로 `HTTP` 요청을 수신하고, 응답하는 기능이 이미 있다. 따라서 웹 서버 소프트웨어 없이도 스스로 동작할 수 있다. 하지만, `node.js` 단독으로 사용하게 되면 `HTTPS`, `도메인 연결`, `static file caching` 등의 기능을 `production-level` 서비스를 구축할 수는 없다. 따라서 `node.js` 앞 단에 웹 서버 소프트웨어를 붙여서 사용한다. `HTTP` 요청과 응답은 node.js에서 자체적으로 사용이 가능하다.
 3. `Nginx` 의 `reverse-proxy` 기능을 사용해, `Node.js` 와 `Nginix` 를 연결할 수 있다. `reverse-proxy` 는 `HTTP` 요청을 다른 서버에 전달하는 기능인데, `Nginx` 가 요청을 받아, 설정된 내용에 해당하는 요청만 `node.js` 에 전달한다.
 
 ![](https://images.velog.io/images/abcd8637/post/9d61eb15-28cf-47e0-9c8e-5b6cdb9ea673/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-11%2016.38.13.png)
@@ -8543,22 +8642,27 @@ server {
 ```
 
 ---
+
 ## 📍 36일차 12.14.화. 실시간 강의
-오늘부터 25일 크리스마스까지는 1차 팀 프로젝트 기간이다. 팀원은 총 6명이고 역할은 `FE` 4명, `BE` 2명이다. 이때까지 혼자서 프로젝트를 진행했다면 이번엔 팀으로 진행하는거라 팀에 누가되지 않도록 열심히 해야겠다는 생각이 가득찼다. 약간의 걸림돌(?) 있다면 지금까지는 `React`, `React + Typescript`로 진행했다면 이번엔 `바닐라 자바스크립트 + node.js`로 진행하는 것이다. `react`를 사용하면서 `DOM` 관리를 편하게 사용했었는데,, 이번엔 `DOM`을 하나씩 관리하는 일이 얼마나 까다로운지 몸소(?)느껴보는 시간을 가져보자.. 내가 맡은 파트는 `image drag & drop + form`, `login` 화면이다. 이번에 맡은 파트를 어떻게 코드로 구현했는지 프로젝트가 끝나갈 무렵에 올려야겠다. 
+
+오늘부터 25일 크리스마스까지는 1차 팀 프로젝트 기간이다. 팀원은 총 6명이고 역할은 `FE` 4명, `BE` 2명이다. 이때까지 혼자서 프로젝트를 진행했다면 이번엔 팀으로 진행하는거라 팀에 누가되지 않도록 열심히 해야겠다는 생각이 가득찼다. 약간의 걸림돌(?) 있다면 지금까지는 `React`, `React + Typescript`로 진행했다면 이번엔 `바닐라 자바스크립트 + node.js`로 진행하는 것이다. `react`를 사용하면서 `DOM` 관리를 편하게 사용했었는데,, 이번엔 `DOM`을 하나씩 관리하는 일이 얼마나 까다로운지 몸소(?)느껴보는 시간을 가져보자.. 내가 맡은 파트는 `image drag & drop + form`, `login` 화면이다. 이번에 맡은 파트를 어떻게 코드로 구현했는지 프로젝트가 끝나갈 무렵에 올려야겠다.
 
 ## ❏ 애자일 방법론
+
 1. 프로젝트를 처음부터 다시 만든다면 비효율적일 것이다. 따라서 처음부터 설계를 꼼꼼하게 진행한다. 데모버전을 빠르게 만들어서 지속적으로 피드백을 시도한다.
 2. 폭포수 방법론: 요구 사항 분석 → 기획 → 개발 → 테스트 → 통합 → 유지보수
 3. 애자일 방법론: 고객이 수용하고 납득할만한 최소한의 설계와 개발을 반복하는 고객 중심의 개발 방법론이다. 익스트림 프로그래밍(XP, TDD: Test Driven Development), 스크럼(Scrum, Sprint) 등의 여러 방법이 있다. (고객의 니즈를 즉시 반영) 이번 프로젝트는 스크럼방식 사용
 4. `TDD`: 테스트 코드를 통해 프로덕트가 원활하게 돌아가는지 확인하는 방법
-5. 애자일 방법론은 순서가 없다. 2주내에 결과물을 내기위해 어떻게 해야할지 생각한다. 
+5. 애자일 방법론은 순서가 없다. 2주내에 결과물을 내기위해 어떻게 해야할지 생각한다.
 6. 한 가지 방법만 따라야 하지도 않고 전체적인 큰 틀인 스크럼과 스프린트 수행을 유지한 상태에서 우리 팀의 상황에 맞게 조금씩 변형하며 적용해야 한다.
 
 ### ❏ 스크럼
+
 1. 작은 목표를 짧은 주기로 체크하며 프로젝트를 지속적으로 개발하는 관리 기법
 2. 매일 짧게 진행되는 미팅을 수행하며 어제 한일, 오늘 할일, 장애 현상 등을 공유한다.
 
 ### Git flow
+
 1. 이번 프로젝트에서는 `branch` 를 간소화해서 생성
 2. `Master branch` : 배포 가능한 상태의 코드, 서비스로 출시될 수 있는 브랜치
 3. `Sprint branch` : 기능 개발을 위한 브랜치 병합을 위해 사용, 모든 기능이 추가되고 버그가 수정되어 배포 가능한 상태라면 `master` 로 `MR`
@@ -8568,21 +8672,25 @@ server {
 7. `MR`(merge request)
 
 ### ❏ 스프린트
+
 1. 짧은 기간 내에 빠르게 결과를 만들어내는 기법, 스프린트 종료 후 구성원들은 스프린트 리뷰와 회고를 진행
 2. 프로덕트 계획 → 아이디어 스케치 → 프로토 타입 개발 → 테스트
-3. 비전에서 최종목표를 세우고 로드맵을 통해 구체적인 단계를 세운다. 
+3. 비전에서 최종목표를 세우고 로드맵을 통해 구체적인 단계를 세운다.
 4. 깃랩 이슈는 3-4시간만에 할 수 있는 단위로 쪼개라.
 5. 스크럼 마스터: 코치
 6. 사소한 기능 하나라도 `product owner` 처럼 만들자.
 
 ### ❏ Issue
+
 1. 프로젝트 진행 시, 어떠한 상황, 문제 또는 계획을 개발 할 예정이라는 것을 알려주는 이정표(문제가 생겨서 `issue` 가 아니라 해야 할 일? `todo` 정도)
 2. `milestone`: 프로젝트에서 주요한 이벤트를 표시하는 기준점,
 
 ### ❏ Wiki
+
 1. 문서화 시켜줄 수 있는 기능, 프로젝트의 정보를 넣어두면 된다.(스크럼 내용 등)
 
 ---
+
 ## 📍 37일차 12.15.수. 프로젝트 2일차 TLDR
 
 1. `Cannot delete branch 'image-upload'`: branch checkout으로 다른 branch로 옮기고 삭제하기
@@ -8595,7 +8703,9 @@ server {
 8. `CSS 방법론`: BEM
 
 ---
+
 ## 📍 38일차 12.16.목. 프로젝트 3일차 TLDR
+
 1. `JPG`와 `JPEG`는 같은 압축파일형식이다. 원래는 `jpeg`로 사용되었으나, DOS 사용시절 확장자의 길이는 3자로 제한됨으로 인해 jpg로 줄여 사용했다.
 2. `exif`는 디지털 카메라에서 이용되는 이미지 파일 포맷이다. jpg, tiff6.0, RIFF, WAV 파일 확장자에만 사용가능하다.(JPEG 2000, PNG, GIF에서는 지원하지 않는다.)
 3. `JPEG2000`은 `JPEG`보다 높은 압축률과 이미지 품질을 얻기 위해 개발되었다. 대부분의 웹 브라우저에서 지원되지 않는다.(현재 `safari`에서만 사용가능)
@@ -8613,7 +8723,9 @@ server {
 8. 위치 입력받는 `input`은 1개로 만들어 놓고 `debounce`, `EXIF`라이브러리로 위치 적용하기
 
 ---
+
 ## 📍 39일차 12.17.금. 프로젝트 4일차 TLDR
+
 1. `addEventListener`의 `event` 타입 전달 시 `on` 접두사를 제외하고 사용한다.(예. onchange -> change, onclick -> click, oninput -> input)
 2. `event` 중 `change` 이벤트는 요소가 포커스를 잃을 때까지 이벤트가 실행되지 않고 다른 곳을 클릭하면 이벤트가 트리거 되는 반면, `input` 이벤트는 요소가 변경될 때마다 이벤트가 트리거 된다.
 3. 자동완성기능에 `addEventListener`를 적용할 때 `change`와 `datalist+option`을 사용하면 `debounce`를 적용하지 않아도 된다. (change 이벤트는 요소의 포커스가 잃을 때 적용되기 때문에 글씨가 입력하는 중간에 이벤트가 발생하지 않는다.) 하지만, `UI`수정이 자유롭지 못하다. 반면, `input` 이벤트에 자동완성기능을 직접 구현한다면, `debounce`로 최적화를 시켜주자(input 이벤트는 입력할 때마다 이벤트가 일어나기 때문) `UI`수정은 `datalist+option`방법보다 비교적 자유롭다.
@@ -8622,7 +8734,9 @@ server {
 6. 배열의 값을 변경해서 적용할 때는 `map`을, 배열을 순회하면서 변수를 뽑아내려고 하면 `forEach`를 사용하자
 
 ---
+
 ## 📍 40일차 12.18.토. 프로젝트 5일차 TLDR
+
 1. 비동기 함수가 중첩되어있을 때 `return` 하려면 `return new Promise`에 `resolve`를 넣어주어 꺼내주자.
 2. 함수에 단순히 `return`을 넣고 `console.log` 찍으면 `undefined`가 나온다.
 3. JS에서 라이브러리 사용시 npm install 이후 import from으로 불러오기
@@ -8630,29 +8744,97 @@ server {
 ```javascript
 // getGPSData
 function getGPSData(img) {
-  return new Promise((resolve, reject) => {
-    img.addEventListener("load", function () {
-      EXIF.getData(this, async function () {
-        const GPSLatitude = EXIF.getTag(this, "GPSLatitude");
-        const GPSLatitudeRef = EXIF.getTag(this, "GPSLatitudeRef");
-        const GPSLongitude = EXIF.getTag(this, "GPSLongitude");
-        const GPSLongitudeRef = EXIF.getTag(this, "GPSLongitudeRef");
+    return new Promise((resolve, reject) => {
+        img.addEventListener("load", function () {
+            EXIF.getData(this, async function () {
+                const GPSLatitude = EXIF.getTag(this, "GPSLatitude");
+                const GPSLatitudeRef = EXIF.getTag(this, "GPSLatitudeRef");
+                const GPSLongitude = EXIF.getTag(this, "GPSLongitude");
+                const GPSLongitudeRef = EXIF.getTag(this, "GPSLongitudeRef");
 
-        if (GPSLatitude === undefined || GPSLongitude === undefined)
-          reject("GPS 정보가 없습니다.");
+                if (GPSLatitude === undefined || GPSLongitude === undefined)
+                    reject("GPS 정보가 없습니다.");
 
-        const latitudeDecimal = changeToDecimal(GPSLatitude, GPSLatitudeRef);
-        const longitudeDecimal = changeToDecimal(GPSLongitude, GPSLongitudeRef);
+                const latitudeDecimal = changeToDecimal(
+                    GPSLatitude,
+                    GPSLatitudeRef
+                );
+                const longitudeDecimal = changeToDecimal(
+                    GPSLongitude,
+                    GPSLongitudeRef
+                );
 
-        const response = await fetchAddressAPI(
-          longitudeDecimal,
-          latitudeDecimal,
-        );
+                const response = await fetchAddressAPI(
+                    longitudeDecimal,
+                    latitudeDecimal
+                );
 
-        const [ wide_addr, local_addr ] = response;
-        resolve(`${wide_addr} ${local_addr}`);
-      });
+                const [wide_addr, local_addr] = response;
+                resolve(`${wide_addr} ${local_addr}`);
+            });
+        });
     });
-  });
+}
+```
+
+---
+## 📍 41일차 12.21.화. 프로젝트 6일차 TLDR
+
+1. 컴포넌트의 리턴값이 1개 이상일 때는 객체로 리턴하자.
+
+```javascript
+const getGPSTag = () => ({
+    GPSLatitude: "GPSLatitude",
+    GPSLatitudeRef: "GPSLatitudeRef",
+    GPSLongitude: "GPSLongitude",
+    GPSLongitudeRef: "GPSLongitudeRef",
+});
+
+const { GPSLatitude, GPSLatitudeRef, GPSLongitude, GPSLongitudeRef } =
+    getGPSTag();
+```
+
+2. 라이브러리를 페이지에서 호출하면 함수 `parameter`로 넘기지 않아도 된다. (전역적으로 호출 가능)
+3. JavaScript로 HTML코드를 다루는 방법 3가지를 배움: `innerHTML`은 보안에 취약한 요소가 있다. DOM조작이 불편하다. 만들기는 쉽다. 가독성도 나쁘지 않다. `node manipulate`는 유지보수가 불편하다. 그러나 DOM을 정확하게 조작할 수 있다. `hyperscript`는 가독성과 컴포넌트의 재사용성이 증가한다. 엘리먼트에 접근할 상황이 생길 때는 한계가 있다. 
+4. `innerHTML`의 장점과 단점
+
+```
+* 장점
+  - HTML 마크업 문자열로 간단히 DOM조작이 가능하다.
+  - 구현이 간단하고 직관적이다.
+* 단점
+  - HTML 코드에 JS 악성코드가 심어져 있다면 파싱과정에서 그대로 실행되기 때문에 위험하다. (XSS)
+  - 기존노드가 존재하고 자식노드를 추가할 때 원래 있던 기존노드까지 새로 만들어 렌더링 한다. 즉, 바뀌지 않아도 되는 노드까지 모두 제거하고 처음부터 새롭게 자식 노드를 생성하여 DOM에 반영하는데 이는 효율적이지 않다.
+  - 새로운 요소를 삽일 할 때 삽입될 위치를 지정할 수 없다.(insertAdjacentHTML 메서드 활용하기, insertAdjacentHTML도 innerHTML과 마찬가지로 HTML 마크업 문자열을 파싱하므로 XSS에 취약하다.)
+```
+
+5. `develop branch`는 `d/upload-page`, `feature branch`는 `f/upload-page`와 같이 설정할 수 있다.
+6. `hyperscript`(HTML 마크업의 Javascript 기반 표현이며, 순수 DOM을 생성한다.)
+
+```
+  * 장점
+    - 순수 DOM을 생성한다.
+    - 코드의 가독성과 재사용성이 크게 향상된다.
+  * 단점
+    - element에 자유롭게 접근이 쉽지 않다.
+```
+
+7. n만큼 자식 node를 추가할 때 직접 DOM에 n번만큼 추가하지 말고(n번만큼 reflow가 발생한다.), `createDocumentFragment`를 사용해서 DOM접근을 한번만 하자.
+8. hyperscript에서 HTML코드에서 class를 추가할 때 class를 쓰지 않고 className을 사용하는 이유: class가 예약어이기 때문
+9. git reset: `git add .`로 track하는 파일 제거하기
+10. css 속성 중 width: clamp(0, 100%, 860px)는 다음을 나타낸다.
+
+```
+  - min-width: 0px;
+  - width: 100%;
+  - max-width: 860px;
+```
+
+11. 중앙정렬은 flex를 사용하기보다는 margin: 0 auto를 사용하자(내용이 1column 일 때)
+12. 저장할 때 원하는 언어 prettire, elint 적용 제외시키기
+
+```
+"[markdown]": {
+    "editor.formatOnSave": false
 }
 ```
