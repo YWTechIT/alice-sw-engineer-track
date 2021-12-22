@@ -8838,3 +8838,66 @@ const { GPSLatitude, GPSLatitudeRef, GPSLongitude, GPSLongitudeRef } =
     "editor.formatOnSave": false
 }
 ```
+
+---
+## 📍 42일차 12.22.수. 프로젝트 7일차 TLDR
+1. `git commit`에서 다음에 구현해야 할 사항이 있다면 다음과 같이 작성하기 `TODO: fetch가 정상적으로 수행되지 않았을 때 예외 처리하는 함수 만들기`
+2. 함수 인자로 객체로 둘러싸여 있을 경우
+
+```javascript
+function createInstance({baseUrl}){}
+
+// 인자에 URL 바로 넣기
+createInstance({baseUrl: "www.naver.com"});
+
+// URL 변수로 따로 저장하기
+const URL = "www.naver.com";
+createInstance({baseUrl: URL});
+```
+
+3. `try - catch` 문에서 `error`의 메세지만 출력할 때는 `error.message`를 사용하자
+4. MIME type: 클라이언트에게 전송된 문서의 다양성을 알려주기 위한 매커니즘, 각 문서와 함께 올바른 `MIME` 타입을 전송하도록, 서버가 정확히 설정하는 것이 중요하다.
+
+```
+  * text/plain
+  * text/html
+  * image/jpeg
+  * image/png
+  * audio/mpeg
+  * audio/ogg
+  * audio/(별표)
+  * video/mp4
+  * application/octet-stream
+```
+
+5. 모르는 개념은 공식문서를 참고하자. 관련 예제를 참조하면 좋다.
+6. 클라이언트 사이드 `WEB API`(브라우저 API)가 포함된 자바스크립트 코드를 실행하면 `node.js` 환경이 아닌 브라우저에서 실행해야 한다.
+7. `input accept` 유형은 선택한 파일 유형을 검증하지는 않으며, 단순히 브라우저가 사용자를 올바른 파일 유형을 사용하도록 힌트를 제공할 뿐이다. 사용자가 옵션을 바꾸면 다른 형태의 파일도 게시할 수 있으므로 서버사이드에서 유효성 검증을 통해 `accept` 특성을 보조해야 한다.
+8. 시각적으로 `input`을 숨긴 후 레이블에 버튼처럼 스타일을 적용해서 파일을 업로드하고 싶은 경우 레이블을 누르라고 알려주는 편이 낫다. 이때, `visibility: none`, `display: none`으로 숨길경우 접근성 보조 기술이 파일 입력 칸을 상호작용 할 수 없기 때문에 `opacity`를 대신 사용한다.
+9. 파일 업로드 취약점: 파일을 업로드 할 때 1차적으로 `input accept`를 이용해 사용자에게 원하는 `MIME` 타입으로만 입력할 수 있게 유도할 수 있지만 악성 코드를 업로드 할 수 있기 때문에 서버사이드에서 유효성검사를 동시에 진행해야 한다. 브라우저에서 `proxy` 툴을 이용해 파일타입 변조를 통해 확장자 검사를 피할 수 있다. (정확하게는 파일 업로드 시 `Content-type`(응답 내에 있는 헤더) 속성을 프록시로 이용해 우회한다.) 기초적인 방어는 다음과 같다.
+
+```
+* 확장자 검사
+* 대소문자 구분하지 않고 확장자 비교
+* 특수문자 금지
+* 업로드 된 파일명, 확장자 난수화
+* 업로드된 파일을 url 요청으로 직접 접근이 불가능한 위치에 저장
+```
+
+10. `innerHTML`의 `script` 공격예시
+
+```js
+// script
+document.body.innerHTML = `<script>alert(\"hi\")</script>`
+
+// onerror
+document.body.innerHTML = `<img src='' onerror="alert(\'hi\')">"
+```
+
+11. `blob` 파일을 데이터를 메모리에 저장하는 방식인데, 이를 사용하려면 메모리 누수와 메모리 해제도 같이 진행해야 한다.
+12. `latency test`: 지연성 검사, scroll이 frame 단위로 어떻게 흘러가는지?, user가 갑자기 늘어났을 때 어떻게 대응할 것인가?, image의 개수를 무제한으로 넣고 실험, image의 용량 무작위, 어떤 컴포넌트가 로딩이 제일 오래 되는지?
+13. 프로젝트 설계에 대한 고민을 충분히 하자. 2~3일씩 걸려도 된다. 나중에 발표할 때 설계에 대한 고민을 다른 팀과의 차별성으로 사용하면 경쟁력있는 프로젝트가 된다.
+
+> reference
+1. MDN: https://developer.mozilla.org/ko/docs/Web/HTML/Element/Input/file
+2. 티스토리: https://owin2828.github.io/devlog/2020/01/09/etc-2.html
