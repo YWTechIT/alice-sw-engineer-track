@@ -8901,3 +8901,16 @@ document.body.innerHTML = `<img src='' onerror="alert(\'hi\')">"
 > reference
 1. MDN: https://developer.mozilla.org/ko/docs/Web/HTML/Element/Input/file
 2. 티스토리: https://owin2828.github.io/devlog/2020/01/09/etc-2.html
+
+---
+## 📍 43일차 12.23.목. 프로젝트 8일차 TLDR
+1. `eslint`가 적용되지 않을 때 `VScode`의 버전을 살펴보자. `VScode`의 버전이 낮으면 `eslint`를 아무리 설정해도 적용되지 않는다. 현재 버전 `1.63.2`, 이전 버전 `1.52.2`
+2. `component`와 `util` 폴더의 차이는 쉽게 생각해서 `HTML` 코드를 리턴하는지 하지 않는지의 여부를 보면 된다. `HTML`코드를 리턴하면 컴포넌트, 리턴하지 않으면 해당 기능을 모든 폴더에서 사용할 수 있는 `util`폴더에 저장하자.
+3. 사이트 배포형태: `SSG`(정적페이지를 빌드한 후 산출물을 CDN에 배포하고 필요할 때마다 CDN으로부터 전달받은 정적 페이지를 유저에게 빠르게 제공한다. JAM stack(Javascript, API, Markup stack), `netlify`, `vercel` 등에 배포만 하고 `API Fetch`만 주로 실시), `SSR`(서버측 코드가 연계되는지의 여부, 주로 `EC2`를 기반으로 한다.)
+4. 렌더링 테스트는 `google - light house`, `snapshot` 테스트
+5. `hyperscript`로 상태관리 하는 방법? `react-fiber` 참고(난이도가 상당히 높다.)
+6. 뷰(VIEW): `proxy api`, `immer`
+7. `redux` + `observer` + 아키텍쳐 패턴
+8. 학습의 주도권을 나에게 갖고 있자. 책에서 나오는 목차를 그대로 옮겨 작성하는 것보다 `input`과 `output`을 고려해서 공부하는 것이 훨씬 기억에 잘 남는다. 
+9. `redux`: 바닐라 자바스크립트에 리덕스를 붙여보자.(`npm install react-redux`는 `react`와 `redux`를 binding해주는 라이브러리고 `npm install redux`를 사용하자.)
+10. 회사에 취업한다는 것이 곧 성장을 뜻하는 것은 아니다. 독학을 할 수 있다면 마음먹고 독학해서 취업해도 좋다.
