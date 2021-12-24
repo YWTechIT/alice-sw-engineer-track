@@ -8913,4 +8913,52 @@ document.body.innerHTML = `<img src='' onerror="alert(\'hi\')">"
 7. `redux` + `observer` + 아키텍쳐 패턴
 8. 학습의 주도권을 나에게 갖고 있자. 책에서 나오는 목차를 그대로 옮겨 작성하는 것보다 `input`과 `output`을 고려해서 공부하는 것이 훨씬 기억에 잘 남는다. 
 9. `redux`: 바닐라 자바스크립트에 리덕스를 붙여보자.(`npm install react-redux`는 `react`와 `redux`를 binding해주는 라이브러리고 `npm install redux`를 사용하자.)
-10. 회사에 취업한다는 것이 곧 성장을 뜻하는 것은 아니다. 독학을 할 수 있다면 마음먹고 독학해서 취업해도 좋다.
+10. 회사에 취업한다는 것이 곧 성장을 뜻하는 것은 아니다. 독학을 할 수 있다면 마음먹고 독학해서 취업해도 좋다. 그게 아니면 스터디를 가입하는 것
+
+---
+## 📍 44일차 12.24.금. 프로젝트 9일차 TL;DR
+오늘은 크리스마스 이브다. 어제와 동일하게 열심히 프로젝트를 진행중인데, `python`이 만들어진 배경이 갑자기 생각났다. (궁금한 분들은 <a href='https://namu.wiki/w/Python#s-2'>나무위키</a> 참조) 나중에 심심해서 토이프로젝트를 만들다가 걸작을 만들 날이 올까? 거두절미하고 오늘의 `TL;RD`을 살펴보자.
+
+1. `keyup`: 키가 놓을 때 이벤트가 발생한다.
+2. `keydown`: 키가 눌렸을 때 이벤트가 발생한다.
+3. `formData`자체로는 `console.log`를 사용하지 못하게 브라우저 정책으로 막혀있고, 대신 `for-of formData.entries()`, `for-of formData.keys()`, `for-of formData.values()`로 하나씩 볼 수 있다.
+4. `formData.addEventListener('formdata')`, `btn.addEventListener('submit')`
+5. `await`으로 결과 확인할 때 `then, catch` 대신 `if`문으로 확인하자.
+6. `form enctype`: `method`가 `post`인 경우 데이터의 `MIME`유형을 나타내는 속성이다.
+
+```
+* application/x-www-form-urlencoded: 기본값(default)
+* multipart/form-data: <input type="file">이 존재하는 경우 사용
+* text/plain: HTML 5에서 디버깅 용으로 추가된 값
+```
+
+7. `formmethod`: `button type="submit"`일 때, `HTTP` 메서드를 지정한다. `formmethod`를 지정한 경우 버튼의 소유자가 가진 `method` 특성보다 우선한다. (post: 양식의 데이터를 HTTP body에 넣는다. get: action URL 뒤에 ?를 추가한 후 양식 데이터를 덧붙인다.)
+8. `dependency cycle detected`: 서로 `export`된 파일을 `import` 할 때 발생하는 오류
+
+```javascript
+// dep-b.js
+import './dep-a.js';
+export function b() {/* ... */}
+
+// dep-a.js
+import { b } from "./dep-b.js" // reported: Dependency cycle deteced.
+```
+
+9. `header` 내부의 `formdata`를 서버로 보낼 때 `JSON.stringify`하지말고 `form` 형태로 보내자
+10. `input`을 가릴 때는 `opacity:0`도 있지만 `hidden` 태그를 사용하자. (`label`의 `for`과 `input`의 `id`를 맞추면 된다.)
+11. `name`: `form` 양식 데이터가 제출될 때 컨트롤의 값과 함께 제출 된다.
+12. `form` 데이터 넘길 때 `img`태그 말고 `file` 형태로 읽은 값을 넘겨야 서버에서 인식한다.
+13. `box-shadow`: 그림자 효과
+
+```css
+/* 수평방향(x), 수직방향(y), 흐림의 반경(숫자가 클 수록 그림자의 끝이 흐려지고 0이 될수록 선명하다), 그림자가 확산되는 거리, 그림자의 색상 */
+.box_shadow {
+	width: 300px;
+	height: 300px;
+	box-shadow: 3px 3px 8px black;  
+}
+```
+
+reference
+1. MDN: https://developer.mozilla.org/ko/docs/Web/HTML/Element/form
+2. eslint-plugin-import git: https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-cycle.md
