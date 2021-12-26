@@ -8962,3 +8962,17 @@ import { b } from "./dep-b.js" // reported: Dependency cycle deteced.
 reference
 1. MDN: https://developer.mozilla.org/ko/docs/Web/HTML/Element/form
 2. eslint-plugin-import git: https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-cycle.md
+
+---
+## 📍 45일차 12.25.토. 프로젝트 10일차 TL;DR
+1. `input`태그의 file값을 동적으로 조작하고 싶으면 `dataTransfer` 객체에 임시로 옮겨 담자
+
+```javascript
+const tempTransfer = new DataTransfer();
+tempTransfer.items.add(validFileData);
+const targetInput = document.querySelector(`#empty-input__${id}`);
+targetInput.files = tempTransfer.files;
+```
+
+2. `JWT` 토큰 사용시 `OAuth` 로그인 후 배포 사이트로 `redirect` 하지 않고 `local`에서 테스트해보려면 `userProfile`, `userId`, `token` 값을 `local browser`에 `localStorage`에 `setItem`으로 넣어두자.
+
