@@ -8976,3 +8976,36 @@ targetInput.files = tempTransfer.files;
 
 2. `JWT` 토큰 사용시 `OAuth` 로그인 후 배포 사이트로 `redirect` 하지 않고 `local`에서 테스트해보려면 `userProfile`, `userId`, `token` 값을 `local browser`에 `localStorage`에 `setItem`으로 넣어두자.
 
+---
+## 📍 46일차 12.28.화. 실시간 강의 React
+저번주까지는 프로젝트를 진행했고 오늘부터 다시 수업에 들어간다. 챕터를 넘어가 이제는 바닐라 자바스크립트 대신 `React`를 배운다. 일일이 `document.createElement` 코드를 작성하며 `DOM` 관리를 했는데 이제는 신경을 덜 써도 되는 `React`를 배운다니 뭔가 홀가분(?)하면서도 `document`코드가 그리워지는 느낌이 든다. 어제 프로젝트를 진행하면서 앞으로 배우고 싶은 내용은 `ESlint`, `prettier`, `webpack`과 `babel`을 정확하게 공부해야겠다는 생각이 들었다. 4주 뒤에 있을 두번째 팀 프로젝트 때 나의 목표는 `CRA`을 사용하지 않고 직접 `ESlint`, `prettier`, `webpack`, `babel` 설정을 나의 코드로 작성하는 것이다.
+
+1. 프로젝트를 너무 거대하게만 생각하지말고 작은 부분에서 수동으로 해야할 일들을 자동으로 돌리면 그것 또한 포트폴리오가 된다. 일상에서 코딩으로 좋아지는 모습을 잘 기록하면 좋은 결과가 있을 것이다. ex) 페이스북 거절 버튼 누르기, 위도와 경도 자동계산??
+2. `npm install --global create-react-app` : 리액트 개발환경 설치
+3. `npx create-react-app react-app` : `CRA` 설치, 파일명 앞에 `.` 를 붙이면 현재 디렉토리에 그대로 생성한다
+4. `CRA`는 코드 변경 후 저장하면 코드의 바뀐 부분을 알아서 적용해주는데, 이는 `webpack`의 `HotModuleReplacement`가 해준다. 웹팩 설정할 때 `devServer`를 설정하면 `CRA`를 사용하지 않고도 이를 구현할 수 있다.
+5. 리액트의 본질은 사용자 정의 태그를 만드는 것이라 해도 과언이 아니다.
+6. `npm run start`: src/index.js 엔트리 파일, `public/index.html`: html 템플릿 파일, `npm run build`: 배포 버전 생성, `build`: 배포 버전의 내용 파일, `import filename.css`를 이용해서 css 를 사용할 수 있다.
+7. `index.css` : 리액트를 실행하면 실행되는 `css` 파일
+8. 사용자 정의 태그를 만들 때 하나의 태그 안에 들어가야한다.
+9. 태그의 제일 앞글자가 대문자면 사용자 정의 태그이고 소문자면 네이티브 태그다. 
+10. `<></>` 와  `<React.Fragment>` 의 차이점:  `<></>` 는 바벨 7버전 이상에서 사용할 수 있다.  `<></>` 는 key를 부여할 수 없다. `<React.Fragment key="key"></React.Fragment>` 와 같이 `key`를 부여한다. `ESlint` 에서 관련된 설정을 할 수 있으며, 자세한 설정은 <a href='https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-fragments.md'>다음</a>을 참고하자
+
+```javascript
+// incorrect code
+<React.Fragment><Foo /></React.Fragment>
+
+// correct code
+1. <><Foo /></>
+2. <React.Fragment key="key"><Foo /></React.Fragment> 
+```
+
+11. `HtmlWebpackPlugin`: HTML 파일 생성을 단순화한다. 매번 컴파일에 변경되는 해시로 된 파일 이름을 가진 webpack 번들에 특히 유용하다. 플러그인이 HTML 파일을 생성하게 하거나 나만의 로더를 사용할 수 있다. script 태그에 사용하여 body 에 있는 모든 webpack 번들을 포함하는 HTML5 파일을 생성한다. 만약, entry 포인트가 여러개인 경우 생성된 HTML 에 모두 `<script>`태그로 포함 된다. 만약, webpack 출력에 CSS asset 이 있다면 이들은 생성된 HTML 파일의 `<head>` 요소 안에 `<link>` 태그로 포함된다.
+12. `HotModuleReplacement`: 전체 재로드 없이 어플리케이션이 실행되는 동안 모듈을 교환, 추가 또는 제거한다. 소스 코드에서 CSS / JS 가 수정되면 브라우저를 즉시 업데이트 한다. 이는 브라우저의 개발 도구에서 직접 스타일을 변경하는 것과 거의 비슷하다.
+13. `Vanilla JS`에 대한 지식이 있어야 한다. 왜냐하면 차세대 프레임워크도 기본은 `JS`기 때문이다.
+14. `CRA` 를 사용하는 이유: Babel (JS Compiler, JS의 최신문법을 ES5 전 문법으로 변경해준다. 그리고 JSX 문법을 JS 문법으로 바꿔준다. JSX 는 문법은 자바스크립트 공식 문법은 아니다.  IE 는 최신문법을 모르기 때문에 예전 문법으로 알려줘야 한다.), webpack 은 여러 파일을 번들링해준다. 다른 파일들을 한 파일로 모아서 제공해준다. npm start 를 치면 Babel, webpack 이 동작한다.
+15. `vite`, `snowpack` 은 프로젝트의 규모가 클 때 사용하고, `CRA` 는 가벼울 때 사용한다. 
+16. `React.strictMode`로 감싸져있으면 `Develop`단계에서 렌더가 2번 되는게 정상이다. 프로덕션은 아님
+17. `serviceWorker.unregister();` :  앱 배포 시 캐시가 남지 않도록 하는 코드
+18. `ReactDOM.render(element, document.getElementById('root'));`: id 가 root 인 태그를 찾은 후, 정의한 엘리먼트를 ReactDOM 에 렌더링 하는 과정
+19. `element`: 실제 화면에 표시 할 수 있는 정보가 들어있는 JS 객체 JSX 형태로 구성되어있다. `component`: document 내부 요소를 설정한다.(props, state 등등..)
