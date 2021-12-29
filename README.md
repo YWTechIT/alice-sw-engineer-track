@@ -9009,3 +9009,141 @@ targetInput.files = tempTransfer.files;
 17. `serviceWorker.unregister();` :  앱 배포 시 캐시가 남지 않도록 하는 코드
 18. `ReactDOM.render(element, document.getElementById('root'));`: id 가 root 인 태그를 찾은 후, 정의한 엘리먼트를 ReactDOM 에 렌더링 하는 과정
 19. `element`: 실제 화면에 표시 할 수 있는 정보가 들어있는 JS 객체 JSX 형태로 구성되어있다. `component`: document 내부 요소를 설정한다.(props, state 등등..)
+
+---
+## 📍 47일차 12.29.수. 온라인 강의
+오늘은 `SPA`, `React`, `Component`, `ES6`, `module`,  `JSX` 등에 대해서 배웠다. 바닐라 자바스크립트와 `CRA`를 통해 프로젝트를 생성할 때 다른점이 있는데 `CRA`는 웹팩과 바벨을 자동으로 설정해준다는 것이다. 강의에서 배우는 내용과 별개로 웹팩과 바벨을 설정하는 방법을 공부하고 있는데 세팅이 끝나면 따로 포스팅으로 올려야겠다.
+
+1. 첫 접속시 `HTML`을 내려받는것은 전통적인 페이지와 동일하나, `data` 변경시 전체를 새로고침하지 않고 변경된 `data`만 업데이트하는 것은 `SPA` 특징 중 하나이다.
+
+![](https://images.velog.io/images/abcd8637/post/f8f37713-7557-4751-99d9-258d82c900d8/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-29%2010.04.06.png)
+
+2. `React`를 사용하면 `SPA`를 편하게 사용할 수 있다.
+3. `React`: 사용자 인터페이스를 만들기 위한 `Javascript` 라이브러리
+4. `component`: react 에서 서비스를 개발하는데 있어 독립적인 단위로 쪼개어 구현 바닐라 자바스크립트를 사용할 때 페이지마다 HTML, CSS, JS 넣는방식과는 달리 한 페이지 내 각 요소를 쪼개 하나의 구성요소를 만들고 컴포넌트를 조립하여 한 페이지를 만든다.
+5. `Virtual DOM`: 가상적인 표현을 메모리에 저장하고 `ReactDOM` 과 같은 라이브러리에 의해 실제 `DOM` 과 동기화하는 프로그래밍 개념
+6. `JSX`: `JavaScript` 내에서 `UI` 를 작성하기 위해 개발자에게 익숙한 환경을 제공, `HTML` 과 유사
+### ❏ 왜 React인가?
+1. 생산성 / 재사용성: `Component` 와 `Hook` 을 활용하여 작은 단위의, 독립적인 요소로 개발하여 개발자의 생산성과 코드의 재사용성을 높인다.
+2. 풍부한 자료 / 라이브러리: 방대한 자료 및 편리한 오픈소스 라이브러리
+3. 다양한 사용처: 웹 애플리케이션뿐만아닌 React-native 에 적용하여 app 으로도 개발 할 수 있기 때문
+
+### ❏ React 특징 분석하기
+1. `JSX`
+2. `component`: 하나의 블록을 만들어서 필요한 곳에 조립하여 개발한다.
+3. `state`: 데이터를 유동적으로 관리한다. `state` 변경시 컴포넌트가 다시 렌더링 된다.(나중에 배우겠지만 `react`가 리렌더링 되는 시기는 `props`가 바뀌었을 때, `state`가 바뀌었을 때 부모 `component`가 렌더링 될 때, `forceUpdate()`를 실행했을 때가 있다.)
+
+### ❏ React 프로젝트 생성
+1. `React` 개발 시 `CRA` 를 사용해야하는것은 아니다 직접 `script` 를 추가해서 사용해도 된다.
+
+```
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+```
+
+2. `CRA` 는 `React` 프로젝트를 손쉽게 생성할 수 있도록 도와주는 보일러플레이트(Boilerplate) , CRA 는 페이스북에서 직접 만들어서 관리한다. 상대적으로 덜 중요한 코드는 노출되지 않고, 강력한 Command 를 지원한다. 모든 브라우저가 해석될 수 있도록 `transcompile` 을 지원한다.(Babel, 코드 번들링(코드를 알아보기 어렵게 함), Webpack)
+
+3. `npx` : `npm` 패키지를 1회성으로 내려 받아 실행할 때 사용하는 명령어 
+
+```js
+node_modules: npm을 이용해 설치한 패키지들 모음
+public: 정적인 파일들을 모아 놓는 곳
+src: 리액트 개발을 위한 파일들을 모아 놓는 곳
+gitignore: git에 올리지 않는 파일
+package.json: 프로젝트에 관한 정보와 사용하는 패키지들을 명세하는 파일 npm install ~로 설치하면 기록에 남는다. npm install을 치면 정의된 모듈을 한꺼번에 설치할 수 있다.
+README.md: 내 프로젝트에 관한 설명을 작성하는 파일
+```
+
+4. 패키지 불러오기
+
+```js
+import "패키지명"  // CSS import하는 것만으로 역할을 하는 경우 패키지명만 import 한다. (확장자까지 명시해야한다.)
+
+import something from "패키지명"  // 기본적으로 패키지를 불러올 때
+
+import { a, b } from "패키지명"  // 일부 메소드나 변수만 가져올 때는 구조분해를 하여 가져온다.
+
+import * as something from "패키지명"  // 패키지에 default로 export되는 객체가 존재하지 않을 경우 * as 이름으로 불러올 수 있다.
+
+import defaultExport from "module-name";
+import * as name from "module-name";
+import { export1 } from "module-name";
+import { export1 as alias1 } from "module-name";
+import { export1 , export2 } from "module-name";
+import { foo , bar } from "module-name/path/to/specific/un-exported/file";
+import { export1 , export2 as alias2 , [...] } from "module-name";
+import defaultExport, { export1 [ , [...] ] } from "module-name";
+import defaultExport, * as name from "module-name";
+import "module-name";
+```
+
+### ❏ JSX와 컴포넌트
+1. `JSX` 는 함수 호출과 객체 생성을 위한 문법적 편의를 제공하는 `JS` 확장
+2. `HTML` 과 비슷하게 생겼으나 `JS` 이고 `HTML` 과 다른 부분이 있음
+3. `JSX` 는 `Babel` 에 의해서 `Transcompile` 이 된다.
+4. 장점: 개발자 편의성 향상, 협업에 용이 / 생산성 향상, 문법 오류와 코드량 감소
+5. `HTML` 과 차이점
+
+```js
+1. `HTML` 태그 내에 `JS` 연산, `HTML` 태그 안에 중괄호를 넣으면 `JS`코드를 사용할 수 있다.
+2. `class` 대신 `className`
+3. 스타일은 큰 따옴표 대신 `object`로만 입력한다. 인라인 스타일은 중괄호 2개 사용 `style={{ padding: 10, color: 'red' }}`(첫번째 중괄호는 자바스크립트를 사용하겠다는 뜻, 두번째 중괄호는 객체 형태로 넣는다. inlineStyle의 propertyName은 camelCase로 사용, 첫단어 소문자 다음은 대문자)
+4. 닫는 태그 필수 `img`, `input`, `<br>` 등...
+5. 최상단 `element`는 반드시 하나(실제 렌더링 시에는 `Fragment` 안에 있는 내용만 출력된다.) <>는 최근에 생긴 문법임
+```
+
+6. 컴포넌트: React 에서 페이지를 구성하는 최소 단위, 이름은 대문자로 시작, Class Component / Function Component로 나뉨, Controlled Component / Uncontrolled Component (form 태그에서 사용자의 입력을 받아 데이터를 state 를 이용해 직접 관리하는지의 여부)
+
+```js
+// MyComponent
+const MyComponent = ({ children }) => {
+	return <div style = {{ }}> { children } </div>
+}
+
+// App
+const App = () => {
+	return (
+		<div>
+			<p>안녕</p>
+			<MyComponent>반가워</MyComponent>
+			<div>반가워</div>
+		</div>
+	)
+}
+```
+
+7. `class Component`, `Function Component`: 초기 `React` 는 모두 클래스 컴포넌트였으나, 이후 v16부터 새로운 Function Component와 Hooks개념이 발표되었으며 현재는 주로 Function Component를 사용한다. 클래스형은 `state` 선언이 가능하지만, 함수형은 `Hooks` 를 통해 `state` 선언이 가능하다.
+
+```js
+// class component
+class Hello extends Component {
+	render(){
+		const { name } = this.props
+		return <div>{ name }님 안녕하세요</div> 
+	}
+}
+
+// function component
+const Hello = (props) => {
+		const { name } = this.props
+		return <div>{ name }님 안녕하세요</div> 	
+}
+```
+
+8. `class Component` 특징: `Java` 개발자에게 친숙한 형태이다. `React` 의 생명주기를 파악하기 쉽다. (렌더링, 값이 바뀌는 시기 등 명확한 구별 가능)
+9. `props(properties)`: 컴포넌트 `Attribute` 에 해당하는 부분, 컴포넌트 안에 작성된 하위 `Element` 를 `children` 이라고 한다. 결국엔 `children` 도 `props` 중 하나이다.
+
+```javascript
+const MyComponent = (props) => {
+	const { user, color, children } = props
+
+	return (
+		<div style={{color}}> 
+			<p>{user.name}님의 하위 element는!</p>
+			{children}
+		</div>
+	) 
+}
+```
+
+10. 컴포넌트끼리 데이터를 주고받을 땐 props, 컴포넌트 내에서 데이터를 관리할 땐 state, 데이터는 부모에서 자식으로만 전달한다.
