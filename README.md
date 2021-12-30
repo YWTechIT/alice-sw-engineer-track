@@ -9147,3 +9147,188 @@ const MyComponent = (props) => {
 ```
 
 10. 컴포넌트끼리 데이터를 주고받을 땐 props, 컴포넌트 내에서 데이터를 관리할 땐 state, 데이터는 부모에서 자식으로만 전달한다.
+
+---
+## 📍 48일차 12.30.목. 온라인 강의
+오늘은 `react`의 `useState`, `props`, `Hooks`, `function component`, `class component`등에 대해서 배웠다. 
+
+1. 나의 문제, 주변에 쉽게 해결 할 수 있는 작은 기능들을 만들어보자 나중에 도움이 된다.(영우 봇 - 지하철 실시간 도착, 영화 순위)
+2. `useState` 를 `consol.log` 하면 첫번째 값은 내가 설정한 값이고 두번째 값은 `state` 의 값을 바꾸는 함수다.
+
+![](https://images.velog.io/images/abcd8637/post/76f94348-99e3-47e8-bc93-0bdd2afaf9ff/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-30%2011.21.35.png)
+
+3. `state` 가 바뀌면 해당 컴포넌트는 재 랜더링된다., `props` 의 값이 바뀌어도 새로 렌더링된다. 이때 자식들의 `component` 까지 재 렌더링된다.
+4. `HEAD`: 워킹 디렉토리가 누구와 같은지 알려준다.
+5. `data-attribute` : data를 임시로 저장하고 싶을 때
+
+```javascript
+// data attribute HTML syntax
+<article
+  id="electriccars"
+  data-columns="3"
+  data-index-number="12314"
+  data-parent="cars">
+...
+</article>
+
+// JS access
+const article = document.querySelector('#electric-cars');
+// The following would also work:
+// const article = document.getElementById("electric-cars")
+
+article.dataset.columns // "3"
+article.dataset.indexNumber // "12314"
+article.dataset.parent // "cars"
+
+// CSS access
+article::before {
+  content: attr(data-parent);
+}
+
+article[data-columns='3'] {
+  width: 400px;
+}
+article[data-columns='4'] {
+  width: 600px;
+}
+
+// react
+// event.target 객체 내에서 dataset객체를 가져올 수 있다.
+function clickHandler(event) {
+	event.preventDefault();
+	const id = evt.target.dataset.id;
+	props.onChangeMode("READ", id);
+}
+```
+
+[데이터 속성 사용하기 - Web 개발 학습하기 | MDN](https://developer.mozilla.org/ko/docs/Learn/HTML/Howto/Use_data_attributes)
+
+7. `teachable Machine` : 조명 세기를 기준으로 홈페이지 주간 / 다크 모드, 사진을 보고 누가 접속했는지 확인하고 UI 변경해주기?? 등등
+
+### ❏ 실습
+1. `component`: `props` 를 `input` 으로 하고 `UI` 가 어떻게 보여야 하는지 정의하는 `React Element` 를 `output` 으로 하는 함수
+2. `class` vs `Functional` : `v16.8` 이전까지는 `class` 를 사용했다. `class` 컴포넌트의 문제점: 복잡하다.(ex. 생명주기 함수), 재사용이 안된다.(동작과정이 비슷한 컴포넌트는 재활용하는것이 효율적임), `this` (4개의 this가 잇음.) Hook이 등장하면서 함수 컴포넌트도 클래스 컴포넌트만 가능했던 작업이 가능해졌습니다. 기존의 클래스 컴포넌트가 가지고 있던 복잡성과 재사용성이 해결되었습니다.
+
+```javascript
+// functional
+function Component1(props){
+	return <div></div>
+}
+
+// class
+class component1 extends React.component{
+	render(){
+		return ()
+	}
+}
+```
+
+3. `props`: 상위 컴포넌트에서 하위 컴포넌트로 데이터를 넘길 때
+4. `state`: 컴포넌트 자체가 갖는 속성 → 보통은 자식에게 넘겨주지 않고 본인만 상태를 갖도록 작성한다.
+5. `Hook:` : 함수형 컴포넌트에서 생명주기 기능을 연동할 수 있게 해줍니다.
+6. `State Hook`: `const [<상태 값 저장 변수>, <상태 값 갱신 함수>] = userState(<상태 초깃값>);`
+7. 클래스 컴포넌트에서는 `state` 변경 시에는 `state` 객체를 통째로 넣어줘야 한다.
+
+```javascript
+import React, { useState } from "react";
+import "./App.css";
+import { LIST } from "./components/mock/LIST";
+
+// Q1. map을 사용해서 컴포넌트 만들기
+// key는 unique한 값으로 넣어두기
+
+// Q2. 데이터를 입력받는 <input> 만들기: state에 저장
+// const [input, setInput] = useState("");
+
+// Q3. 데이터를 추가하려면? data state에 새로운 값을 넣는다.
+// 1. 버튼을 하나 만들자
+// 2. 버튼을 눌렀을 때 title은 사용자가 입력한 값으로 date는 날짜로
+
+// Q4. 플래그
+// 1. 버튼을 하나 만들자
+// 2. 버튼을 눌렀을 때, 위쪽 데이터가 전부 안 보임
+// 3. 버튼을 다시 누르면 데이터가 다시 보임
+
+function App() {
+    const [flag, setFlag] = useState(false);
+
+    function toggleFlag(flag) {
+        setFlag(!flag);
+    }
+
+    const [data, setData] = useState(LIST);
+
+    function onSubmit(event, title, date) {
+        event.preventDefault();
+        const newData = {
+            id: data.length + 1,
+            title: title,
+            date: date,
+        };
+        setData([...data, newData]); // 기존의 data를 바꾸려면 원래 있던 Data를 복사해야함.
+    }
+
+    return (
+        <div className="App">
+            {flag === false &&
+                data.map((item) => (
+                    <Info key={item.id} title={item.title} date={item.date} />
+                ))}
+            <Form onSubmit={onSubmit} />
+            <hr />
+            <button onClick={() => toggleFlag(flag)}>
+                화면 보이기 / 숨기기
+            </button>
+        </div>
+    );
+}
+
+function Form(props) {
+    const [title, setTitle] = useState("");
+    const [date, setDate] = useState("");
+
+    function handleTitle(event) {
+        event.preventDefault();
+        setTitle(event.target.value);
+    }
+
+    function handleDate(event) {
+        event.preventDefault();
+        setDate(event.target.value);
+    }
+
+    return (
+        <form onSubmit={(event) => props.onSubmit(event, title, date)}>
+            <input
+                type="text"
+                value={title}
+                name={title}
+                onChange={handleTitle}
+                placeholder="이름을 입력하세요"
+            />
+            <input type="date" onChange={handleDate} value={date} name={date} />
+            <button type="submit">제출</button>
+        </form>
+    );
+}
+
+// 원래는 `form`태그 양식으로 써도 되지만 button으로
+/* <button onClick={(e) => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const day = today.getDay();
+}}></button> */
+
+function Info(props) {
+    return (
+        <div>
+            <h3>{props.title}</h3>
+            <p>{props.date}</p>
+            <hr />
+        </div>
+    );
+}
+
+export default App;
+```
