@@ -9332,3 +9332,320 @@ function Info(props) {
 
 export default App;
 ```
+
+---
+## 📍 49일차 12.31.금. 온라인 강의
+오늘은 `class component`와 `function component`에서 `props`와 `state`, `event`를 다루는 법을 배웠다. `function component`는 많이 사용해서 익숙했는데, `class` 문법은 많이 사용하지 않아서 손에 잘 잡히지 않았다. 다루는 법을 배워둬야 나중에 많이 써먹겠지?!
+
+### ❏ props
+1. `component` 에 원하는 값을 넘겨주고 재사용 할 때 사용하며, 넘겨줄 수 있는 값은 변수, 함수, 객체, 배열 등 `JS` 의 요소라면 제한이 없다.
+2. 반환되는 `JSX` 요소가 많으면 `props` 를 활용하는것이 중요하다.
+
+```javascript
+const Welcome = (props) => {
+	return <h1>Hello, {props.name}</h1>
+}
+
+const App = () => {
+	return <Welcome name="영우" />
+}
+```
+
+3. `props` 의 값을 임의로 변경해서 사용하는 것을 지양하자. `props`를 가공하려면 복제한다음 사용하자.
+
+```javascript
+// Don't
+const Welcome = (props) => {
+	props.name = props.name + "님";
+	return <h1>Hello, {props.name}</h1>
+}
+
+// Do
+const Welcome = (props) => {
+	const username = props.name + "님";
+	return <h1>Hello, {username}</h1>
+}
+```
+
+4. 기본적인 `DOM Element(div, span 등)` 들의 `Attribute` 는 `camel case` 로 작성한다. 
+5. `data-`, `aria-` 의 `Attribute` 예외다. (ex, data-type, aria-label 등)
+6. `HTML` 의 `Attribute` 와 `JSX` 의 `Attribute` 는 다른 이름이 있다. `class -> className`, `for -> htmlFor`
+7. `HTML` 의 `Attribute` 와 `JSX` 의 `Attribute` 는 다른 동작 방식을 가지는것이 있다. (`checked → defaultChecked`, `value -> defaultValue`,  `style은 object 형식`), `html` 에서는 기본값을 설정하는 역할을 했으나 jsx에서는 현재값을 의미한다. 자유롭게 변경하고 싶다면 `default` 값을 설정하자.
+
+```javascript
+// checked 값이 false면 checkbox를 클릭해도 변화가 일어나지 않는다.
+// 초기값의 의미로 checked, value를 사용하고 싶다면 defaultChecked, defaultValue Attribute를 사용하자.
+<input type="checkbox" checked={false} />
+```
+
+8. `React` 에서만 쓰이는 새로운 `Attribute` 가 있다.(`key`, `dangerouslySetInnerHTML` 등)
+
+```javascript
+1. key는 React가 어떤 항목을 변경, 추가 또는 삭제할지 식별하는 것을 돕는다.
+2. key는 엘리먼트에 안정적인 고유성을 부여하기 위해 배열 내부의 element에 지정해야한다.
+3. key는 배열 안에서 형제 사이에 고유해야 하고 전체 범위에서 고유할 필요는 없다.
+4. 두 개의 다른 배열을 만들 때 동일한 key를 사용할 수 있다.
+5. Key를 선택하는 가장 좋은 방법은 리스트의 다른 항목들 사이에서 해당 항목을 고유하게 식별할 수 있는 문자열을 사용하는 것입니다. 대부분의 경우 데이터의 ID를 key로 사용합니다.
+6. 렌더링 한 항목에 대한 안정적인 ID가 없다면 최후의 수단으로 항목의 인덱스를 key로 사용할 수 있습니다.
+```
+
+### ❏ State
+1. `state` 는 `component` 내에서 유동적으로 변할 수 있는 값을 저장한다.
+2. `state` 값이 변경되고 재렌더링이 필요한 경우에 `react` 가 자동으로 계산하여 변경된 부분을 렌더링한다.
+3. `state` 값을 직접 변경하지말자. 직접 변경하게 되면 `react` 가 값이 변경됐는지 알아차리지 못한다. 반드시 `setState` 함수를 이용해 값을 변경하자.
+4. `state` 를 변경하는 두 가지 방법
+
+```javascript
+const [count, setcount] = useState(0);
+
+// setState내에 변경할 값을 넣기
+setCount(count + 1);
+
+// setState에 함수를 넣기, 함수를 넣는 경우 함수가 반환하는 값으로 state가 변경된다.
+// 현재 값을 기반으로 state를 변경하고자 하는 경우 함수를 넣는 방법을 권장한다.
+setCount((current) => { return current + 1 });
+
+// object state를 만들 때 주의사항
+// user.grade 값이 변경되었지만 user 객체는 변경되지 않았으므로 재렌더링 하지 않는다.
+const [user, setUser] = useState({name: "민수", grade: 1});
+setUser((current) => {
+	current.grade = 2;
+	return current;
+})
+
+// 재렌더링이 되려면 객체 자체를 바꿔야 한다. 
+// object를 복사해서 새로만들고 원하는 값으로 변경한다.
+setUser((current) => {
+	const newUser = { ...current }
+	newUser.grade = 2;
+	return newUser;
+})
+```
+
+### ❏ event
+1. 웹 브라우저가 알려주는 `HTML` 요소에 대한 사건의 발생을 의미한다. `Element` 로딩, `Element` 클릭, 마우스를 올렸을 때, 더블 클릭했을 때 등 다양한 이벤트가 존재한다.
+2. 이벤트 처리 방법: 핸들링 함수선언, 익명 함수로 처리
+3. 이벤트 객체: `DOM Element`의 경우 핸들링 함수에 이벤트 `object` 를 매개변수로 전달한다.
+
+```javascript
+const App = () => {
+	const handleChange = (event) => {
+		console.log(event.target.value
+	}
+
+	return (
+		<input onChange={handleChange} />
+	)
+}
+```
+
+4. 여러개의 input을 한 개의 `handler` 로 관리하기
+
+```javascript
+import React, { useState } from 'react';
+
+function App() {
+  const [person, setPerson] = useState({
+    name: "김민수",
+    school: "엘리스대학교"
+  })
+  
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setPerson((current) => {
+        const newPerson = { ...person };
+        newPerson[name] = value;
+        return newPerson;
+    })
+  }
+  
+  return (
+    <div className="App">
+        <input name = "name" value={person.name} onChange={handleChange}/>
+        <input name = "school" value={person.school} onChange={handleChange}/>
+        <button onClick={()=>alert(`${person.name}님은 ${person.school}에 재학중입니다.`)}>버튼클릭!</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### ❏ 컴포넌트 내 이벤트 처리
+1. 컴포넌트에 이벤트 넘기기
+
+```javascript
+// app.js
+import React, { useState } from 'react';
+import { MyForm } from "./components/MyForm";
+
+function App() {
+    const [username, setUsername] = useState("");
+    
+  return (
+    <div className="App">
+        <h1>{username}님 환영합니다.</h1>
+				<MyForm onChange={(event) => {
+            setUsername(event.target.value)
+        } }/>
+    </div>
+  );
+}
+
+export default App;
+
+// MyForm.js
+import React from "react";
+
+export const MyForm = ({ onChange }) => <input onChange={onChange}/>;
+```
+
+2. 커스텀 이벤트
+
+```javascript
+const SOS = ({onSOS}) => {
+	const [count, setCount] = useState(0);
+	const handleClick = () => {
+		if(count >=2){
+			onSOS();
+		}
+	setCount(count+1);
+	}
+
+	return <button onClick={handleClick}> 세 번 누르면 긴급호출({count})</button>
+}
+
+const App = () => {
+	return (
+		<div>
+			<SOS
+				onSOS={() => {alert("긴급사태!"}} />
+		</div>
+	)
+}
+```
+
+3. 이벤트 명명법: 자유롭게 설정할 수 있으나, 보통 `on + 명사`, `on + 명사 + 동사` 형태로 작성한다. (`onClick`, `onButtonClick`, `onInputChange`) 혹은 `handle + 동사`, `handle + 명사 + 동사` 형태로 작성한다. 
+4. 컴포넌트를 활용하여 기능을 모듈화 하면 다음과 같은 이점이 있다.
+
+```javascript
+1. 코드 유지보수성이 향상됩니다.
+2. 코드 재사용이 용이합니다.
+3. 가독성 향상됩니다.
+```
+
+5. `setState`: 시간이 변하는 것처럼 주기적으로 변하는 것이 아니라 버튼 클릭과 같은 특정 이벤트로 상태가 변하는 것을 `State` 가 비동기적으로 변경된다고 한다.
+6. 생명주기: 앱이 실행되고 종료되는 과정을 특정 시점별로 나눠둔 것, 컴포넌트가 이벤트를 다룰 수 있는 특정 시점
+
+```javascript
+// react
+1. constructor(): State 데이터를 초기화 하는 메소드
+2. render(): 클래스 컴포넌트에서 반드시 구현되어야 하는 메소드
+3. componentDidMount(): 컴포넌트가 마운트 된 직후 호출되는 메소드
+4. componentDidUpdate(): 업데이트가 진행된 직후에 호출되는 메소드
+5. componentWillUnmount(): 컴포넌트가 마운트 해제되어 제거되기 직전에 호출되는 메소드
+
+// componentDidMount
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {favoritecolor: "red"};
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({favoritecolor: "yellow"})
+    }, 1000)
+  }
+  render() {
+    return (
+      <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+    );
+  }
+}
+
+ReactDOM.render(<Header />, document.getElementById('root'));
+```
+
+7. 재사용 캡슐화(현재 시간 출력 컴포넌트)
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
+//현재시간을 출력하는 컴포넌트
+//현재시간의 props를 받아 출력합니다.
+function Clock(props) {
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>현재 시간: {props.time.toLocaleTimeString()}</h2>
+    </div>
+  );
+}
+
+//매초 마다 호출되는 함수
+function tick() {
+  //Clock 컴포넌트를 호출합니다.
+  const element = <Clock time={new Date()}/>;
+  
+  //ReactDOM에 element을 렌더링합니다.
+  ReactDOM.render(element, document.getElementById('root'));
+}
+
+setInterval(tick, 1000);
+
+serviceWorker.unregister();
+```
+
+8. 클래스 컴포넌트로 현재 시간 출력 하기
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
+//클래스 컴포넌트를 사용하여 Clock컴포넌트를 작성합니다.
+class Clock extends React.Component {
+    render(){
+        return(
+             <div className="App">
+                <h1>Hello, world!</h1>
+                <h2>It is {this.props.time.toLocaleTimeString()}</h2>
+            </div>
+        )
+    }
+}
+
+//매초 마다 호출되는 함수
+function tick() {
+  const element = <Clock time={new Date()}/>;
+  ReactDOM.render(
+    element,
+    document.getElementById('root')
+  );
+}
+
+setInterval(tick, 1000);
+
+serviceWorker.unregister();
+```
+
+9. 클래스 컴포넌트로 `state` 관리하기 (클래스 내부에서 `state` 를 사용하려면 `constructor` 메소드를 생성해야한다.)
+
+```javascript
+1. 클래스 컴포넌트 내에 `constructor()` 메소드 선언
+2. `constructor()` 메소드 내에 `super(props)` 호출
+3. `this.props`를 `this.state`로 변경 `props`를 제공하는 대신 `state`에 필요한 데이터 저장
+```
+
+10. 이벤트 핸들러에 인수 전달하기: 보통 반복문 안에서 id 값을 추가 인수로 전달 할 때 bind를 사용하는 경우, event 를 따로 전달하지 않아도 된다.
+
+```javascript
+<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+<button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+```
