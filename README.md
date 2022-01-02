@@ -9336,8 +9336,8 @@ export default App;
 ---
 ## 📍 49일차 12.31.금. 온라인 강의
 오늘은 `class component`와 `function component`에서 `props`와 `state`, `event`를 다루는 법을 배웠다. `function component`는 많이 사용해서 익숙했는데, `class` 문법은 많이 사용하지 않아서 손에 잘 잡히지 않았다. 다루는 법을 배워둬야 나중에 많이 써먹겠지?!
-
 ### ❏ props
+
 1. `component` 에 원하는 값을 넘겨주고 재사용 할 때 사용하며, 넘겨줄 수 있는 값은 변수, 함수, 객체, 배열 등 `JS` 의 요소라면 제한이 없다.
 2. 반환되는 `JSX` 요소가 많으면 `props` 를 활용하는것이 중요하다.
 
@@ -9649,3 +9649,655 @@ serviceWorker.unregister();
 <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
 <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
 ```
+
+---
+## 📍 50일차 22.1.1.토. 온라인 강의
+22년 임인년이 밝았다. 새해를 맞으며 온라인 강의를 들으니까 별 감흥이 없었다. 내게 중요한 목표는 작년부터 준비하고 있는 프론트엔드를 잘 살려서 상반기에는 꼭 취업을 했으면 하는 바램이 있다. 그럼 `FE` 교육을 들으면서 배웠던 내용을 복습해보자..
+
+### ❏ State Hook
+1. `useState` 는 컴포넌트 내 동적인 데이터를 관리할 수 있는 `hook` 입니다.
+2. 최초에 `useState` 가 호출될 때 초기값으로 설정되며 재 렌더링이 될 경우 무시됩니다.
+3. `state` 는 읽기 전용이므로 직접 수정하지 마세요.
+4. `state` 가 변경되기 위해서는 `setState` 를 이용합니다.
+5. `state` 가 변경되면 자동으로 컴포넌트가 재 렌더링 됩니다.
+
+```javascript
+const App = () => {
+	const [state, setState] = useState();
+
+	// 1
+	setState("Hello");
+
+	// 2
+	setState((current) => {
+		return current+"world"
+	})
+```
+
+### ❏ Effect Hook
+1. 함수 컴포넌트에서 `side effect` 를 수행한다.
+2. 컴포넌트가 최초로 렌더링될 때, 지정한 `state` 나 `props` 가 변경될 때마다 콜백 함수가 호출 됩니다.(`dependency array`)
+```javascript
+const App = () => {
+	useEffect(EffectCallback, Deps?)
+}
+```
+
+3. 다른 함수를 `return` 할 경우 `state` 가 변경되어 컴포넌트가 다시 렌더링되기 전과 컴포넌트가 없어질 때 호출할 함수를 지정한다.
+
+```javascript
+useEffect(() => {
+	// state가 변경될 때, 컴포넌트를 렌더링할 때
+	const intervalId = setInerval(() => {
+		console.log("hi");
+	}, 1000)
+
+	// 컴포넌트를 재 렌더링 하기 전에, 컴포넌트가 없어질 때
+	return () => {
+		clearInterval(intervalId);
+	}
+}, [])
+
+// 컴포넌트 생성 / 소멸 관리
+import React, { useEffect } from "react";
+
+export const Greeting = () => {
+		// 컴포넌트 생성
+    useEffect(() => {
+        console.log("컴포넌트가 생성되었습니다.")
+    
+		// 컴포넌트 소멸
+    return () => {
+        console.log("컴포넌트가 소멸되었습니다.")
+    }
+  }, [])
+    
+    return <h1>안녕하세요.</h1>
+}
+```
+
+### ❏ 이외의 Hooks
+1. `useMemo`: `const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b])`, 지정한 `state` 나 `props` 가 변경될 경우 해당 값을 활용해 계산된 값을 메모이제이션하여 재렌더링 시 불필요한 연산을 줄인다. 메모리에 올려놓기 때문에 컴포넌트가 너무 무거우면 사용을 지양한다.
+
+```javascript
+const App = () => {
+	const [firstName, setFirstName] = useState("영우");
+	const [lastName, setLastName] = useState("안");
+
+  // 이름과 성이 바뀔 때마다 풀네임을 메모이제이션
+	const fullName = useMemo(() => {
+		return `${firstName} ${lastName}`
+	}, [firstName, lastName])
+}
+```
+
+2. `useCallback`: 함수를 메모이제이션하기 위해 사용한다. 불필요하게 함수가 다시 생성되는 것을 방지한다. `useMemo` 와 원리는 동일하다. `useMemo` 에서 함수를 리턴해주는 것과 `useCallback` 에 함수 자체를 넣어주는 것은 같은 의미를 갖는다.
+
+```javascript
+const App = () => {
+	const [firstName, setFirstName] = useState("영우");
+	const [lastName, setLastName] = useState("안");
+
+  // 이름과 성이 바뀔 때마다 풀네임을 메모이제이션
+	const getFullName = useCallback(() => {
+		return `${firstName} ${lastName}`
+	}, [firstName, lastName])
+
+	return <>{getFullName()}</>
+}
+```
+
+3. useRef: .current 프로퍼티를 가지며 값을 자유롭게 변경할 수 있다. React 에서 DOM element 에 접근할 때 사용한다. useRef에 의해 ref 객체가 변경되어도 컴포넌트가 재렌더링되지 않는다. let 을 이용하면 컴포넌트를 렌더링 할 때 선언문을 통과하면서 초기화 시킨다. 그럴때 useRef 를 사용하면 편하다. 변수를 함수밖에다 선언해도되지만 잠재적인 버그를 일으킬 수 있다.
+
+```javascript
+const App = () => {
+	const inputRef = useRef(null);
+	const onButtonClick = () => {
+		inputRef.current.focus()
+
+		// inputRef.current.value: element의 value값 가져오기
+		// inputRef.current.name: element의 name값 가져오기
+	}
+
+	return (
+		<div>
+			<input ref={inputRef} type="text" />
+			<button onClick={onButtonClick}> input으로 포커스</button>
+		</div>
+	)
+}
+```
+
+4. `customHook` : 자신만의 Hook 을 만들면 컴포넌트 로직을 함수로 뽑아내어 재사용할 수 있습니다. state 나 effect hook 을 사용할 때 별도로 분리하는 것, hook 의 이름은 use 로 시작한다. 한 Hook 내의 state 는 공유되지 않는다.
+
+```javascript
+// useToggle.js
+import React, { useState } from "react";
+
+// initialValue에 default 값 설정
+export const useToggle = (initialValue = false) => {
+    const [isOn, setIsOn] = useState(initialValue);
+    const toggle = () => setIsOn((isOn) => !isOn);
+    
+    return {
+        isOn,
+        toggle
+    }
+}
+
+// App.js
+import React from 'react';
+import { useToggle } from "./hooks/useToggle";
+
+function App() {
+  const { isOn, toggle } = useToggle(false);
+  
+  return (
+    <div className="App">
+        <button onClick={()=>toggle()}>{isOn ? "켜짐" : "꺼짐"}</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### ❏ 종합 실습 / 유용한 팁들
+1. `Form` 개발하기
+
+```javascript
+// InsertForm.js
+import React, { useState } from "react";
+
+export const InsertForm = ({ onInsert }) => {
+    const [inputValue, setInputValue] = useState("")
+    
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+				// onInsert가 있을 때만 실행
+        if(typeof onInsert === "function"){
+            onInsert(inputValue);
+        }
+        setInputValue("");
+    }
+    
+    return (
+        <form onSubmit={(event) => handleSubmit(event)}>
+            <input value={inputValue} onChange={(event) => setInputValue(event.target.value)}/>
+            <button type="submit">등록</button>
+        </form>
+    )
+}
+
+// App.js
+import React from 'react';
+import { InsertForm } from "./components/InsertForm";
+
+function App() {
+  const onInsert = (value) => {
+    console.log(value)
+  }
+
+  return (
+    <div className="App">
+        <InsertForm onInsert={onInsert}/>
+    </div>
+  );
+}
+
+export default App;
+```
+
+2. 리스트 표현하기: Form 으로부터 전달 받은 값들을 리스트에 저장하고, 리스트의 값을 순차적으로 화면에 출력해봅시다.
+
+```javascript
+// InsertForm.js
+import React, { useState, useCallback } from "react";
+
+const InsertForm = ({ onInsert }) => {
+    const [inputValue, setInputValue] = useState("");
+    const handleSubmit = useCallback((event) => {
+        event.preventDefault(); // 기본적인 HTML 동작으로 인해 페이지가 새로고침 되는 것을 방지
+        if(typeof onInsert === "function" && inputValue) { // onInsert가 정상적인 함수인 지 확인하여 에러 방지
+            onInsert(inputValue);
+        }
+        setInputValue("");
+    },[onInsert, inputValue])
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input value={inputValue} onChange={(event) => {
+                setInputValue(event.target.value);
+            }} />
+            <button type="submit">등록</button>
+        </form>
+    )
+
+}
+
+export default InsertForm;
+
+// ListView.js
+import React from "react";
+
+export const ListView = ({ todoList }) => (
+         <div>
+            <ol>
+                {
+                    todoList.map((item) => 
+                        <li key={item.key}>
+                            <span>{item.value}</span>
+                            <button type="button">완료</button>
+                            <button type="button">삭제</button>
+                        </li>
+                )}
+            </ol>
+        </div>
+ )
+
+// App.js
+import React, { useState } from 'react';
+import InsertForm from "./components/InsertForm";
+import { ListView } from "./components/ListView";
+
+function App() {
+  const [todoList, setTodoList] = useState([]);
+  
+  
+  const onInsert = (value) => {
+    const newTodo = {
+        key: new Date().getTime(),
+        value: value,
+        isCompleted: false,
+    }
+    setTodoList([...todoList, newTodo])
+    console.log(todoList)
+  }
+  
+  return (
+    <div className="App">
+        <InsertForm onInsert={onInsert} />
+        <ListView todoList={todoList}/>
+    </div>
+  );
+}
+
+export default App;
+```
+
+3. 리스트의 값을 변경 및 삭제하는 기능 구현하기
+
+```javascript
+// App.js
+import React, { useState } from 'react';
+import InsertForm from "./components/InsertForm";
+import ListView from "./components/ListView";
+
+function App() {
+  const [todoList, setTodoList] = useState([]);
+  
+const handleInsert = (value) => {
+    setTodoList((current) => {
+      const newList = [...current];
+      newList.push({
+        key: new Date().getTime(),
+        value,
+        isCompleted: false,
+      });
+      return newList;
+    })
+  }
+  
+const handleComplete = (index) => {
+    const newList = todoList.map((item, idx) => 
+        idx === index ? {...item, isCompleted: true} : item
+    )
+    console.log(newList)
+  }
+  
+  const handleRemove = (index) => {
+    const newList = todoList.filter((item, idx) => idx !== index);
+    setTodoList(newList);
+  }
+  
+  return (
+    <div className="App">
+        <ListView todoList={todoList} onComplete={handleComplete} onRemove={handleRemove} />
+        <InsertForm onInsert={handleInsert} />
+    </div>
+  );
+}
+
+export default App;
+
+// ListView.js
+import React from "react";
+
+const ListView = ({todoList, onComplete, onRemove}) => {
+  return (
+    <div>
+      <ol>
+        {todoList.map((item, index) => {
+          return (
+            <li key={item.key}>
+              <span>{item.value}</span>
+              <button type="button" onClick={() => {
+                if(typeof onComplete === "function") {
+                  onComplete(index);
+                }
+              }}>완료</button>
+              <button type="button" onClick={() => {
+                if(typeof onRemove === "function") {
+                  onRemove(index);
+                }
+              }}>삭제</button>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  )
+
+}
+
+export default ListView;
+```
+
+1. 메모리 누수: `정리가 필요하지 않은 side effects`, 클래스형 컴포넌트의 생명주기 메소드를 작성하다 보면 동일한 코드가 들어가는 경우가 많습니다. Effect Hook을 이용하면 생명주기 메소드 내 중복되는 코드를 함수형 컴포넌트에서 간단하게 관리할 수 있습니다.
+
+React가 DOM을 업데이트한 뒤 추가로 코드를 실행해야 하는 경우 side effects 정리가 필요 없습니다. 즉, 컴포넌트 실행 이후 신경 쓸 것이 없는 경우 별다른 정리를 하지 않아도 됩니다. 아래 예시는 버튼 클릭 시 1씩 카운트를 추가하는 컴포넌트입니다. 해당 컴포넌트는 렌더링 이후 계속 사용되기 때문에 따로 정리가 필요하지 않습니다.
+
+```javascript
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+
+  componentDidMount() {
+    document.title = `You clicked ${this.state.count} times`;
+  }
+  componentDidUpdate() {
+    document.title = `You clicked ${this.state.count} times`;
+  }
+
+  render() {
+    return (
+      <div>
+        <p>You clicked {this.state.count} times</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Click me
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+2. `정리를 이용하는 side effects`: 한편 정리(clean-up)가 필요한 side effects도 있습니다. React가 DOM을 업데이트한 뒤 추가로 코드를 실행할 필요가 없으면 정리를 해줘야 합니다. 그렇지 않으면 경우에 따라 메모리 누수가 발생해 시스템에 치명적인 영향을 미칠 수 있기 때문입니다. 아래는 채팅 앱에서 친구의 상태를 보여주는 컴포넌트입니다.
+
+```javascript
+class FriendStatus extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isOnline: null };
+    this.handleStatusChange = this.handleStatusChange.bind(this);
+  }
+
+  componentDidMount() {
+    ChatAPI.subscribeToFriendStatus(
+      this.props.friend.id,
+      this.handleStatusChange
+    );
+  }
+  componentWillUnmount() {
+    ChatAPI.unsubscribeFromFriendStatus(
+      this.props.friend.id,
+      this.handleStatusChange
+    );
+  }
+  handleStatusChange(status) {
+    this.setState({
+      isOnline: status.isOnline
+    });
+  }
+
+  render() {
+    if (this.state.isOnline === null) {
+      return 'Loading...';
+    }
+    return this.state.isOnline ? 'Online' : 'Offline';
+  }
+}
+```
+
+3. 정리가 필요 없는 컴포넌트: DOM을 업데이트 한 뒤 추가로 코드를 실행해야 하는 경우는 clean up을 하지 않아도 된다.
+
+```javascript
+// 클래스 컴포넌트
+import ReactDOM from 'react-dom';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
+
+
+import React from 'react';
+
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+  
+  // componentDidMount() 메소드를 완성하세요.
+  componentDidMount(){
+   alert(`${this.state.count}번 클릭했습니다.`)
+  }
+  
+  // componentDidUpdate() 메소드를 완성하세요.
+  componentDidUpdate(){
+    alert(`${this.state.count}번 클릭했습니다.`)
+  }
+  
+  render() {
+    return (
+      <div>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          버튼 클릭
+        </button>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<Counter />,document.getElementById('root'));
+
+serviceWorker.unregister();
+
+// 함수형 컴포넌트
+import ReactDOM from 'react-dom';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
+
+// useEffect를 import 하세요.
+import React, { useState, useEffect } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  // useEffect()와 화살표 함수를 이용해 버튼이 클릭된 횟수를 경고창으로 띄우세요.
+  // componentDidMount(), componentDidUpdate()와 동일한 기능을 한다.
+  useEffect(() => {
+    alert(`${count}번 클릭했습니다.`)
+  }, [count])
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>
+          버튼 클릭
+        </button>
+      </div>
+  );
+}
+
+ReactDOM.render(<Counter />,document.getElementById('root'));
+
+serviceWorker.unregister();
+```
+
+4. 정리가 필요한 컴포넌트
+
+```javascript
+// class형
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
+
+class Container extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {show: true};
+  }
+  delHeader = () => {
+    this.setState({show: false});
+  }
+  render() {
+    let myheader;
+    if (this.state.show) {
+      myheader = <Child />;
+    };
+    return (
+      <div>
+        {myheader}
+        <button type="버튼" onClick={this.delHeader}> Delete Header </button>
+      </div>
+    );
+  }
+}
+
+class Child extends React.Component {
+  // componentWillUnmount() 메소드를 생성하고 경고창을 띄우세요.
+  componentWillUnmount(){
+    alert("텍스트가 제거 되었습니다!")
+  }
+  
+  render() {
+    return (
+      <p>버튼을 클릭해 해당 텍스트를 제거하세요.</p>
+    );
+  }
+}
+
+ReactDOM.render(<Container />,document.getElementById('root'));
+
+serviceWorker.unregister();
+
+// 함수형 컴포넌트: useEffect 안에 작성함으로써 생명주기 메소드를 한 곳에서 관리할 수 있다.
+import ReactDOM from 'react-dom';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
+import React, { useState, useEffect } from 'react';
+
+function Container() {
+  const [show, setShow] = useState(true);
+  
+  let myheader;
+  if (show) {
+    myheader = <Child />;
+  }
+  
+  return (
+    <div>
+    {myheader}
+    <button onClick={() => setShow(false)}>버튼</button>
+    </div>
+  );
+}
+
+function Child() {
+  // useEffect() 내 경고 문구를 출력하는 cleanup() 메소드를 반환하세요.
+  useEffect(() => {
+    return () => {
+        alert("텍스트가 제거 되었습니다!")
+    }
+  })
+  
+  return (
+    <p>버튼을 클릭해 해당 텍스트를 제거하세요.</p>
+  );
+  
+}
+
+ReactDOM.render(<Container />,document.getElementById('root'));
+
+serviceWorker.unregister();
+```
+
+5. Effect Hook 요약: 10초뒤에 clean up 함수 작동
+
+```javascript
+import ReactDOM from 'react-dom';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
+
+
+import React, { useState, useEffect } from 'react';
+
+const Example = () => {
+  const [username, setUsername] = useState("");
+
+  // 언제 호출되는지 확인하기 위해 useEffect에서 콘솔 출력을 해보세요.
+  useEffect(() => {
+    console.log("componentMount, compnentDidUpdate", username);
+    },
+    [username]
+  );
+
+  useEffect(() => {
+    return () => {
+        console.log("unMount", username);
+    };
+  }, []);
+
+  const handleUsername = e => {
+    const { value } = e.target;
+
+    setUsername(value);
+  };
+
+  return (
+    <div>
+      <div>
+        <input value={username} onChange={handleUsername} />
+      </div>
+      <div>
+        <span>{username}</span>
+      </div>
+    </div>
+  );
+};
+
+function App() {
+  const [shouldRender, setShouldRender] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShouldRender(false);
+    }, 10000);
+  }, []);
+
+  return shouldRender ? <Example /> : null;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+serviceWorker.unregister();
+```
+
+5. `useReducer`: 컴포넌트의 상태 업데이트 로직을 컴포넌트에서 분리할 수 있습니다.
+6. `useMemo` : 메모이제이션이란 함수의 인자로 넘겨진 함수로 기존 함수의 실행이 끝나고 난 뒤 실행되는 함수 또는 특정 시점이나 이벤트가 발생했을 때 시스템이 자동으로 실행시키는 함수를 말합니다.
+7. `useCallback`: 함수를 `props` 로 넘겨줄 때 사용 (실습 코드 생략)
