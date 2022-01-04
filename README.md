@@ -10301,3 +10301,36 @@ serviceWorker.unregister();
 5. `useReducer`: 컴포넌트의 상태 업데이트 로직을 컴포넌트에서 분리할 수 있습니다.
 6. `useMemo` : 메모이제이션이란 함수의 인자로 넘겨진 함수로 기존 함수의 실행이 끝나고 난 뒤 실행되는 함수 또는 특정 시점이나 이벤트가 발생했을 때 시스템이 자동으로 실행시키는 함수를 말합니다.
 7. `useCallback`: 함수를 `props` 로 넘겨줄 때 사용 (실습 코드 생략)
+
+---
+## 📍 51일차 1.4.화. 실시간 강의
+오늘은 `React`의 `form`태그, `props`, `컴포넌트 계층으로 분리`, `역방향 state`처리에 대해서 배웠다. `50일`차 내용에 크게 벗어나지 않아서 난이도가 있지는 않았다. 
+
+### ❏ 이론
+1. 부모에서 자식으로 오는 변경된 값은 `props` 를 사용하고, 자식에서 부모로 가는 값의 변경은 부모에서 내려오는 함수로 값을 전달한다.
+2. `form` 에서 `onSubmit` 으로 제출 된 값 가져올때는 `event.target.name.value` 사용하기
+
+```javascript
+<form onSubmit={submitHandler}>
+  <input type="text" name="title" placeholder="title" />
+  <textarea name="body" placeholder="body" />
+  <input type="submit" value="제출" />
+</form>;
+
+function submitHandler(event) {
+    event.preventDefault();
+		const { title, body } = event.target;
+    console.log(title.value, body.value);
+}
+```
+
+3. `update` 시 `props` 로 받아온 내용은 수정이 정상적으로 되지 않기때문에 `props` 로 받아온 내용을 `state` 로 선언하고 `setState`로 바뀌는 값을 적용한다.
+4. 서버를 변경하는 명령으로 `a href` 태그를 사용하지 않고 `form` 태그를 사용한다.
+
+### ❏ 실습
+1. `UI`를 컴포넌트 계층으로 분리하기: 한 가지의 기능만 수행하는 컴포넌트로 만들기.
+
+![](https://images.velog.io/images/abcd8637/post/8725fccd-2753-4d26-b281-4b356ff69f65/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-04%2015.32.09.png)
+
+2. 역방향으로 `state`를 처리하려면 `state`를 한 단계 위로 올리는 방법이나 상위 컴포넌트에서 `state`를 적용하는 함수를 만들기
+3. 스타트업에 지원할 때는 지원회사가 시리즈 투자를 받은 이력이 있는지 확인해보고 `job description`이 내가 지원하는 분야와 맞는지 확인하기
