@@ -10334,3 +10334,289 @@ function submitHandler(event) {
 
 2. 역방향으로 `state`를 처리하려면 `state`를 한 단계 위로 올리는 방법이나 상위 컴포넌트에서 `state`를 적용하는 함수를 만들기
 3. 스타트업에 지원할 때는 지원회사가 시리즈 투자를 받은 이력이 있는지 확인해보고 `job description`이 내가 지원하는 분야와 맞는지 확인하기
+
+---
+## 📍 52일차 1.5.수. 온라인 강의
+오늘은 `react`에서 스타일링과 관련한 내용을 배웠다. `CSS-import`, `CSS-module`, `CSS-in-JS`인데, 나는 `CSS-in-JS` 방식 중 하나인 `styled-componentns`를 줄곧 사용해왔었고, `CSS-module`은 처음 듣는 용어였는데, 각 방식의 장/단점과 차이점들을 배우고나니까 이해가 잘됐다.
+
+### ❏ React styling
+1. 스타일링을 통해 사용성을 높이면 유저경험이 높아진다.
+2. 좋은 앱을 만들기 위해서는...
+
+```
+1. 번들 사이즈: CSS코드가 차지하는 사이즈는 무척 중요한 요소, 번들 사이즈가 클수록 서버로부터 파일을 받아 파싱하고 유저에게 보이는 시간이 길어질 것이다.
+2. 앱 성능: animation, transition 등 유저와의 상호작용에서 스타일 코드의 성능이 중요한 요소다.
+3. UI/UX: 스타일링에 대한 지식으로, 고급 테크닉을 적용하여 더 나은 UI/UX를 반영
+4. JS 를 이용한 다양한 스타일 기법: UI 토글링, 애니메이션, 다크모드, 복잡한 UI 컴포넌트 등은 JS에 대한 지식만으로 구현하기 힘듦
+5. 유지보수가 용이하고 확장 가능한 코드: 스타일에 관련된 코드를 작성하고 어떻게 관리하는가에 대한 지식이 필요하다.
+```
+
+3. 자바스크립트로 스타일을 바꾸는 코드를 여러 줄 작성할 때, 브라우저는 각 줄을 수행하며 해당 DOM Element뿐만 아니라 주변의 모든 Element에 대한 스타일 재계산을 수행하게 됩니다. 반면에 CSS class를 바꾸면 한 번에 스타일을 변경하게 됩니다.
+4. CSS에는 관련 스타일을 하나로 축약하는 코드가 많습니다. 또한 cascading을 이용해 inherit할 수 있는 속성, default 속성 등도 있습니다. 이처럼 CSS 지식을 이용해 간결하고 효율적인 코드를 작성할 수 있습니다.
+5. `CSS-import`: `CSS(SCSS, Sass)` 파일을 `import` 해서 사용. 필요한 모든 `CSS` 스타일을 하나의 파일에 작성하여, 자바스크립트 파일과 코드 분리 가능, 단순하게 `import` 문만 작성하면 되니까 간단하다.
+
+```javascript
+1. 단순히 CSS 파일만을 import하여 사용할 수 있어 편리.
+2. 컴포넌트가 많지 않을 경우, 하나의 CSS 파일에 코드를 관리하는 것도 가능함
+3. CSS 파일은 분리할 수 있으나, namespace를 나눌 수 없음. 만일 스타일이 겹칠 경우, cascading rule에 따라, 마지막에 나온 룰이 덮어씌워짐
+4. button 스타일을 따로 따로 적용하고 싶은데 마지막에 import한 css의 button으로 통일된다.
+5. className을 구체적으로 명시함으로써 해결 가능하지만, 불필요하게 클래스명이 길어지고 비슷한 버튼 컴포넌트가 여러개 생길수록 코드 관리가 어려워진다. 
+
+import 'button.css'
+
+function Button({ children }){
+	return <button className="button"> { children } </button>
+}
+```
+
+![](https://images.velog.io/images/abcd8637/post/6c485b65-93dc-44b9-90c4-2c815eeaa213/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-05%2009.42.26.png)
+
+6. `CSS-module`: 하나의 `CSS module` 파일 안에 작성한 스타일은 하나의 파일 `nameSpace` 로 관리한다. `className` 뒤에 겹치지 않는 `hash`를 붙인다. 스타일이 겹치는 문제 해결, 두 단어 이상의 경우 `camelCase` 로 이름을 지음
+
+```javascript
+// InputWithButton.jsx
+import styles from "./input-with-button.module.css";
+
+export function InputWithButton(){
+	return(
+		<div className={styles.container}>
+			<input className={styles.input}/>
+			<button className={styles.button}/>
+		</div>
+	)
+}
+```
+
+![](https://images.velog.io/images/abcd8637/post/cf575f51-5693-4446-b184-f47dfd099e08/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-05%2023.24.06.png)
+
+7. `CSS-in-JS`: 별도의 CSS 파일을 만들지 않고 하나의 컴포넌트 파일 안에서 스타일을 작성, JS 문법을 그대로 활용하여 코드를 작성, React 컴포넌트를 사용하는 것처럼 사용, Sass 문법 활용 가능
+
+```javascript
+// InputWithButton.js
+
+import styled from "styled-components";
+
+const Container = styled.div`
+	background: black;
+	margin: 10px;
+	padding: 3px;
+`
+
+const Input = styled.input`
+	border: none;
+	height: 20px;
+`
+
+function InputWithButton(){
+	return(
+		<Container />
+		<Input />
+		<Button />
+	)
+}
+```
+
+### ❏ CSS, Sass
+1. `CSS Box Model`: `CSS layout` 의 기본이 되는 모델
+
+```
+1. content-box, padding-box, border-box, margin-box 순으로 하나의 element 를 감싸고 있음
+2. `box`의 타입은 `inline`, `block` 두 가지
+3. `display`: `inline`, `inline-block`, `block` 으로 서로 다른 `box type`을 적용함
+4. `element`의 기본 flow는 normalFlow
+div - block
+	span - inline
+div - block
+p - block
+
+5. box-sizing
+  - 보통 박스의 크기를 정할 때 `width`, `height` 속성을 정하는데 이때는 `default`로 content-box를 정하게 된다.
+  - 기본적으로 `width`, `height` 는 기본적으로 content-box로 정하게 된다.
+  - width와 padding의 값까지 모두 합하면 width보다 커지거나 작아진다. 이때 이해하기 쉬운 레이아웃을 정의하기 위해 `box-sizing: border-box`를 사용한다.
+  - `border-box`의 경우 `padding`, `border`의 크기까지 하나의 영역으로 잡는 `box-sizing`이 된다. (width나 height에 영향을 주지 않는다.), `border-box`까지 `width`를 설정한다.              
+```
+
+![](https://images.velog.io/images/abcd8637/post/77cdc8a4-2417-4e76-a1bb-56c822ee3b4b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-05%2023.26.26.png)
+
+2. `css-position`
+
+```
+1. static: position의 default값으로, element는 normal flow를 따라 위치함
+2. relative: normal flow를 따라 위치하되, 자기 자신에 상대적으로 위치함 (기본위치에서 얼마나 움직여서 지정할지?)
+3. absolute: normal flow에서 벗어나 가장 가까운 ancestor에 상대적으로 위치함
+4. fixed: normal flow에서 벗어나 viewport에 상대적으로 위치함 (바닥에 딱 붙이려면 left:0, bottom: 0)
+5. sticky: normal flow에 따라 위치하되, 가장 가까운 scrolling ancestor에 상대적으로 위치함
+
+* anscestor: 어떤 엘리먼트를 감싸는 개념(부모), containing block(static 속성을 제외한 다른 position을 가진 속성)
+
+div - relative
+	div - static
+		p - absolute(div - relative에 상대적으로 위치한다. 만약, relative가 없다면 가장 최상위의 ancestor containing block으로 위치하게 된다.)
+
+- modal을 만들 때 감싸는 element를 relative로 설정하고 relative의 상대적인 위치를 따라 모달을 설정한다.(top: 100px, left: 100px), 보통은 fixed를 사용함. 
+```
+
+3. `css-units`
+
+```
+1. px, pt, cm, in: 절대적인 길이를 표현(pt, cm, in은 printable에 많이 사용한다.)
+2. rem, em, %: 특정 값에 상대적인 길이를 표현
+3. vw, vh, vmin, vmax: viewport에 상대적인 길이를 표현
+
+div - 5em
+	div - 3em
+		span - 2em(부모의 크기에 따라 변경된다.)
+		span - 2rem(5em(root)의 크기에 따라 변경)
+
+모바일 가로: 100vw, 세로: 100vh 일 때
+- 내가 바라보는 창의 전체사이즈를 차지하게 된다.
+```
+
+4. `Sass`
+
+```javascript
+1. Syntactic Awesome Style Sheets. CSS Preprocessor
+2. SCSS, Sass 문법을 지원함
+3. 모듈, 믹스인, nested style, 변수, 조건문, 반복문 등의 기능으로 `CSS`를 프로그래밍 언어적으로 활용하도록 확장
+4. `styled-components`는 Sass를 기본적으로 지원함
+
+// & 문법
+.reset-button{
+	&.active {}  // .reset-button.active
+	&.disabled {}
+	&:hover {}
+  &:not(:first-of-type){}
+	&+&{}  // .reset-button + .reset-button
+	&~&{}
+	& > button {}
+}
+
+// variable
+// 색상, 사이즈 등 자주 등장하는 값을 주로 변수로 사용함
+$color-red: red;
+$color-white: #fff;
+
+.reset-button{
+	color: $color-red;
+	&:hover {
+		color: $color-white
+	}
+}
+
+// nested style
+// 별도의 class를 정의할 필요 없이, 하나의 block안에 여러 css를 적용할 수 있는 방법
+// CSS sepcificity가 그대로 적용되므로, 너무 깊은 nested는 유지보수가 힘들다. 보통 1depth
+.reset-button{
+	color: $color-red;
+	&:hover {
+		color: $color-white;
+	} 
+	> button {}
+}
+
+/* 일반적인 css 적용시
+resset-button{ 
+	color: red
+}
+
+reset-button: hover{
+	color: black
+}
+*/
+
+// mixins, import, include
+// font-styles.scss
+@mixins font-style-1 {
+	font-size: 36pt;
+	font-weight: 700;
+	line-height: 1.5;
+	letter-spacing: -0.05;
+}
+
+@mixins flex-center{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+// usage.scss
+@import './font-styles.scss';
+@import './flex-center.scss';
+
+.button{
+	@include font-style-1;
+	background: red;
+}
+
+.layout{
+	@include flex-center
+}
+```
+
+### ❏ `CSS flexbox model`
+1. `CSS flexbox model`
+
+```js
+1. HTML element를 하나의 상자로 간주하고, 그 안에서 내부의 item을 어떻게 배열할 것인지 스타일 하는 모델
+2. 1차원의 레이아웃을 디자인하는데 사용
+3. responsive design에 유리
+4. 가운데 정렬, 비율로 정렬 등을 처리할 때 유리
+```
+
+2. `flex-box` 기본 개념
+
+![](https://images.velog.io/images/abcd8637/post/b75d653a-33ab-4551-8f9a-b195922fb2b6/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-05%2023.28.48.png)
+
+```
+1. flex container: flexbox 아이템을 담는 컨테이너
+2. flex item: 컨테이너 안에 담긴 아이템
+3. flex axis: flex 아이템의 방향을 결정하는 축
+```
+
+3. `flex-container`
+
+```js
+1. flex-direction: row, column
+2. justify-content: main axis 정렬
+3. align-items: cross axis 정렬
+4. flex-wrap: flex container가 내부 item의 width를 합친것보다 작아질 때 어떻게 정렬할것인지를 결정
+```
+
+4. `flex-item`
+
+```js
+1. flex-grow: flex container가 커질 때 item이 얼마나 늘어날 것인가(flex-grow: 0, container가 늘어나도 item의 모양은 그대로)
+2. flex-shrink: flex container가 줄어들 때 item이 얼마나 줄어들 것인가 (flex-shrink: 0, container가 줄어들어도 item의 모양은 그대로)
+3. flex-basis: 기준점이 되는 item의 크기(width, height 속성을 대신해서 사용, flex-basis:120px, item의 기본 길이가 120px이 된다.)
+4. justify-self: 한 아이템을 main-axis에 따라 정렬할 것인지를 결정(container보다 우선순위가 높다.)
+5. align-self: 한 아이템을 cross-axis에 따라 정렬할 것인지를 결정(container보다 우선순위가 높다.)
+6. order: flex container내에서 item의 순서를 결정
+```
+
+5. `flex` : `flex-grow`, `flex-shrink`, `flex-basis` 를 축약한 속성이다. (default: `0 1 auto`)
+
+```js
+flex: 1 => 1 1 auto;(container의 영역이 여유가 있다면 그만큼 늘어나고, container의 영역이 줄어들면 같이 줄어든다. 기본 길이는 auto)
+```
+
+![](https://images.velog.io/images/abcd8637/post/f0ae209e-a2e0-4664-8c2e-8ad9b2cfe0dd/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-05%2023.30.13.png)
+
+![](https://images.velog.io/images/abcd8637/post/45f57441-ae36-4cc3-ad9e-dcf822cf0cab/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-05%2023.30.31.png)
+
+6. 첫번째 태그를 제외한 나머지 태그에 style 적용하기
+
+```js
+.problem span:not(:first-of-type){
+	margin-left: 12px;
+}
+```
+
+### ❏ styled-components
+1. 자바스크립트 파일 안에 스타일을 정의하고 `React` 컴포넌트처럼 활용
+2. `JS` 코드와 긴밀히 연계하여 다양한 코드작성 가능(변수, 반복문, 조건문, 함수, 모듈 등 활용가능)
+3. 별도의 `CSS` 파일을 만들지 않고 하나의 파일 안에 스타일을 관리하고 싶을 때 유리
+4. 스타일코드와 컴포넌트 코드간의 결합을 나누고 싶을 때 유리
+5. `tagged template literal` 문법 활용
+6. `CSS` 코드에 `post-css`, `minification`, `Sass` 적용
+7. `CSS` 코드를 겹치지 않게 처리
+8. 클래스 이름 자체가 `hash`
