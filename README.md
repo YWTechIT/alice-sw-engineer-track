@@ -10620,3 +10620,75 @@ flex: 1 => 1 1 auto;(container의 영역이 여유가 있다면 그만큼 늘어
 6. `CSS` 코드에 `post-css`, `minification`, `Sass` 적용
 7. `CSS` 코드를 겹치지 않게 처리
 8. 클래스 이름 자체가 `hash`
+
+```javascript
+const Button = styled.button`
+	background: ${({ clicked }) => ( clicked ? "orangered" : "red" )};
+	color: ${({ clicked }) => ( clicked ? "blue" : "orange" )};
+	padding: 12px 40px;
+	border: none;
+`
+
+const List = styled.ul`
+	display: flex;
+	flex-direction: column;
+`
+
+const ListItem = styled.li`
+	padding: 20px 100px;
+	background: orange;
+	color: white;
+
+	& + & {
+		margin-top: 8px;
+	}
+`
+```
+
+---
+## 📍 53일차 1.6.목. 실시간 강의
+오늘은 `CORS`, `React-router-dom`에 대해서 배웠다. 실습강의 중 `React-router-dom`를 사용하지 않고 `useState`를 이용해 라우팅하는것처럼 구현하는 시간이 있었는데, 이해가 잘 안됐다. 그런데, `React-router-dom` 라이브러리를 사용하면서 코드를 줄여나가니까 이것들이 왜 사용되었는지 그리고 해당 라이브러리가 중요성에 대해 알게되었다. 결론: `React-router-dom` 최고.
+
+1. `JS immutability`: 해당 라이브러리 사용시 객체 자료형은 값이 바뀌지 않는다.(얕은복사 후 객체 `value`을 변경하게 되면 원본 객체까지 변경되나, 해당 라이브러리를 사용하면 원본 객체의 값은 그대로 유지할 수 있다.), <a href='https://opentutorials.org/module/4075'>생활코딩님 강의영상 참고</a>
+2. 구글 `element`에서 `className`에 `notranslate` 속성을 추가하면 한글 번역시 해당 `element`는 번역되지 않는다.
+3. `bookmarklet`: 북마크에 `javascript:`로 시작하는 간단한 스크립트를 입력한다.
+4. `React-Router-Dom`: `react`에서 `router` 기능을 사용하기 위한 라이브러리 최신버전은 `v6`이고, 자주 사용한 라이브러리는 `v5`이다. 변경된 명령어가 많으니 <a href='https://reactrouter.com/docs/en/v6'>공식문서</a>를 한번 읽어볼 것! 대표적으로 `useHistory`가 `useNavigate`로 바뀌었다.
+5. `browserRouter`: `HTML5`의 `historyAPI`를 활용하여 `UI`를 업데이트 함
+6. 네이버 검색 `API` 사용시 `CORS` 관련에러가 나오는데, 네이버에서는 `API` 요청을 브라우저에서 하지 말고 서버프로그래밍(python, jsp, php, node.js 등...)을 통해서 호출하도록 되어있다. 다른 클라이언트의 `id` 혹은 `secret`으로 `api` 호출하는것을 막기 위해서다. (<a href='https://developers.naver.com/forum/posts/26989'>네이버 개발자 포럼</a>) 로컬환경에 프록시를 설정하거나, 프록시 서버를 이용하는 방법이 있는데 이번에는 <a href='https://cors-anywhere.herokuapp.com/corsdemo'>`cors-anywhere`</a>사이트를 이용했다. `heroku`를 이용했는데, 내 계정으로 하나 만들고 싶다.
+
+```javascript
+useEffect(() => {
+    axios
+        .get(URL, {
+            params: {
+                query: "치킨",
+            },
+            headers: {
+                "X-Naver-Client-Id": API_ID,
+                "X-Naver-Client-Secret": API_PW,
+            },
+        })
+        .then((res) => {
+            setResult(res.status);
+        });
+});
+
+// has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+
+7. `CORS(Cross-origin Resource Sharing)`: 교차 출처 리소스 공유, 다른 도메인의 자원에 접근할 수 있도록 권한을 부여하도록 브라우저에 알려주는 것, 서버의 도메인이 자신의 도메인과 다를 때 실행한다.
+
+```
+1. 브라우저는 SOP 정책을 준수한다. 같은 출처에서만 리소스에 접근할 수 있다.
+  * a.com <-> a.com but, 다른 사이트와 접근할 수 있는데 이때는 CORS를 준수하면서 사용해야한다.
+  * CORS 정책은 서버가 아니라 브라우저가 결정한다.
+  * Access-Control-Allow-Origin: 허용된 페이지
+  * 네이버는 API를 브라우저끼리 통신하는것을 권장하지 않고 서버(제 3서버: proxy server)에서 뿌려주는것을 선호한다.
+
+2. script는 보안정책이 적용되지 않는 점을 이용한 JSONP를 사용한다.
+3. 프록시를 이용해 서버 접근을 우회할 수 있다
+4. 특정 도메인의 CORS를 허용한다. 자신이 만든 서버가 아니면 적용하기 어렵다.
+```
+
+* 교차출처 리소스 공유(CORS) - <a href='https://developer.mozilla.org/ko/docs/Web/HTTP/CORS'>MDN</a>
+* 동일 출처 정책(SOP) - <a href='https://developer.mozilla.org/ko/docs/Web/Security/Same-origin_policy'>MDN</a>
