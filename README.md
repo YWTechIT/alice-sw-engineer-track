@@ -10692,3 +10692,145 @@ useEffect(() => {
 
 * 교차출처 리소스 공유(CORS) - <a href='https://developer.mozilla.org/ko/docs/Web/HTTP/CORS'>MDN</a>
 * 동일 출처 정책(SOP) - <a href='https://developer.mozilla.org/ko/docs/Web/Security/Same-origin_policy'>MDN</a>
+
+---
+## 📍 54일차 1.7.금. 온라인 강의
+오늘은 `SPA`, `MPA`, `React-router-dom` 속성에 대해서 배웠다. 이후에 `useReducer`를 사용해 문제를 푸는데 `useReducer`를 사용해본적이 많지 않아 난이도가 조금 어렵게 느껴졌다.
+
+### ❏ SPA(Single Page Application)
+1. 하나의 페이지 요청으로 전체 웹앱을 사용하는 방식
+2. 유저는 웹페이지를 사용하며 모바일 앱 같은 경험을 느낌(새로고침없이 화면전환이 된다.)
+3. `html` 코드를 읽다가 `script` 태그를 만나면 다시 서버에 요청하고 서버에서 다시 브라우저로 넘겨준다. 브라우저에서 `JS` 코드를 파싱한 다음 `app.js` 가 렌더링된다.
+4. `CSR` 기술을 활용하여, 페이지 진입 시 리로드없이 라우팅한다.
+5. `AJAX` 기술을 활용, 페이지 이동 시 서버에 데이터만 요청하여 `JS` 로 페이지를 만듦 (`fetch` 등..)
+6. `MPA` 와 다르게 여러 페이지를 하나의 앱의 구성요소로 보고 여러 페이지 간의 스타일, 컴포넌트를 재활용하는 방향으로 구현한다.
+7. `JS` 만으로 전체 페이지를 만들기 때문에, 첫 요청 시 빈 페이지를 받게 된다.
+
+```
+장점
+ - 서버에서 페이지를 만들 필요가 없으므로 CDN에 캐싱이 가능하다. 
+  * CDN:콘텐츠 전송 네트워크(contents network delivery), 서버가 각 최종 사용자들에게 가장 가까운 서버를 기반으로 데이터 요청을 수행한다.
+  * 더 빠른 서비스 제공 가능(HTML, CSS, JS 등...)
+ - 매번 페이지 요청을 할 필요가 없어 네트워크 요청이 줄어듦(서버 입장), 마찬가지로, 데이터 요청 등을 캐싱하여 재사용하는 등 제약 조건이 줄어듦
+ - 웹 사이트를 개별 페이지보다는 하나의 앱으로 보는 설계로 고도의 S/W 설계와 패턴을 적용할 수 있음
+
+단점
+ - MPA 방식보다는 SEO에 불리함
+ - 하나의 JS 앱이 지속하므로, 메모리 관리, 성능, 데이터 활용 등이 중요하다.
+ - 모든 페이지를 한번에 로드해야 하므로 코드가 많아질수록 로드 속도가 느려진다.
+```
+
+### ❏ MPA(Multi Page Application)
+1. 서버에 미리 여러 페이지를 두고 유저가 네비게이션 요청 시 요청에 적합한 페이지를 전달한다.
+2. 미리 서버에서 전체 페이지를 빌드해 브라우저로 전송된다.
+3. 서버에 라우팅을 처리하는 기능이 있고, 서버에서 여러 페이지를 관리한다.
+4. 페이지 요청마다 모든 리소스를 다시 받아오므로, 페이지 간 데이터를 재활용하기 힘듦
+5. `res.send(page)` 를 받으면 `build` 된 페이지를 브라우저로 전달해준다.
+6. MPA는 서버에서 build하기 때문에 CDN처리를 할 수 없다.
+
+### ❏ SPA에서 라우팅이 중요한이유
+1. 주로 `History API` 혹은 `URL Hash` (www.naver.com#a, #b, #c ,,,)를 이용해 페이지 리로드 없는 페이지 전환을 구현한다.
+2. `history`, `location` 등 `HTML5 API` 를 활용한다.
+3. `visibilitychange`, `popstate`, `beforeunload` 등 `window event` 를 활용하여 페이지 전환 등의 이벤트 시 핸들러 등록
+4. `react-router`, `reach-router` 등의 라이브러리를 활용하면, 라우팅 관련 기능을 쉽게 사용할 수 있음.
+
+### ❏ react-router
+1. `declarative`: 서술문의(`<Link to=”/login”>` - JSX), `imperative`: 반드시 해야하는(`handleClick = () ⇒ push(’/login’)` - history API)
+2. `Declarative routing for React`
+3. React의 `JSX` 를 이용하거나, `History API` 를 사용하여 라우팅을 구현한다.
+4. 웹에서는 `react-router-dom` 을 사용한다.(`react-router-native` 도 있음)
+5. 적용시, 서버의 모든 `path` 에서 같은 앱을 서빙하도록 해야 한다.
+6. `React` 컴포넌트를 특정 `path` 와 연결하면, 해당하는 `path` 로 진입 시 컴포넌트를 렌더링하게 한다.
+7. `query`, `path variable` 등 `URL parameter` 를 얻어 활용한다.
+8. 조건에 맞지 않을 경우 `redirect` 함 `<Redirect to ="/register" />`
+9.  페이지 이동 시, 이벤트 핸들러를 등록함 `history.listen(cb)`
+10. `/posts/my-post-1` 등의 `nested route` 를 구현한다.
+11. `BrowserRouter` 로 감싸 `Router Context` 를 제공해야 한다.
+12. `Route` 로 `path` 를 정의하고, 그 안에 렌더링하고자 하는 컴포넌트를 ㅓㄴㅎ음
+13. `Link` 로 특정 페이지 이동 시, 리로드 없이 페이지가 이동함
+14. `Switch` 로 매칭되는 라우트 하나를 렌더링하게 한다. (`exact` 혹은 `switch` 를 쓰지 않으면 모두 렌더링시킨다.)
+
+```javascript
+// 라우터는 동기적으로 확인한다.
+<BrowserRouter>
+	<Switch>
+		<Route path="/about"><AboutPage></Route>
+		<Route path="/contact"><ContactPage></Route>
+		<Route path="/"><HomePage></Route>
+	</Switch>
+</BrowserRouter>
+```
+
+15. `NavLink` 의 특징은 매칭되는 `path` 가 자기 자신인 경우 강조처리해준다.
+
+### ❏ BrowserRouter
+1. 브라우저환경에서 라우팅 기능을 사용할 수 있는 컴포넌트
+2. `HTML5` 의 `HistoryAPI` 를 사용하여, `UI` 와 `URL` 의 싱크를 맞추는 역할을 담당한다.
+3. 모든 `URL` 에 대해 동작하게 하기 위해서는 서버 설정 필요
+4. 모든 `path` 앞의 `basename` 을 지정할 수 있다. (`basename=”/ko”`)
+5. `forceRefresh` 로 페이지 이동 시 리프레시할 것인지 지정할 수 있다.
+
+### ❏ Switch
+1. 여러 `Route` 중 매치되는 `Route` 위에서부터 하나를 선택하여 렌더링한다.
+2. 매칭되는 `Route` 가 없으면 아무것도 보여주지 않음. `callback` 용으로 `404 Not Found Page` 를 추가함
+3. `path="/"` 의 경우 모든 `path` 에 매칭되므로 `exact` 키워드를 추가하거나 가장 아래로 내린다.
+
+### ❏ Route
+1. `path` 와 컴포넌트를 매칭함
+2. 매칭되는 컴포넌트는 `children` 으로 넣어주거나 `component prop` 으로 넘김
+3. `exact` 키워드로 정확하게 매칭하는 `path` 를 설정함
+4. `Route` 로 렌더링 되는 최상위 컴포넌트는 `match`, `location`, `history` 를 `prop` 으로 받음
+5. `render prop` 으로 매칭되었을 때, 실제 어떤 컴포넌트를 렌더링할지 통제함
+
+### ❏ Redirect
+1. `Link` 와 비슷하나, 렌더링되면 `to prop` 으로 지정한 `path` 로 이동함
+2. `Switch` 안에서 쓰일 경우 `from ,to` 를 받아 이동하게 만듬(from =”/” to=”/login”)
+
+```javascript
+// 선언방식(선호)
+if (!users) return <Redirect to="/abc" />
+return <div>userPage</div>
+
+// 명령방식
+if(!users) history.push("/abc")
+return <div>userPage</div>
+```
+
+### ❏ Link, NavLink
+1. `to prop` 을 특정 `URL` 로 받아 클릭 시 네비게이션 함
+2. `anchor tag` 를 래핑함(a tag)
+3. `NavLink` 의 경우, 매칭 시 어떤 스타일을 가질 지 등의 추가 기능이 있음 `<NavLink to ="/users"></>`
+4. `to` 에 `location object` 나 함수를 받을 수 있다. (`hash`, `pathname`, `state` 객체 등...)
+
+### ❏ useHistory, useLocation, useParams, useRouteMatch
+1. 원래는 최상위 컴포넌트에서만 접근 가능했으나, `hook` 을 사용함으로써 `react-router` 관련 객체에 접근할 수 있다.
+2. `history`, `location`, `params`, `match` 객체에 접근함
+
+### ❏ react-router 응용
+1. `private Route`: 특정 조건이 충족되지 않았을 때 다른 페이지로 `Redirect` 하도록 하는 기능, 유저의 상세페이지, 개인정보 변경 페이지 등을 만들 때 사용됨.
+
+```javascript
+// declarative(선언적) 방법
+function PrivateRoute({ component: Component, ...props }){
+	return <Route {...props} render={props => {
+		const isLoggedIn = !!getUserInfo()
+		if(!isLoggedIn){
+			return <Redirect to="/login" />
+		}
+		return <Component {...props} />
+	}}
+}
+
+// imperative(명령적) 방법
+function usePrivateRoute(validateFunc){
+	const history = useHistory();
+	
+	useEffectt(() => {
+		if (!validateFunc()){
+			history.push("/login")
+		}
+	}, [])
+}
+
+usePrivateRoute(getUserInfo);
+```
