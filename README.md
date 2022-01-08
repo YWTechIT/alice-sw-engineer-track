@@ -10834,3 +10834,266 @@ function usePrivateRoute(validateFunc){
 
 usePrivateRoute(getUserInfo);
 ```
+
+---
+## 📍 55일차 1.8.토. 온라인 강의
+오늘은 `JS 비동기`, `동기`, `API 요청`, `callback`, `promise`, `async - await`, `OpenAPI`, `CORS` 에 대해서 배웠다. 이전에 한번 배운내용이었고, 오늘 다시 복습한다는 마인드로 공부하니까 이해가 잘됐다.
+
+### ❏ 자바스크립트 비동기
+1. 초기 웹 환경에서는 서버에서 모든 데이터를 로드하여 페이지를 빌드했으므로 JS에는 별도의 비동기 처리가 필요하지 않음
+2. Ajax 기술의 등장으로 페이지 로드 없이 `client-side` 에서 서버로 요청을 보내 데이터를 처리할 수 있게 됨
+3. `XMLHttpRequest` 객체를 이용해 서버로 요청을 보낼 수 있게 됨
+4. `JS` 는 `single-thread` 이므로, 서버 요청을 기다려야 한다면 유저는 멈춰있는 브라우저를 보게 된다. 따라서 동기가 아닌 비동기 처리를 이용해 서버로 통신해야 한다.
+5. 비동기 요청 후, `main thread` 는 유저의 입력을 받거나, 페이지를 그리는 등의 작업을 처리
+6. 비동기 응답을 받으면, 응답을 처리하는 `callback` 함수를 `task queue` 에 넣음 (동기적인 처리는 call stack) 
+7. `event loop` 는 `main thread` 에 여유가 있을 때 `task queue` 에서 함수를 꺼내 실행한다.
+8. 브라우저에서 실행되는 `JS` 코드는 `event driven` 시스템으로 작동한다.
+9. 웹앱을 로드하면 브라우저는 `HTML document` 를 읽어 문서에 있는 `CSS code`. `JS code`  를 불러옴
+10. `JS` 엔진(`V8`, `blink`)은 코드를 읽어 실행
+11. 서버에서 바이트 스트링을보내면 브라우저에서 해당 스트링을 파싱하여 DOM tree 구조로 만든다. `css`, `js` 코드를 서버에 요청한 다음 바이트 스트림을 넘겨 받으면 다시 읽어서 `code` 를 만들어낸다. 이후에 `JS` 엔진이 해당 코드를 실행한다.
+12. 브라우저의 `main thread` 는 `JS` 코드에서 동기적인 코드외에도 웹 페이지를 실시간으로 렌더링하고, 유저의 입력을 감지하고, 네트워크 통신을 처리하는 등 수많은 일을 처리한다.
+13. 비동기 작업을 할당하면 비동기 처리가 끝나고 브라우저는 `task queue` 에 실행 코드를 넣는다.
+14. `main thread` 는 `event loop` 를 돌려 `task queue` 에 작업이 있는지 확인하고,  동기적인 작업이 끝나면 `call stack` 으로 이동시킨 후 `task` 를 실행한다.
+
+```javascript
+// async
+request("user-data", (userData) => {
+	console.log("userData 코드");
+	saveUsers(userData)
+}
+
+consoel.log("DOM 변경")
+consoel.log("유저 입력")
+```
+
+### ❏ Promise
+1. 비동기 처리 후 실행될 코드를 `CB` 로 보내는 것
+2. 비동기 처리가 고도화 되면서, `CB hell` 등이 단점으로 부각 됨
+3. `Promise` 를 활용하여 비동기 처리의 순서 조작, 에러 핸들링, 여러 비동기 요청 처리 등을 쉽게 처리할 수 있게 됨
+
+```javascript
+// callback pattern
+setTimeout(() => {
+	console.log("Done");		
+}, 1000)
+
+// callback pattern - single request
+function fetchUsers(onSuccess){
+	return request('/users').then(onSuccess)
+}
+
+// Error handle 1
+function fetchUsers(onSuccess, onError){
+	return request('/users')
+						.then(onSuccess)
+						.catch(onError)
+}
+
+// Error handle 2
+return request('/users').then(onSuccess, onError)
+
+// callback pattern - multiple request
+function fetchUserAddress(onSuccess){
+		return request('/users', (userData) => {
+			const userDataWithAddress = [];
+			const userLength = userData.lenth;
+
+			userData.map(user => request(`/users/${user.userId}/address`, (address) => {
+				userDataWithAddress.push({ ...user, address })
+				if(userDataWithAddress.length === userLegnth){
+					onSuccess(userDataWithAddress)
+				}
+			})
+		})
+}
+
+// promise pattern - multiple request
+function fetchUserAddress(){
+	return request("/users").then((userData) => 
+		Promise.all(
+			userData.map((user) => 
+				request(`/users/${user.userId}/address`).then((address) => ({
+					...user,
+					address
+				})
+			)
+		)
+	);
+}
+```
+
+4. `Promise` 객체는, 객체가 생성 당시 알려지지 않은 데이터에 대한 `Proxy` 
+5. 비동기 실행이 완료된 이후 `then`, `catch`, `finally` 등의 핸들러를 붙여 각각 데이터 처리 로직, 에러 처리로직, 클린업 로직을 실행한다.
+6. `then` 체인을 붙여 비동기 실행을 마치 동기 실행처럼 동작하도록 한다.
+
+```javascript
+function returnPromise(){
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			const randomNumber = generateRandomNumber(100);
+			if (randomNumber < 50) resolve(randomNumber)
+			else reject(new Error("Random number is too big."))
+		}, 1000)
+	})
+}
+
+// 비동기 코드를 동기스럽게 작성 할 수 있다.
+returnPromise()
+		.then(num => {
+			console.log("first random number:", num)
+		})
+		.catch(error => {
+			console.error("Error occured", error)
+		})
+		.finally(() => {
+			console.log("Promise returned")			
+		})
+```
+
+7. `Promise` 객체는 `pending`, `fulfilled`, `rejected` 상태를 가짐
+8. `fulfilled`, `rejected` 두 상태를 `settled` 라고 지칭
+9.  `pending` 은 비동기 실행이 끝나기를 기다리는 상태 이후 `promise` 핸들러를 붙여 조작가능
+10. `fulfilled` 는 비동기 실행이 성공한 상태
+11. `rejected` 는 비동기 실행이 실패한 상태
+12. `then`, `catch` 는 비동기, 동기 실행 중 어떤 것이라도 리턴할 수 있음
+13. `promise.all()` 은 모든 프로미스가 `fulfilled` 되길 기다림, 하나라도 에러 발생시 모든 프로미스 요청이 중단됨
+14. `promise.allSettled()` 는 모든 프로미스가 `settled` 되길 기다림
+15. `Promise.race()`는 넘겨진 프로미스들 중 하나라도 `settled` 되길 기다림
+16. `Promise.any()` 는 넘겨진 프로미스들 중 하나라도 `fulfilled` 되길 기다림
+
+```javascript
+// Promise.all
+Promise.all(
+	users.map((user) => request('/users/detail', user.name))
+)
+ .then(console.log)
+ .catch(e => console.error("하나라도 실패했습니다."))
+
+// Promise.allSettled
+function saveLogRetry(logs, retryNum){
+	if(retryNum >= 3) return;  // no more try
+
+	Promise.allSettled(logs.map(saveLog))
+		.then((results) => {
+			return results.filter((result) => result.status === "rejected");
+		})
+		.then((failedPromises) => {
+			saveLogRetry(
+				failedPromises.map((promise) => promise.reason.failedLog),
+				retryNum + 1
+			);
+		});
+}
+
+// Promise.race
+function requestWithTimeout(request, timeout = 1000){
+	return Promise.race([request, wait(timeout)].then((data) => {
+		console.log("요청 성공");
+		return data;
+	}))
+}
+
+function wait(timeout){
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			reject()
+		}, timeout)
+	})
+}
+
+requestWithTimeout(req)
+	.then(data => console.log("data: ", data)
+	.catch(() => console.log("타임아웃 에러!"))
+
+// Promise.any
+function getAnyData(dataList){
+	Promise.any(dataList.map((data) => request(data.url)))
+		.then((data) => {
+			console.log("가장 첫 번째로 가져온 데이터 : ", data)
+		})
+		.catch((e) => {
+			console.log("아무것도 가져오지 못했습니다.")
+		});
+}
+```
+17. `promise chaining` : `Promise` 객체는 `settled` 되더라도 계속 핸들러를 붙일 수 있다. 핸들러를 붙인 순서대로 호출된다. `catch` 뒤에 핸들러가 연속해서 붙어있다면, 에러를 처리한 후에 계속 진행된다. 이때는 `catch` 에서 리턴 값이 있다면 `then` 으로 전달된다.
+### ❏ async / await
+1. `Promise` 체인을 구축하지 않고 `Promise` 를 직관적으로 사용할 수 있는 문법
+2. `try - catch` 문으로 에러를 직관적으로 처리
+3. `async function` 을 만들고, `Promise` 를 기다려야 하는 표현 앞에 `await` 를 붙인다.
+4. `then` 을 많이 붙이다보면 직관적이지 못할 수 있다.
+
+```javascript
+// async/await
+async function fetchUsers(){
+	try{
+		const users = await request('/users')  // resolve data, then()
+		console.log("users fetched")
+		return users
+	}catch(e){  // catch()
+		console.log("error: ", e);
+	}
+} 
+
+// Promise
+function fetchUsers(){
+	return request('./users)
+		.then(users => console.log("users fetched"))
+		.catch(console.log("error: ", e));
+}
+```
+
+5. 여러 개의 await 을 순서대로 나열하여 `then` `chain` 을 구현할 수 있음
+
+```javascript
+async function fetchUserAddress(id){
+	try{
+		const user = await request('/user/)
+		if(!user) throw new Error("No user found")  // 조건 만족시 catch절로 이동
+	  const address = await request(`/user/${user.id}/address`);  // 위에서 작성한 user의 결과를 인자로 사용함
+		return { ...user, address }
+	}catch(e){  // promise의 모든 에러를 catch 할 수 있다.
+		console.log(e)
+	}
+}
+```
+
+### ❏ async / await - Promise 조합
+1. `Promise.all` 은 특정 비동기 작업이 상대적으로 빨리 끝나도, 느린 처리를 끝까지 기다려야 하는데 이와 달리 `async/await` 를 사용할 경우 `parallelism` 을 구현할 수 있다. 즉, 빨리 끝난 대로 먼저 처리가 가능하다
+
+```javascript
+async function fetchUserAddress(id){
+	return await Promise.all([
+		(async () => await request(`/users/${id}`))(),
+		(async () => await request(`/users/${id}/address`))(),
+	]);
+}
+
+fetchUserAddress("1234")
+	.then(([user, address]) => ({...user, address}))
+	.catch(e => console.log(e))
+```
+
+### ❏ POSTMAN, OpenAPI, CORS
+1. 서버와의 통신을 위해 `API` 를 활용하는 경우, `React` 앱으로만 요청하는 것은 비효율적이다.
+2. `POSTMAN`: `API` 를 테스트하기 위한 개발 도구
+
+### ❏ OpenAPI
+1. `RESTful API` 를 하나의 문서로 정의하기 위한 문서 표준
+2. `OpenAPI Specification(OAS)` 로 정의됨
+3. `Swagger` 등의 툴로, `Open API` 로 작성된 문서를 파싱해 테스팅 도구로 만들 수 있음
+4. `FE`, `BE` 협업 시 중요한 도구로 사용
+5. `API` 의 `method`, `endpoint` 를 정의한다.
+6. `endpoint` 마다 인증 방식, `content type` , `body data`, `query string`, `path variable`등 정의
+
+### ❏ CORS
+1. 브라우저는 모든 요청 시 `Origin` 헤더를 포함
+2. 서버는 `Origin` 헤더를 보고, 해당 요청이 원하는 도메인에서 출발한 것인지를 판단
+3. 다른 `Origin` 에서 온 요청은 서버에서 기본적으로 거부함.
+4. 본격적인 요청을 보내기 전에 `options` 에 `preflight` 를 통해 미리 서버에 요청을 보내본다. ( 서버 `option` 에서 처리 할 수 없다는 `CORS` 를 보내면 네트워크 요청을 실패하도록 한다.
+5. 서버의 `endpoint` 와 홈페이지의 `domain` 은 다른 경우가 많다. 따라서, 서버에서는 홈페이지 `domain` 을 이용하여 다른 `domain` 이라 하더라도 요청을 보낼 수 있게 한다.
+6. 서버는 `Accss-control-allow-origin` 외에 `Access-control-*` 을 포함하는 헤더에 `CORS` 관련 정보를 클라이언트로 보냄
+7. 브라우저의 `same-origin-policy` 정책을 준수하기 위해 생겨난 개념
+8. 웹사이트에 악성 `script` 가 로드되어, 수상한 요청을 하는것을 막기 위함
+9. 반대로 익명 유저로부터의 `DDos` 공격 등을 막기 위함(여러가지 도메인을 만들어 특정 서버에 무차별적으로 요청을 보낸다. 그것을 브라우저가 1차적으로 방어해준다)
+10. 서버에 직접 `CORS` 요청을 할 수 없다면, `Proxy` 서버 등을 만들어 해결한다.(`proxy server`: 클라이언트가 요청을 보낼 때 `CORS` 요청을 허용해준다. 요청을 보낼 때 `proxy` 서버는 `target.server` 에 요청을 보내고  `target.server` 는 `proxy` 에 요청정보를 응답한다. (`proxy` 서버는 브라우저가 아니므로 `SOP`, `CORS` 을 사용하지 않는다.) 그리고 `proxy` 서버는 `CORS` 설정을 허용했기 때문에 다시 요청받은 브라우저로 `target Server` 에서 받은 내용을 뿌려준다.
