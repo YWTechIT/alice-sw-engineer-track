@@ -11017,6 +11017,7 @@ function getAnyData(dataList){
 }
 ```
 17. `promise chaining` : `Promise` 객체는 `settled` 되더라도 계속 핸들러를 붙일 수 있다. 핸들러를 붙인 순서대로 호출된다. `catch` 뒤에 핸들러가 연속해서 붙어있다면, 에러를 처리한 후에 계속 진행된다. 이때는 `catch` 에서 리턴 값이 있다면 `then` 으로 전달된다.
+
 ### ❏ async / await
 1. `Promise` 체인을 구축하지 않고 `Promise` 를 직관적으로 사용할 수 있는 문법
 2. `try - catch` 문으로 에러를 직관적으로 처리
@@ -11097,3 +11098,137 @@ fetchUserAddress("1234")
 8. 웹사이트에 악성 `script` 가 로드되어, 수상한 요청을 하는것을 막기 위함
 9. 반대로 익명 유저로부터의 `DDos` 공격 등을 막기 위함(여러가지 도메인을 만들어 특정 서버에 무차별적으로 요청을 보낸다. 그것을 브라우저가 1차적으로 방어해준다)
 10. 서버에 직접 `CORS` 요청을 할 수 없다면, `Proxy` 서버 등을 만들어 해결한다.(`proxy server`: 클라이언트가 요청을 보낼 때 `CORS` 요청을 허용해준다. 요청을 보낼 때 `proxy` 서버는 `target.server` 에 요청을 보내고  `target.server` 는 `proxy` 에 요청정보를 응답한다. (`proxy` 서버는 브라우저가 아니므로 `SOP`, `CORS` 을 사용하지 않는다.) 그리고 `proxy` 서버는 `CORS` 설정을 허용했기 때문에 다시 요청받은 브라우저로 `target Server` 에서 받은 내용을 뿌려준다.
+
+---
+## 📍 56일차 1.11.화. 실시간 강의
+오늘은 `React`에서 난이도가 어렵다고 느끼는 `Redux`에 대해서 배웠다. 이전까지 만들었던 프로젝트들은 규모가 작아 `Redux`를 사용해야 할 필요성을 느끼지 못했고, 어떤 예제로 `Redux`를 공부해야하나라고 생각하는 중에 커리큘럼에 `Redux`가 포함되어있어 깊게는 아니어도 발을 얕게나마 담글 수 있음게 감사함을 느꼈다. 
+
+### ❏ Redux
+1. `Redux`는 `React`에 사용하려고 만들어졌지만, 실제로 다른 UI 라이브러리 혹은 프레임워크와 함께 사용할 수도 있다.(`angular-redux`, `ember-redux` 등)
+2. `Redux` 는 앱의 복잡성을 획기적으로 낮추어 예측가능하게 만들어주는 환상적인 도구이다.
+3. 하나의 상태(객체)를 유지하여 앱의 복잡성을 낮춘다. 외부로부터 차단시켜 데이터를 함부로 수정하는것을 차단시킨다. 데이터의 접근은 인가된 함수(`redux` , `dispatch`)에서만 상태를 변경한다. 상태를 사용할 때도 함수를 이용해서만 접근한다.
+4. 의도치 않게 `state` 값이 변경되는것을 막는다.
+5. `store` 에 들어있는 `state`는 직접 접근할 수 없다. `getState()` 를 통해서 접근해야한다.
+
+```javascript
+// dispatcher는 state 값 변경하기
+// getState는 state의 값 전체를 가져오기
+// subscribe는 state가 바뀔 때 새로운 상태를 갱신해주기
+// render는 state를 그려주기
+
+function reducer(oldState, action){}
+
+const store = Redux.createStore(reducer)
+
+function render(){  // React의 return문 과 같음
+	const store = store.getState();  // store에 있는 값 가져오기
+	document.querySelector("#app").innerHTML = `<h1>WEB</h1>`
+}
+
+store.subscribe(render);  // state의 값이 바뀔 때마다 render 된다.
+```
+
+6. `render` 는 `UI` 를 만들어주는 개발자가 짜야하는 코드(`reducer` 도 마찬가지)
+
+![](https://images.velog.io/images/abcd8637/post/ad69cbce-1970-469a-97e3-c3ad3e08dd91/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-11%2011.32.33.png)
+
+7. 각각의 상태가 강하게 의존되어있다면?? `redux` 를 사용하지 않았을때는 상태 하나가 변경되었을 때 나머지 상태에도 적용시켜줘야한다. `redux` 를 사용하면 강하게 연결된 상태를 하나로 관리할 수 있다. 상태관리의 편의성 증가 곧, 코드의 가독성 증가
+8. `redux cdn code`: `https://cdnjs.cloudflare.com/ajax/libs/redux/5.0.0-alpha.0/redux.min.js` 끝부분에 `min` 이 붙여져 있으면 코드를 한 줄로 표현한다.(`minimize`의 줄임말)
+9. `dispatch` 에 값을 전달할 때 `type` 을 꼭 붙이자. (`store.dispatch({type: 'CHANGE_COLOR', color: 'red'})`)
+10. `redux` 에서 값을 변경할 때는 `immutable` 한 상태로 변경하자.(객체를 복사 하고나서 수정하기, 객체의 구조가 복잡해지거나 배열도 함께 다루는 경우 `immer` 라이브러리를 사용하면 좀 더 쉽게 리듀서를 작성할 수 있다. 리덕스의 상태는 최대한 깊지 않은 구조로 진행하는 것이 좋다.)
+11. 리덕스에서 불변성을 유지해야 하는 이유는 내부적으로 데이터가 변경되는 것을 감지하기 위해 얕은 비교(`shallow equality`) 검사를 하기 때문이다. 객체의 변화를 감지할 때 객체의 깊숙한 안쪽까지 비교하는 것이 아니라, 겉핥기 식으로 비교하여 좋은 성능을 유지할 수 있는 것이다.
+12. `state` 가 바뀔때 자동으로 `render` 함수를 실행해주는 방법: `subscribe` 사용하기.
+13. `redux` 를 사용하면 `decoupling` 이 쉽다.
+14. 상태관리란? 한곳에서 상태를 관리하여 다른 컴포넌트끼리 상태 의존성을 줄인다.
+15. `store`: 한 개의 프로젝트에서는 단 하나의 스토어만 가질 수 있다.
+16. `reducer`: 변화를 일으키는 함수. 액션을 만들어서 발생시키면 리듀서가 현재 상태와 전달받은 액션 객체를 파라미터로 받아 온다.
+
+```
+Redux를 사용해야 할까요?
+1. 계속해서 바뀌는 상당한 양의 데이터가 있다.
+2. 상태를 위한 단 하나의 근원이 필요하다.
+3. 최상위 컴포넌트가 모든 상태를 가지고 있는 것은 더 이상 적절하지 않다.
+```
+
+14. `props drilling`: 사용하지 않는 `props`를 전달 목적으로 계속 사용하는 것. 불 필요한 전달을 피하기 위해서 `context API`를 사용함
+15. `contexnt API` 에서 `value`는 1개만 넣자. 2개 이상 넣고싶다면 `createContext` 에 객체 형태로 묶어서 넣자
+
+```javascript
+// Context API: props drilling을 방지하기 위해 사용한다.
+// ContextAPI는 상태관리 역할은 하지 않는다. data만 가져다 사용하는 기능이다. 단독으로 수정은 불가)
+
+import React, { useState, useContext } from 'react';
+
+const TestContext = React.createContext();  // Context API 생성
+
+function App() {
+    let [content, setContent] = useState("a");
+    return (
+        <div>
+            <TestContext.Provider value={content}>
+                <FirstComponent />
+            </TestContext.Provider>
+        </div>
+   )
+}
+
+function FirstComponent = () => <SecondComponent />;
+
+function SecondComponent = () => {
+    const data = useContext(TestContext);
+    return(
+        <div>{data}</div>
+    )    
+}
+
+export default App;
+```
+
+1.  `contextAPI`를 사용해서 `value`를 넘겨받는 예제
+
+```javascript
+import React, { useState, useContext } from 'react';
+
+const CircleSizeContext = React.createContext();
+
+function CircleSizeProvider(props) {
+  // 원의 크기를 지정해주고, 원의 크기는 변화할 수 있으므로 State로 지정.
+  const [circleSize, circleSizeChange] = useState(20);
+  return (
+    <CircleSizeContext.Provider value={{ circleSize, circleSizeChange }}>
+      {props.children}
+    </CircleSizeContext.Provider>
+  );
+}
+
+function Circle() {
+  const { circleSize, circleSizeChange } = useContext(CircleSizeContext);
+  
+  return (
+    <div
+      onClick={() => circleSizeChange(circleSize + 20)}
+      style={{
+        width: circleSize + "px",
+        height: circleSize + "px",
+        background: "red",
+        borderRadius: "50%",
+      }}
+    />
+  );
+}
+
+function App() {
+  return (
+    <CircleSizeProvider>
+      <div className="App">
+        <h1>Click circle</h1>
+        <div style={{ display: 'flex', justifyContent: 'center'}}>
+          <Circle />
+        </div>
+      </div>
+    </CircleSizeProvider>
+  )
+}
+
+export default App;
+```
