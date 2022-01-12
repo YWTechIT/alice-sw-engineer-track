@@ -11232,3 +11232,219 @@ function App() {
 
 export default App;
 ```
+
+---
+## 📍 57일차 1. 12. 수. 온라인강의
+오늘은 `상태관리`를 중심으로 `redux`, `contextAPI`, `prop drilling`, `MVC`, `Flux` 패턴에 대해서 배웠다. `MVC`과 `Flux`패턴의 가장 큰 차이는 상태가 연속적으로 바뀌는지 여부인데, `MVC` 패턴에서 만약, `view`의 특정 값이 업데이트 된다면, 해당 `view`를 관리하는 `model`이 업데이트되고 해당 `model`을 구독하는 `view`도 함께 업데이트되는 연쇄적인 모습이 일어난다. 만약에 앱의 사이즈가 클 때 이와 같은 연쇄적으로 동작하게 된다면 업데이트의 흐름을 따라가기 힘들다. 반면에 `Flux`는 하나의 `Action`이 하나의 `update`만을 만들도록 한다. (최종적으로는 데이터가 `store`에서 `view`로만 흐른다.) 이것의 장점은 업데이트가 한 방향으로만 흘러가기 때문에 `UI`의 업데이트를 예측하기 쉬워진다. 그리고 지나가다 용어가 헷갈려서 남긴다. `nextJS`: `react`로 사용하는 `SSR`, `nuxtJS`: `vue`로 사용하는 `SSR`, `nestJS`: `node`를 쓰는 프레임워크
+
+### ❏ 상태관리
+1. 앱 상에서의 데이터를 메모리(`localStorage`, `JS memory`) 등에 저장하고 하나 이상의 컴포넌트에서 데이터를 공유하는 것
+2. 한 컴포넌트 안에서의 상태, 여러 컴포넌트 간의 상태, 전체 앱의 상태 관리를 모두 포함
+3. `MPA`: 서버의 데이터를 이용해 페이지를 렌더링하므로, 클라이언트의 데이터와 서버의 데이터가 큰 차이를 가지지 않음
+4. `SPA`: 자체적으로 데이터를 갖고, 서버와의 동기화가 필요한 데이터만을 처리한다. 그 외의 데이터는 `Client`만의 데이터로 유지 (서버에서 매번 `data` 를 받아오지 않는다.)
+5. 상태가 많지 않거나, 유저와의 인터렉션이 많지 않다면 매 작업 시 서버와 동기화하더라도 충분함
+6. 앱이 사용하는 데이터가 점점 많아지고, 유저와의 인터렉션 시 임시로 저장하는 데이터가 많아지는 경우 상태관리를 고려
+7. 프론트엔드 뿐만 아니라, 백엔드와의 데이터 통신도 충분히 고려해야 함.(`GraphQL`)
+8. `Children.toArray()`: `this.props.children`을 하부로 전달하기 전에 다시 정렬하거나 일부만 잘라내고 싶을 때에 유용합니다. `React.Children.toArray()`는 `children`을 평평하게(Flatten) 만들 때, 중첩된 배열들의 의미를 보존하기 위하여 `key`를 변경합니다. 즉, `toArray`는 반환되는 배열에 `key` 값을 덧붙여서 각 엘리먼트가 갖는 `key`가 평평해진 배열 내에서만 유효한 범위를 형성하도록 해줍니다.
+
+### ❏ 상태관리 장, 단점
+1. 높은 품질의 코드를 작성하는 데 유리(하나의 `store` 에서 관리)
+2. 성능 최적화, 네트워크 최적화 등에 유리(타이핑을 했을 때 매번 서버와 통신할 필요가 없다.)
+3. 데이터 관리의 고도화(`localStorage` 를 활용한 `persist state`, `offline` 일때 `localStorage` 사용 등)
+4. `Boilerplate` 문제
+5. 파악해야 할 로직과 레이어가 많아짐
+6. 잘못 사용할 경우, 앱의 복잡도만을 높이거나, 성능을 악화시킨다. `global state` 의 잘못된 활용 시 앱 전체 리렌더링 발생
+7. 즉, 상태관리 도입시 섬세하게 상태를 디자인하고 성능을 고려해야한다.
+
+### ❏ 상태관리 기술이 해결하는 문제들
+1. 데이터 캐싱과 재활용
+
+```js
+1. SPA에서 페이지 로딩 시마다 모든 데이터를 로딩한다면 사용자 경험 측면에서 MPA를 크게 넘어서기 힘듦
+2. 오히려 네트워크 요청 수가 많아져 더 느릴 수도 있음.
+3. 변경이 잦은 데이터가 아니라면, 데이터를 캐싱하고 재활용함
+4. 변경이 잦다면, 데이터의 변경 시점을 파악해 최적화(ex, 일정 시간마다 서버에 저장, 타이핑 5초 후 서버에 저장)
+```
+
+2. `prop drilling`
+
+```js
+1. 컴포넌트가 복잡해지는 경우, 상위 부모와 자식 컴포넌트 간의 깊이가 커짐.
+2. 최하단의 자식 컴포넌트가 데이터를 쓰기 위해 최상위 컴포넌트부터 데이터를 보내야 하는 상황이 발생한다.
+3. Context API 등을 활용, 필요한 컴포넌트에서 데이터를 가져올 수 있음.
+4. 컴포넌트 간의 결합성을 낮춘다.
+```
+
+### ❏ MVC, Flux 패턴
+1. `MVC pattern`: 애플리케이션을 `Model`, `View`, `Controller` 로 분리하여 개발하는 소프트웨어 디자인 패턴 중 하나
+2. `Flux pattern`
+
+```js
+- 2014년에 `META` 에서 제안한 웹 애플리케이션 아키텍쳐 패턴
+- Unidirectional(일방향의(store -> view)) <-> Bidirectional(양방향의(store <-> view)), data flow를 활용하여 데이터의 업데이트와 UI반영을 최소화 시킨다.
+- React의 UI패턴인 합성 컴포넌트와 어울리도록 설계한다.
+- redux, react-redux 라이브러리의 Prior art, 나오기 이전에 연구된 패턴
+- 하나의 유저 인터렉션이 무조건 하나의 업데이트만 만들 수 있는 것은 아닙니다. 예를 들어 특정 버튼을 클릭했을 때 여러개의 액션을 만들 수 있기 때문입니다.
+- MVC 패턴의 경우, 하나의 유저 인터렉션 발생 시 그 인터렉션으로 발생한 업데이트가 다른 연쇄 업데이트를 만들어낼 수 있습니다. 따라서 업데이트의 근원을 추적하기 힘든 반면 Flux 패턴은 연쇄 업데이트가 아닌 단방향 업데이트만을 만들어낼 수 있습니다.
+```
+
+3. `MVC` 패턴에서는 `View` 에서 특정 데이터를 업데이트하면, 연쇄적인 업데이트(`view` 가 업데이트되면 해당 `view` 를 관리하는 `model` 이 업데이트되고 해당 `model` 을 구독하는 `view` 도 업데이트되고... )가 일어난다. 즉, 앱이 커질 때 업데이트의 흐름을 따라가기 힘들다
+4. `flux` 는 하나의 `Action` 이 하나의 `Update` 만을 만들도록 한다.(최종적으로 데이터는 `store` 에서 `view` 로만 흐른다.) 업데이트가 한 방향으로 흐르므로 UI의 업데이트를 예측하기 쉬움.
+
+### ❏ Flux 구조
+1. `action` → `dispatcher` → `store` → `view` 순으로 데이터가 흐름
+2. `store` 는 미리 `dispatcher` 에 `callback` 을 등록해, 자신이 처리할 `action` 을 정의
+3. `action creator` 는 `action` 을 생성하여 `dispatcher` 로 보냄
+4. `dispatcher` 는 `action` 을 `store` 로 넘김
+5. `store` 는 `action` 에 따라 데이터를 업데이트 후, 관련 `view` 로 변경 이벤트 발생
+6. `view` 는 그에 따라 데이터를 다시 받아와 새로운 UI를 만듬
+7. 유저 인터렉션이 발생하면 `view` 는 `action` 을 발생
+
+![](https://images.velog.io/images/abcd8637/post/1d73ad39-0983-49c2-9745-7748810384b4/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-12%2010.39.25.png)
+
+![](https://images.velog.io/images/abcd8637/post/d2e10031-2dae-4da4-ae49-943eff781417/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-12%2010.42.34.png)
+
+### ❏ 상태관리에 사용되는 훅
+1. 외부 라이브러리 없이 `React` 가 제공하는 훅 만으로 상태 관리를 구현한다.
+2. 함수형 컴포넌트에 상태를 두고, 여러 컴포넌트 간 데이터와 데이터 변경 함수를 공유하는 방식으로 상태를 관리한다.
+
+### ❏ useState
+1. 단순한 하나의 상태를 관리하기에 적합하다.
+
+```js
+const [state, setState] = useState(initState | initFn);
+```
+
+2. 상위 컴포넌트에서 `state` 와 `setState` 를 정의하고 해당 `state` 를 사용하는 `component` 까지 `prop` 으로 내려준다. 중간에 `state` 가 변경되면, 중간에 `state` 를 넘기기만 하는 컴포넌트들도 모두 리렌더링 된다.(리렌더링을 고려하면 `contextAPI` 가 나은 선택 일 수도 있다.) 상태와 상태에 대한 변화가 단순하거나, 상대적으로 소규모 앱에서 사용하기에 적합하다.
+
+### ❏ useRef
+1. 상태가 바뀌어도 리렌더링하지 않는 상태를 정의함 즉, 상태가 UI 변경과 관계없을 때 사용한다. (`setTimeout` 의 `timerID` 저장)
+2. `uncontrolled component` 의 상태를 조작하는 등, 리렌더링을 최소화하는 상태관리에 사용(ex, `dynamic Form`)
+
+### ❏ useContext
+1. 컴포넌트와 컴포넌트간 상태를 공유할 때 사용
+2. 부분적인 컴포넌트들의 상태관리, 전체 앱의 상태 관리를 모두 구현
+3. `content provider` 안에서 렌더링되는 컴포넌트는, `useContext` 를 이용해 깊이 `nested` 된 컴포넌트라도 바로 `context value` 를 가져옴
+4. `context value` 가 바뀌면 내부 컴포넌트는 모두 리렌더링 됨.
+5. `Provider` 단에서 상태를 정의하고, 직접 상태와 변경 함수를 사용하는 컴포넌트에서 `useContext` 를 이용해 바로 상태를 가져와 사용하는 패턴
+6. `useReducer` 와 함께, 복잡한 상태와 상태에 대한 변경 로직을 두 개 이상의 컴포넌트에서 활용하도록 구현 가능
+7. `state` 는 필요한 곳에서만 사용하므로, 불 필요한 컴포넌트 리렌더링을 방지
+8. `Prop drilling(plumbing)` 을 방지하여 컴포넌트 간 결합도를 낮춤
+
+```javascript
+// TodoContext.jsx
+const TodoContext = createContext(null);
+
+const initialState = {
+	todos: [],
+	filter: "all",
+	globalId: 3000,
+}
+
+function useTodoContext(){
+	const context = useContext(TodoContext);
+	if (!context){
+		throw new Error("Use TodoContext inside Provider")
+	}
+	return context;
+}
+
+function TodoContextProvider({ children}){
+	const values = useTodoState();
+	return (
+		<TodoContext.Provider value={values}>
+			{children}
+		</TodoContext.Provider>
+	)
+}
+
+function reducer(state, action){
+	switch (action.type){
+		case "change.filter":
+			return { ...state, filter: action.payload.filter };
+		case "init.todos":
+			return { ...state, todos: action.payload.todos };
+		case "add.todo":
+			return { ...state, todos: [{ title: action.payload.title, id: state.globalId + 1 }], globalId: state.glbalId + 1 };
+		case "delete.todo" : {
+			return { ...state, todos: state.todos.filter((todo) => todo.id !== action.payload.id) };
+		case "toggle.todo" : {
+			return { ...state, todos: state.todos.map((t) => t.id === action.payload.id ? { ...t, completed: !t.completed } : t)};
+		}
+		default: return state;
+  }
+}
+
+function useTodoState(){
+	const [state, dispatch] = useReducer(reducer, initialState);
+	const toggleTodo = useCallback( (id) => dispatch({type: "toggle.todo", payload: { id } }), []);
+  const deleteTodo = useCallback( (id) => dispatch({type: "delete.todo", payload: { id } }), []);
+  const addTodo = useCallback( (title) => dispatch({type: "add.todo", payload: { title } }), []);
+  const changeFilter = useCallback( (filter) => dispatch({type: "change.filter", payload: { filter } }), []);
+  const initializeTodos = useCallback( (todos) => dispatch({type: "init.todos", payload: { todos } }), []);
+
+	return { state, toggleTodo, deleteTodo, addTodo, changeFilter, initializeTodos };  // dispatch 활용, 사용하기 편리해짐
+}
+
+// TodoApp.jsx
+function TodoApp(){
+	return(
+		<TodoContextProvider>
+			<TodosPage />
+		</TodoContextProvider>
+
+	)
+}
+
+// TodosPage.jsx
+function TodosPage(){
+	const { initializeTodos } = useTodoContext();
+
+	useEffect(() => {
+		console.log("useEffect");
+		fetchTodos().then(initializeTodos);  // component 처음 mount 후 state todo로 업데이트하기
+	}, [ininitializeTodos])
+
+// 하위 컴포넌트들과의 커플링이 없음(props가 없다.)
+	return(  
+				<div>
+					<TodoForm />
+					<TodoFilter />
+					<TodoList />	
+				</div>	
+	)
+}
+
+// TodoFilter.jsx
+function TodoFilter(){
+	const { state, changeFilter } = useTodoContext();
+	const { filter } = state;
+
+	return(
+		<div>
+			<label htmlFor="filter">Filter</label>
+			<select
+					onChange={(e) => changeFilter(e.target.value)}
+					id="filter"
+					name="filter"
+					value={filter}
+			>
+		</div>
+	)
+}
+```
+
+### ❏ useReducer
+1. `useState` 보다 복잡한 상태를 다룰 때 사용
+2. 별도의 라이브러리 없이 `flux pattern` 에 기반한 상태관리를 구현.
+3. `nested state` 등 복잡한 여러 개의 상태를 한꺼번에 관리하거나, 어떤 상태에 여러가지 처리를 적용할 때 유용하다.
+4. 상태가 복잡하다면, `useState` 에 관한 `callback` 을 내려주는 것보다, `dispatch` 를 `prop` 으로 내려 리렌더링을 최적화하는 것을 권장한다.
+
+```javascript
+// dispatch로 action을 넣으면 reducer로 흘러간다. reducer에서 update된 state를 return하고 state가 업데이트 되고 해당 state를 구독하는 다른 component가 업데이트 된다.
+const [state, dispatch(update Fn)] = useReducer(reducer, initState)  // reducer와 initState는 필수 값
+
+const handleClick = useCallback(() => {
+	setCount(count => count + 1);
+})
+```
