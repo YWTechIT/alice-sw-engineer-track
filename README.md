@@ -11485,3 +11485,308 @@ export default React.memo(TodosContainer);
 1. `TDD`: 레이아웃을 짜고 테스트코드를 작성한 다음에 로직을 구현하는 경우가 많다. 테스트 주도만을 위하다보면 생산성이 저하될수도 있다.
 2. `unit test`: 하나의 모듈을 기준으로 독립적으로 동작하는 가장 작은 단위의 테스트 → `react` 에서 `component` 단위로 테스트 할 수도 있다. 기능마다 대응하는 테스트코드 작성
 3. `intergration test`: 한번에 모아서 테스트
+
+---
+## 📍 59일차 1.14.금. 온라인 강의
+오늘은 `redux`, `react-redux`, `react-redux`에서 비동기 처리를 담당하는 `redux-thunk`, `redux-saga` 그리고 `react-redux`를 쉽게 작성할 수 있는 `react-toolkit`에 대해서 배웠다. 이전에 단순하게 `redux`만 배운것에 비하면 난이도가 상당히 올라갔다. 그래도 현업에서 자주 사용되는 상태관리니까 잘 알아둬야겠다. 
+
+### ❏ Redux 소개
+1. 앱 전체 상태를 쉽게 관리하기 위한 라이브러리
+2. `Redux` 의 많은 개념들이 `Flux pattern` 에서 차용됨
+3. 주로 `React` 앱과 많이 사용한다.
+
+### ❏ Redux를 언제 사용할까?
+1. 앱 전체 상태 관리가 필요할 때
+2. 복잡한 비동기 처리가 있는 상태관리가 필요할 때(`redux-thunk`, `redex-saga`, `redux-observable` 등)
+3. 앱의 상태가 복잡하고, 이를 체계적으로 관리하고 싶을 때(`redux-orm(state를 DB화 시키는 기능)`, `normalizer`)
+4. 상태 관리 패턴을 도입하여, 여러 개발자와 협업하고 싶을 때
+5. `logger`, `devtool` 등을 활용하여 상태를 관리할 필요가 있을 때
+
+### ❏ Redux 핵심원칙
+1. `Single source of truth`: `store` 는 단 하나이며, 모든 앱의 상태는 이곳에 보관됨
+2. `Immutability`: 상태는 오로지 읽을 수만 있다. 변경하려면 모든 상태가 변경되어야 함
+3. `Pure function`: 상태의 변경은 어떠한 사이드 이펙트도 만들지 않아야 함
+
+### ❏ Action
+1. 상태의 변경을 나타내는 개념
+2. 어떤 형태든지 상관없으나, 주로 `type`, `payload` 를 포함하는 객체형태로 주로 사용됨
+
+```js
+// 상태변경외에 다른 일을 하면 안된다.
+const action1 = {
+	type: 'namespace/getMyData',
+	payload: {
+		id: 123
+	}
+}
+```
+
+### ❏ Action Creator
+1. `Action` 을 생성하는 함수
+2. 직접 `Action` 을 생성하는 것보다 `Action Cretaor` 를 활용하면 재사용성이 좋고, 하나의 레이어를 추가할 수 있음
+
+```js
+const addObj = (id) => ({
+	type: 'namespace/getMyData',
+	payload: {
+		id: String(id).slice(1)  // layer
+	}
+})
+```
+
+### ❏ Store
+1. 앱 전체의 상태를 보관하는 곳
+2. `Action` 에 따라 `reducer` 에서는 새로운 상태를 만들어내며, `Store` 는 그 상태를 저장한다.
+3. `Store` 의 상태는 불변하며, 매 액션이 발생할 때마다 새로운 객체가 만들어짐
+
+```js
+const store = createStore(reducer, initialState);
+```
+### ❏ Reducer
+1. Action을 받아 새로운 State를 만든다.
+2. `(state, action) => state` 의 인터페이스를 따름
+3. 상태 변경 시 사이드 이펙트가 없어야 한다.
+
+```js
+const reducer = (state, action) => {
+	switch (action.type){
+		case 'namespace/getMyData',:
+			const obj = { id: action.payload.id }
+			return { ...state, obj }
+		default:
+			return state
+	}
+}
+
+const store = createStore(reducer, initialState);
+```
+
+### ❏ Dispatch
+
+1. `Action`을 `redux`로 보내는 함수
+2. `dispatch` 후에 `action`은 `middleware`를 거쳐 `reducer`에 도달
+
+```jsx
+function MyApp(){
+	const dispatch = useDispatch();
+	return(
+		<button
+			onClick={
+				() => dispatch(addObj(123))}
+		>submit</button>
+	)
+}
+```
+
+### ❏ Selector
+1. 특정 state 조각을 store로부터 가져오는 함수
+2. store의 state는 raw data를 저장하고, 계산된 값 등을 selector로 가져오는 등의 패턴을 구사할 때 유용하다.
+3. `Action creator`는 데이터를 리듀서를 보낼 때 로직을 넣어주고, `selector` 는 데이터를 얻어올 때 로직을 넣어준다.
+
+```js
+function MyApp() {
+	const obj = useSelector(state => state.boj);
+	return(
+		<div>{JSON.stringify(obj)}</div>
+	)
+}
+```
+
+### ❏ Redux의 구조
+1. `redux` 는 자유롭게 확장하여 사용할 수 있음
+2. 내부적으로 `action` 과 데이터가 어떻게 흐르는지 이해하고 `middleware`, `enhancer` 등을 이용하여 `redux` 를 확장함
+3. `middleware`: `action` 은 `dispatch` 이후 모든 `middleware` 를 먼저 통과한 후에 `reducer` 에 도달한다. 관련 라이브러리로는 `redux-thunk`, `redux-logger` 등이 있다.
+4. redux-devtools같이, Enhancer는 전체 state의 상태를 중심으로 redux 동작을 확장한다.
+5. redux-thunk는 Middleware의 예로, action object가 Promise를 리턴하는지 체크한다.
+
+![](https://images.velog.io/images/abcd8637/post/4979f66b-0278-43fb-85e3-766eafc1cd13/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-14%2010.19.15.png)
+
+### ❏ redux-toolkit
+1. `redux` 라이브러리에서 공식적으로 추천하는 `helper` 라이브러리
+2. 기존에 만들어야 하는 수많은 보일러 플레이트를 제거하고, 유용한 라이브러리를 포함하여 `redux` 코드를 쉽게 작성하게 도와 줌
+3. `redux-devtools`, `immerjs`, `redux-thunk`, `reselect` 등의 라이브러리가 미리 포함됨
+
+```js
+// configureStore
+// named parameter: 객체의 이름으로 쉽게 store 생성
+// reducer 객체를 받아 combineReducers를 적용함.
+// reducer를 여러개 넘기고 싶을 때 하나의 리듀서로 묶어준다. combineReducers를 사용하지 않아도 됨
+// createStore를 사용할 때보다 간단하고 코드가 깔끔해지는 장점이 있다.
+const store = configureStore({
+	reducer: {
+		posts: postsReducer,
+		users: usersReducer
+	}
+})
+
+// createAction
+// action creator 함수를 만드는 함수
+// 만들어진 action creator에 데이터를 넘기면 payload 필드로 들어감
+// 생성된 action creator는 toString() 메서드를 오버라이드해, 자신이 생성하는 액션의 타입 String을 리턴
+const addPost = createAction('post/addPost');
+addPost({ title: 'post 1' })
+
+/*
+{
+	type: 'post/addPost',
+	payload: { title: 'post 1'}
+}
+*/
+
+// createReducer
+// reducer를 만들어주는 함수, initState를 넘기고 builder를 인자로 받는 콜백 함수
+// addCase 메서드를 이용하여 action마다 state의 변경을 정의한다.
+// immerjs를 내부적으로 사용하므로 mutable code를 이용해 간편하게 변경 코드를 작성 할 수 있다.(따로 복사하는 수고를 덜음)
+const postsReducer = 
+	createReducer(initState,
+			builder => {
+				builder.addCase(addPost,
+					(state, action) => {
+						state.posts
+							.push(action.payload)
+				})
+	})
+
+// createSlice
+// Action creator, reducer 등 별도로 만들어야 하는 여러 Redux 구현체를 하나의 객체로 모은 것
+// createSlice 함수를 이용하여 많은 보일러 플레이트를 없애고 쉽게 action creator, reducer를 만듬
+// slice를 반환한 객체.actions에는 actionCreator가 있고, .reducer에는 정의된 reducer가 들어간다.
+const postsSlice = createSlice({
+	name: 'posts',
+	initialState,
+	reducers: {
+		addPost(state, action) {
+			state.posts
+				.push(action.payload)
+		}
+	}
+})
+
+const { addPost } = postsSlice.actions;
+const reducer = postSlice.reducer;
+
+// createSelecor
+// state를 이용한 특정 데이터를 리턴하도록 함
+// 내부적으로 데이터를 캐시하며, 데이터가 변동이 없다면 캐시된 데이터를 리턴함(성능 향상)
+const postsSelector = state => state.posts;
+const userSelecor = state => state.user;
+const postsByUserIdSelector = createSelector(
+	postsSelector,
+	useSelector,
+	(posts, user) => 
+		posts.filter(post =>
+			post.username === user.username
+	)
+)
+```
+
+### ❏ react-redux
+1. redux를 react앱에 연결하게 하는 라이브러리
+2. 리액트에서 상태가 변화해도 `redux` 에서는 알 수 없다. 그래서 `react-redux` 로 연결해줘야 한다.
+3. `redux`에서 관리하는 상태, `dispatch` 함수 등을 가져올 수 있음
+4. 클래스, 함수 컴포넌트 모두 연결 가능
+
+```js
+// Provider
+// Redux store를 react와 연결하기 위해서는 반드시 Provider로 컴포넌트를 감싸야 한다.
+// Provider 안에서 렌더링된 컴포넌트들은 state, dispatch 등에 접근할 수 있음
+// contextAPI를 내부적으로 사용하는 Provider, value 대신 store를 넣어준다.
+const store = configureStore({
+	reducer: rootReducer
+})
+
+function App(){
+	return(
+		<Provider store={store}>
+			<MyPage />
+		</Provider>
+	)
+}
+
+// useDispatch
+// redux의 dispatch 함수를 가져오기 위한 API
+// dispatch로 action creator가 생성한 action을 보내면 redux 내부로 보내지게 된다.
+// dispatch(addPost()) -> middleware -> reducer -> store
+const addPost = createAction('addPost');
+function MyPage(){
+		const dispatch = useDispatch();
+		const handleClick = () => dispatch(addPost());
+		return(
+			<button 
+					onClick={handleClick}
+			>Submit</button>
+		)
+}
+
+// useSelector
+// Redux store로부터 데이터를 얻기 위한 API
+// selector function을 인자로 넘기면 state를 받아오는 변수
+// selector function은 데이터에 어떤 변경을 가하면 안됨, 단지 값을 가져오는 용도로만 사용한다.
+// 데이터를 특정 형태로 계산하여 읽을 수 있음
+function MyPage(){
+	const posts = useSelector(state => state.posts);
+	
+	return posts.map( post => <Post {...post} />)
+}
+```
+
+### ❏ Redux를 이용한 비동기 처리
+1. `redux` 는 비동기 처리를 자체 내장하지 않고 ,`redux-thunk` 같은 외부 익스텐션이 필요하다.
+2. `redux` 비동기 처리를 위해서는 비동기를 위한 `middleware` 를 추가해야 함
+3. `redux-toolkit` 에는 `redux-thunk` 가 내장되어있다.
+4. `redux-thunk` 는 `Promise` 를 이용한 비동기 `Action` 을 쉽게 처리하도록 하는 `middleware`
+5. `redux-toolkit` 에는 정해진 `convention` 이 있고, 그것을 따라야 한다.
+6. `redux-thunk` 이외에도 `redux-sage` 의 `saga 패턴`, `redux-observable` 의 `rxjs` 가 있다. 복잡한 비동기 처리가 필요하면 `redux-sage`, `redux-observable` 를 동시에 사용해서 처리할 수 있다.
+
+```js
+// createAsyncThunk
+1. redux-toolkit에서는 thunk middleware를 디폴트로 추가
+2. redux-toolkit은 createAsyncThunk API를 제공함 fulfilled, rejected, pending 3가지 상태에 대해 각각 reducer 작성
+3. Typescript 환경에서 reducer 작성 시, builder callback을 사용하여 작성해야 정확한 타이핑이 가능하다. 
+
+// createAsyncThunk는 두 인자 action type, async callback(payload creator)를 받음
+// action type을 주어지면, pending, fulfilled, rejected가 각각 postfix로 붙어 reducer로 들어옴 (posts/addPost/pending)
+const addPost = createAsyncThunk('posts/addPost', 
+	async (title) => {
+		const result = await PostAPI.addPost({ title })
+		return result.data
+	}	
+)
+
+useEffect(() => {
+	dispatch(addPost('post 1'))
+})
+
+// createAsyncThunk로 만들어진 action creator는 4가지 함수로 구성
+// addPost - async 함수를 dispatch하는 함수
+// addPost.pending - promise를 생성했을 때 발생하는 액션
+// addPost.fulfilled - promise가 fulfilled 일 때 발생하는 액션, fulfilled시 데이터는 payload로 들어옴(action.payload.todos)
+// addPost.rejected - promise가 rejected 일 때 발생하는 액션, rejected시 에러는 action.error로 들어오며, payload는 undefined가 된다.
+// extraReducers 함수를 이용해, builder에 각 상황에 대한 리듀서를 추가
+// 공식적으로 builder pattern을 추천하는데 타입스크립트에서 타이핑이 용이하기 때문임
+const postsSlice = createSlice({
+	extraReducers: builder => {
+		builder
+			.addCase(addPost.pending. state => ...)
+			.addCase(addPost.fulfilled. state => ...)
+			.addCase(addPost.rejected. state => ...)
+	}
+})
+
+// 연속적인 비동기 처리
+// thunk 함수를 dispatch하면 promise가 리턴 따라서, then() 메서드로 연속적인 비동기 처리를 이어 실행
+dispatch(addPost('post1'))
+	.then(() => )
+
+dispatch(updatePost('post1'))
+
+// 동시 비동기 처리
+// Promise.all을 이용해, 여러 비동기 처리를 동시에 실행한다.
+// 주의할 점은 thunk의 promise가 rejected 되어도 .then()으로 들어온다는 것
+Promise.all([
+	dispatch(addPost('post1')),
+  dispatch(updatePost('post2')),
+])
+	.then(() =>
+		console.log("DONE"))
+```
