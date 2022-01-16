@@ -1242,7 +1242,7 @@ Math.random(); // 임의의 숫자 출력
 
 5. 문자를 숫자로 변환하는 메서드
 
-```jsx
+```js
 parseInt("20.6"); // 정수 형태의 20 변환
 parseFloat("20.6"); // 실수 형태의 20.6 변환
 ```
@@ -11789,4 +11789,529 @@ Promise.all([
 ])
 	.then(() =>
 		console.log("DONE"))
+```
+
+---
+## 📍 60일차 1.15.토. 온라인 강의
+오늘은 `testing`, `jest`에 대해서 배웠다. 취업 공고를 보다보면 `jest`도 사용 스택에 포함되어있는것을 많이 봤는데, 언제 공부하나 이런생각이 들었다. 이번을 계기로 `test`와 많이 친해지고, `jest`도 많이 다뤄야 겠다는 생각이 들었다.
+
+### ❏ React 테스팅
+1. 코드 테스트가 필요한 경우
+
+```js
+1. 코드를 작성하고 나면, 원하는 대로 동작하는지 알기 위해 테스트를 함
+2. 코드에 버그가 있으면, 어떤 상황에서 버그가 발생하는지를 알기 위해 테스트를 함
+3. 코드를 리팩토링하면, 원래대로 동작하는지 테스트함
+4. 리액트 앱의 컴포넌트가 늘어날수록, 컴포넌트끼리 서로 영향을 미치는 경우가 많아짐
+5. 특정 코드가 수정되면, 어떤 컴포넌트에 에러가 발생할 수 있음 
+```
+
+2. 테스팅 코드 작성의 이점
+
+```js
+1. 언급한 상황들에 대한 테스팅 코드를 작성하며, 미연의 에러를 방지
+2. TDD(Test Driven Development) 등의 방법론을 적용하여 생산성을 향상
+3. 테스트가 늘어나면서 테스트 코드가 구현 코드에 대한 문서화가 됨
+4. 테스트가 용이하게 코드를 작성하여, 코드 품질과 신뢰성을 높임
+```
+
+3. 테스터블한 코드 작성하기
+
+```js
+1. 코드가 영향을 미치는 범위를 최대한 줄인다. 사이드 이펙트(함수 내에서 외부 변수 값을 변경하는 기능 등)를 줄임
+2. 하나의 함수가 너무 많은 일을 하지 않게 함
+3. 기능들을 작게 분리함
+```
+
+4. 주요 테스팅 용어
+
+```js
+1. Mocking: 특정 동작을 흉내 내는 것(실제 API를 호출하는 게 아니라 가짜 payload를 반환하는 mocking function을 만듦, unit test에 적합하게 끔 데이터를 만든다.)
+2. Stubbing: 더미를 채워 넣는 것(Child 컴포넌트를 렌더링하지 않고, 대신 그 자리에 <div>등을 채워 넣음)
+```
+
+5. 테스트의 구성
+
+```js
+1. setup: 테스트하기 위한 환경을 만든다. mock data, mock function 등을 준비함
+2. expectation: 원하는 테스트 결과를 만들기 위한 코드를 작성함
+3. assertion: 정말 원하는 결과가 나왔는지 검증함
+```
+
+6. 예제 코드
+
+```js
+// 테스트 할 함수
+const transformUser = (user) => {
+	const { name, age, address } = user
+	return [ name, age, address ];
+}
+
+// 테스트 코드(jest)
+test('Test transformUser', () => {
+	// setup
+	const mockUser = { name : 'testName', age: 20, address: 'testAddress' }
+
+	// expectation
+	const result = transformUser(mockUser)
+
+	// assertion
+	expect(result).toBe(['testName', 20, 'testAddress'])
+})
+```
+
+7. `white-box testing`: 컴포넌트 내부 구조를 미리 안다고 가정하고 테스트 코드를 작성
+8. `black-box testing`: 컴포넌트 내부 구조를 모른 채 어떻게 동작하는지에 대한 테스트 코드를 작성, 단순하게 컴포넌트가 렌더링한 무언가를 인터렉션했을 때 어떤 결과가 나오는지를 테스트한다.
+9.  테스팅 범위에 따른 분류
+
+```js
+1. Unit 테스팅
+2. Integration 테스팅
+3. end-to-end(e2e) 테스팅
+```
+
+10. Unit Testing
+
+```js
+1. 다른 부분과 분리된 작은 코드를 만들고 그것을 테스트 함
+2. 작은 코드는 function, module, class 등을 의미
+3. 각 부분이 원하는 대로 동작함을 보장하기 위함
+4. 테스트는 서로 분리되어야 함(특정 컴포넌트가 데이터에 따라 잘 렌더링되는지를 테스트하는 경우)
+
+function getUpperCaseTesting(str){
+	return str.toUpperCase();
+}
+
+expoect(getUpperCaseTesting('lower')).toBe('LOWER');
+```
+11. Intergration Testing
+
+```js
+1. 앱의 특정 부분이 동작하는지 테스트함
+  - 여러 컴포넌트가 한꺼번에 동작하거나, 어떤 페이지의 부분이 잘 동작하는지를 테스트하는 경우
+  - react-router, redux 등이 특정 컴포넌트와 함께 잘 동작하는지를 테스트하는 경우
+```
+
+12. End-to-end Testing
+
+```js
+1. 유저가 어떤 시나리오를 가지고 그 시나리오의 end-to-end로 잘 동작하는지 테스트함
+2. 필요한 경우 웹서버, 데이터베이스를 실행함
+3. 범위가 너무 넓어서 에러가 발생했을 때 특정 기능이 안 된다는 것은 알 수 있지만 정확히 어떤 부분에 문제가 생겼는지 알기 힘듬
+4. 유저가 회원가입 후 로그인하여 유저 정보 페이지를 볼 수 있는지 테스트 하는경우
+5. 전체 큰 범위를 확인하기 때문에 side-effect가 얼마든지 가능하다.
+```
+
+### ❏ Jest
+1. facebook에서 오픈소스화한 테스팅 프레임워크
+2. assertion 함수들, test runner, mock 라이브러리 등을 모두 제공
+3. create-react-app에서 기본적으로 사용됨
+4. 사용성이 좋고, 가장 인기있는 프로젝트
+
+```jsx
+// jest의 핵심 기능들
+1. assertion matchers(toBe, toEqual)
+2. async assertion(async/await, done)
+3. mock functions(jest.fn().mockReturnValueOnce(), jest.mock('axios'))
+4. testing lifecycle functions
+5. grouping(컴포넌트 별 grouping, describe())
+6. snapshot testing(스냅샷을 저장한 값이 리턴 값과 같은지 확인)
+```
+
+5. Assertion matchers
+
+```js
+1. jest는 풍부한 matcher를 제공하여, 여러 상황에서 match를 체크함
+2. expect()는 expectation object를 리턴한다. 이 object의 메서드를 이용해 여러 매칭상황을 assert함
+3. not을 prefix로 붙여 negative 상황도 매칭할 수 있다.
+
+expect("hi").toMatch("hi")
+expect(true).toBe(false)
+expect(user).toBeDefined()
+expect(fn).toHaveBeenCalledWith()
+expect().not.toBe()
+```
+
+6. Async Assertion
+
+```js
+1. 비동기 상황의 테스트를 처리할 수 있는 여러 방법 제공
+2. callback, promise, async / await를 모두 활용할 수 있음
+
+useEffect(() => {
+	fn()
+		.then(setData)
+}, [])
+```
+
+7. Mock functions
+
+```js
+1. mock function을 만듬
+2. 모듈 전체를 mocking 함
+3. 라이브러리 전체를 mocking 함
+
+jest.mock('../mocks/api.js');  // 특정 컴포넌트가 사용하는 모듈을 mock처리한다.
+```
+
+8. lifecycle functions
+
+```js
+1. 각 테스트의 시작과 끝, 전체 테스트의 시작과 끝에 원하는 작업을 할 수 있다.
+2. beforeEach, afterEach, beforeAll, afterAll 함수를 활용함
+3. describe 블록 안에 사용하면 별도의 scope를 가짐  
+4. 무거운 data를 load하고 test하는 경우: beforeAll
+5. 함수 실행 후 무언가를 처리할 때, 메모리 해제 등: afterAll
+
+// 안쪽 beforeEach는 scope안에서만 작동한다.
+describe("~", () => {
+	beforeEach(() => {})
+	descibe("~"), () => {
+		beforeEach(() => {})
+	}
+})
+```
+
+9. Grouping
+
+```js
+1. describe 함수를 이용해 여러 test()함수를 논리적으로 나눔
+2. describe 함수 안에 describe 함수가 중첩될 수 있음
+```
+
+10. Snapshot Testing
+
+```js
+1. 특정 함수, 모듈, 컴포넌트 등의 결과를 seializable 한 형태의 snapshot으로 저장하고, 추후 변경이 발생했을 대 이전의 snapshot과 새로운 snapshot을 비교하여 변경이 발생했는지 추측함
+2. jest의 주요기능으로, 코드의 변경이 컴포넌트의 렌더링 결과에 영향을 미치는지를 파악하기에 적합함
+3. TDD는 테스트기능을 정의하고 구현한다. (결과를 테스트하기 때문에 TDD와 적합하지 않다)
+```
+
+11. jest함수의 실행순서
+
+```js
+1. beforeAll, beforeEach, afterEach, afterAll의 순서로 Lifecycle 함수들이 실행됨
+2. 다만, describe 블록 안에 있는 before-*, after-* 함수는 해당 블록의 범위 안에서 실행됨
+3. describe 함수는 모든 test() 함수 이전에 실행된다. 따라서 test() 함수들은 순차적으로 한꺼번에 실행된다.
+```
+
+12. 테스팅의 구성
+
+```js
+test('User component', () => {
+	// setup
+	const mockProps = {
+		name: 'test-username',
+		age: 20,
+	}
+
+	// expectation
+	const { container } = render(<User {...mockProps} />)
+
+	// assertion
+	expect(container.firstChild).toMatchSnapshot()
+})
+```
+
+### ❏ Jest 활용
+
+1. Assertion Matchers 활용
+
+```js
+// toBe()는 객체의 내용을 비교하고, toEqual()은 객체 자체를 비교할 때 사용한다.
+// example 1: toBe()
+function isPythagorean(a, b, c){
+	return a * a + b * b + c * c === c * c
+}
+
+test('Should 3, 4, 5 pythagorean', () => {
+	expect(isPythagorean(3, 4, 5)).toBe(true)  // JS의 Object.is로 테스트한다.
+})
+
+test('Should 3, 4, 6 not pythagorean', () => {
+	expect(isPythagorean(3, 4, 6)).toBe(false)
+})
+
+// example 2: toEqual(), toMatch()
+function createTodo(id, title, content){
+	return { id, title, content }
+}
+
+test('Should create user', () => {
+	const id = 1, title = "Test todo", content = "Test content";
+	expect(createUser(id, title, content).toEqual({id, title, content})  // deep Equality check(nested object)
+})
+
+test('Should create user', () => {
+	const id = 1, title = "Test todo", content = "Test content";
+	expect(createUser(id, title, content).title).toMatch("Test todo")  // check string, reg
+})
+
+// example 3: toContain()
+function transformUser(user){
+	const { name, age, address } = user;
+	return [ name, age, address ]
+}
+
+test('Should contain name after transformUser', () => {
+	const user = { name: 'test name', age: 20, address: 'test address' }
+	expect(transformUser(user)).toContain('test name')  // 포함여부를 확인(in)
+})
+
+test('Should contain name after transformUser', () => {
+	const user = { name: 'test name', age: 20, address: 'test address' }
+	expect(transformUser(user)).not.toContain(30)
+})
+```
+
+2. Async assertion
+
+```js
+1. callback 패턴의 경우, test()함수가 제공하는 done() 함수를 활용하여 콜백이 끝나고 done()을 호출, 에러가 발생하면 done()의 인자로 에러를 넘김
+2. Promise 패턴의 경우 async/await을 활용하거나, Promise를 리턴
+
+function isPythagoreanAsync(a, b, c){
+	return new Promise(resolve => {
+		setTimeout(() => {
+			const result = isPythagorean(a, b, c)
+			if(result) return resolve(result)
+			reject(new Error("Not pythagorean"))
+		}, 500)
+	})
+}
+
+test('Should 3, 4, 5 be pythagorean async', (done) => {
+	isPythagoreanAsync(3, 4, 5).then(done).catch(done)
+})
+
+test('Should 3, 4, 5 be pythagorean async', (done) => {
+	return expect(isPythagoreanAsync(3, 4, 5)).resolves.toBe(true)  // resolve 된 값이 true인지?
+})
+
+test('Should 3, 4, 6 be pythagorean async', (done) => {
+	return expect(isPythagoreanAsync(3, 4, 6)).rejects.toBe('Not pythagorean')  // reject 된 값이 message와 같은지?
+})
+```
+
+3. mock functions
+
+```js
+1. jest.fn()을 활용하여 mock function 객체를 만듬
+2. mockReturnValueOnce() 등으로 리턴하는 값을 임의로 조작한다. 여러번 호출하면 순서대로 세팅된 값을 반환함
+3. mockResolvedValue() 로 promise가 resolve하는 값을 조작함
+4. jest.mock()으로 특정 모듈을 mocking 함
+5. toHaveBeenCalled - 이 함수가 호출되었는지 검증.
+6. toHaveBeenCalledWith(arg1, arg2...) - 이 함수가 특정 인자와 함께 호출 되었는지 검증
+7. toHaveBeenLastCalledWith(arg1, arg2...) - 마지막으로 특정 인자와 함께 호출되었는지 검증
+```
+
+4. Lifecycle functions
+
+```js
+// beforeEach()
+beforeEach(() => {
+	setupMockData()
+})
+
+// afterEach()
+afterEach(() => {
+	clearMockData()
+})
+```
+
+5. Grouping
+
+```js
+// describe(), block으로 묶어서 관리
+describe('This is group 1', () => {
+	describe('This is inner group 1', () => {
+		test('Test 1', () => {})
+
+	describe('This is inner group 2', () => {
+		test('Test 2', () => {})
+	})
+})
+```
+
+6. snapshot testing
+
+```js
+1. toMatchSnapshot()을 호출하면, 기존에 스냅샷이 없었을 경우 .snap 파일을 만듬
+2. 기존 스냅샷이 있을 경우, 새로운 스냅샷과 비교하여 변경 사항이 있으면 테스트는 실패함
+3. toMatchInlineSnapshot()을 호출하면 별도의 스냅샷 파일을 만들지 않음. 이 경우, 어떻게 스냅샷이 쓰였는지를 하나의 파일 안에서 알 수 있게 됨
+
+test('Snapshot test form', () => {
+	const { container } = render(<MyForm />)
+	expect(container.firestChild).toMatchSnapshot()
+})
+
+test('Snapshot test form', () => {
+	const { container } = render(<MyForm />)
+	expect(container.firestChild).toMatchInlineSnapshot()
+})
+
+expect(container.firstChild).toMatchInlineSnapshot(`
+	<div>
+		<form>
+		...
+		</form>
+	</div>
+`)
+```
+
+### ❏ react-testing-library
+1. 테스트가 소프트웨어가 사용되는 모습을 닮을수록, 테스트를 더욱 신뢰할 수 있게 됨
+2. The more your tests resemble the way your software is used, the more confidence they can give you
+3. React 컴포넌트의 특정 메서드나 상태를 테스트하는게 아니라 실제 유저가 사용하는 방식대로 테스트하는 접근
+4. 유저가 페이지에서 어떤 DOM 요소에 접근하는 방법을 흉내냄 이러한 방식으로 테스트 코드를 작성하면, 내부 구현이 바뀌어도 테스트가 깨지지 않는다.
+5. React 컴포넌트가 렌더링한 결과에 대한 접근만 가능함
+6. 쿼리는 내부 상태나 내부 메서드에 접근할 수 없게 설계됨, 결과에 대한 접근만 가능
+
+```js
+// get
+1. getBy: 원하는 요소를 찾지 못할 경우나 여러개의 요소를 찾을 경우 에러를 던짐
+2. getAllBy: 여러 요소를 찾아 배열을 반환, 원하는 요소를 찾지 못할 경우 에러르 던짐
+3. 원소가 반드시 페이지에 존재해야만 하는 경우 활용함
+
+// find
+1. findBy 관련 쿼리는 원하는 원소가 없더라도 비동기적으로 기다림
+2. 여러 원소를 찾거나, 정해진 timeout동안 찾지 못하면 에러를 던짐
+3. findAllBy 관련 쿼리는 여러 원소를 검색해 배열을 반환한다. 정해진 timeout동안 찾지 못하면 에러를 던짐
+4. Promise를 리턴하며, 실패시 reject, 성공시 resolve
+5. 어떤 유저의 동작 후에 등장하는 원소 등을 테스트하고자할 때 활용함
+
+// query
+1. queryBy 관련 쿼리는 getBy와 비슷하게 원소를 찾아 반환하나, 못찾을 경우 에러를 던지지 않고 null을 반환함. 여러 원소를 찾으면 에러를 던짐
+2. queryAllBy 관련 쿼리는 getAllBy와 비슷하게 여러개의 원소를 찾아 배열로 반환하거나, 하나도 찾지 못하면 에러 대신 빈 배열을 반환함
+3. 특정 요소를 찾을 수 없음을 assertion의 기준으로 둘 때 활용됨
+
+// container
+1. container는 컴포넌트를 렌더한 결과를 감싸는 원소
+2. queryselector(), querySelectorAll()을 이용해 selector문법으로 원소를 선택할 수 있음
+
+// jest-dom
+1. react-testing-library는 jest를 확장하여, 좀 더 쓰기 편한 assertion을 제공함
+2. toBeInTheDocument(), toHaveValue(), toBeDisabled(), toBeVisible() 등 DOM 테스팅에 특히 유용한 assertion 메서드를 제공함 
+```
+
+### ❏ 쿼리의 우선순위
+7. 유저가 페이지를 이동하는 방식에 가까운 쿼리일수록 우선순위가 높음
+8. 접근성 높은 HTML을 작성할 수록 테스트가 용이한 코드가 됨(sementic web)
+
+```js
+// ByRole
+1. accessibility tree에 있는 요소들을 기준으로 원소를 찾음
+2. 유저가 웹 페이지를 사용하는 방식을 가장 닮은 쿼리
+3. 동일한 role을 가진 경우, accessible name을 이용해 원소를 구별함
+4. 임의로 role 혹은 aria-*을 부여하는 것을 지양함
+5. 자주 사용되는 role - button, checkbox, listitem, heading, img, form, textbox, link
+6. 자주 사용되는 accessible name (button - 텍스트), (label - 텍스트), (a - 텍스트), (img - alt 텍스트)
+
+<button role="button">submit</button>
+<input type="checkbox" role="checkobx" />
+
+test('제출 버튼을 찾아 클릭하면, username 인풋이 비워진다.', () => {
+	const { getByRole } = render(<TestForm />);
+	const usernameInput = getByRole('textbox', { name : 'Username' })
+	const submitButton = getByRole('button', { name : 'Submit' })
+	userEvent.type(usernameInput, 'test username')
+	userEvent.click(submitButton)
+	
+	expect(usernameInput).toHaveValue("")  // jest-dom 
+})
+
+// Text
+1. 유저가 볼 수 있는 Text 값을 기준으로 쿼리로 찾음
+2. ByLabelTest - label과 연관된 원소를 찾음
+3. ByPlaceholderTest - placeholder과 연관된 원소를 찾음
+4. ByText - 주어진 Text와 연관된 원소를 찾음
+5. ByDisplayValue - input, textarea, select 등의 value를 기준으로 원소를 찾음
+
+test('제출 버튼을 찾아 클릭하면, username 인풋이 비워진다.', () => {
+	const { getByLabelText, getByText } = render(<SimpleTestForm />);
+	const usernameInput = getByLabelText('username')
+	const submitButton = getByText('Submit')
+
+	userEvent.type(usernameInput, 'test username')
+	userEvent.click(submitButton)
+	
+	expect(usernameInput).toHaveValue("")  // jest-dom 
+})
+
+// semantic queries
+1. 유저에게 보이지 않지만 접근성 스펙에 적합한 alt, title을 이용하여 원소를 검색함
+2. ByAltText - img, area, input 등의 alt 속성으로 원소를 검색함
+3. ByTitle - title 속성으로 원소를 검색함
+
+// Test ID
+1. data-testid 속성을 원하는 원소에 지정하고, 쿼리를 이용해 찾음
+2. 유저가 해당 속성을 기반으로 화면의 요소를 찾는게 아니므로 우선순위가 낮음
+3. 다른 쿼리로 테스트를 작성할 수 없을 때 이 쿼리를 백도어로 활용함
+
+test('제출 버튼을 찾아 클릭하면, username 인풋이 비워진다.', () => {
+	const { getByTestId } = render(<SimpleTestForm />);
+	const usernameInput = getByTestId('username-input')
+	const submitButton = getByTestId('submit-button')
+
+	userEvent.type(usernameInput, 'test username')
+	userEvent.click(submitButton)
+	 
+	expect(usernameInput).toHaveValue("")  // jest-dom 
+})
+```
+
+### ❏ user-event
+1. 내장 이벤트함수인 `fireEvent`, `createEvent`를 좀 더 직관적이고 범용적으로 사용할 수 있도록 만든 라이브러리
+2. `click`, `type`, `keyboard`, `upload`, `hover`, `tab` 등 유저가 실제로 웹페이지를 사용하며 만드는 이벤트를 메서드로 제공함
+
+```js
+// click
+userEvent.click(submitButton)
+userEvent.click(submitButton, { shiftKey: true })
+userEvent.click(submitButton, { shiftKey: true }, { clickCount : 5 })
+
+test('숨은 텍스트를 보여준다', () => {
+	const text = "Hidden text!";
+	
+	const { getByRole, queryByText } = render(<Expansion text={text} />);
+	expect(queryByText("Hidden text!")).toBe(null);
+	
+	const showButton = getByRole("button", { name: "Expand" }):
+	expect(showButton).toBeInTheDocument();  // jest dom assertion
+
+	userEvent.click(showButton);
+	expect(queryByText(text)).toBeInTheDocument();
+})
+
+function Expansion({ text }){
+	const [expanded, setExpaned] = useState(false);
+	
+	return(
+		<div>
+			<button onClick={() => setExpanded(b) => !b)}>Expand</button>
+			{expanded && <div>{text}</div>}
+		</div>
+	);
+}
+
+// type
+userEvent.type(inputElement, 'react advanced')
+userEvent.type(inputElement, 'react{space}advanced{enter}')  // 어떤 곳들에 입력하는지 지정가능
+await userEvent.type(inputElement, 'react advanced', { delay: 300 })  // 비동기적인 테스트 가능
+
+test('Typeahead에서 쿼리에 따른 검색 겨롸를 보인다.', () => {
+	const mockSearchData = ['kim', 'ted', 'an', 'jeong'];
+	
+	const { getByPlaceholderText, getAllByRole } = render(
+		<Typeahead searchData={mockSearchData} />
+	);
+	
+	const inputElement = getByPlaceholderText('type name...');
+	userEvent.type(inputElement, 'a');
+
+	expect(getAllByRole('listitem').length).toBe(2);
+
+	userEvent.clear(inputElement);
+	expect(getAllByRole('listitem').length).toBe(mockSearchData.lengh);
+});
 ```
