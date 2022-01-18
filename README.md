@@ -12315,3 +12315,74 @@ test('Typeahead에서 쿼리에 따른 검색 겨롸를 보인다.', () => {
 	expect(getAllByRole('listitem').length).toBe(mockSearchData.lengh);
 });
 ```
+
+---
+## 📍 61일차 1.18.화. 실시간 강의
+이번주가 마지막 정규 수업이고 다음주부터 교육과정이 종료되는 주까지는 2차 프로젝트 기간으로 진행된다. 벌써 교육을 들은지도 4개월이 되어간다니... 시간이 참 빠른것 같다. 엘리스 교육을 들으며 프론트부터 백엔드까지 네트워크 통신에 대해 대략적인 큰 틀과 프론트엔드에서 사용하는 언어, 프레임워크 등 다양한 내용들을 배웠다. 참으로 도움이 많이 되었다. 교육이 끝날 때까지 열심히 공부해서 현업에서 함께 일하고 싶은 개발자가 되고 싶다. 그럼 `SSR`, `CSR`, `style-components`, 배포에 대해서 배워보자. 덧붙여 오늘은 `json-server`, `github-action`, `CI-CD`, `webhook`, `nginx`에 대해서도 배웠다.
+ 
+### ❏ 이론 강의
+`development` 단계에서 `API`를 `RESTful`하게 통신할 수 있는 간단한 라이브러리가 있는데 바로 `json-server`다. 사용법도 어렵지 않은데, `npx json-server --watch <실행 할 파일 명>` 을 터미널에 치면 곧바로 사용할 수 있다. 나는 `db.json` 파일을 생성하고 다음과 같이 작성했다. 이렇게 개발단계에서 임시적으로 `API`를 만들어 통신하는 서버를 `mock server`라 부르는데, 프로젝트 진행중에 백엔드에서 `API`가 만들어지지 않았을 때 사용하면 괜찮을 것 같다. `db.json`에서 여러개의 데이터를 `collection`이라 부르고, 단일 데이터를 `element`라고 부른다.
+
+```javascript
+{
+    "topics":[
+        {"id":1, "title":"html", "body":"html is ..."},
+        {"id":2, "title":"css", "body":"css is ..."}
+    ]
+}
+
+// POST
+const URL = 'http://localhost:3000/topics';
+const data = {id: 4, title: 'gimotti', body: '오마에와 모 신데이루..'};
+
+response = await fetch(URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    });
+result = await response.json
+```
+
+지금은 `POST`만 구현했지만 이처럼 `fetch` 혹은 `axios`를 이용해 데이터를 `CRUD` 할 수 있다.
+
+### ❏ 실습 강의
+1. `CI/CD`: `commit` 한번만으로 자동으로  `discord` 에 알림 설정하고 배포까지 한다. 
+2. 해당 아이콘은 배포용으로 적합하지 않다는 뜻, 개발용으로만 사용하기
+
+![](https://images.velog.io/images/abcd8637/post/8d63ca10-fb19-493c-ab7b-dae63589a436/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-18%2015.24.10.png)
+
+3. `development`: 디버깅 및 개발 환경
+4. `production`: 실제 배포 환경
+5. `node.js`로 `development`로 배포한다면 오류가 어디에서 났는지 알 수 있기 때문에 보안에 취약하다
+6. `front`에서 `development`로 배포하면 `production`보다 느리다. `development`에서는 `warning`이 잘 보인다. 반면에, `production` 에서는 `warning` 같은것이 뜨지 않는다. `production`은 가볍다. 개발모드와 배포모드의 속도차이는 약 4배(2017년 기준)
+7. `npm run build`를 작성하면 `production`모드로 `build` 해주는데, `build` 폴더에서 파일을 클릭하면 코드가 한줄로 작성되어 코드를 읽기 힘들다. 
+8. `scripts` 객체에서 명령어를 사용하려면 `npm run`을 작성하자
+9. `serve -s build`: 배포용 버전 확인
+
+```javascript
+// 배포용에서만 확인 할 수 있는 코드
+if(process.env.NODE_ENV === "production"){
+	console.log("현재 Production 빌드로 돌아가고 있어요!")
+}
+```
+
+10. `<script src=""></script>`로 `js` 파일을 불러오면 `window`인 전역객체에 생성되므로 나중에 생성한 파일이 이전에 생성한 함수의 값을 변경할 수도 있다. 이를 보완하기위해 `webpack`으로 번들링하여 보관한다.
+11. `cloud`, `web hosting`: 개인적으로 서버를 빌려 운영하면 가격이 비쌈(`VM`), 반면에, `heroku`와 같이 `PasS`를 이용하여 서버의 일부자원을 이용하는 작업은 소스코드를 올려주어 페이지를 띄우는 작업이라 비용이 들지 않는다. 
+12. `AWS`: 점유율이 높고, 매우 안정적이며 다양한 기능을 제공하지만 가격이 비싸다...
+13. `oracle`, `google cloud`: 가입시 프리티어 무료 제공
+14. `프론트만 쌩으로 돌린다.`: `Github Page`, `Netlify`, `Vercel`
+15. `Node.js`도 돌린다: 시간제한이 괜찮다면 `Heroku`
+16. `Nginx`같은 웹 서버도 돌리고, 다양한 작업을 한다: `2G`, `1 Core`로 충분
+17. `Docker`도 돌리고 싶다: 최대 `8G`, `4 Core`..
+18. 실물서버의 단점: 데이터 복구시 절차가 까다롭다. 
+19. `NGINX`(web server): http를 통해 웹 브라우저에서 요청하는 HTML문서나 오브젝트을 전송해주는 서비스 프로그램을 말한다. `SSL`, `forward proxy`, `reverse froxy`, `cache`, `로드 밸런서`, `정적이고 가벼운 데이터 제공`시 사용하기에 적당하다.
+20. `proxy-server`: 클라이언트와 서버 중간에서 무언가를 해주는 서버
+21. `reverse-proxy`: 클라이언트가 요청하면 `Nginx`가 대신해서 응답해준다. 서버의 보안을 높일 수 있다
+22. `Docker`: 한 서버에서 서로 같은 두 개의 서비스를 만들려면? 서버를 컨테이너로 나눈다면 개발환경을 구축하다가 충돌이 발생하거나, 의존성이 꼬일 필요가 없다.(가상화)
+23. `CI(Continuous Integration) / CD(Continuous Deployment)`: 통합, 배포를 자동으로 해주는 과정, 단순하게 커밋만 하면 배포까지 한번에 된다. 원래는 `GitLab` 의 기능이었으나 `github` 에서  `github-action` 를 만들어 제공했다. 현업에은 `Jenkins` 를 주로 사용한다. `Jenkins` 는 별도의 서버를 요구한다. `Travis CI`: 상황에 따라 유료인점을 감안하기
+24. `web-hook`: 특정 이벤트가 발생했을 때 타 서비스나 응용프로그램으로 알림을 보내는 기능(다른 팀원이 커밋하면 해당 코드를 바로 볼 수 있음)
+25. `web-hook` 디스코드로 설정하기: 서버 생성 → 이 서버 설정 → 웹 후크 → URL 복사 → `github settings/webhook` → `payloadURL`에 붙여넣고 끝에 `/github` 붙여주기
+26. `yml`: 들여쓰기를 신경쓰는 문법
+27. `git action` 빌드 중 중간에 에러가 발생하면 그 이후의 작업은 수행하지 않는다.
