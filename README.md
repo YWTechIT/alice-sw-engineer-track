@@ -12386,3 +12386,163 @@ if(process.env.NODE_ENV === "production"){
 25. `web-hook` 디스코드로 설정하기: 서버 생성 → 이 서버 설정 → 웹 후크 → URL 복사 → `github settings/webhook` → `payloadURL`에 붙여넣고 끝에 `/github` 붙여주기
 26. `yml`: 들여쓰기를 신경쓰는 문법
 27. `git action` 빌드 중 중간에 에러가 발생하면 그 이후의 작업은 수행하지 않는다.
+
+---
+## 📍 62일차 1.19.수. 온라인 강의
+오늘은 `SSR`과 `CSR`, 간단하게 `Next.js`를 사용하는 법에 대해서 배웠다. 이전에 병과테스트 프로젝트를 react로 구현 하면서 SSR에 대해서 관심이 생겼는데 이번에 깊게는 아니어도 작동하는 원리, 간단한 예제등을 배울 수 있어서 좋았다.
+
+### ❏ Server Rendering
+1. React, Vue, Angular 등 자바스크립트 프레임워크가 나오기 이전 초기 웹 환경에서는 모든 페이지를 서버에서 빌드
+2. 클라이언트는 별도의 처리 없이 웹페이지 노출 이를, `Server Rendering` 이라고 함
+
+### ❏ Client Side Rendering
+1. `Ajax` 등의 기술, 자바스크립트 프레임워크를 활용하여, 데이터를 받아 자바스크립트로 페이지를 동적으로 만들 수 있게 됨(`XMLHTTPRequest`)
+2. 데이터는 `XML`, `JSON` 형태로 클라이언트에 전송하는데, 이를 `CSR`이라고 함
+
+### ❏ CSR의 장점
+1. CSR은 자바스크립트만으로 완전히 페이지를 만들 수 있다.
+2. 자바스크립트를 최대한도로 활용하여 HTML, CSS를 동적으로 생성
+3. 컴포넌트 단위로 코드를 나누고, 다양한 디자인 패턴을 적용하는 등 클라이언트 개발의 수준을 한 단계 끌어올림.
+4. Full page load 없이 라우팅(페이지 이동시 매번 새로고침을 할 필요가 없음)
+
+### ❏ CSR의 단점
+1. `JS` 코드가 많으면 앱 로딩이 느려짐
+2. `SEO` 가 좋지 않음(검색엔진이 아예)
+3. `crawler` 는 서버에 페이지를 요청하고 서버는 HTML, CSS, JS를 내려줄 수 있지만 `crawler` 는 HTML만을 읽어서 페이지에 어떤 정보가 있는지 판별함 `crawler` 가 HTML을 읽어서 얻은 정보를 DB에 저장하고, 나중에 user가 search engine에 검색했을 때 DB에서 정보를 꺼내게 된다. CSR의 경우 JS에서 페이지를 만들기 때문에 초기 HTML을 내려줄때는 정보가 별로 없다.
+
+### ❏ SSR
+1. 서버에서 자바스크립트(`js engine`)를 이용해 페이지를 미리 빌드
+2. 컴포넌트 생성에 필요한 `API 요청`, `routing`, `redux store` 생성 등을 처리.
+3. 클라이언트는 빌드된 페이지와 자바스크립트를 받아 웹앱을 CSR처럼 동작하게 함(`hydration`)
+4. 이런 특징으로, `Universal Rendering`이라고도 함
+5. `server rendering` 은 `MPA` 라고도 부름.
+6. CSR은 자바스크립트 프레임워크를 활용하여, 데이터를 받아 자바스크립트로 페이지를 동적으로 만들 수 있게 된다.
+
+![](https://images.velog.io/images/abcd8637/post/4befebbc-69ae-42ca-9a6d-d7bd41722b38/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-19%2010.52.09.png)
+
+### ❏ SSR의 장점
+1. `Crawler`는 페이지를 `Indexing`하기 위해 페이지에 관한 많은 정보가 필요
+2. `SSR`을 활용하여 미리 페이지를 빌드하면, `Crawler`에게 많은 정보를 줄 수 있음
+3. `SEO`(Search Engine Optimization)에 유리
+
+### ❏ SSR의 단점
+1. `CSR`에 비해 `TTFB(Time To First Byte)`에 불리함(서버에서 미리 빌드를 하고 있어야 하기 때문, 시간이 오래걸리면 오히려 CSR보다 느려질 수 있다.)
+2. 별도의 서버를 유지하는데 비용(유저가 많을 경우 서버를 여러 대 유지해야할 수 있음)이 듦
+3. `CSR` 보다 `CDN Caching`에 불리함(같은 요청 시 `CDN`에 직접 요청할 수도 있음, 도메인 관리 서버에서 직접 서버로 요청할것인지 CDN으로 요청을 보낼 것인지 관리를 할 수 있다.)
+
+### ❏ 웹 퍼포먼스
+1. 웹 페이지가 로드되고 유저와 상호작용하는 모든 것들을 측정
+2. 성능을 측정하여 웹앱의 사용성을 개선할 수 있음
+3. 열악한 네트워크 환경에서도 사용 가능한 앱을 만드는 등 좋은 유저 경험으로 유저의 만족을 얻음
+4. `Time To First Byte` , TTFB
+
+```
+1. 브라우저에서 서버로 페이지 요청 후 서버가 브라우저에게 처음 데이터를 전달할 때 도착하기까지 걸리는 시간
+2. 요청을 받았을 때, 서버에서 처리하는 시간이 오래 걸리거나, 네트워크가 딜레이되는 등의 상황 발생 시 지표가 악화됨
+3. 브라우저의 요청이 서버까지 가는 시간
+4. 서버에서 요청을 처리하는 시간
+5. 서버에서 브라우저까지 응답이 가는 시간
+```
+
+5. `First Contentful Paint`: FCP
+
+```
+1. 페이지에 진입하고부터, 브라우저가 어떤 DOM Content를 만들 때까지 걸리는 시간
+2. 페이지 진입 후 FCP(뭐라도 paint되는 시간)까지 평균 3초 이상 걸리면 성능 개선이 필요
+3. 브라우저에서 HTML, CSS, JS 등을 파싱하는 시간
+4. 브라우저에서 페이지를 그리는 시간
+```
+
+6. `Time to Interactive`: TTI
+
+```
+1. 웹 페이지 진입 후, 유저가 클릭, 스크롤, 인풋 등의 행위를 하기까지 걸리는 시간
+2. 자바스크립트가 로드되고 나서, 이벤트 핸들러 등이 부착되어 입력을 처리할 수 있기까지의 시간
+3. JS가 처리되어 DOM에 이벤트를 부착하는 시간
+```
+
+### ❏ CSR, SSR의 페이지 로드방식
+1. 먼저 CSR의 페이지 로드방식은 다음과 같다.
+
+```
+1. 브라우저에서 HTML을 요청한다.
+2. 서버에서 HTML을 응답한다.(TTFB)
+3. 브라우저에서 JS를 요청한다.(script태그를 만나면)
+4. JS 응답
+5. JS 엔진으로 페이지 빌드
+6. data 요청(axios, API 등등)
+7. data 응답
+8. 페이지 로드 완료(FCP, TTI)
+9. CSR은 브라우저에서 JS를 끄고 리로딩을 하면 내용물조차 보이지 않는다.
+```
+
+![](https://images.velog.io/images/abcd8637/post/62c5a210-dd2d-4dc3-8ebe-f3f6c83a1e0e/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-19%2011.01.17.png)
+
+2. SSR의 페이지 로드 방식
+
+```
+1. 브라우저가 HTML을 요청한다.
+2. 서버에서 페이지를 빌드하는 시간이 소요된다(CSR과 다른 부분), 경우에 따라 API 데이터 요청, routing, redux store 처리, dom 생성 등
+3. HTML 응답(TTFB, FCP)
+4. JS 요청
+5. JS 응답
+6. Rehydration(TTI): input, navBar가 완벽하게 동작하지 않음(js가 모두 파싱되기 전까지)
+7. data 요청
+8. data 응답
+9. 페이지 로드 완료
+10. SSR은 브라우저에서 JS를 끄고 리로딩을 하면 내용물은 보여도 동작하지 않는다.
+11. 유저가 빠르게 페이지의 내용을 볼 수 있도록 HTML을 미리 빌드하여 FCP등의 키 메트릭을 개선한다.
+12. 서버 자원을 활용하여, 초기 큰 성능이 필요하거나 내용이 많은 페이지 등을 미리 빌드하는 데 활용한다. 
+```
+
+![](https://images.velog.io/images/abcd8637/post/171124ca-4102-4336-8676-340d17a6670e/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-19%2011.05.05.png)
+
+### ❏ React를 활용하여 SSR구축하기
+1. `ReactDOMServer`를 활용하여, 특정 `React Component`를 가상의 DOM에서 HTML로 빌드
+2. `Node.js` 서버에서 `JSX`를 사용하여 페이지 빌드
+
+```
+1. `renderToString`: `React component`를 `HTML`로 변환, 한꺼번에 모든 페이지를 만들어서 리턴하기 때문에 브라우저가 기다려야한다.(`ReactDOMServer.renderToString(<App />)`)
+2. 클라이언트의 페이지 요청 시, 변환된 HTML string을 전달
+3. `renderToNodeStream`은 DOM서버가 조금씩 페이지를 만들어서 `readable stream` 에 전달함.브라우저가 받아서 점진적으로 페이지를 부분적으로 보여줄 수 있음
+4. ReactDOM.hydrate: CSR에서 동작하는 객체, renderToString으로 생성한 HTML의 root를 기준으로, 받아온 React code를 통해 markup에 이벤트 핸들러를 등록하는 등 컴포넌트화
+5. Hydration 시 주의할 점
+  - 서버에서 생성한 컴포넌트와 브라우저에서 Hydration을 거친 후의 마크업이 다르면, React runtime은 경고를 보냄 (ex, 현재 시간을 보여주는 컴포넌트)
+  - 경고 발생 시, 어느 부분에서 차이점이 생기는지 반드시 파악해야 함
+  - componentDidMount 역할을 하는 useEffect의 경우, SSR시 서버에서 동작하지 않음, 이때는 getInitialProps로 초기 데이터를 채운 다음에 페이지를 보내는 방법을 사용할 수 있다.
+  - data loading 등의 처리를 별도로 해주어야 할 필요가 있음
+```
+6. 실습1: div root 내부에 html 컴포넌트 생성: <a href='https://github.com/YWTechIT/ssr-with-react-node-practice'>github</a>
+7. 실습2: next.js router 해보기: <a href='https://github.com/YWTechIT/next-js-init-practice'>github</a>
+
+### ❏ React 앱 배포 overview
+1. 인터넷에서 내가 만든 앱에 접근할 수 있어야 함
+2. 지속적으로 앱을 수정하고 배포해야 함(bug, feature 등...)
+3. Public IP 주소 혹은 DNS로 직접 접근할 수 있도록 함
+
+![](https://images.velog.io/images/abcd8637/post/690b688d-f9ac-4589-9689-915c58033ec9/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-19%2014.37.25.png)
+
+4. 서버와 통신시, CORS가 허용되었는지 점검
+5. 브라우저, 디바이스별로 앱이 정상적으로 동작하는지 점검
+6. 앱의 로딩 속도, 각 동작 시 성능, 버그 등을 점검
+7. IP를 부여받은 서버(VM)에 React앱을 배포 → 앱을 빌드하고, 웹서버를 세팅 → 앱을 서빙하는 웹서버를 통해 사용자에게 앱을 전달 → 사용자는 필요한 데이터를 받아 앱을 로딩
+
+```
+git clone ${url}
+cd ${project_name} 
+npm i 
+sudo npm i -g serve  # build 후 간단한 웹서버를 띄워줌
+npm run build
+sudo -s(serve) -p(port) 80 build(directory)  # serve 웹 서버를 사용해 프로젝트를 80번 포트에서 서빙함
+```
+
+### ❏ React 앱 준비
+1. `yarn.lock`, `package-lock.json` 이 동시에 존재하지 않는지 점검(npm과 Yarn dependency가 충돌에서 build가 실패할 수 있음)
+2. 로컬에서 `npm run build` 를 실행하여, 빌드 시 에러가 발생하지 않는지 점검하자.(로컬에서 빌드시 에러가 발생하면 서버에 배포했을 때에도 에러가 발생할 여지가 있다.)
+3. 로컬에서 배포하여, `production build` 가 제대로 실행되는지 점검하기.
+
+### ❏ Gitlab 연동
+```bash
+> git remote add origin ${git repository url}
+> git push --set-upstream origin master
+```
