@@ -12546,3 +12546,164 @@ sudo -s(serve) -p(port) 80 build(directory)  # serve 웹 서버를 사용해 프
 > git remote add origin ${git repository url}
 > git push --set-upstream origin master
 ```
+
+---
+## 📍 63일차 1.20.목. 실시간 강의
+오늘은 화요일에 배웠던 `CI/CD`, `github-actions`, `Heroku`, 그리고 백엔드 서비스를 구축 할 때 서버 인프라 구축을 쉽게 할 수 있도록 도와주는 `firebase`에 대해서 배웠다. 이 강의를 듣기 전에 `CI/CD` 관련한 내용을 봤을 때 저게 대체 왜 필요하지? 라는 생각이 들었는데, 직접 해보니까 자동화 구축이 주는 효과는 굉장했다!! `CI/CD`를 배웠지만 여기서 그치지 않고 내가 직접 프로젝트를 만들 때 사용할 수 있을 정도까지 공부하고 싶다는 생각이 들었고 `firebase`가 무엇인지 배우면서 `Authentication`, `NoSQL`, `Storage`, `Hoisting`을 적용해보고 싶다는 생각이 들었다. 개념을 새로 배울 때마다 이론에서 그치지 않고 어떻게 실전에 써먹어 내것으로 만들까 생각하지만, 배운내용이 많아서 한꺼번에 적용하려니까 버거웠다. 천천히 한 개념씩 적용하다보면 언젠간 손에 익지 않을까?
+
+1. `react` 개발환경에서 `proxy` 를 쓰는 이유
+
+```js
+ 1. 절대경로(ex `https://www.example.com/todos`) 대신 proxy를 사용하여 상대경로(`/todos`)로 요청해도 React에서는 에러가 나지 않는다.
+  * 상대경로로 작성하면 나중에 URL이 바뀔 때 일일이 바꾸는 것보다 package.json에서 URL만 바꾸면 모두 적용되므로 간편하다.
+ 2. 예를 들어, 브라우저는 `localhost:8080`이고 서버에서 데이터를 받아오는 URL은 `localhost:8888/todos` 라면, 상대경로를 '/todos'로 작성했을 때 react는 브라우저 서버인 `localhost:8080/todos`로 요청하게 된다. 분명 해당 주소는 값이 없기때문에 에러를 내지만, `package.json`의 `proxy`를 보고 react가 `proxy(중계)`역할을 대신한다. 따라서 `localhost:8888/todos`로 요청하게 되고 해당 주소의 데이터를 가져올 수 있게 된다.
+  * 이전까지는 `브라우저 <-> react`, `브라우저 <-> 백엔드`와 통신을 지속했지만, react가 `proxy(중계서버)`역할을 하면서 `브라우저 <-> react <-> 백엔드` 순으로 통신을 하게된다.
+ 3. 이렇게 통신할 때의 장점은 `CORS`에 적용되지 않는다는 점이다. (서버와 서버간에는 `SOP`가 적용 되지 않는다. 그렇기 때문에 백엔드에서 데이터를 `react`로 가져오고 `react`는 `browse`r로 걱정없이 데이터를 뿌려 줄 수 있게 된다.)
+```
+
+2. `mui.com(material UI)`: 디자인 시스템을 제공하는 React UI Framework
+3. `npm install @mui/material @emotion/react @emotion/styled`
+4. `git reset --hard hash`: 해당 커밋으로 이동
+
+### ❏ 실습
+1. <a href='https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#overview'>Git Actions</a>
+2. CI(Continous Intergration): 통합시키는데 초점
+3. CD(Continous Deployment): 배포하는데 초점
+4. `Github - actions`:  빌드, 테스트 및 배포 파이프라인을 자동화할 수 있는 `CI/CD`(지속적 통합 및 지속적 전달) 플랫폼. `PR` 혹은 `Merge` 와 같은 이벤트가 일어날 때 workFlow를 트리거 할 수 있다. 각 작업은 자체 가상 머신 실행기 내부 또는 컨테이너 내부에서 실행되며, 사용자가 정의한 스크립트를 실행하거나 작업을 실행하는 하나 이상의 단계가 있다.
+5. `workFlow`: 하나 이상의 작업을 실행하는 자동 프로세스, `YAML` 으로 파일을 작성하며, PR, merge와 같은 이벤트, 수동 설정, 스케쥴에 의해 트리거하게 설정할 수 있다.
+
+![](https://images.velog.io/images/abcd8637/post/060f2c32-0f94-49cf-8344-8d84facddffe/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-20%2015.12.36.png)
+
+6. 단계별로 나눠서 `build` 할 때는 독립된 형태로 `build` 한다.
+
+```yaml
+name: first-CI-practice  # 이름: 이후에 CI가 동작하는 과정에서 이름으로 뜬다.
+
+on:  # 어떤 경우에 아래 동작을 시행할 것인가?
+  push:  # code push 할 때
+    branches: [ master ]
+  pull_request:  # code PR 할 때
+    branches: [ master ]
+
+jobs:  # 실제 동작
+
+  build:  # 동작의 이름(바꿔도 됨), 첫번째 CI
+    runs-on: ubuntu-latest  # 우분투 최신 버전 적용
+    strategy:  # 매개변수 네이밍시 사용
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:  # 실제로 돌아가는 동작
+    # '-'는 각각의 동작을 의미함.
+    - uses: actions/checkout@v2  # 플러그인 사용, 워크플로가 실행될 때마다 체크아웃 작업을 사용한다.
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+
+	test:  # 두번째 CI
+	  runs-on: ubuntu-latest
+		needs: build  # build 단계 이후 실행
+	  strategy:
+	    matrix:
+	      node-version: [12.x, 14.x, 16.x]
+	
+	  steps:
+	    - uses: actions/checkout@v2  # 플러그인 사용
+	    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+	    - run: npm ci
+	    - run: npm run build --if-present
+	    - run: npm test
+```
+
+7. `actions/cache`: `actions`의 의존성을 매번 새로 작성하거나 빌드한 결과물을 다른데에 사용하고 싶다. 
+8. `yml` 로 파일을 만들고 수정(연필)버튼을 누르면 `marketplace` 가 뜬다. 여기서 원하는 `CI/CD` template를 가져 올 수 있음
+9. `Heroku`
+
+```js
+1. 유럽보다 미국이 태평양을 바로 지날 수 있어서 속도가 조금 더 빠르다.
+2. Heroku가 cloud의 기능을 대신 해줌(Load balance, Auto scaling 등...)
+3. Heroku CLI: git <-> heroku, git Action을 쓸 수 없음
+4. Github Action + Heroku plugin
+5. Github Actions에서 heroku_api_key는 그대로 commit하지 말고 secret에 넣어서 ${{secrets.api_key}}로 사용하자 대신 actions에 한번 secret을 업로드하면 작성자조차 무슨 값인지 다시 볼 수 없다.
+6. 개발 -> commit -> Github -> Action -> Test -> Heroku
+7. 개발 -> commit -> P/R -> Test(코드리뷰) -> build -> deployment
+8. actions를 사용하는 큰 이유: 각종 테스트로 정상적으로 배포 할 수 있는 상태인지 확인할 수 있다. 특정상황에서 배포, 추가적인 명령어 설정 등 원하는조건에서 배포 할 수 있게끔 커스터마이징이 가능하다.
+
+- name: Generate.env file
+  run: |
+      echo "DISCORD_TOKEN=$DISCORD_TOKEN" >> .env
+      echo "WEATHER_API_KEY=$WEATHER_API_KEY" >> .env
+    env:
+      DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+      WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+```
+
+9. `firebase`: 기본적인 서비스 구축하기 위한 서버 인프라 구축, 서버단 세팅 등을 고민하지 않고 클라이언트 단의 작업만 진행하여 서비스를 제작할 수 있는 플랫폼, 전통적인 서버 구성처럼 매번 서버 - DB를 나누어 데이터를 가져와서 관리해야하는 불편함을 덜수 있음. `Baas(Backend as a Service)`, `RealTimeDB`, `Cloud Firestore(NoSQL DB)`, `Storage`, `OAuth`, `Hosting`, `CDN`, `Cloud Functions` 등 지원하는 기능이 생각보다 많다. 백엔드를 관리할 필요없이 클릭 몇번으로 서버를 관리할 수 있다.
+10. `npm i firebase`, `npm i -g firebase-tools`
+11. `firebase login`
+12. `firebase deploy`
+13. `firebase 사용 예시 코드`
+
+```javascript
+// App.js
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import { FormControl, Button, Input, InputLabel } from '@material-ui/core';
+import Todo from './Todo';
+import db from './firebase_setting';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+
+function App() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState('');
+
+  useEffect(() => {
+    db.collection('todos')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot(data => {
+        setTodos(data.docs.map(doc => ({ id : doc.id, todo: doc.data().todo })))
+      })
+  }, [input])
+
+  const addTodo = (e) => {
+    e.preventDefault();
+    db.collection('todos').add({
+      todo: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    setTodos([...todos, input]);
+    setInput('');
+  }
+
+  return (
+    <div className="App">
+      <h1>Hello World</h1>
+      <form>
+        <FormControl>
+          <InputLabel>Write a Todo</InputLabel>
+          <Input value={input} onChange={e => setInput(e.target.value)} />
+        </FormControl>
+        <Button disabled={!input} type="submit" variant="contained" color="primary" onClick={addTodo}>Add Todo</Button>
+      </form>
+      <ul>
+        {todos.map(todo => (
+          <Todo todo={todo} />
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+export default App;
+```
