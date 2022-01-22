@@ -12549,7 +12549,7 @@ sudo -s(serve) -p(port) 80 build(directory)  # serve 웹 서버를 사용해 프
 
 ---
 ## 📍 63일차 1.20.목. 실시간 강의
-오늘은 화요일에 배웠던 `CI/CD`, `github-actions`, `Heroku`, 그리고 백엔드 서비스를 구축 할 때 서버 인프라 구축을 쉽게 할 수 있도록 도와주는 `firebase`에 대해서 배웠다. 이 강의를 듣기 전에 `CI/CD` 관련한 내용을 봤을 때 저게 대체 왜 필요하지? 라는 생각이 들었는데, 직접 해보니까 자동화 구축이 주는 효과는 굉장했다!! `CI/CD`를 배웠지만 여기서 그치지 않고 내가 직접 프로젝트를 만들 때 사용할 수 있을 정도까지 공부하고 싶다는 생각이 들었고 `firebase`가 무엇인지 배우면서 `Authentication`, `NoSQL`, `Storage`, `Hoisting`을 적용해보고 싶다는 생각이 들었다. 개념을 새로 배울 때마다 이론에서 그치지 않고 어떻게 실전에 써먹어 내것으로 만들까 생각하지만, 배운내용이 많아서 한꺼번에 적용하려니까 버거웠다. 천천히 한 개념씩 적용하다보면 언젠간 손에 익지 않을까?
+오늘은 화요일에 배웠던 `CI/CD`, `github-actions`, `Heroku`, 그리고 백엔드 서비스를 구축 할 때 서버 인프라 구축을 쉽게 할 수 있도록 도와주는 `firebase`에 대해서 배웠다. 이 강의를 듣기 전에 `CI/CD` 관련한 내용을 봤을 때 저게 대체 왜 필요하지? 라는 생각이 들었는데, 직접 해보니까 자동화 구축이 주는 효과는 굉장했다!! `CI/CD`를 배웠지만 여기서 그치지 않고 내가 직접 프로젝트를 만들 때 사용할 수 있을 정도까지 공부하고 싶다는 생각이 들었고 `firebase`가 무엇인지 배우면서 `Authentication`, `NoSQL`, `Storage`, `Hoisting`을 적용해보고 싶다는 생각이 들었다. 개념을 새로 배울 때마다 이론에서 그치지 않고 어떻게 실전에 써먹어 내것으로 만들까 생각하지만, 배운내용이 많아서 한꺼번에 적용하려니까 버거웠다. 천천히 한 개념씩 적용하다보면 언젠간 손에 익지 않을까? 
 
 1. `react` 개발환경에서 `proxy` 를 쓰는 이유
 
@@ -12707,3 +12707,433 @@ function App() {
 
 export default App;
 ```
+
+---
+## 📍 64일차 1.21.금. 온라인 강의
+오늘은 `CSS Module`, `UI Framework`, `CSS framework`, `CSS-in-JS`, `Styled-components`에 대해서 배우고 전반적인 사용 역사(?)에 대해서 배웠다. 기존에 사용하던 방식의 단점, 불편함 때문에 새로운 방식이 나왔고, 새로운 방식에서 생겨난 단점, 불편함을 통해 새로운 방식을 사용하고.. 이렇게 일련의 과정들을 배우니까 이해가 잘 됐다. 그리고 평소에 관심있던 리팩토링에 대해서도 배웠는데 일련의 과정들을 보면서 리팩토링의 `before / after`를 보며 가독성이 어떻게 증가되었는지 한번 살펴보자. 마지막에는 `figma`의 조작법을 3가지정도만 작성했다. 한번 살펴보자.
+
+### CSS Module
+1. 기존 `CSS`의 단점: 하나의 스타일 `sheet`가 여러 컴포넌트에 영향을 미친다.
+2. CSS module을 사용하면 `class`, `id` 등 선택자가 겹칠 우려가 없음 (`hash`값 사용)
+3. 스타일 충돌을 방지하고 코드를 격리하여 체계적으로 CSS 설계가 가능
+4. CSS module의 단점은 개발자가 스타일링을 직접 하나하나씩 해야한다는 점이다. 
+
+```javascript
+// App.jsx
+import styles from "./app.module.css";
+
+export default function App(){
+	return(
+		<div>
+			<h1 className={ styles.title }>Pink Hello world</h1>  // hash가 붙어있음
+			<h1 className={ "title" }>Hello world</h1>  // 그냥 title
+		</div>
+	)
+}
+
+// app.module.css
+h1 {
+	font-size: 1.5rem;
+}
+
+.title {
+	font-size: 2.5rem;
+	color: pink;
+}
+```
+
+### UI Framework
+1. 종류: `MUI(material UI)`, `Ant design`
+2. 장점은 이미 만들어져 있는 스타일이기 때문에 간편하고 쉽게 사용하기 좋다.
+3. 단점으로는 이미 다 만들어져 있기 때문에 styling의 학습 및 훈련이 필요한 초심자들에게는 비추천한다. 또한 해당 framework의 디자인철학을 벗어나기 쉽지 않고, 컴포넌트들을 커스터마이징하기 어려움
+
+```javascript
+// App.jsx use Ant design
+import "antd/dist/antd.css";
+import { Button } from "antd";
+
+export default function App(){
+	return(
+		<div>
+			<Button type="primary">Primary Button</Button>
+			<Button type="secondary">Secondary Button</Button>
+			<Button type="danger">Danger Button</Button>
+		</div>
+	)
+}
+```
+
+### CSS Framework
+1. 종류: `Tailwind CSS`, `w3.css`
+2. 거대한 CSS 파일 하나를 가져오는 것
+3. 장점: 개발자가 따로 CSS 파일을 작성하지 않아도 HTML에 클래스만 적어주면 정해진 규칙대로 스타일링이 적용됨.
+4. 단점: CSS에 대한 이해력이 있어도 해당 framework를 사용하기 위한 학습을 또 다시 해야함, 이미 다 만들어져 있어서 styling의 학습 및 훈련이 필요한 초심자들에게는 비추천
+
+```javascript
+// W3CSS 예시
+import { Helmet } from "react-helmet";
+
+export default function App(){
+	return(
+		<div>
+			<Helmet>  // <head></head>
+				<link
+					rel="stylesheet"
+					href="https://www.w3schools.com/w3css/4/w3.css"
+				</>
+			</Helmet>
+
+			<div className="w3-container w3-green">
+				<h1>W3Schools Demo</h1>
+				<p>Lorem</p>
+			</div>
+		</div>
+	)
+}
+```
+
+### CSS-in-JS
+1. 종류: `Styled-components`, `emotion`
+2. 따로 CSS 파일을 만들지 않고 JSX 파일 안에서 스타일링까지 해결 가능함
+3. 컴포넌트 재사용성이 쉬워짐
+5. JS 값을 props로 넘겨줘서 해당 JS 값에 의도된 styling을 바로 적용할 수 있다.
+6. class 이름에 hash값을 생성하여 선택자 이름이 겹칠 우려가 없다.
+7. 스타일링을 개발자가 직접 해야함
+
+```javascript
+import styled from "styled-components";
+
+const Title = styled.hi`
+	font-size: 1.5rem;
+	text-align: center;
+	color: pink;
+`
+
+export default function App(){
+	return <Title>Hello world</Title>
+}
+```
+
+### ❏ 기존 CSS 문법을 SCSS로 리팩토링하기
+리팩토링하면서 느낀것이지만 `SCSS`로 작성했을 때의 장점은 코드를 계층적으로 작성할 수 있다는 것이었다. 따라서, 부모 - 자식간의 관계를 코드를 통해 유추 할 수 있었고, 동일한 선택자를 불필요하게 여러번 사용할 필요없이 `&`으로 대체해서 사용하거나, 현재 선택자 이외에 다른 선택자만 사용하는 등 간편하게 사용하는 점이 좋았다.
+
+```scss
+/* 기존 CSS 문법 */
+.container {
+  padding: 10px;
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.counter {
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 2rem;
+  border: 1px solid black;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.buttons-container {
+  margin-top: 20px;
+}
+
+button {
+  color: white;
+  width: 80px;
+  height: 50px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+button + button {
+  margin-left: 10px;
+}
+
+button.inc {
+  background-color: blue;
+}
+
+button.dec {
+  background-color: red;
+}
+button:hover {
+  box-shadow: 10px 5px 5px gray;
+}
+
+/* SCSS 리팩토링 */
+/* 어떤 클래스안에 종속되어있는지 계층적으로 확인이 가능하다. 
+동일한 선택자는 제거하고 &로 대체 할 수 있다. 가독성이 증가하는 효과가 있음 */
+.container {
+  padding: 10px;
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+      .counter {
+      width: 100px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 2rem;
+      border: 1px solid black;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+      .buttons-container {
+          margin-top: 20px;
+      
+        button {
+          color: white;
+          width: 80px;
+          height: 50px;
+          text-align: center;
+          border-radius: 10px;
+          
+          + button { 
+            margin-left: 10px;
+          }
+          
+          &.inc {
+            background-color: blue;
+          }
+          
+          &.dec {
+            background-color: red;
+          }
+          
+          &:hover{
+            box-shadow: 10px 5px 5px gray;
+          }
+        }
+    }
+}
+```
+
+### ❏ JavaScript template literal
+1. 문자열 안에서 JS 표현식을 사용할 수 있게 하는 문법이다. `string text ${expression} string text`
+
+```javascript
+const string = "elice"
+const message = `hello ${string}`;
+console.log(message)  // "hello elice"
+
+const number = 12345
+const message = `hello ${number}`;
+console.log(message)  // "hello 12345"
+
+const boolean = true;
+const message = `hello ${boolean}`;
+console.log(message)  // "hello true"
+
+const object = { a: "apple" };
+const message = `hello ${object}`;
+console.log(message)  // "hello [object object]"
+
+const name = "Ted";
+const gender = "male";
+const message = `hello ${gender === "male" ? "Mr. " : "Mrs."}`;
+console.log(message)  // "hello Mr.Ted, nice to meet u";
+```
+
+### ❏ Styled-components
+1. `props` 유무에 따른  `styled-components` 작성 방법
+
+```javascript
+// props가 없는 경우
+const Button = styled.button`
+  font-size: 32px;
+	margin: 1em;
+	padding: 0.25em 1em;
+`
+
+function App(){
+	return <Button>Hello!</Button>
+}
+
+// props가 있는 경우
+const Button = styled.button`
+  font-size: 32px;
+	margin: 1em;
+	padding: 0.25em 1em;
+	background: ${(props) => props.primary ? "pink" : "black"}
+	color: ${(props) => props.primary ? "white" : "green"}
+`
+
+function App(){
+	return <Button primary>Hello!</Button>  // primary = true와 같음
+}
+```
+
+2. `css` vs `scss` vs `styled-components`
+
+```scss
+// CSS
+.name .red {
+	color: red;
+}
+
+.name .blue {
+	color: blue;
+}
+
+.name .green {
+	color: green;
+}
+
+.name .child .yellow {
+	color: yellow;
+}
+
+.name + .name {
+	color: purple;
+}
+
+// SCSS: 중복된 선택자 제거 가능
+.name {
+	&.red {
+		color: red;
+	}
+
+	&.blue {
+		color: blue;
+	}
+
+	&.green {
+		color: green;
+	}
+
+	.child {
+		.yellow {
+			color: yellow;
+		}
+	}
+
+	+ .name {  /* 인접요소 연산자 */
+		color: purple;
+	}
+}
+
+// SCSS in styled components
+const SCSSStyledDiv = styled.div`
+	background-color: orange;
+	color: white;
+
+	div{   // SCSSStyledDiv 내부의 div태그의 bg color
+		background-color: red;
+	}
+
+	.purple{  // SCSSStyledDiv 내부의 purple 클래스의 bg color
+		background-color: purple;
+	}
+`
+
+// Componennt Use Case
+function Test(){
+	return (
+		<SCSSStyledDiv>
+			<div className={"purple"} />
+	)
+}
+```
+
+3. style-components 로 CSS 수정하기
+
+```js
+// CSS
+.container {
+  margin: 0 auto;
+  width: clamp(0px, 100%, 860px);
+  padding: 10px;
+  background-color: lightgray;
+  text-align: center;
+}
+
+.count {
+    width: 128px;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    padding: 16px;
+    border: 2px solid black;
+    border-radius: 16px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.button-wrapper {
+    margin-bottom: 16px;
+}
+
+button {
+    padding: 16px;
+    background-color: blue;
+    color: white;
+    font-size: 32px;
+    border-radius: 16px;
+}
+
+button:last-child {
+    background-color: red;
+}
+
+button + button {
+    margin-left: 16px;
+}
+
+button:hover {
+    box-shadow: 8px 4px 4px gray;
+}
+
+// styled-components
+const Container = styled.div`
+  margin: 0 auto;
+  width: clamp(0px, 100%, 860px);
+  padding: 10px;
+  background-color: lightgray;
+  text-align: center;
+`
+
+const Count = styled.div`
+    width: 128px;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    padding: 16px;
+    border: 2px solid black;
+    border-radius: 16px;
+    font-size: 32px;
+    font-weight: 700;
+`
+
+const ButtonWrapper = styled.div`
+    margin-bottom: 16px;
+`
+
+const Button = styled.button`
+    padding: 16px;
+    background-color: ${(props) => props.bgColor };
+    color: white;
+    font-size: 32px;
+    border-radius: 16px;
+    
+    & + & {  // 둘중에 하나 사용하면 됨
+        margin-left: 16px;
+    }
+    
+    + button {  // 둘중에 하나 사용하면 됨
+        margin-left: 16px;
+    }
+    
+    &:hover {
+        box-shadow: 8px 4px 4px gray;
+    }
+`
+```
+
+### ❏ Figma
+1. `shift + scroll` :횡으로 `scroll`
+2. 좌측 Search: 컴포넌트 구조 확인 가능
+3. 마우스 커서로 컴포넌트 사이의 거리 확인 가능(`px`)
