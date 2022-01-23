@@ -13137,3 +13137,387 @@ const Button = styled.button`
 1. `shift + scroll` :횡으로 `scroll`
 2. 좌측 Search: 컴포넌트 구조 확인 가능
 3. 마우스 커서로 컴포넌트 사이의 거리 확인 가능(`px`)
+
+---
+## 📍 65일차 1.22.토. 온라인 강의
+오늘은 직접 `React`와 `Styled-components`를 이용해서 트랙카드, 탭, 검색창을 초기 `UI`로 구현하고 이후에는 실제 `API`를 연동하면서 검색창에서 검색 데이터를 가져오는 방법까지 응용하는 법을 배웠다. 그리고 마지막에는 `JS`에서 `TS`로 마이그레이션 설정 방법에 대해서 배웠다. `CSS`를 배울 때 `position`과 같은 내용을 직접 적용하려고 할 때 어려움이 많았는데 이번 실습을 보면서 `position: absolute`의 사용시기를 잘 배울 수 있었고, 아무 조건에서 적용되는것이 아니라 부모가 `relative`일 때 적용된다는 점도 배웠다. 인상깊었던 부분은 `::before`연산자로 `background-color`를 만드는 방법인데, 평소에 잘 적용하지 않는 방법이어서 나중에 써먹을 수 있도록 따로 기록을 해놓았다. 그리고 검색창 구현시 `debounce`를 적용하여 매 입력마다 서버로 요청하지 않고 특정 시간 이후에 서버로 입력값을 요청하여, 서버입장에서 부하를 어느정도 줄여줄 수 있는 방법인데, 현업에서 많이 사용하는 방법이라서 까먹지 않아야겠다고 생각했다.
+
+### Styled-components
+1. `styled-components` 를 사용 할 때 다음과 같이 컴포넌트 하나마다 `import` 해야 할 상황이 많으면 `* as Card` 처럼 전체 페이지를 로드하고 `component` 앞에 `Card` 를 붙여  `after` 과 같이 사용하면 같은 결과를 반환해도 코드가 줄어들어 가독성이 올라간다.
+
+```javascript
+// before
+import { 
+		Container,
+		Tags,
+		Title,
+		Description,
+		TextsWrapper,
+		TextWrapper,
+		Chart,
+		Text,
+		Computer,
+		Calendar,
+		Image,
+		LanguagesWrapper,
+		Language,
+		DividerLine,
+		CostFree,
+		CostWrapper,
+		CurrentCost,
+		OriginalCost,
+		DiscountPercentile
+} from "./js";
+
+return (
+    <Container>
+        <Tags>{tags.join("﹒")}</Tags>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+        <TextsWrapper>
+            <TextWrapper>
+                <Chart />
+                <Text>난이도 : {level}</Text>
+            </TextWrapper>
+            <TextWrapper>
+                <Computer />
+                <Text>수업 : {classFormat}</Text>
+            </TextWrapper>
+            <TextWrapper>
+                <Calendar />
+                <Text>기간 : {duration}</Text>
+            </TextWrapper>
+        </TextsWrapper>
+        <Image src={imgUrl} />
+        <LanguagesWrapper>
+            {languages.map((lang, idx) => {
+                return (
+                    <Language key={`${lang}-${idx}-${title}`} lang={lang}>
+                        {lang}
+                    </Language>
+                );
+            })}
+        </LanguagesWrapper>
+        <DividerLine />
+        {isFree ? (
+            <CostFree>무료</CostFree>
+        ) : (
+            <CostWrapper>
+                <CurrentCost>
+                    {currentCost.toLocaleString()}원
+                </CurrentCost>
+                <OriginalCost>
+                    {originalCost.toLocaleString()}원
+                </OriginalCost>
+                <DiscountPercentile>
+                    {discountPercentile}%
+                </DiscountPercentile>
+            </CostWrapper>
+        )}
+    </Container>
+);
+
+// after
+import * as Card from "./Card.js";
+
+return (
+    <Card.Container>
+      <Card.Tags>{tags.join("﹒")}</Card.Tags>
+      <Card.Title>{title}</Card.Title>
+      <Card.Description>{description}</Card.Description>
+      <Card.TextsWrapper>
+        <Card.TextWrapper>
+          <Chart />
+          <Card.Text>난이도 : {level}</Card.Text>
+        </Card.TextWrapper>
+        <Card.TextWrapper>
+          <Computer />
+          <Card.Text>수업 : {classFormat}</Card.Text>
+        </Card.TextWrapper>
+        <Card.TextWrapper>
+          <Calendar />
+          <Card.Text>기간 : {duration}</Card.Text>
+        </Card.TextWrapper>
+      </Card.TextsWrapper>
+      <Card.Image src={imgUrl} />
+      <Card.LanguagesWrapper>
+        {languages.map((lang, idx) => {
+          return (
+            <Card.Language key={`${lang}-${idx}-${title}`} lang={lang}>
+              {lang}
+            </Card.Language>
+          );
+        })}
+      </Card.LanguagesWrapper>
+      <Card.DividerLine />
+      {isFree ? (
+        <Card.CostFree>무료</Card.CostFree>
+      ) : (
+        <Card.CostWrapper>
+          <Card.CurrentCost>{currentCost.toLocaleString()}원</Card.CurrentCost>
+          <Card.OriginalCost>{originalCost.toLocaleString()}원</Card.OriginalCost>
+          <Card.DiscountPercentile>{discountPercentile}%</Card.DiscountPercentile>
+        </Card.CostWrapper>
+      )}
+    </Card.Container>
+  );
+```
+
+2. props 에 맞게 해당 컴포넌트의 css 를 추가하거나 변경하고 싶다면 다음처럼 사용하자
+
+```javascript
+// Card.js
+import styled, { css } from "styled-components";
+
+export const Container = styled.div`
+  background-color: white;
+  border: 1px solid #f0f1f3;
+  border-radius: 8px;
+  width: 296px;
+  height: 407px;
+  box-sizing: border-box;
+  padding: 28px 24px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  
+  ${(props) => props.large && css`
+    width: 398px;
+    height: 409px;
+    padding-top: 32px;
+  `}
+`;
+
+// TrackCard.jsx
+export default function TrackCard() {
+  return <Card.Container large />
+}
+```
+
+3. `absolute` 상태에서 `left: 0, right: 0`으로 설정하면 `width: 100%` 와 마찬가지로 좌우로 쭉 펴진다. `left: 0, right: 0, top: 0, bottom: 0`으로 설정하면 상하좌우로 쭉 펴진 상태가 된다.
+4. `navBar` 에서 원하는 메뉴를 클릭했을 때 `active` 시키는 방법은 `useState` 를 이용해서 해당 태그를 누르면 `active`되게 끔 설정하면 된다.
+
+```javascript
+// App.jsx
+import { useState } from "react";
+import Tab from "./Tab.jsx";
+
+export default function App() {
+  const [currTab, setCurrTab] = useState("트랙");
+  const handleClickTab = (tab) => {
+    setCurrTab(tab);
+  }
+
+  return (
+    <Container>
+      <Tab currTab={currTab} onClick={handleClickTab}/>
+    </Container>
+  );
+}
+
+// Tab.jsx
+import styled, { css } from "styled-components";
+
+const Container = styled.div`
+    display: flex;
+    border-bottom: 1px solid #E1E2E4;
+    width: 100%;
+`
+
+const EachTab = styled.p`
+    font-size: 14px;
+    line-height: 22px;
+    color: #151618;
+    padding: 8px;
+    
+   & + & {
+        margin-left: 16px;
+    }
+    
+   ${props => props.active && css`
+        color: $524FA1;
+        font-weight: bold;
+        background: rbga(230, 230, 230, 0.0001);
+        box-shadow: inset 0px -4px 0px #524FA1;
+   `}
+`
+
+const tabs = ["트랙", "과목"];
+
+Tab.defaultProps = {
+  currTab: "트랙",
+  onClick: () => {},
+};
+
+export default function Tab({ currTab, onClick }) {
+  return (
+      <Container>
+        {tabs.map((tab, i) => {
+            return (
+                <EachTab 
+                    key={`${tab}-${i}`}
+                    active={currTab === tab}
+                    onClick={() => onClick(tab)}
+                    >{tab}</EachTab>)
+        })}
+      </Container>)
+}
+```
+
+5. 검색 창 만들기: `container` 안에 `input` 을 넣는다. 돋보기 모양은 `container` 안에서 `svg` 태그를 따로 설정해준다.
+
+```javascript
+// App.jsx
+import { useState } from "react";
+import SearchTextField from "./SearchTextField.jsx";
+
+export default function App() {
+  const [value, setValue] = useState("");
+  const handleChangeValue = (value) => setValue(value);
+
+  return (
+    <Container>
+      <SearchTextField value={value} onChange={handleChangeValue}/>
+    </Container>
+  );
+}
+
+// SearchTextField.jsx
+import styled from "styled-components";
+import MagnifyingGlass from "./icons/MagnifyingGlass.jsx";
+
+const Container = styled.div`
+    width: 100%;
+    position: relative;
+    
+    svg {
+        position: absolute;
+        top: 15px;
+        left: 12px;
+    }
+`;
+
+const Input = styled.input`
+    padding: 11px 11px 11px 39px;
+    border: 1px solid #C9CACC;
+    border-radius: 4px;
+    height: 46px;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 14px;
+    line-height: 22px;
+    color: #7D7E80;
+`;
+
+SearchTextField.defaultProps = {
+  value: "",
+  onChange: () => {},
+};
+
+export default function SearchTextField({ value, onChange }) {
+  return (
+    <Container>
+      <MagnifyingGlass />
+      <Input 
+        placeholder="배우고 싶은 언어, 기술을 검색해 보세요."
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </Container>
+  );
+}
+```
+
+### React에서 TS로 마이그레이션 하기
+1. 타입스크립트 라이브러리 설치
+
+```javascript
+* 새로 CRA를 생성하는 경우: npx create-react-app <project name> -template typescript만 작성
+* 기존 JS 파일을 TS로 마이그레이션 하는 경우 하단 과정 시작
+
+npm i -D typescript esbuild-loader @types/react @types/react-dom
+yarn add -D typescript esbuild-loader @types/react @types/react-dom
+
+- typescript: tsc 컴파일러, ts 문법 지원을 위해 필요한 라이브러리
+- @types/react: react 라이브러리를 위한 타입 패키지
+- @types/react-dom: react에서 dom element와 관련된 타입들을 모아놓는 패키지
+  * @types/라이브러리 이름: 타입스크립트에서 라이브러리 설치할 때 사용하는 명령어(Definitely Typed 참고)
+- esbuild/loader: 타입스크립트 트랜스파일링을 위한 패키지(속도가 매우 빠르다)
+  * 본래는 babel-loader를 사용했으나, 최근 들어 webpack의 빌드를 빨리하기 위해 esbuild를 많이 사용하는 추세다
+```
+
+2. tsconfig.json 설정
+
+```javascript
+1. tsconfig.json 파일 생성 
+  * tsc --init 혹은 npx tsc --init 입력 시 tsconfig.json의 기본적인 컴파일러 옵션을 설정해준다.
+
+{
+  "compilerOptions": {
+    "target": "es5",  // 트랜스파일링을 할 경우 어떤 버전으로 변환 할 것인지(IE 지원은 es5로 설정)
+		"outDir": "./dist/",  // 컴파일 후 어떤 경로로 저장할지?
+		"sourceMap": true,  // 디버깅을 위한 소스맵이 필요한 경우에 설정
+    "module": "esnext",  // 모듈 코드를 ESM(ECMAScript Module: import, export), CJS(Common JS: require, exports.module) 모드로 설정할것인가?
+    "jsx": "react-jsx"  // jsx파일을 js파일로 변환하도록 하는 설정, react 설정시 jsx파일이 js로 변환된다.
+  }
+}
+
+jsx 옵션은 preserve, react, react-native 3가지 옵션을 설정할 수 있습니다.
+1. preserve: 바벨이나 swc 같은 다른 트랜스파일러가 변환할 수 있도록 jsx 문법을 트랜스파일링하지 않고 그대로 둡니다. 따라서 트랜스파일링 결과는 .tsx에서 .jsx 파일이 됩니다.
+
+2. react: jsx 문법을 js로 변환시킵니다. 트랜스파일링 결과는 .js 확장자 파일입니다.
+
+3. react-native: preserve 모드처럼 jsx 문법을 그대로 두지만 트랜스파일링 결과는 .js 확장자 파일이 됩니다.
+```
+
+3. 사용하는 라이브러리들 중 @types 패키지 추가(타입 전환)
+
+```javascript
+1. npm i -D @types/<library name>: DefinitelyTyped 오픈소스에 등록된 타입 선언 파일 설치
+2. git repo에 index.d.ts에 있는 라이브러리면 설치 안해도 됨. 
+3. npm에서 @types/패키지명 검색해보고 있으면 @types/패키지 설치하고 @types/패키지가 없다면 직접 모듈에 대한 타입을 선언해야 한다.
+4. 모듈에 타입을 직접 선언했다면 다른 개발자도 사용할 수 있게 라이브러리에 DefinitelyTyped에 PR을 날려보자
+```
+
+4. `webpack` 설정 변경
+
+```javascript
+module.exports = {
+  entry: {  // 앱을 시작할 파일
+    main: "./src/index.js",
+  },
+  output: {  // 웹팩 번들링 결과에 대한 옵션, 기본 경로는 dist
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].js",
+  },
+  resolve: {  // 번들링할 확장자 설정
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+  },
+  module: {  // 번들링 할 때 플러그인 설정 가능
+    rules: [
+      {
+        test: /\.(t|j)sx?$/,
+        loader: "esbuild-loader",  // 타입스크립트 변환을 위한 로더
+        options: {
+          loader: "tsx", // Or 'ts' if you don't need tsx
+          target: "es2015",
+        },
+      },
+      {
+        test: /\.css$/,  
+        use: ["style-loader", "css-loader"],  // style-loader: style 태그를 삽입해 dom에 css 추가, css-loader: css 확장자의 css파일을 읽기 위한 로더, css 확장자를 가져와서 style 태그를 삽입해 DOM에 css를 추가한다.
+      },
+    ],
+  },
+  externals: {  // 번들링 결과에서 제외할 라이브러리들
+    react: "React",
+    "react-dom": "ReactDOM",
+  },
+};
+```
+
+5. `jsx` → `.tsx` 로 확장자 변환
+
+```javascript
+- jsx 파일에서 tsx파일로 확장자 변경을 하고 이 과장에서 생기는 타입 오류들을 해결해야 마이그레이션이 끝난다.
+```
