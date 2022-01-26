@@ -14158,3 +14158,37 @@ export const ResultScreen: React.FC<ResultScreenProps> = () => {
 - Sprint Branch: 모든 기능이 추가되고 버그가 수정되어 배포 가능한 상태라면 MR
 - Feature Branch: 새로운 기능 개발 및 수정하는 브랜치, 작업이 끝난 기능은 Sprint로 MR!
 ```
+
+---
+## 📍 66일차 1.26.수 프로젝트 2일차 TL;DR
+오늘부터 2차 프로젝트가 끝나는 날까지 글을 길게 쓰지 않고 그날 배운내용이나 느꼈던 점들을 나열하겠다.
+
+1. `configuration`: `secretKey`와 같은 값들은 소스코드에 포함하지 않고, `local`에서 보관한다. 이때, `dotenv`를 이용하면 쉽게 `config` 파일을 작성할 수 있다.
+2. `express` 에러처리: 동기적으로는 마지막 `use`로 넘어가지만 비동기적인 처리시에는 콜백함수 내에서 에러처리를 해야한다.
+3. `express.json()`: REST API, body parser
+4. `express.urlencoded({ extended: false })`: HTML Form -> Body parser
+5. `cors`
+
+```javascript
+app.use(
+    cors({
+        origin: ["http://127.0.0.1:5500"],
+        optionsSuccessStatus: 200,
+        credentials: true, // Access-Control-Allow-Credentials: true
+    })
+);
+```
+
+6. `morgan`: 요청시 어떤 요청을 받았는지, 얼마나 걸렸는지 log를 남겨주는 라이브러리
+7. `helmet`: 보안에 필요한 헤더를 추가해준다.
+
+```
+/* helmet settings
+	X-Content-Type-Options: nosniff
+	X-DNS-Prefetch-Control: off
+	X-Download-Options: noopen
+	X-Frame-Options: SAMEORIGIN
+	X-Permitted-Cross-Domain-Policies: none
+	X-XSS-Protection: 0 
+*/
+```
