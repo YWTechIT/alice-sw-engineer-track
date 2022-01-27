@@ -14192,3 +14192,23 @@ app.use(
 	X-XSS-Protection: 0 
 */
 ```
+
+---
+## 📍 67일차 1.27.목 프로젝트 3일차 TL;DR
+### ❏ JWT 토큰 인증 흐름
+<a href='https://www.youtube.com/watch?v=p09YODnkSO8&list=PLanIiKDTgXLy4cZc5Ahfi_x443ZVKXb_5&index=12'>DFSW Labs Youtube 강의</a>
+
+1. once user verified the email, password thry're going to get back a token using JWT
+2. once they get that token they can send that along to access a protected route with passport, passport-jwt
+3. JWT module creates the token passport will actully validate. it also extract the users information from it
+4. we need to add login functionally, we need to accept a user's email
+5. validate that email that it exists and validate the password 
+6. JWT.sign include user info, because when that token gets sent to the server
+7. we want decode it and it needs to know what user it is
+8. we also need to send a secretOrKey & expiration if we want it to expire in a certain amount of time(expiration: no more than a week, permanently)
+9. put it header as an authrization and send it to the server, the server will validate the user, it'll get ther user information and use it within our express server
+10. once we have successful match. it gives a token and token includes user info
+11. passport.Strategy, passport.ExtractJwt(extract payload which is userdata)
+12. fromAuthHeaderAsBearerToken: bear string before token
+13. once we call payload, find that user and validate it jwt-payload includes the user staff
+14. token 확인 후 : then we tried to access a protected route we first did it without the token. you saw it was authorized then we added correct token and now responding with the user data
