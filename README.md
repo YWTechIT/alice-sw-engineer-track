@@ -14218,7 +14218,7 @@ app.use(
 1. 백엔드 인증 로직: GitHub login -> GitHub 정보 획득 -> JWT 토큰 생성 -> 쿠키로 client 전달 -> 로그인 필요한 서비스에서 JWT 검증(검증은 req.user있는지 확인)
 2. React CRA 설정을 override 하고 싶으면 React-app-rewired
 3. redux처럼 API를 중앙에서 관리하고 싶다면 react-query 사용
-4. rebase: 장점으로는 merge commit 이 없어져서 history 가 깔끔해지지만,  단점으로 언급되는 내용이 반대로 history 가 없어져 commit 이력이 남지 않아 confilct 가 나기 쉽다고 하는군요.. 저희가 git 을 잘 다루는 입장이라면 rebase 를 고려할법 하지만, git 의 숙련도가 낮기때문에 기존의 방식대로 merge 를 사용할까하는데 어떻게 생각하시나요?
+4. rebase의 장. 단점: merge commit 이 없어져 history 가 깔끔해짐, 반대로 history 가 없어져 commit 이력이 남지 않아 confilct 가 나기 쉽다. `Git`의 숙련도에 따라 `rebase` 도입 여부를 고민하기
 5. browser에서 mobile device 확인하는 방법: device-width, user-agent
 6. 모바일에 사용성을 맞췄기 때문에 반응형 웹 디자인에서 모바일, 태블릿까지만 대응하기
 7. redux는 state를 중앙에서 관리할 수 있다는 장점이 있으나, boilerplate의 작성이 오래걸린다. 프로젝트의 기간이 길지 않기 때문에 페이지별로 상태를 관리하는 방법을 사용하자.
