@@ -14160,7 +14160,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = () => {
 ```
 
 ---
-## 📍 66일차 1.26.수 프로젝트 2일차 TL;DR
+## 📍 67일차 1.26.수 프로젝트 2일차 TL;DR
 오늘부터 2차 프로젝트가 끝나는 날까지 글을 길게 쓰지 않고 그날 배운내용이나 느꼈던 점들을 나열하겠다.
 
 1. `configuration`: `secretKey`와 같은 값들은 소스코드에 포함하지 않고, `local`에서 보관한다. 이때, `dotenv`를 이용하면 쉽게 `config` 파일을 작성할 수 있다.
@@ -14194,7 +14194,7 @@ app.use(
 ```
 
 ---
-## 📍 67일차 1.27.목 프로젝트 3일차 TL;DR
+## 📍 68일차 1.27.목 프로젝트 3일차 TL;DR
 ### ❏ JWT 토큰 인증 흐름
 <a href='https://www.youtube.com/watch?v=p09YODnkSO8&list=PLanIiKDTgXLy4cZc5Ahfi_x443ZVKXb_5&index=12'>DFSW Labs Youtube 강의</a>
 
@@ -14212,3 +14212,15 @@ app.use(
 12. fromAuthHeaderAsBearerToken: bear string before token
 13. once we call payload, find that user and validate it jwt-payload includes the user staff
 14. token 확인 후 : then we tried to access a protected route we first did it without the token. you saw it was authorized then we added correct token and now responding with the user data
+
+---
+## 📍 69일차 1.28.금. 프로젝트 4일차 TL;DR
+1. 백엔드 인증 로직: GitHub login -> GitHub 정보 획득 -> JWT 토큰 생성 -> 쿠키로 client 전달 -> 로그인 필요한 서비스에서 JWT 검증(검증은 req.user있는지 확인)
+2. React CRA 설정을 override 하고 싶으면 React-app-rewired
+3. redux처럼 API를 중앙에서 관리하고 싶다면 react-query 사용
+4. rebase: 장점으로는 merge commit 이 없어져서 history 가 깔끔해지지만,  단점으로 언급되는 내용이 반대로 history 가 없어져 commit 이력이 남지 않아 confilct 가 나기 쉽다고 하는군요.. 저희가 git 을 잘 다루는 입장이라면 rebase 를 고려할법 하지만, git 의 숙련도가 낮기때문에 기존의 방식대로 merge 를 사용할까하는데 어떻게 생각하시나요?
+5. browser에서 mobile device 확인하는 방법: device-width, user-agent
+6. 모바일에 사용성을 맞췄기 때문에 반응형 웹 디자인에서 모바일, 태블릿까지만 대응하기
+7. redux는 state를 중앙에서 관리할 수 있다는 장점이 있으나, boilerplate의 작성이 오래걸린다. 프로젝트의 기간이 길지 않기 때문에 페이지별로 상태를 관리하는 방법을 사용하자.
+8. 전통적인 flow는 back에서 api를 내려주는 방법을 사용했으나, 최근에는 back으로 한정짓지 않고 front에서도 api를 호출하여 사용한다.
+9. `branch`에 `feature-TODO`만들고, issue에도 TODO 남기기 (cross-check)
