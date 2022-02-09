@@ -14275,3 +14275,14 @@ app.use(
     ├── cookie-extractor.js
     └── create-token.js
 ```
+
+---
+## 📍 71일차 2.8.화. 프로젝트 6일차 TL;DR
+1. mongoDB connect 주소는 localhost 대신 MongoDB Compass URI 사용하기 (mongodb+srv://<account>:<password>@<URI>.mongodb.net/<dbName>)
+2. Database Access탭에서 접근 계정을 생성할 수 있다.
+3. dotenv 파일에서 key=value에서 value에 ""를 붙이지 않아도 된다.
+4. Promise.all 사용시 중간에 reject가 나게되면 실행을 중지한다. 그러나, Promise.allSettled를 사용하면 중간에 reject가 나도 멈추지 않는다. settled는 fulfilled, rejected 상태를 의미함.
+5. GitHub API rest로 total commit을 구할 때 get요청 당 per_page가 100개가 limit이므로 100개가 넘을 때는 `@octokit/plugin-paginate-rest`의 paginateRest를 사용하자.
+6. 외부 API를 사용하는 로직은 lib/api 폴더 안에 넣어두자
+7. passport.authenticate('jwt', { session: false })에서 next()가 되지 않고 Unautorized가 나오면 jwt의 expiredIn 값을 제대로 적용했는지 살펴보자 (3600 => 1h)
+8. `jest` 실행 시 `svg` 관련 오류가 난다면 `jest-svg-transformer` 라이브러리를 살펴보자
