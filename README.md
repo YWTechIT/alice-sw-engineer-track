@@ -14286,3 +14286,20 @@ app.use(
 6. 외부 API를 사용하는 로직은 lib/api 폴더 안에 넣어두자
 7. passport.authenticate('jwt', { session: false })에서 next()가 되지 않고 Unautorized가 나오면 jwt의 expiredIn 값을 제대로 적용했는지 살펴보자 (3600 => 1h)
 8. `jest` 실행 시 `svg` 관련 오류가 난다면 `jest-svg-transformer` 라이브러리를 살펴보자
+
+---
+## 📍 72일차 2.9.수. 프로젝트 7일차 TL;DR
+1. React에서 webpack과 함께 사용시 svg를 사용할 때 ["@svgr/webpack"]를 사용한다면 file-loader에는 svg를 제거해주자 
+2. webpack alias로 jest test가 정상적으로 작동하지 않으면 "@/(.*)": "<rootDir>/src/$1"를 추가하자
+3. mongoDB의 timestamps를 카멜케이스로 작성하면 작동하지 않는다.(timeStamps(x)) 주의하자
+4. mongoDB에서 _v(이 키 값에는 문서의 내부 개정이 포함됩니다)를 없애려면 versionKey: false로 설정하자.
+6. DB에 accessToken값을 그대로 저장하기보다는 암호화작업 혹은 yml, aws-secret-manager로 관리하자
+7. API가 중복되더라도 Rest하고 그 양이 적다면 중복으로 보지 않아도 된다.
+8. commit/today에서 한꺼번에 모으지 말고 계층화시키자. commit/today/detail, commit/today/repo-name, commit/today/list처럼
+9. issue는 commit으로 포함시키는가? 도메인간의 포함관계를 따져 rest하게 작성하자.
+10. 필요한 데이터만 추려서 db에 넣고 가공하자
+11. 우리 서버에서 전송하는 api가 아니고 제 3의 api를 이용한다면 external-api와 같은 작명을 생각하자
+12. service는 api를 호출해서 나온 결과를 가공해서 나온 결과를 db에 저장하는 용도, contoller는 client로 내려주는 용도(ex. res.json)
+13. router가 controller의 기능을 가져갈 수도 있다.
+14. router는 API path를 만들어준다.
+15. /api의 존재여부가 restful의 차이를 만들기보다는 보통은 우리 서비스의 api를 호출할 때 사용한다.
