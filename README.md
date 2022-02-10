@@ -14306,4 +14306,9 @@ app.use(
 
 ---
 ## 📍 73일차 2.10.목. 프로젝트 8일차 TL;DR
-test
+1. populate는 mongoDB에서 _id를 통해 다른 컬렉션에 있는 데이터를 참조할 수 있다.
+2. new User({}).save()와 User.create({})는 동일하다.
+3. findById(id)는 findOne({_id: id})와 같다.
+4. query 요청을 줄이기 위해 find() -> 수정 -> save()보다 where()를 활용하자.
+5. upsert(): 존재하지 않는 문서의 경우 새로 생성하여 저장한다.
+6. mongoDB에서 dataBase는 여러 collection을 담는 하나의 저장소, collection: 여러개의 document를 담는 공간, document: 여러개의 key-value로 이루어진 하나의 페이지, key-value: 이름 - 값
