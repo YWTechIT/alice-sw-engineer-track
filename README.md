@@ -14303,3 +14303,7 @@ app.use(
 13. router가 controller의 기능을 가져갈 수도 있다.
 14. router는 API path를 만들어준다.
 15. /api의 존재여부가 restful의 차이를 만들기보다는 보통은 우리 서비스의 api를 호출할 때 사용한다.
+
+---
+## 📍 73일차 2.10.목. 프로젝트 8일차 TL;DR
+test
