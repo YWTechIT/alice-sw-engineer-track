@@ -14315,4 +14315,45 @@ app.use(
 
 ---
 ## 📍 74일차 2.11.금. 프로젝트 9일차 TL;DR
-test commit
+1. 함수 파라미터로 새로운 객체 key를 설정할 때는 다음과 같이 작성하자.
+
+```javascript
+const FindByKey = (key) => {
+  const config = {};
+  config[key] = value;
+}
+```
+
+2. webpack에서 favicon 관련 설정은 `HtmlWebpackPlugin`의 option으로 설정할 수 있지만 manifest를 고려한다면 `FaviconsWebpackPlugin`으로 설정해주자.
+3. GitLab에는 Default branch를 설정하여 MR요청을 보낼 때 target설정을 하지 않으면 default branch로 경로를 설정할 수 있다.
+4. GitLab에는 Protected branches 설정이있어 함부로 해당 branch에 바로 commit하지 못하게 설정할 수도 있다.(force도 사용불가, MR로만 merge 가능)
+5. eslint 설정시 `eslint-plugin-prettier` 패키지와 `eslint-config-prettier` 패키지가 정상적으로 설치되었는지 확인하자.
+6. eslint 설정시 `test` 파일은 `eslint-plugin-jest` 패키지로 문법 검사하자.
+7. DB에 저장하는 timestamp를 KST로 맞추지말고 UTC로 통일하자. 나중에 마이그레이션 혹은 서비스 복제시 불 필요한 행위를 방지한다.
+8. GitHub API에서 응답시간을 고려해서 응답시간을 초과하면 DB에 있는 값을 내려주기
+9. 매 요청마다 API를 주지말고 일정시간 이내 동일한 요청이오면 DB에 있는 값을 내려주어 불 필요한 API 요청을 막는다.
+10. 객관적인 기준이 아니라 주관적인 기준을 시험해보고 싶다면 한번 시도해보고 장단점을 비교해서 나만의 기준을 세워놓자.
+11. 현재 팀의 상황을 고려해서 브랜치 전략을 어떻게 구성할지 생각해보자 
+12. 커밋 단위도 팀원들끼리 고려해서 적용하자.
+13. GitHub API GET 요청시 time을 UTC로 변경해서 요청하는지는 doc를 참고하자
+14. GitHub API에서는 timestamps 기능을 요청할 때만 사용할 수 있고, 값을 돌려받는 요청에서는 사용할 수 없다. (Note that these rules apply only to data passed to the API, not to data returned by the API. As mentioned in "Schema," timestamps returned by the API are in UTC time, ISO 8601 format.) <a href='https://docs.github.com/en/enterprise-server@3.0/rest/overview/resources-in-the-rest-api'>GitHub DOC</a>
+15. mongoDB에서 UTC를 KST로 변경하는 방법
+16. UTC에서 KST로 바꿀 때 Date.prototype.toLocaleTimeString()를 사용하면 간편하게 바꿀 수 있다.
+17. JS 기본 Date는 UTC로 변환되기 때문에 UTC로 요청을 받는 GitHub API는 추가적으로 시간을 변환해줄 필요가 없다.
+
+```javascript
+const config = {
+  timestamps: { currentTime: () => Math.floor(Date.now() + UTC_TO_KST) },
+  versionKey: false,
+};
+
+const UTC_SEOUL_OFFSET = 9;
+const MILLISECOND_TO_SECOND = 1000;
+const MINUTES_TO_SECOND = 60;
+const HOUR_TO_MINUTES = 60;
+const UTC_TO_KST =
+  UTC_SEOUL_OFFSET *
+  HOUR_TO_MINUTES *
+  MINUTES_TO_SECOND *
+  MILLISECOND_TO_SECOND;
+```
