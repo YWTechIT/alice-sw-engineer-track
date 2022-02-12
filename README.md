@@ -14357,3 +14357,70 @@ const UTC_TO_KST =
   MINUTES_TO_SECOND *
   MILLISECOND_TO_SECOND;
 ```
+
+---
+## 📍 75일차 2.12.토. 프로젝트 10일차 TL;DR
+1. MR시 confilct가 난다면 새로운 branch를 하나 파서 내가 올리려는 branch를 git pull origin <내 브랜치>하고 다시 MR요청하자.
+2. MR을 팀장만 보는것이 아니라 해당 팀원들과 같이 보면서 개선하고 싶은점, 느낌점등을 간단하게 코멘트로 남겨주고 merge하는 방법도 있다.
+3. postman에서 POST요청을 보낼 때 cookie를 사용한다면 cookie 탭에 값을 추가하자. 이때 도메인은 host네임만 작성해도 된다.
+4. 캘린더형식의 data에서 각각 일수를 더하는 로직
+
+```javascript
+const data = [
+  [
+    [0, 0, 1, 5],
+    [2, 7, 1, 4],
+  ],
+  [
+    [0, 0, 1, 5],
+    [2, 7, 1, 4],
+  ],
+];
+
+const answer = data[0].map((month, monthIndex) =>
+  month.map((day, dayIndex) =>
+    data.reduce(
+      (prev, current, repoIndex) =>
+        prev + data[repoIndex][monthIndex][dayIndex],
+      0,
+    ),
+  ),
+);
+
+console.log(answer)
+👉🏽 [ [ 0, 0, 2, 10 ], [ 4, 14, 2, 8 ] ]
+```
+
+5. 현재 달을 기준으로 며칠까지 있는지 리턴하는 함수작성(윤년포함)
+
+```javascript
+const checkLeapYear = (year) =>
+  (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+
+const getFebruary = () => {
+  const isLeapYear = checkLeapYear(year);
+
+  return isLeapYear
+    ? Array.from({ length: 29 }, () => 0)
+    : Array.from({ length: 28 }, () => 0);
+};
+
+export const getMonthCalendar = (month) => {
+  const thirtyOneDaysMonth = ["01", "03", "05", "07", "08", "10", "12"];
+  const february = "02";
+  const monthReg = new RegExp(month);
+
+  if (month === february) {
+    return getFebruary(year);
+  }
+
+  if (monthReg.test(thirtyOneDaysMonth)) {
+    return Array.from({ length: 31 }, () => 0);
+  }
+
+  return Array.from({ length: 30 }, () => 0);
+};
+
+console.log(getMonthCalendar("02"));
+👉🏽 [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+```
