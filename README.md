@@ -14424,3 +14424,14 @@ export const getMonthCalendar = (month) => {
 console.log(getMonthCalendar("02"));
 👉🏽 [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 ```
+---
+## 📍 2.13.월. TL;DR
+1. Suspense는 자식 컴포넌트의 비동기 작업이 처리되기 전에 fallback props가 렌더링 된다. 즉, 비동기 작업이 끝날 때까지 loading 컴포넌트를 보여주는 코드를 넣을 수 있다.
+2. bcrypt에서 sync보다 async를 권장하는 이유: 간단한 script에서는 sync모드를 사용하는것이 좋으나, 서버에서 bcrypt를 사용하는 경우 비동기모드를 사용하는것이 좋다. bcrypt에 의해 수행된 해싱은 CPU를 많이 사용하므로 동기화는 이벤트 루프를 차단하기때문에 다른 이벤트를 처리하지 못한다. 비동기는 메인 이벤트 루프를 차단하지 않는 스레드 풀을 사용한다.
+3. GitHub로 로그인하면 Backend에서 cookie에 담아서 Frontend로 보낸다.
+4. Frontend에서 JWT토큰을 Header에 넣어서 req요청을 보내면 Backend에서 해당 jwt를 해석한다. 혹은 cookie에 담아서 보낸다.
+5. jest test시 `expect(...).toBeA is not a function` 오류가 난다면 expect에 괄호가 제대로 작성되어있는지 살펴보자.
+// correct expect(getApi()).toBe(answer);
+// Incorrect expect(getApi().toBe(answer));
+6. jest test시 `regeneratorRuntime is not defined`가 뜬다면 `npm i -D regenerator-runtime`를 설치하고 `import 'regenerator-runtime'`로 불러오자.
+
