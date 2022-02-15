@@ -14425,7 +14425,7 @@ console.log(getMonthCalendar("02"));
 👉🏽 [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 ```
 ---
-## 📍 2.13.월. TL;DR
+## 📍 2.14.월. TL;DR
 1. Suspense는 자식 컴포넌트의 비동기 작업이 처리되기 전에 fallback props가 렌더링 된다. 즉, 비동기 작업이 끝날 때까지 loading 컴포넌트를 보여주는 코드를 넣을 수 있다.
 2. bcrypt에서 sync보다 async를 권장하는 이유: 간단한 script에서는 sync모드를 사용하는것이 좋으나, 서버에서 bcrypt를 사용하는 경우 비동기모드를 사용하는것이 좋다. bcrypt에 의해 수행된 해싱은 CPU를 많이 사용하므로 동기화는 이벤트 루프를 차단하기때문에 다른 이벤트를 처리하지 못한다. 비동기는 메인 이벤트 루프를 차단하지 않는 스레드 풀을 사용한다.
 3. GitHub로 로그인하면 Backend에서 cookie에 담아서 Frontend로 보낸다.
@@ -14435,3 +14435,26 @@ console.log(getMonthCalendar("02"));
 // Incorrect expect(getApi().toBe(answer));
 6. jest test시 `regeneratorRuntime is not defined`가 뜬다면 `npm i -D regenerator-runtime`를 설치하고 `import 'regenerator-runtime'`로 불러오자.
 
+---
+## 📍 76일차 2.15.화. 프로젝트 11일차 TL;DR
+1. branch 전략
+
+```javascript
+  - Git-Flow: 단순하다, CI/CD가 자연스럽다, master(최종), 체계적인 분류 없이 master에 의존한다.
+  - GitHub-flow: 상세한 리뷰와 토의, master(최종), develop(개발), release(QA 및 베타 테스트), hotfix(master에서 버그수정)
+```
+
+2. 우리팀은 GitHubFlow를 기반으로 하되 GitFlow의 방법을 조금 섞었다. commit convention을 정했고, MR올리면 해당 분야 팀원들이 코드리뷰 후 의견을 남긴다. emoji를 모두 남겼으면 팀장이 최종적으로 merge한다. merge가 완료된 branch는 삭제한다. commit의 개수를 모두 남기는것보다 squash 전략으로 여러개의 커밋을 하나로 뭉친다. (이와 비슷한 rebase 전략은 제일 마지막 commit만 사용한다. log가 깔끔해지는 장점이 있지만 반면에 기록이 남지 않으므로 git 숙련도가 낮으면 추천하지 않는다.) 급하게 수정하는 사항은 hotfix 브랜치를 사용했고, Back과 Front 연결은 release 0.0.x 버전의 브랜치를 만들어서 QA테스트를 진행한다. 
+3. react에서 proxy를 사용할 때 CRA 대신 webpack을 사용한다면 webpack.config.js에서 devServer안에 다음과 같은 코드를 추가한다. 이렇게 작성하면 프론트에서 백으로 API요청을 할 때 host + port를 생략해도 target으로 요청이 넘어간다.
+
+```javascript
+proxy: {
+      "/api": {
+        target: "http://localhost:8888",
+	},
+}
+```
+
+4. 이왕 서버 배포해보는 김에 `Azure`, `Nginx`, `CI/CD` 도 공부해보자.
+5. 서버에서 `GET,`, `POST` 와 같은 요청을 테스트하는 라이브러리는 `supertest`를 이용했다. 유닛 테스트는 `jest`
+6. `jest coverage` 는 테스트 현황을 표로 한 눈에 볼 수 있다.
