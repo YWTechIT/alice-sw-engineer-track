@@ -14458,3 +14458,111 @@ proxy: {
 4. 이왕 서버 배포해보는 김에 `Azure`, `Nginx`, `CI/CD` 도 공부해보자.
 5. 서버에서 `GET,`, `POST` 와 같은 요청을 테스트하는 라이브러리는 `supertest`를 이용했다. 유닛 테스트는 `jest`
 6. `jest coverage` 는 테스트 현황을 표로 한 눈에 볼 수 있다.
+
+---
+## 📍 77일차 2.16.수. 프로젝트 12일차 TL;DR
+오늘은 내 생일이다. 어릴때의 생일은 특별한 날로 생각했지만 요즘은 특별한 날이 아니라는 생각이 든다. 프로젝트 마감이 4일이 채 남지 않았기 때문에 신경쓰지않고 작업중이다.
+
+1. 동점자를 고려한 순위 매기기
+
+```javascript
+const calcRankWithConcurrentScore = (userData) => {
+  const userRank = [...userData];
+
+  userRank.sort((a, b) => {
+    if (a.score === b.score) {
+      if (a.username < b.username) return -1;
+      if (a.username > b.username) return 1;
+    }
+    return b.score - a.score;
+  });
+
+  let rank = 1;
+  let currentScore = 0;
+  const result = userRank.map((user) => {
+    const { score } = user;
+    if (score >= currentScore) {
+      const newUser = {
+        ...user,
+        rank,
+      };
+      currentScore = score;
+      return newUser;
+    }
+
+    rank += 1;
+    currentScore = score;
+    return { ...user, rank };
+  });
+
+  return result;
+};
+
+userRank: [
+  {
+    username: "Jin1won",
+    avatarUrl: "https://avatars.githubusercontent.com/u/54543013?v=4",
+    score: 100,
+    rank: 1,
+  },
+  {
+    username: "YWTechIT",
+    avatarUrl: "https://avatars.githubusercontent.com/u/54543013?v=4",
+    score: 100,
+    rank: 1,
+  },
+  {
+    username: "cafeLatte",
+    avatarUrl: "https://avatars.githubusercontent.com/u/54543013?v=4",
+    score: 70,
+    rank: 2,
+  },
+  {
+    username: "coffee",
+    avatarUrl: "https://avatars.githubusercontent.com/u/54543013?v=4",
+    score: 50,
+    rank: 3,
+  },
+  {
+    username: "h1jun",
+    avatarUrl: "https://avatars.githubusercontent.com/u/54543013?v=4",
+    score: 50,
+    rank: 3,
+  },
+  {
+    username: "alice",
+    avatarUrl: "https://avatars.githubusercontent.com/u/54543013?v=4",
+    score: 30,
+    rank: 4,
+  },
+  {
+    username: "soo054141",
+    avatarUrl: "https://avatars.githubusercontent.com/u/54543013?v=4",
+    score: 30,
+    rank: 4,
+  },
+];
+```
+
+2. develop에 최신 코드를 다른 브랜치로 내려받을 때는 git checkout develop 후 git merge <target-branch>를 해주면 된다.
+3. routes에서 동일한 URI로 GET, POST요청을 보내는 코드는 다음처럼 한 줄로 줄일 수 있다.
+
+```javascript
+// before
+router.get("/today/goal", getGoalController);
+rotuer.post("/today/goal", postGoalController);
+
+// after
+router.route("/today/goal").get(getGoalController).post(postGoalController);
+```
+
+4. `nvm(node version manager)`: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
+5. `source ~/.bashrc` 파일로 이동 
+6. `nvm install 14.18.1`: 원하는 노드 버전 설치 
+7. `nvm ls`: 설치한 노드 목록 보기
+8. `node -v` : 현재 노드버전 보기
+9. 터미널 재부팅 후에도 노드 버전이 제대로 적용되어있는지 살펴보기
+10. 백엔드 개선할 점: 써드파티 API를 이용하는 로직은 처음에 모두 긁어온다음 DB에 저장하고, 일정 시간마다 갱신했으면 더 좋을 것 같다.
+11. `Nginx` 이용시 `proxy_pass` 값 설정하기 `도메인` -> `nginx` -> `server.js`
+12. `release` 브랜치는 수정하지 않고 `develop` 브랜치의 수정사항을 가져오기만 한다. 만약, `release` 브랜치의 `history`를 관리하고 싶다면 `tag`를 남기거나 삭제하지 않거나..
+13. 무겁지 않은 로직은 테스트코드로 남겨두기
