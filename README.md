@@ -14566,3 +14566,24 @@ router.route("/today/goal").get(getGoalController).post(postGoalController);
 11. `Nginx` 이용시 `proxy_pass` 값 설정하기 `도메인` -> `nginx` -> `server.js`
 12. `release` 브랜치는 수정하지 않고 `develop` 브랜치의 수정사항을 가져오기만 한다. 만약, `release` 브랜치의 `history`를 관리하고 싶다면 `tag`를 남기거나 삭제하지 않거나..
 13. 무겁지 않은 로직은 테스트코드로 남겨두기
+
+---
+## 📍 78일차 2.17.목. 프로젝트 13일차 TL;DR
+1. cors credentials: HTTP Cookie와 HTTP Authentication 정보를 인식할 수 있게 해주는 요청이다. 클라이언트에서 서버로 요청을 보낸다면 `axios.defaults.withCredentials = true;`를 꼭!!!@#!@#!@#!@ 설정해주자.
+
+```javascript
+export const AXIOS = axios.create({
+  baseURL: serverURL,
+  withCredentials: true,
+  axiosConfig,
+});
+
+app.use(
+  cors({
+    origin: "http://localhost:1111",
+    credentials: true,
+  }),
+);
+```
+
+2. /bin/www 파일은 익스프레스의 설정 파일을 가져와 http와 연결하는 작업 (nginx를 붙인다면 이 파일과 연결하면 된다.)
