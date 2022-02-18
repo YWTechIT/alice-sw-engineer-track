@@ -14587,3 +14587,19 @@ app.use(
 ```
 
 2. /bin/www 파일은 익스프레스의 설정 파일을 가져와 http와 연결하는 작업 (nginx를 붙인다면 이 파일과 연결하면 된다.)
+
+---
+## 📍 79일차 2.18.금. 프로젝트 14일차 TL;DR
+1. webpack 사용시 public에 접근하려면 devServer.static에는 다음과 같이 작성하면 `localhost:port/assets/public`로 접속이 가능하다.
+
+```javascript
+static: {
+      directory: path.resolve(__dirname, "public"),
+      publicPath: "/assets", /
+}
+```
+
+2. public에서 manifest.json의 경로는 다음과 같이 작성한다. `<link rel="manifest" crossorigin="use-credentials" href="/assets/manifest.json">`
+3. GitLab에서 tag는 브랜치가 아니라 commit을 관리한다.
+4. 응답을 JSON Parse를 사용할 때는 요청도 String으로 변환하고 보내야 한다.(데이터 타입이 배열이면 `[${badges}]` 처럼 보내기)
+5. nginx를 사용하면 클라이언트에서 서버 URI의 자원을 볼 수 없다.(정해진API로 요청하면 리버스 프록싱을 통해 서버가 응답하는 주소로 바꿔주기 때문)
