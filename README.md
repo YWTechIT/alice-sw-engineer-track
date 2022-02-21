@@ -14605,5 +14605,7 @@ static: {
 5. nginx를 사용하면 클라이언트에서 서버 URI의 자원을 볼 수 없다.(정해진API로 요청하면 리버스 프록싱을 통해 서버가 응답하는 주소로 바꿔주기 때문)
 
 ---
-## 📍 80일차 2.19.토. 프로젝트 15일차 TL;DR
-test
+## 📍 80일차 2.20.토. 프로젝트 15일차 TL;DR
+1. 클라이언트에서 요청할때는 가동서버(localhost)로 요청하는것이 아니라 배포하는 도메인으로 요청해야한다.(이후에 nginx에서 reverse proxy 처리함)
+2. env의 callback URI는 도메인까지 포함해서 작성하자.
+3. Git clone 버튼으로 눌러서 받는것은 최신의 브랜치를 받는것이다. 특정 브랜치를 받고 싶으면 다음 주소를 입력하자 `git clone -b <branchName> --single-branch <git clone URL>`
